@@ -1,0 +1,46 @@
+var a array [ 2 ] [ 2 ] = { { 1 , 2 } , { 2 , 4 } }
+func void testfunc
+para a arr [ ]
+start testfunc
+str-1 =test func:
+ins-1
+ln-1
+1t = arr [ 0 ]
+anw-1 = 1t
+PRINTF
+end testfunc
+func void printarrrr
+para a arr [ ] [ 2 ]
+start printarrrr
+str-1 =first: 
+ins-1
+2t = arr [ 0 ] [ 0 ]
+anw-1 = 2t
+PRINTF
+ret
+end printarrrr
+func void printarr
+para a arr [ ] [ 2 ]
+para a arr2 [ ]
+start printarr
+str-1 =first : 
+ins-1
+3t = arr [ 0 ] [ 0 ]
+anw-1 = 3t
+PRINTF
+push arr
+call testfunc
+4t = RET
+end printarr
+func int main
+start main
+push array
+5t = array [ 0 ]
+push 5t
+call printarr
+6t = RET
+push array
+call printarrrr
+7t = RET
+ret 0
+end main
