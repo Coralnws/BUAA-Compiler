@@ -1,2 +1,1 @@
-first : 1test func:1
-first: 1
+run:100

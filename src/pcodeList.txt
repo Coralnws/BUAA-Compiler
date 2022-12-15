@@ -1,46 +1,79 @@
-var a array [ 2 ] [ 2 ] = { { 1 , 2 } , { 2 , 4 } }
-func void testfunc
-para a arr [ ]
-start testfunc
-str-1 =test func:
+1t = 25 * 4
+var a s1_1 [ 3 ] [ 5 ] = { { 1t , 200 , 300 , 400 , 500 } , { 111 , 222 , 333 , 444 , 555 } , { 99 , 102 , 0 , 123 , 145 } }
+var a s2_1 [ 3 ] [ 5 ] = { { 100 , 200 , 300 , 400 , 500 } , { 111 , 222 , 333 , 444 , 555 } , { 99 , 102 , 0 , 123 , 145 } }
+var a add [ 3 ] = { 123 , 666 , 456 }
+var a s_2 [ 3 ] = { 0 , 0 , 0 }
+var a s_3 [ 3 ] = { 0 , 0 , 0 }
+const v a1 = 1
+const v a2 = 2
+const v a3 = 3
+const a month [ 9 ] = { 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 }
+const v year_1 = 4
+const v year_2 = 100
+func int checkyear
+para v year
+start checkyear
+#if1
+#cond1 year >= 0
+cond #cond1
+CheckCond
+start #if1
+#if2
+2t = + 2022
+#cond1 year != 2t ||
+#cond2 year <= 2021
+cond #cond1 || #cond2
+CheckCond
+start #if2
+#if3
+3t = ( year % ( - year_1 * - year_2 ) )
+#cond1 3t == 0 ||
+4t = ( year % year_1 )
+#cond2 4t == 0 &&
+5t = ( year % year_2 )
+#cond3 5t != 0
+cond #cond1 || #cond2 && #cond3
+CheckCond
+start #if3
+str-1 =run:
 ins-1
 ln-1
-1t = arr [ 0 ]
-anw-1 = 1t
+anw-1 = year
 PRINTF
-end testfunc
-func void printarrrr
-para a arr [ ] [ 2 ]
-start printarrrr
-str-1 =first: 
+end #if3
+start #else3
+str-1 =not run:
 ins-1
-2t = arr [ 0 ] [ 0 ]
-anw-1 = 2t
+ln-1
+anw-1 = year
 PRINTF
-ret
-end printarrrr
-func void printarr
-para a arr [ ] [ 2 ]
-para a arr2 [ ]
-start printarr
-str-1 =first : 
-ins-1
-3t = arr [ 0 ] [ 0 ]
-anw-1 = 3t
+end #else3
+end #if2
+start #else2
+str-1 =2022!!!
+ln-1
 PRINTF
-push arr
-call testfunc
-4t = RET
-end printarr
+end #else2
+end #if1
+ret year
+end checkyear
 func int main
 start main
-push array
-5t = array [ 0 ]
-push 5t
-call printarr
-6t = RET
-push array
-call printarrrr
+start #block
+var v aaa
+var v bbb
+var v ccc
+var v ddd
+var v eee
+var v fff
+var v y_1
+var v z_1
+6t = GETINT
+upd z_1 = 6t
+push z_1
+call checkyear
 7t = RET
+upd fff = 7t
+end #block
 ret 0
 end main

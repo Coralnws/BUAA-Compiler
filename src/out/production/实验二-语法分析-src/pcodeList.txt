@@ -1,243 +1,79 @@
-1t = 3 % 3
-var v u = 1t
-var v v = 6
-var v s = 9
-var a dim_2 [ 3 ] [ 3 ]
-var a array [ 2 ] [ 2 ] = { { 1 , 2 } , { 2 , 4 } }
-func int add_three
-para v a
-para a arr [ ]
-para v b
-start add_three
-2t = arr [ 0 ]
-3t = a + 2t + b
-ret 3t
-end add_three
-func int add1
-para v a
-para v b
-start add1
-var v ans
-const v AAA = 3
-const v BBB_ = 3
-const v CCC = 9
-const v a1 = 12
-const v a2 = 22
-4t = a + b
-upd ans = 4t
-str-1 =20373394
-ln-1
-PRINTF
-str-1 =a = 
-ins-1
-ln-1
-anw-1 = a
-PRINTF
-str-1 =b = 
-ins-1
-ln-1
-anw-1 = b
-PRINTF
-ret ans
-end add1
-func int addmmm
-para v a
-para v b
-para v c
-start addmmm
-5t = a + b + c
-ret 5t
-end addmmm
-func int add
-start add
-ret 99
-end add
-func void printarrrr
-para a arr [ ] [ 2 ]
-start printarrrr
-str-1 =first: 
-ins-1
-6t = arr [ 0 ] [ 0 ]
-anw-1 = 6t
-PRINTF
-ret
-end printarrrr
-func void printarr
-para a arr [ ]
-para a arr2 [ ]
-start printarr
-str-1 =first : 
-ins-1
-7t = arr [ 0 ]
-anw-1 = 7t
-PRINTF
-end printarr
-func int main
-start main
-var a var_array [ 7 ] = { 1 , 2 , 3 , 4 , 5 , 7 , 8 }
-8t = 1 + 1
-9t = 3 + 3
-const a c_array [ 2 ] = { 8t , 9t }
-var a var_AAA [ 1 ] = { 1 }
-10t = var_array [ 0 ]
-11t = var_array [ 1 ]
-var a var_2dim [ 2 ] [ 2 ] = { { 1 , 2 } , { 10t , 11t } }
-const v ONE = 1
+1t = 25 * 4
+var a s1_1 [ 3 ] [ 5 ] = { { 1t , 200 , 300 , 400 , 500 } , { 111 , 222 , 333 , 444 , 555 } , { 99 , 102 , 0 , 123 , 145 } }
+var a s2_1 [ 3 ] [ 5 ] = { { 100 , 200 , 300 , 400 , 500 } , { 111 , 222 , 333 , 444 , 555 } , { 99 , 102 , 0 , 123 , 145 } }
+var a add [ 3 ] = { 123 , 666 , 456 }
+var a s_2 [ 3 ] = { 0 , 0 , 0 }
+var a s_3 [ 3 ] = { 0 , 0 , 0 }
+const v a1 = 1
+const v a2 = 2
+const v a3 = 3
+const a month [ 9 ] = { 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 }
+const v year_1 = 4
+const v year_2 = 100
+func int checkyear
+para v year
+start checkyear
 #if1
-#cond1 0 &&
-#cond2 1
-cond #cond1 && #cond2
+#cond1 year >= 0
+cond #cond1
 CheckCond
 start #if1
-upd var_array [ 1 ] = 3
-end #if1
-start #else1
 #if2
-#cond1 1 ||
-12t = ! ONE
-#cond2 12t
+2t = + 2022
+#cond1 year != 2t ||
+#cond2 year <= 2021
 cond #cond1 || #cond2
 CheckCond
 start #if2
 #if3
-13t = var_array [ 0 ]
-14t = 13t + 99
-#cond1 14t < 99
-cond #cond1
-CheckCond
-start #if3
-call add
-15t = RET
-16t = 99 / 15t
-upd var_array [ 1 ] = 16t
-end #if3
-end #if2
-end #else1
-17t = 4 % 3
-18t = var_array [ 17t ]
-push 18t
-19t = var_array [ 2 ]
-push 19t
-call add1
-20t = RET
-var v input_n
-var v input_m
-21t = GETINT
-upd input_n = 21t
-push input_n
-22t = array [ 0 ] [ 1 ]
-23t = + 22t
-push 23t
-call add1
-24t = RET
-25t = - input_n
-push 25t
-26t = array [ 0 ] [ 1 ]
-push 26t
-call add1
-27t = RET
-push input_n
-push ONE
-call add1
-28t = RET
-push 1
-push 2
-push 3
-call addmmm
-29t = RET
-30t = var_array [ 3 ]
-31t = var_array [ 5 ]
-call add
-32t = RET
-33t = 30t - 31t * 32t
-upd var_array [ 3 ] = 33t
-var v i
-34t = + - + i
-var v ui = 34t
-call add
-35t = RET
-upd i = 35t
-push 1
-push 3
-call add1
-36t = RET
-upd i = 36t
-37t = var_array [ 0 ]
-38t = ( i + 37t )
-upd i = 38t
-upd i = 0
-#if4
-#cond1 i == 0
-cond #cond1
-CheckCond
-start #if4
-end #if4
-#while
-#cond1 1
-cond #cond1
-CheckCond
-start #while
-#if5
-39t = var_array [ i ]
-#cond1 39t == 2 &&
-40t = var_array [ 0 ]
-#cond2 40t > 0
-cond #cond1 && #cond2
-CheckCond
-start #if5
-ins-1
-ln-1
-41t = var_array [ i ]
-anw-1 = 41t
-PRINTF
-end #if5
-start #else5
-end #else5
-#if6
-42t = var_array [ i ]
-#cond1 42t != 2
-cond #cond1
-CheckCond
-start #if6
-ins-1
-str-1 = is not 2
-ln-1
-43t = var_array [ i ]
-anw-1 = 43t
-PRINTF
-end #if6
-str-1 =xxxx
-ln-1
-PRINTF
-44t = i + 1
-upd i = 44t
-#if7
-45t = var_array [ i ]
-46t = - 45t
-#cond1 46t >= 0 ||
-47t = var_array [ 0 ]
-#cond2 47t <= 0 &&
-#cond3 1
+3t = ( year % ( - year_1 * - year_2 ) )
+#cond1 3t == 0 ||
+4t = ( year % year_1 )
+#cond2 4t == 0 &&
+5t = ( year % year_2 )
+#cond3 5t != 0
 cond #cond1 || #cond2 && #cond3
 CheckCond
-start #if7
-48t = var_array [ i ]
-49t = 48t * 3
-upd var_array [ i ] = 49t
-BREAK
-end #if7
-start #else7
-CONTINUE
-end #else7
-end #while
-50t = array [ 0 ]
-push 50t
-51t = array [ 1 ]
-push 51t
-call printarr
-52t = RET
-push array
-call printarrrr
-53t = RET
+start #if3
+str-1 =run:
+ins-1
+ln-1
+anw-1 = year
+PRINTF
+end #if3
+start #else3
+str-1 =not run:
+ins-1
+ln-1
+anw-1 = year
+PRINTF
+end #else3
+end #if2
+start #else2
+str-1 =2022!!!
+ln-1
+PRINTF
+end #else2
+end #if1
+ret year
+end checkyear
+func int main
+start main
+start #block
+var v aaa
+var v bbb
+var v ccc
+var v ddd
+var v eee
+var v fff
+var v y_1
+var v z_1
+6t = GETINT
+upd z_1 = 6t
+push z_1
+call checkyear
+7t = RET
+upd fff = 7t
+end #block
 ret 0
 end main

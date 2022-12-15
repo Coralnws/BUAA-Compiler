@@ -554,10 +554,16 @@ public class Executor {
                 }
 
                 if(activeRunner.condList.size() > 1){
+                    System.out.println("检查short circuit , pcode = "+pcode);
                     String currentOp = sym[sym.length-1];
                     boolean cond2 = activeRunner.condList.pop();
                     boolean cond1 = activeRunner.condList.pop();
                     String op = activeRunner.condOpList.pop();
+                    System.out.print("currentOp = "+ currentOp);
+                    System.out.print(" cond1 = "+ cond1);
+                    System.out.print(" cond2 = "+ cond2);
+                    System.out.println(" op = "+ op);
+
                     boolean result = compareCond(cond1,cond2,op);
                     if(op.equals("||") && result){
                         System.out.println("OR short circuit");
@@ -924,7 +930,6 @@ public class Executor {
             Para para = new Para("");
             para = func.getPara();  //get para from func
 
-
             if(para != null){  //if still got para
                 System.out.println("Got para");
                 if(para instanceof paraVar){  //
@@ -941,9 +946,11 @@ public class Executor {
                     System.out.println("确保是paraArr类型:" + symb.getClass());
 
                     para.skipLevel = symb.skipLevel;
+
                     para.level = symb.level;
                     ((paraArr) para).content = symb.content;
-
+                    System.out.println("paraArr id:" + para);
+                    System.out.println("检查callfunc时level是:"+para.level);
                     System.out.println("参数是数组类型,检查主要数组存在content :" + ((paraArr) para).content.name);
                     System.out.println("参数是数组,参数名:" + ((paraArr) para).name +" ,真正指向的数组是 :" + ((paraArr) para).content.name);
                     newRunner.symbList.put(para.name,para);  //direct send the arr to function
@@ -1399,14 +1406,19 @@ public class Executor {
         symb=getArr(name);
         if(symb instanceof paraArr){
             arr = (Arr) ((paraArr) symb).content;
+            System.out.println("检查updateArr,是paraArr,实际变值的是:" + arr.name + " paraArr id:" + symb);
         }else{
             arr = (Arr) symb;
         }
-        if(arr.skipLevel){
+        if(symb.skipLevel){
             dimension = arr.dimension.get(1);
-            index = arr.level*dimension + dimension2;
+            System.out.println("检查level是:" + arr.level);
+            index = symb.level*dimension + dimension2;
+            System.out.println("检查skip level index是:" + index);
         }else{
             index = arr.dimension.get(1) * dimension1 + dimension2;
+            System.out.println("检查普通 index是:" + index);
+
         }
         arr.valueList.set(index,newValue);
     }
@@ -1460,10 +1472,18 @@ public class Executor {
 
     public boolean isExpression(){
         System.out.println(pcode);
-        if(pcode.contains("+") || pcode.contains("-") || pcode.contains("*") || pcode.contains("/") || pcode.contains("%")){
+        String[] str = pcode.split(" ");
+        boolean isFunc=false;
+        for(int i=0;i<str.length-1;i++){
+            if(isVar(str[i]) && str[i+1].equals("(")){
+                isFunc=true;
+            }
+        }
+        if(pcode.contains("+") || pcode.contains("-") || pcode.contains("*") || pcode.contains("/") || pcode.contains("%") || (pcode.contains("(")&&pcode.contains(")")&& isFunc==false)){
             return true;
         }
         else{
+            System.out.println("return false");
             return false;
         }
     }

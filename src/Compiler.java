@@ -20,6 +20,7 @@ public class Compiler {
         PcodeGenerator pcodeGenerator = new PcodeGenerator();
         pcodeGenerator.generate();
         //Writer.showList();
+
         Executor executor = new Executor();
         executor.execute();
     }
