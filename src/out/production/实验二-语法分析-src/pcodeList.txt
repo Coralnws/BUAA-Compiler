@@ -1,79 +1,267 @@
-1t = 25 * 4
-var a s1_1 [ 3 ] [ 5 ] = { { 1t , 200 , 300 , 400 , 500 } , { 111 , 222 , 333 , 444 , 555 } , { 99 , 102 , 0 , 123 , 145 } }
-var a s2_1 [ 3 ] [ 5 ] = { { 100 , 200 , 300 , 400 , 500 } , { 111 , 222 , 333 , 444 , 555 } , { 99 , 102 , 0 , 123 , 145 } }
-var a add [ 3 ] = { 123 , 666 , 456 }
-var a s_2 [ 3 ] = { 0 , 0 , 0 }
-var a s_3 [ 3 ] = { 0 , 0 , 0 }
-const v a1 = 1
-const v a2 = 2
-const v a3 = 3
-const a month [ 9 ] = { 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 }
-const v year_1 = 4
-const v year_2 = 100
-func int checkyear
-para v year
-start checkyear
+var a conflictMap [ 20 ] [ 20 ]
+var a record [ 20 ]
+var a result [ 20 ]
+var v minGroup = 30
+var v m = 0
+var v global_var = 0
+func int func
+start func
+1t = global_var + 1
+upd global_var = 1t
+ret 1
+end func
+func void init
+start init
+var v i = 0
+#while
+#cond1 i < 20
+cond #cond1
+CheckCond
+start #while
+upd record [ i ] = 0
+upd result [ i ] = 0
+2t = i + 1
+upd i = 2t
+end #while
+ret
+end init
+func void copy
+start copy
+var v i = 0
+#while
+#cond1 i < 20
+cond #cond1
+CheckCond
+start #while
+3t = record [ i ]
+upd result [ i ] = 3t
+4t = i + 1
+upd i = 4t
+end #while
+ret
+end copy
+func void attribute
+para v num
+para v groupNum
+start attribute
 #if1
-#cond1 year >= 0
+#cond1 num > m
 cond #cond1
 CheckCond
 start #if1
 #if2
-2t = + 2022
-#cond1 year != 2t ||
-#cond2 year <= 2021
-cond #cond1 || #cond2
+#cond1 groupNum < minGroup
+cond #cond1
 CheckCond
 start #if2
+upd minGroup = groupNum
+call copy
+5t = RET
+end #if2
+ret
+end #if1
+var v i = 1
+#while
+#cond1 i <= groupNum
+cond #cond1
+CheckCond
+start #while
+var v flag = 0
+var v j = 1
+#while
+#cond1 j <= m
+cond #cond1
+CheckCond
+start #while
 #if3
-3t = ( year % ( - year_1 * - year_2 ) )
-#cond1 3t == 0 ||
-4t = ( year % year_1 )
-#cond2 4t == 0 &&
-5t = ( year % year_2 )
-#cond3 5t != 0
-cond #cond1 || #cond2 && #cond3
+6t = conflictMap [ num ] [ j ]
+#cond1 6t == 1 &&
+7t = record [ j ]
+#cond2 7t == i
+cond #cond1 && #cond2
 CheckCond
 start #if3
-str-1 =run:
-ins-1
-ln-1
-anw-1 = year
-PRINTF
+upd flag = 1
 end #if3
-start #else3
-str-1 =not run:
-ins-1
-ln-1
-anw-1 = year
-PRINTF
-end #else3
-end #if2
-start #else2
-str-1 =2022!!!
-ln-1
-PRINTF
-end #else2
-end #if1
-ret year
-end checkyear
+8t = j + 1
+upd j = 8t
+end #while
+#if4
+#cond1 flag == 0
+cond #cond1
+CheckCond
+start #if4
+upd record [ num ] = i
+9t = num + 1
+push 9t
+push groupNum
+call attribute
+10t = RET
+upd record [ num ] = 0
+end #if4
+11t = i + 1
+upd i = 11t
+end #while
+12t = groupNum + 1
+upd record [ num ] = 12t
+13t = num + 1
+push 13t
+14t = groupNum + 1
+push 14t
+call attribute
+15t = RET
+ret
+end attribute
 func int main
 start main
-start #block
-var v aaa
-var v bbb
-var v ccc
-var v ddd
-var v eee
-var v fff
-var v y_1
-var v z_1
-6t = GETINT
-upd z_1 = 6t
-push z_1
-call checkyear
-7t = RET
-upd fff = 7t
-end #block
+str-1 =20373360
+ln-1
+PRINTF
+call init
+16t = RET
+var v n
+17t = GETINT
+upd n = 17t
+18t = GETINT
+upd m = 18t
+var v i = 0
+#while
+#cond1 i < n
+cond #cond1
+CheckCond
+start #while
+var v j = 0
+var a temp [ 3 ]
+#while
+#cond1 3
+cond #cond1
+CheckCond
+start #while
+var v k
+19t = GETINT
+upd k = 19t
+upd temp [ j ] = k
+#if5
+#cond1 j > 1
+cond #cond1
+CheckCond
+start #if5
+BREAK
+end #if5
+start #else5
+20t = j + 1
+upd j = 20t
+end #else5
+end #while
+21t = temp [ 0 ]
+22t = temp [ 1 ]
+upd conflictMap [ 21t ] [ 22t ] = 1
+23t = temp [ 1 ]
+24t = temp [ 0 ]
+upd conflictMap [ 23t ] [ 24t ] = 1
+25t = temp [ 0 ]
+26t = temp [ 2 ]
+upd conflictMap [ 25t ] [ 26t ] = 1
+27t = temp [ 2 ]
+28t = temp [ 0 ]
+upd conflictMap [ 27t ] [ 28t ] = 1
+29t = temp [ 1 ]
+30t = temp [ 2 ]
+upd conflictMap [ 29t ] [ 30t ] = 1
+31t = temp [ 2 ]
+32t = temp [ 1 ]
+upd conflictMap [ 31t ] [ 32t ] = 1
+33t = i + 1
+upd i = 33t
+end #while
+push 1
+push 1
+call attribute
+34t = RET
+str-1 =input:
+ln-1
+PRINTF
+str-1 =4
+ln-1
+str-2 =7
+ln-2
+str-3 =1 2 3
+ln-3
+str-4 =2 3 4
+ln-4
+str-5 =3 4 5
+ln-5
+str-6 =4 5 6
+ln-6
+PRINTF
+str-1 =Your answer is:
+ln-1
+PRINTF
+upd i = 1
+#while
+#cond1 i <= minGroup
+cond #cond1
+CheckCond
+start #while
+var v j = 1
+#while
+#cond1 j <= m
+cond #cond1
+CheckCond
+start #while
+#if6
+35t = result [ j ]
+#cond1 35t == i
+cond #cond1
+CheckCond
+start #if6
+ins-1
+anw-1 = j
+PRINTF
+end #if6
+36t = j + 1
+upd j = 36t
+end #while
+ln-1
+PRINTF
+37t = i + 1
+upd i = 37t
+end #while
+str-1 =expect:
+ln-1
+PRINTF
+str-1 =1 4 7
+ln-1
+str-2 =2 5
+ln-2
+str-3 =3 6
+ln-3
+PRINTF
+#if7
+#cond1 0 &&
+call func
+38t = RET
+#cond2 38t
+cond #cond1 && #cond2
+CheckCond
+start #if7
+end #if7
+ins-1
+ln-1
+anw-1 = global_var
+PRINTF
+#if8
+#cond1 1 ||
+call func
+39t = RET
+#cond2 39t
+cond #cond1 || #cond2
+CheckCond
+start #if8
+end #if8
+ins-1
+ln-1
+anw-1 = global_var
+PRINTF
 ret 0
 end main

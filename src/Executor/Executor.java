@@ -525,6 +525,7 @@ public class Executor {
                     continue;
                 }
                 ArrayList<Boolean> resultList = new ArrayList<Boolean>();
+                boolean currentRes=false;
 
                 if(checkCondGotOp(sym)){
                     int value1=-1,value2=-1;
@@ -547,12 +548,25 @@ public class Executor {
 
                 if(resultList.contains(false)){
                     activeRunner.condList.push(false);
-                    //condResult =false;
+                    currentRes =false;
                 }else{
                     activeRunner.condList.push(true);
-                    //condResult=true;
+                    currentRes=true;
                 }
 
+                if(sym[sym.length-1].equals("||")){
+                    if(currentRes){
+                        shortCircuit=true;
+                        continue;
+                    }
+                }
+                if(sym[sym.length-1].equals("&&")){
+                    if(!currentRes){
+                        shortCircuit=true;
+                        continue;
+                    }
+                }
+/*
                 if(activeRunner.condList.size() > 1){
                     System.out.println("检查short circuit , pcode = "+pcode);
                     String currentOp = sym[sym.length-1];
@@ -565,6 +579,7 @@ public class Executor {
                     System.out.println(" op = "+ op);
 
                     boolean result = compareCond(cond1,cond2,op);
+
                     if(op.equals("||") && result){
                         System.out.println("OR short circuit");
                         activeRunner.condList.push(true);
@@ -594,7 +609,10 @@ public class Executor {
                         activeRunner.condOpList.push(sym[sym.length-1]);
                     }
                 }
+
                 checkCondList();
+
+ */
 
             }
             else if(sym[0].equals("CheckCond")){
