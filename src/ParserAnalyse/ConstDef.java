@@ -6,7 +6,7 @@ import Save.TreeNode;
 public class ConstDef extends SymbAnalyse{
     public ConstDef(TreeNode parent){
         super("<ConstDef>",parent);
-        System.out.println("start <ConstDef>");
+        //System.out.println("start <ConstDef>");
 
         //1
         if(sym.typeCode.equals("IDENFR")){
@@ -41,7 +41,7 @@ public class ConstDef extends SymbAnalyse{
                 ConstInitVal constInitVal = new ConstInitVal(this.node);
             }
             else{
-                System.out.println("ConstDef Error:Not = ");
+                //System.out.println("ConstDef Error:Not = ");
             }
 
 
@@ -51,7 +51,7 @@ public class ConstDef extends SymbAnalyse{
             listIndex++;
 
              */
-            System.out.println("Printout <ConstDef>");
+            //System.out.println("Printout <ConstDef>");
             parserList.add(this.node.node);
         }
     }

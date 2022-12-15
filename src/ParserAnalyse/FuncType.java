@@ -6,7 +6,7 @@ import Save.TreeNode;
 public class FuncType extends SymbAnalyse{
     public FuncType(TreeNode parent){
         super("<FuncType>",parent);
-        System.out.println("Start <FuncType>");
+        //System.out.println("Start <FuncType>");
         //1
         if(sym.content.equals("void")){
             parserList.add(sym);
@@ -14,7 +14,7 @@ public class FuncType extends SymbAnalyse{
             voidNode.addNode(this.node);
             nextSym();
 
-            System.out.println("Printout <FuncType>");
+            //System.out.println("Printout <FuncType>");
             parserList.add(this.node.node);
         }
         else if(sym.content.equals("int")){
@@ -23,11 +23,11 @@ public class FuncType extends SymbAnalyse{
             intNode.addNode(this.node);
             nextSym();
 
-            System.out.println("Printout <FuncType>");
+            //System.out.println("Printout <FuncType>");
             parserList.add(this.node.node);
         }
         else{
-            System.out.println("FuncType Error: Not match");
+            //System.out.println("FuncType Error: Not match");
         }
 
     }

@@ -6,7 +6,7 @@ import Save.TreeNode;
 public class Exp extends SymbAnalyse{
     public Exp(TreeNode parent){
         super("<Exp>",parent);
-        System.out.println("Start <Exp>");
+        //System.out.println("Start <Exp>");
         AddExp addExp = new AddExp(this.node);
 
         //printout <Exp>
@@ -15,7 +15,7 @@ public class Exp extends SymbAnalyse{
         listIndex++;
 
          */
-        System.out.println("Printout <Exp>");
+        //System.out.println("Printout <Exp>");
         parserList.add(this.node.node);
 
     }

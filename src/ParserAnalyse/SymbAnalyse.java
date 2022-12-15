@@ -58,7 +58,7 @@ public class SymbAnalyse {
     }
 
     public static void printTree() throws IOException {
-        System.out.println("printTree");
+        //System.out.println("printTree");
         BufferedWriter writer = new BufferedWriter(new FileWriter("tree.txt"));
         TreeNode scanNode = firstNode;
         //System.out.println(firstNode);

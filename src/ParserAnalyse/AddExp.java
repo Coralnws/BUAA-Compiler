@@ -8,13 +8,13 @@ public class AddExp extends SymbAnalyse {
 
     public AddExp(TreeNode parent) {
         super("<AddExp>", parent);
-        System.out.println("start <AddExp>");
+        //System.out.println("start <AddExp>");
 
         //1
         MulExp mulExp = new MulExp(this.node); //print 1st
 
         //printout <AddExp>
-        System.out.println("Printout <AddExp>");
+        //System.out.println("Printout <AddExp>");
         parserList.add(this.node.node);
 
         //2 loop for { ('+' | '−') MulExp }
@@ -30,7 +30,7 @@ public class AddExp extends SymbAnalyse {
             //printout <AddExp>
             //save.addParserWord(listIndex, this.node.node);
             //listIndex++;
-            System.out.println("Printout <AddExp>");
+            //System.out.println("Printout <AddExp>");
             parserList.add(this.node.node);
         }
     }

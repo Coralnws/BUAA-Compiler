@@ -11,24 +11,24 @@ import java.io.IOException;
 
 public class Return extends PcodeGenerator{
     public Return() throws IOException {
-        System.out.println("Pcode Return:" + currentWord.typeCode);
+        //System.out.println("Pcode Return:" + currentWord.typeCode);
         pcode.append("ret");  //currentWord = return
 
         ignoreParser = true;
         nextWord();   //跳过<Exp>
-        System.out.println("Check now is Exp or ; : " + currentWord.typeCode);
+        //System.out.println("Check now is Exp or ; : " + currentWord.typeCode);
 
         while(!currentWord.typeCode.equals("SEMICN")){
             if(!BlockItemTestExp()){
-                System.out.println("return值没有Exp");
+                //System.out.println("return值没有Exp");
                 while(!currentWord.typeCode.equals("SEMICN")){
-                    System.out.println("append into pcode: " + currentWord.typeCode);
+                    //System.out.println("append into pcode: " + currentWord.typeCode);
                     pcode.append(" " + currentWord.content);
                     nextWord();
                 }
             }
             else{
-                System.out.println("return值有Exp");
+                //System.out.println("return值有Exp");
                 Exp exp = new Exp();
                 pcode.append(" " + varT);
             }
@@ -37,7 +37,7 @@ public class Return extends PcodeGenerator{
         ignoreParser = false;
         writer.write(String.valueOf(pcode));
         nextWord();
-        System.out.println("Before return end ,check now is : "+ currentWord.typeCode);
+        //System.out.println("Before return end ,check now is : "+ currentWord.typeCode);
 
     }
 

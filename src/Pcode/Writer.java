@@ -17,7 +17,7 @@ public class Writer{
     }
 
     public static void write(String pcode) throws IOException {
-        System.out.println("Write : " + pcode);
+        //System.out.println("Write : " + pcode);
         if(pcode.length() > 0){
             pcodeList.add(pcode);
             pcode += '\n';

@@ -27,10 +27,10 @@ public class Print extends PcodeGenerator{
 
     public Print() throws IOException {
         //currentWord 应该是 printf
-        System.out.println("Check current is printf : "+ currentWord.typeCode);
+        //System.out.println("Check current is printf : "+ currentWord.typeCode);
         nextWord();  //(
         nextWord();  //strcon
-        System.out.println("Check current is strcon : "+ currentWord.content);
+        //System.out.println("Check current is strcon : "+ currentWord.content);
         String str = currentWord.content;
         char ch;
 
@@ -78,7 +78,7 @@ public class Print extends PcodeGenerator{
             while(!currentWord.typeCode.equals("PRINTEND")){
                 if(!currentWord.content.equals(",") && !currentWord.typeCode.equals("PRINTEND")){  //分割每一个para
                     if(PrintTestExp()){
-                        System.out.println("Print 有Exp");
+                        //System.out.println("Print 有Exp");
                         Exp exp = new Exp();
                         pcode.append(" " + varT);
                         if(pcode.length() > 0 ){
@@ -87,7 +87,7 @@ public class Print extends PcodeGenerator{
                             pcode.delete( 0, pcode.length() );
                         }
                     }else{
-                        System.out.println("Print 没有Exp");
+                        //System.out.println("Print 没有Exp");
                         pcode.append(currentWord.content);
                         nextWord();
                     }
@@ -103,7 +103,7 @@ public class Print extends PcodeGenerator{
                 }
             }
             if(pcode.length() > 0){
-                System.out.println("last");
+                //System.out.println("last");
                 pcode.insert(0,getAnwNum() + " = ");
                 writer.write(String.valueOf(pcode));
                 pcode.delete( 0, pcode.length() );
@@ -111,9 +111,9 @@ public class Print extends PcodeGenerator{
         }
         writer.write("PRINTF");
         ignoreParser = false;
-        System.out.println("Check current is ) : " + currentWord.content);
+        //System.out.println("Check current is ) : " + currentWord.content);
         nextWord();
-        System.out.println("Check current is ; : " + currentWord.content);
+        //System.out.println("Check current is ; : " + currentWord.content);
         nextWord();
 
 

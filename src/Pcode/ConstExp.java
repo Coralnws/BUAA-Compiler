@@ -11,7 +11,7 @@ import static Pcode.Exp.var_t;
 //for array里面的Exp
 public class ConstExp extends PcodeGenerator{
     public ConstExp() throws IOException {
-        System.out.println("In ConstExp");
+        //System.out.println("In ConstExp");
         ignoreParser = true;
         while(!currentWord.typeCode.equals("RBRACK")){
             ignoreParser = true;
@@ -30,10 +30,10 @@ public class ConstExp extends PcodeGenerator{
                 writer.write(varT + " = RET");
                 pcode.append(" " + varT);
             }else if(scanAhead() == returnType.UnaryOp){
-                System.out.println("Retun UnaryOp, wordAhead is : "+ wordAhead.typeCode);
+                //System.out.println("Retun UnaryOp, wordAhead is : "+ wordAhead.typeCode);
                 nextWord();
                 if(currentWord.typeCode.equals("LPARENT")){
-                    System.out.println("After ! is (Exp)");
+                    //System.out.println("After ! is (Exp)");
                     //nextWord();
                     UnaryExp unaryExp = new UnaryExp();
                     String ans = varT;
@@ -41,7 +41,7 @@ public class ConstExp extends PcodeGenerator{
                     writer.write(varT + " = ! " + ans);
                     pcode.append(" " + varT);
                 }else if(currentWord.typeCode.equals("PLUS") || currentWord.typeCode.equals("MINU")) {
-                    System.out.println("After ! is +-+");
+                    //System.out.println("After ! is +-+");
                     //nextWord();
                     UnaryPlusMinExp unaryPlusMinExp = new UnaryPlusMinExp();
                     String ans = varT;
@@ -51,7 +51,7 @@ public class ConstExp extends PcodeGenerator{
                 }else if(currentWord.typeCode.equals("IDENFR")){
                     //nextWord();
                     if(wordAhead.typeCode.equals("LPARENT")){ //function
-                        System.out.println("!后面是Func");
+                        //System.out.println("!后面是Func");
                         Call callFunc = new Call();
                         nextTVar();
                         writer.write(varT + " = RET");
@@ -60,7 +60,7 @@ public class ConstExp extends PcodeGenerator{
                         writer.write(varT + " = ! " + ans);
                         pcode.append(" " + varT);
                     }else if(wordAhead.typeCode.equals("LBRACK")){
-                        System.out.println("!后面是Arr");
+                        //System.out.println("!后面是Arr");
                         Array array = new Array();
                         String ans = varT;
                         nextTVar();

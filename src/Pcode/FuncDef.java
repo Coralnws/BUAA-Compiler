@@ -7,13 +7,13 @@ public class FuncDef extends PcodeGenerator{
 
     public FuncDef() throws IOException {
         //currentWord应该是 int/void
-        System.out.println("Check current is int/void:" + currentWord.typeCode);
+        //System.out.println("Check current is int/void:" + currentWord.typeCode);
         pcode.append("func");
         //nextWord(); //int / void
         pcode.append(" " + currentWord.content);
         nextWord();  //funcName
         funcName = currentWord.content;
-        System.out.println("FuncName:" + currentWord.content );
+        //System.out.println("FuncName:" + currentWord.content );
         pcode.append(" " + currentWord.content);
         //func <type> <funcName>
         writer.write(String.valueOf(pcode));
@@ -25,7 +25,7 @@ public class FuncDef extends PcodeGenerator{
             nextWord(); // <FuncFParam>
             while(currentWord.typeCode.equals("<FuncFParam>")){
                 FuncFParam funcFParam = new FuncFParam();
-                System.out.println("In FuncDef while loop:" + currentWord.typeCode);
+                //System.out.println("In FuncDef while loop:" + currentWord.typeCode);
             }
         }
 

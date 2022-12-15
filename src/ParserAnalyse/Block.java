@@ -6,7 +6,7 @@ import Save.*;
 public class Block extends SymbAnalyse{
     public Block(TreeNode parent){
         super("<Block>",parent);
-        System.out.println("Start <Block>");
+        //System.out.println("Start <Block>");
         //1
         if(sym.content.equals("{")){
             parserList.add(sym);
@@ -27,7 +27,7 @@ public class Block extends SymbAnalyse{
                 nextSym();
             }
 
-            System.out.println("Printout <Block>");
+            //System.out.println("Printout <Block>");
             parserList.add(this.node.node);
         }
     }

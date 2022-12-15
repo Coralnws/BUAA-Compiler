@@ -28,7 +28,7 @@ public class Arr extends Symbol{
         }else{
             value = dimension.get(0) * dimension.get(1);
         }
-        System.out.println("space of arr = "+ value);
+        //System.out.println("space of arr = "+ value);
         for(int i =0;i<=value;i++){
             valueList.add(0);
         }

@@ -1,267 +1,397 @@
-var a conflictMap [ 20 ] [ 20 ]
-var a record [ 20 ]
-var a result [ 20 ]
-var v minGroup = 30
-var v m = 0
-var v global_var = 0
-func int func
-start func
-1t = global_var + 1
-upd global_var = 1t
-ret 1
-end func
-func void init
-start init
-var v i = 0
-#while
-#cond1 i < 20
-cond #cond1
-CheckCond
-start #while
-upd record [ i ] = 0
-upd result [ i ] = 0
-2t = i + 1
-upd i = 2t
-end #while
-ret
-end init
-func void copy
-start copy
-var v i = 0
-#while
-#cond1 i < 20
-cond #cond1
-CheckCond
-start #while
-3t = record [ i ]
-upd result [ i ] = 3t
-4t = i + 1
-upd i = 4t
-end #while
-ret
-end copy
-func void attribute
-para v num
-para v groupNum
-start attribute
+const v N = 10007
+const a const_diag_matrix [ 3 ] [ 3 ] = { { 1 , 0 , 0 } , { 0 , 1 , 0 } , { 0 , 0 , 1 } }
+const v const_d_matrix = 3
+const a const_base [ 3 ] = { 1 , 0 , 0 }
+const v const_a = 1
+const v const_b = 2
+const v const_c = 3
+const v const_d = 4
+var a diag_matrix [ 3 ] [ 3 ] = { { 1 , 0 , 0 } , { 0 , 1 , 0 } , { 0 , 0 , 1 } }
+var v d_matrix = 3
+var a base [ 3 ] = { 1 , 0 , 0 }
+var a matrix_A [ 10 ] [ 10 ]
+var a matrix_B [ 10 ] [ 10 ]
+func void print_id
+para v id
+start print_id
+ins-1
+ln-1
+anw-1 = id
+PRINTF
 #if1
-#cond1 num > m
-cond #cond1
+#cond1 0 &&
+#cond2 4 > 5
+cond #cond1 && #cond2
 CheckCond
 start #if1
+ret
+end #if1
+end print_id
+func void print_matrix
+para a matrix [ ] [ 10 ]
+start print_matrix
+var v i = 0
+var v j
+#while
+#cond1 i < 10
+cond #cond1
+CheckCond
+start #while
+upd j = 0
+#while
+#cond1 j < 10
+cond #cond1
+CheckCond
+start #while
 #if2
-#cond1 groupNum < minGroup
+1t = 10 - 1
+#cond1 j == 1t
 cond #cond1
 CheckCond
 start #if2
-upd minGroup = groupNum
-call copy
-5t = RET
+ins-1
+2t = matrix [ i ] [ j ]
+anw-1 = 2t
+PRINTF
 end #if2
-ret
-end #if1
-var v i = 1
+start #else2
+ins-1
+str-1 = 
+3t = matrix [ i ] [ j ]
+anw-1 = 3t
+PRINTF
+end #else2
+4t = j + 1
+upd j = 4t
+end #while
+ln-1
+PRINTF
+5t = i + 1
+upd i = 5t
+end #while
+end print_matrix
+func void create_double_matrix
+para a matrix_A [ ] [ 10 ]
+para a matrix_B [ ] [ 10 ]
+para v x
+para v y
+start create_double_matrix
+var v i = 0
+var v j
 #while
-#cond1 i <= groupNum
+#cond1 i < 10
 cond #cond1
 CheckCond
 start #while
-var v flag = 0
-var v j = 1
+upd j = 0
 #while
-#cond1 j <= m
+#cond1 j < 10
 cond #cond1
 CheckCond
 start #while
-#if3
-6t = conflictMap [ num ] [ j ]
-#cond1 6t == 1 &&
-7t = record [ j ]
-#cond2 7t == i
-cond #cond1 && #cond2
-CheckCond
-start #if3
-upd flag = 1
-end #if3
+6t = i + 1 + x
+upd matrix_A [ i ] [ j ] = 6t
+7t = j + 1 + y
+upd matrix_B [ i ] [ j ] = 7t
 8t = j + 1
 upd j = 8t
 end #while
+9t = i + 1
+upd i = 9t
+end #while
+end create_double_matrix
+func int sum_matrix
+para a matrix [ ] [ 10 ]
+start sum_matrix
+var v i = 0
+var v j
+var v k
+var v res = 0
+#while
+#cond1 i < 10
+cond #cond1
+CheckCond
+start #while
+upd j = 0
+#while
+#cond1 j < 10
+cond #cond1
+CheckCond
+start #while
+10t = matrix [ i ] [ j ]
+11t = res + 10t
+upd res = 11t
+12t = j + 1
+upd j = 12t
+end #while
+13t = i + 1
+upd i = 13t
+end #while
+ret res
+end sum_matrix
+func int multi_double_matrix
+para a matrix_A [ ] [ 10 ]
+para a matrix_B [ ] [ 10 ]
+start multi_double_matrix
+var a matrix_C [ 10 ] [ 10 ]
+var v i = 0
+var v j
+var v k
+#while
+#cond1 i < 10
+cond #cond1
+CheckCond
+start #while
+upd j = 0
+#while
+#cond1 j < 10
+cond #cond1
+CheckCond
+start #while
+upd k = 0
+upd matrix_C [ i ] [ j ] = 0
+#while
+#cond1 k < 10
+cond #cond1
+CheckCond
+start #while
+14t = matrix_C [ i ] [ j ]
+15t = matrix_A [ i ] [ k ]
+16t = matrix_B [ k ] [ j ]
+17t = 14t + 15t * 16t
+upd matrix_C [ i ] [ j ] = 17t
+18t = k + 1
+upd k = 18t
+end #while
+19t = j + 1
+upd j = 19t
+end #while
+20t = i + 1
+upd i = 20t
+end #while
+push matrix_C
+call sum_matrix
+21t = RET
+ret 21t
+end multi_double_matrix
+func int vdot
+para a x [ ]
+para a y [ ]
+start vdot
+var v d = 0
+var v sum = 0
+#while
+#cond1 1 ||
+#cond2 0
+cond #cond1 || #cond2
+CheckCond
+start #while
+22t = x [ d ]
+23t = y [ d ]
+24t = sum + 22t * 23t / 1
+upd sum = 24t
+25t = d + 1
+upd d = 25t
+#if3
+#cond1 d == const_d_matrix ||
+#cond2 0 &&
+26t = - sum < 7
+27t = ! 26t
+28t = 27t 7 + 1
+#cond3 28t ||
+29t = + sum
+30t = 8 - 1
+#cond4 29t > 30t
+cond #cond1 || #cond2 && #cond3 || #cond4
+CheckCond
+start #if3
+BREAK
+end #if3
+start #else3
 #if4
-#cond1 flag == 0
+#cond1 1
 cond #cond1
 CheckCond
 start #if4
-upd record [ num ] = i
-9t = num + 1
-push 9t
-push groupNum
-call attribute
-10t = RET
-upd record [ num ] = 0
+CONTINUE
 end #if4
-11t = i + 1
-upd i = 11t
+start #else4
+end #else4
+end #else3
 end #while
-12t = groupNum + 1
-upd record [ num ] = 12t
-13t = num + 1
-push 13t
-14t = groupNum + 1
-push 14t
-call attribute
-15t = RET
-ret
-end attribute
-func int main
-start main
-str-1 =20373360
+ret sum
+end vdot
+func void print_vec
+para a v [ ]
+start print_vec
+ins-1
+str-1 = 
+ins-2
+str-2 = 
+ins-3
+ln-1
+31t = v [ 0 ]
+anw-1 = 31t
+32t = v [ 1 ]
+anw-2 = 32t
+33t = v [ 2 ]
+anw-3 = 33t
+PRINTF
+end print_vec
+func void print_solve_math_problem
+start print_solve_math_problem
+start #block
+str-1 =Let us solve math problem
 ln-1
 PRINTF
-call init
-16t = RET
-var v n
-17t = GETINT
-upd n = 17t
-18t = GETINT
-upd m = 18t
-var v i = 0
-#while
-#cond1 i < n
-cond #cond1
-CheckCond
-start #while
-var v j = 0
-var a temp [ 3 ]
-#while
-#cond1 3
-cond #cond1
-CheckCond
-start #while
-var v k
-19t = GETINT
-upd k = 19t
-upd temp [ j ] = k
+end #block
+end print_solve_math_problem
+func void empty_block
+start empty_block
+end empty_block
+func void solve_math_problem
+para v x
+para v y
+start solve_math_problem
+var v tmp
+call print_solve_math_problem
+34t = RET
+call empty_block
+35t = RET
 #if5
-#cond1 j > 1
+#cond1 x == y
 cond #cond1
 CheckCond
 start #if5
-BREAK
+str-1 =x not equal to y
+ln-1
+PRINTF
+ret
 end #if5
 start #else5
-20t = j + 1
-upd j = 20t
-end #else5
-end #while
-21t = temp [ 0 ]
-22t = temp [ 1 ]
-upd conflictMap [ 21t ] [ 22t ] = 1
-23t = temp [ 1 ]
-24t = temp [ 0 ]
-upd conflictMap [ 23t ] [ 24t ] = 1
-25t = temp [ 0 ]
-26t = temp [ 2 ]
-upd conflictMap [ 25t ] [ 26t ] = 1
-27t = temp [ 2 ]
-28t = temp [ 0 ]
-upd conflictMap [ 27t ] [ 28t ] = 1
-29t = temp [ 1 ]
-30t = temp [ 2 ]
-upd conflictMap [ 29t ] [ 30t ] = 1
-31t = temp [ 2 ]
-32t = temp [ 1 ]
-upd conflictMap [ 31t ] [ 32t ] = 1
-33t = i + 1
-upd i = 33t
-end #while
-push 1
-push 1
-call attribute
-34t = RET
-str-1 =input:
-ln-1
-PRINTF
-str-1 =4
-ln-1
-str-2 =7
-ln-2
-str-3 =1 2 3
-ln-3
-str-4 =2 3 4
-ln-4
-str-5 =3 4 5
-ln-5
-str-6 =4 5 6
-ln-6
-PRINTF
-str-1 =Your answer is:
-ln-1
-PRINTF
-upd i = 1
-#while
-#cond1 i <= minGroup
-cond #cond1
-CheckCond
-start #while
-var v j = 1
-#while
-#cond1 j <= m
-cond #cond1
-CheckCond
-start #while
 #if6
-35t = result [ j ]
-#cond1 35t == i
+#cond1 x != y
 cond #cond1
 CheckCond
 start #if6
-ins-1
-anw-1 = j
-PRINTF
-end #if6
-36t = j + 1
-upd j = 36t
-end #while
-ln-1
-PRINTF
-37t = i + 1
-upd i = 37t
-end #while
-str-1 =expect:
-ln-1
-PRINTF
-str-1 =1 4 7
-ln-1
-str-2 =2 5
-ln-2
-str-3 =3 6
-ln-3
+str-1 =x is not equal to y and 
 PRINTF
 #if7
-#cond1 0 &&
-call func
-38t = RET
-#cond2 38t
-cond #cond1 && #cond2
+#cond1 x >= y
+cond #cond1
 CheckCond
 start #if7
-end #if7
+36t = x - y
+upd tmp = 36t
+str-1 =x is 
 ins-1
+str-2 = more than y
 ln-1
-anw-1 = global_var
+anw-1 = tmp
 PRINTF
+end #if7
 #if8
-#cond1 1 ||
-call func
-39t = RET
-#cond2 39t
-cond #cond1 || #cond2
+#cond1 x <= y
+cond #cond1
 CheckCond
 start #if8
+37t = y - x
+upd tmp = 37t
+str-1 =y is 
+ins-1
+str-2 = more than x
+ln-1
+anw-1 = tmp
+PRINTF
 end #if8
+end #if6
+end #else5
+ret
+end solve_math_problem
+func int main
+start main
+const v N = 3
+var a v [ 3 ]
+var v i = 0
+#while
+#cond1 i < N
+cond #cond1
+CheckCond
+start #while
+upd v [ i ] = getint ( )
+38t = i + 1
+upd i = 38t
+end #while
+#if9
+39t = ! 0
+#cond1 39t &&
+#cond2 0 ||
+#cond3 1
+cond #cond1 && #cond2 || #cond3
+CheckCond
+start #if9
+push 20373623
+call print_id
+40t = RET
+end #if9
+push matrix_A
+push matrix_B
+push 0
+push 0
+call create_double_matrix
+41t = RET
+ln-1
+PRINTF
+push matrix_A
+call print_matrix
+42t = RET
+ln-1
+PRINTF
+push matrix_B
+call print_matrix
+43t = RET
+44t = ( ( 1 + 1 / 1 * 1 ) % 2 ) - + 1 - + - 1
+var v res = 44t
+push matrix_A
+push matrix_B
+call multi_double_matrix
+45t = RET
+upd res = 45t
 ins-1
 ln-1
-anw-1 = global_var
+anw-1 = res
 PRINTF
+upd i = 0
+#while
+#cond1 i < N
+cond #cond1
+CheckCond
+start #while
+var v res = 0
+push v
+46t = diag_matrix [ i ]
+push 46t
+call vdot
+47t = RET
+upd res = 47t
+ins-1
+ln-1
+anw-1 = res
+PRINTF
+48t = i + 1
+upd i = 48t
+end #while
+push 100
+push 100
+call solve_math_problem
+49t = RET
+push 200
+push 100
+call solve_math_problem
+50t = RET
+push 100
+push 300
+call solve_math_problem
+51t = RET
 ret 0
 end main

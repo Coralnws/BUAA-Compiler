@@ -17,10 +17,10 @@ Stmt → LVal '=' Exp ';'
 public class Stmt extends SymbAnalyse{
     public Stmt(TreeNode parent){
         super("<Stmt>",parent);
-        System.out.println("start <stmt>");
+        //System.out.println("start <stmt>");
         boolean run = false;
 
-        System.out.println("In Stmt : sym is " + sym.content);
+        //System.out.println("In Stmt : sym is " + sym.content);
         //1 - if
         if(sym.content.equals("if")){
             run = true;
@@ -61,11 +61,11 @@ public class Stmt extends SymbAnalyse{
                        Stmt stmt2 = new Stmt(this.node);
 
                        //insertList();
-                       System.out.println("Printout <stmt>");
+                       //System.out.println("Printout <stmt>");
                        parserList.add(this.node.node);
                    }
                    else{
-                       System.out.println("Printout <stmt>");
+                       //System.out.println("Printout <stmt>");
                        parserList.add(this.node.node);
                    }
                }
@@ -96,7 +96,7 @@ public class Stmt extends SymbAnalyse{
                     nextSym();
                     //2.4
                     Stmt stmt = new Stmt(this.node);
-                    System.out.println("Printout <stmt>");
+                    //System.out.println("Printout <stmt>");
                     parserList.add(this.node.node);
                 }
             }
@@ -118,7 +118,7 @@ public class Stmt extends SymbAnalyse{
                 nextSym();
 
                 //insertList();
-                System.out.println("Printout <stmt>");
+                //System.out.println("Printout <stmt>");
                 parserList.add(this.node.node);
             }
         }
@@ -138,7 +138,7 @@ public class Stmt extends SymbAnalyse{
                 nextSym();
 
                 //insertList();
-                System.out.println("Printout <stmt>");
+                //System.out.println("Printout <stmt>");
                 parserList.add(this.node.node);
 
             }
@@ -163,7 +163,7 @@ public class Stmt extends SymbAnalyse{
                 nextSym();
 
                 //insertList();
-                System.out.println("Printout <stmt>");
+                //System.out.println("Printout <stmt>");
                 parserList.add(this.node.node);
             }
         }
@@ -212,7 +212,7 @@ public class Stmt extends SymbAnalyse{
                             nextSym();
 
                             //insertList();
-                            System.out.println("Printout <stmt>");
+                            //System.out.println("Printout <stmt>");
                             parserList.add(this.node.node);
 
                         }
@@ -221,17 +221,17 @@ public class Stmt extends SymbAnalyse{
                 }
 
             }
-            System.out.println("quit printf" + " sym:" + sym.content);
+            //System.out.println("quit printf" + " sym:" + sym.content);
         }
 
         // 7 - Block : need scan - start with {
         else if(sym.content.equals("{")){
-            System.out.println("BLOCK IN STMT");
+            //System.out.println("BLOCK IN STMT");
             run = true;
             Block block = new Block(this.node);
 
             //this.insertList();
-            System.out.println("Printout <stmt>");
+            //System.out.println("Printout <stmt>");
             parserList.add(this.node.node);
         }
 
@@ -239,7 +239,7 @@ public class Stmt extends SymbAnalyse{
         else if(AddExp.scanAhead() == ParserType.LVal){
             boolean isAssign = this.scanAssign();
             run = true;
-            System.out.println("Exp in stmt");
+            //System.out.println("Exp in stmt");
 
             if(isAssign){
                 LVal lVal = new LVal(this.node);
@@ -274,7 +274,7 @@ public class Stmt extends SymbAnalyse{
                                     nextSym();
 
                                     // this.insertList();
-                                    System.out.println("Printout <stmt>");
+                                    //System.out.println("Printout <stmt>");
                                     parserList.add(this.node.node);
                                 }
                             }
@@ -289,7 +289,7 @@ public class Stmt extends SymbAnalyse{
                             semicnNode.addNode(this.node);
                             nextSym();
 
-                            System.out.println("Printout <stmt>");
+                            //System.out.println("Printout <stmt>");
                             parserList.add(this.node.node);
                         }
                     }
@@ -304,7 +304,7 @@ public class Stmt extends SymbAnalyse{
                     semicnNode.addNode(this.node);
                     nextSym();
 
-                    System.out.println("Printout <stmt>");
+                    //System.out.println("Printout <stmt>");
                     parserList.add(this.node.node);
                 }
             }
@@ -312,7 +312,7 @@ public class Stmt extends SymbAnalyse{
         //9 [Exp] ;
 
         else if(AddExp.scanAhead() != ParserType.ERROR){
-            System.out.println("exp in stmt");
+            //System.out.println("exp in stmt");
             run = true;
             Exp exp = new Exp(this.node);
 
@@ -322,7 +322,7 @@ public class Stmt extends SymbAnalyse{
                 semicnNode.addNode(this.node);
                 nextSym();
 
-                System.out.println("Printout <stmt>");
+                //System.out.println("Printout <stmt>");
                 parserList.add(this.node.node);
             }
         }
@@ -333,13 +333,13 @@ public class Stmt extends SymbAnalyse{
             semicnNode.addNode(this.node);
             nextSym();
 
-            System.out.println("Printout <stmt>");
+            //System.out.println("Printout <stmt>");
             parserList.add(this.node.node);
         }
 
         if(!run){
-            System.out.println("Not Match" + " sym: " +sym.content );
-            System.out.println("Not Match line: " + (listIndex));
+            //System.out.println("Not Match" + " sym: " +sym.content );
+            //System.out.println("Not Match line: " + (listIndex));
         }
 
     }

@@ -25,13 +25,13 @@ public class VarDef extends PcodeGenerator{
     public VarDef() throws IOException {
         //var v <name> =
         //currentWord应该是<VarDecl>
-        System.out.println("VarDecl开头 :" + currentWord.typeCode);
+        //System.out.println("VarDecl开头 :" + currentWord.typeCode);
         ignoreParser = true;
 
         if(currentWord.typeCode.equals("<VarDef>")){
             pcode.append("var");
             nextWord(); //name
-            System.out.println("Check type of varDecl: " + wordAhead.typeCode);
+            //System.out.println("Check type of varDecl: " + wordAhead.typeCode);
             if(!wordAhead.content.equals("[")){
                 pcode.append(" v");
                 type = 'v';
@@ -49,9 +49,9 @@ public class VarDef extends PcodeGenerator{
                     pcode.append(" " + currentWord.content);  // append [
                     nextWord();
                     //inside DIM
-                    System.out.println("ConstDecl 检查Array DIM 里：" + currentWord.content);
+                    //System.out.println("ConstDecl 检查Array DIM 里：" + currentWord.content);
                     if(ArrayTestExp()){
-                        System.out.println("ConstDecl Array DIM 里是Exp");
+                        //System.out.println("ConstDecl Array DIM 里是Exp");
                         ConstExp constExp = new ConstExp();
                         pcode.append(" " + varT);
                         pcode.append(" "+ currentWord.content);
@@ -61,7 +61,7 @@ public class VarDef extends PcodeGenerator{
                         //这边要确保出来的时候是 [ or leave array ,总之是 ] 的下一个 - 所以需要nextWord()
                     }
                     else{
-                        System.out.println("ConstDecl Array DIM 里没有Exp");
+                        //System.out.println("ConstDecl Array DIM 里没有Exp");
                         pcode.append(" " + currentWord.content);  //append var or value
                         nextWord(); // ]
                         pcode.append(" " + currentWord.content);
@@ -70,7 +70,7 @@ public class VarDef extends PcodeGenerator{
                 }
                 ignoreParser =false;
                 //currentWord应该是 =
-                System.out.println("Check word is = :" + currentWord.content);
+                //System.out.println("Check word is = :" + currentWord.content);
                 if(currentWord.content.equals("=")){
                     pcode.append(" " + currentWord.content);
                     nextWord();  // {
@@ -91,15 +91,15 @@ public class VarDef extends PcodeGenerator{
                         } else{
                             nextWord();
                         }
-                        System.out.println("ConstDef while loop:" + currentWord.typeCode);
+                        //System.out.println("ConstDef while loop:" + currentWord.typeCode);
                     }
                 }
                 //currentWord应该是 ;
-                System.out.println("Check now is ; or , : " + currentWord.typeCode);
+                //System.out.println("Check now is ; or , : " + currentWord.typeCode);
                 writer.write(String.valueOf(pcode));
                 //ignoreParser = false;
                 nextWord();
-                System.out.println("Check now skip ; or , : " + currentWord.typeCode);
+                //System.out.println("Check now skip ; or , : " + currentWord.typeCode);
             }else if(type == 'v'){
                 ignoreParser = true;
                 if(currentWord.content.equals("=")){
@@ -115,15 +115,15 @@ public class VarDef extends PcodeGenerator{
                                 nextWord();  // intcon/exp/var or {
                             }
                         }
-                        System.out.println("VarDef while loop:" + currentWord.typeCode);
+                        //System.out.println("VarDef while loop:" + currentWord.typeCode);
                     }
                 }
                 //currentWord应该是 ;
-                System.out.println("Check now is ; or , : " + currentWord.typeCode);
+                //System.out.println("Check now is ; or , : " + currentWord.typeCode);
                 writer.write(String.valueOf(pcode));
                 ignoreParser = false;
                 nextWord();
-                System.out.println("Check now skip ; or , : " + currentWord.typeCode);
+                //System.out.println("Check now skip ; or , : " + currentWord.typeCode);
             }
         }
         ignoreParser = false;

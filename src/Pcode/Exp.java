@@ -24,7 +24,7 @@ public class Exp extends PcodeGenerator{
     static String var_t;
 
     public Exp() throws IOException {
-        System.out.println("To Exp :" + currentWord.content);
+        //System.out.println("To Exp :" + currentWord.content);
         //如果符合 while 的停止条件,那么currentWord现在应该是 [  ） or  ,  or  ;  ]
         ignoreParser = true;
         while(!currentWord.typeCode.equals("SEMICN") && !currentWord.typeCode.equals("COMMA") &&!currentWord.typeCode.equals("RBRACE") && !currentWord.typeCode.equals("PARAEND") && !currentWord.typeCode.equals("PRINTEND")
@@ -46,10 +46,10 @@ public class Exp extends PcodeGenerator{
                 writer.write(varT + " = RET");
                 pcode.append(" " + varT);
             }else if(scanAhead() == returnType.UnaryOp){
-                System.out.println("Retun UnaryOp, wordAhead is : "+ wordAhead.typeCode);
+                //System.out.println("Retun UnaryOp, wordAhead is : "+ wordAhead.typeCode);
                 nextWord();
                 if(currentWord.typeCode.equals("LPARENT")){
-                    System.out.println("After ! is (Exp)");
+                    //System.out.println("After ! is (Exp)");
                     //nextWord();
                     UnaryExp unaryExp = new UnaryExp();
                     String ans = varT;
@@ -57,7 +57,7 @@ public class Exp extends PcodeGenerator{
                     writer.write(varT + " = ! " + ans);
                     pcode.append(" " + varT);
                 }else if(currentWord.typeCode.equals("PLUS") || currentWord.typeCode.equals("MINU")) {
-                    System.out.println("After ! is +-+");
+                    //System.out.println("After ! is +-+");
                     //nextWord();
                     UnaryPlusMinExp unaryPlusMinExp = new UnaryPlusMinExp();
                     String ans = varT;
@@ -67,7 +67,7 @@ public class Exp extends PcodeGenerator{
                 }else if(currentWord.typeCode.equals("IDENFR")){
                     //nextWord();
                     if(wordAhead.typeCode.equals("LPARENT")){ //function
-                        System.out.println("!后面是Func");
+                        //System.out.println("!后面是Func");
                         Call callFunc = new Call();
                         nextTVar();
                         writer.write(varT + " = RET");
@@ -76,7 +76,7 @@ public class Exp extends PcodeGenerator{
                         writer.write(varT + " = ! " + ans);
                         pcode.append(" " + varT);
                     }else if(wordAhead.typeCode.equals("LBRACK")){
-                        System.out.println("!后面是Arr");
+                        //System.out.println("!后面是Arr");
                         Array array = new Array();
                         String ans = varT;
                         nextTVar();
@@ -103,7 +103,7 @@ public class Exp extends PcodeGenerator{
             }
         }
         if(isMulti()){
-            System.out.println("isMulti");
+            //System.out.println("isMulti");
             nextTVar();
             if(pcode.charAt(0) != ' '){
                 pcode.insert(0," ");
@@ -159,29 +159,29 @@ public class Exp extends PcodeGenerator{
         //用来看下一个word是什么
         scanWord(index-1);
         if(scanWord.typeCode.equals("INTCON")){
-            System.out.println("scanAhead() return NUM");
+            //System.out.println("scanAhead() return NUM");
             return returnType.NUM;
         }
         if(scanWord.typeCode.equals("IDENFR")){
             scanWord(index);
             if(scanWord.typeCode.equals("LPARENT")){
-                System.out.println("scanAhead() return FUNC");
+                //System.out.println("scanAhead() return FUNC");
                 return returnType.FUNC;
             }
             else if(scanWord.typeCode.equals("LBRACK")){
-                System.out.println("scanAhead() return ARR");
+                //System.out.println("scanAhead() return ARR");
                 return returnType.ARR;
             } else {
-                System.out.println("scanAhead() return VAR");
+                //System.out.println("scanAhead() return VAR");
                 return returnType.VAR;
             }
         }
         if(scanWord.typeCode.equals("NOT")){
-            System.out.println("scanAhead() return NOT");
+            //System.out.println("scanAhead() return NOT");
             return returnType.UnaryOp;
         }
         if(scanWord.typeCode.equals("GETINTTK")){
-            System.out.println("scanAhead() return GETINT");
+            //System.out.println("scanAhead() return GETINT");
             return returnType.GETINT;
         }
         return returnType.ERROR;

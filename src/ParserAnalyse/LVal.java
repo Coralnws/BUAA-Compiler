@@ -6,7 +6,7 @@ import Save.TreeNode;
 public class LVal extends SymbAnalyse{
     public LVal(TreeNode parent){
         super("<LVal>",parent);
-        System.out.println("Start <lval>");
+        //System.out.println("Start <lval>");
         //1
         if(sym.typeCode.equals("IDENFR")){
             parserList.add(sym);
@@ -32,7 +32,7 @@ public class LVal extends SymbAnalyse{
             //printout <LVal>
             //save.addParserWord(listIndex,this.node.node);
            // listIndex++;
-            System.out.println("Printout <lval>");
+            //System.out.println("Printout <lval>");
             parserList.add(this.node.node);
 
         }

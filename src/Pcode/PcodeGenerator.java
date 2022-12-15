@@ -51,7 +51,7 @@ public class PcodeGenerator {
         nextWord();
         while(currentWord != null){
             //这边读的是CompUnit的部分，之后那些就好像语法分析那样，从内部来调用
-            System.out.println("In PcodeGenerator , Currentword:" + currentWord.typeCode);
+            //System.out.println("In PcodeGenerator , Currentword:" + currentWord.typeCode);
             if(currentWord.typeCode.equals("<FuncDef>")){
                 nextWord();
                 nextWord();

@@ -7,7 +7,7 @@ import Save.TreeNode;
 public class RelExp extends SymbAnalyse{
     public RelExp(TreeNode parent){
         super("<RelExp>",parent);
-        System.out.println("start <RelExp>");
+        //System.out.println("start <RelExp>");
 
         //1
         AddExp addExp = new AddExp(this.node);
@@ -30,7 +30,7 @@ public class RelExp extends SymbAnalyse{
             //printout <RelExp>
             //save.addParserWord(listIndex,this.node.node);
             //listIndex++;
-            System.out.println("Printout <relExp>");
+            //System.out.println("Printout <relExp>");
             parserList.add(this.node.node);
         }
     }

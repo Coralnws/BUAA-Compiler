@@ -14,7 +14,7 @@ public class Draft {
     public Draft() throws IOException {
         String str = "Hello!";
         str = str.substring(0,0);
-        System.out.println(str);
+        //System.out.println(str);
 
     }
 
@@ -24,14 +24,14 @@ public class Draft {
         stack.push(2);
         stack.push(3);
 
-        System.out.println(stack.get(0));
-        System.out.println(stack.get(1));
-        System.out.println(stack.get(2));
+        //System.out.println(stack.get(0));
+        //System.out.println(stack.get(1));
+        //System.out.println(stack.get(2));
 
         /*
         List<String> str = new ArrayList<>();
         str = strToStrList("+-+44*-3");
-        System.out.println(str);
+        //System.out.println(str);
         //System.exit(0);
 
         String str2 = "-43";
@@ -49,28 +49,28 @@ public class Draft {
         ch1 = str.get(i);
         ch2 = str.get(i+1);
         while (i < str.size()) {
-            System.out.println("new round: ch:" + str.get(i));
-            System.out.println(ch1);
+            //System.out.println("new round: ch:" + str.get(i));
+            //System.out.println(ch1);
             ch1 = str.get(i);
-            System.out.println(ch1);
+            //System.out.println(ch1);
             if(isPlusMin(ch1)) {  //+-+3 , ch1+ ch2-
                 //starting
                 if (!meetNum && !meetPlusMin) {
-                    System.out.println("!meetNum && !meetPlusMin");
+                    //System.out.println("!meetNum && !meetPlusMin");
                     ch2 = str.get(i + 1);
                     if (isPlusMin(ch2)) {  //+- or -+  definitely only who plus min
                         if (ch1 != ch2) {
                             str.remove(i);
                             str.remove(i);
                             str.add(i,"-");
-                            System.out.println(str);
+                            //System.out.println(str);
                             //str = '-' + str.substring(i + 2);
                             //newStr += '-';
                         } else {
                             str.remove(i);
                             str.remove(i);
                             str.add(i,"+");
-                            System.out.println(str);
+                            //System.out.println(str);
                             //newStr += '+';
                         }
                         meetPlusMin = true;
@@ -81,38 +81,38 @@ public class Draft {
 
                         //str = "(0" + ch1 + ch2 + ")" + str.substring(i + 2);
                         //newStr += "(0"+ch1+ch2+")";   //add zero and bracket
-                        System.out.println(str);
+                        //System.out.println(str);
                         i += 5;
                         meetPlusMin = false;
                         meetNum = true;
                     }
                 } else if (!meetNum && meetPlusMin) {  //+-+ kind
-                    System.out.println("!meetNum && meetPlusMin");
+                    //System.out.println("!meetNum && meetPlusMin");
                     ch2 = str.get(i + 1);
-                    System.out.println("ch1:" + ch1 + " ch2:" + ch2);
+                    //System.out.println("ch1:" + ch1 + " ch2:" + ch2);
                     if (isPlusMin(ch2)) {  //+- or -+  definitely only who plus min
                         if (ch1 != ch2) {
                             str.remove(i);
                             str.remove(i);
                             str.add(i,"-");
-                            System.out.println(str);
+                            //System.out.println(str);
                             //newStr += '-';
                         } else {
                             str.remove(i);
                             str.remove(i);
                             str.add(i,"+");
-                            System.out.println(str);
+                            //System.out.println(str);
                             //str = '+' + str.substring(i + 2);
                             //newStr += '+';
                         }
                         meetPlusMin = true;
                     } else if (isNumeric(String.valueOf(ch2))) { //-+-1 or +-+1
-                        System.out.println("ch1:" + ch1 + " ch2:" + ch2);
-                        System.out.println("isNumeric");
+                        //System.out.println("ch1:" + ch1 + " ch2:" + ch2);
+                        //System.out.println("isNumeric");
                         str.add(i+2,")");
                         str.add(i,"0");
                         str.add(i,"(");
-                        System.out.println(str);
+                        //System.out.println(str);
                         //str = "(0" + ch1 + ch2 + ")" + str.substring(i + 2);
                         i += 5;
                         meetPlusMin = false;
@@ -124,11 +124,11 @@ public class Draft {
                 }
                 //middle
                 else if (meetNum && !meetMulDiv && !meetPlusMin) {  //
-                    System.out.println("ch1:" + ch1);
-                    System.out.println("meetNum && !meetPlusMin");
+                    //System.out.println("ch1:" + ch1);
+                    //System.out.println("meetNum && !meetPlusMin");
                     ch2 = str.get(i + 1);
                     if (isNumeric(String.valueOf(ch2))) { //-+-1 or +-+1
-                        System.out.println("isNumeric");
+                        //System.out.println("isNumeric");
                         i++;
                     }
                     else{
@@ -136,9 +136,9 @@ public class Draft {
                         meetPlusMin = true;
                     }
                 } else if (meetNum && meetPlusMin) {
-                    System.out.println("meetNum && meetPlusMin");
+                    //System.out.println("meetNum && meetPlusMin");
                     ch2 = str.get(i + 1);
-                    System.out.println("ch1:" + ch1 + " ch2:" + ch2);
+                    //System.out.println("ch1:" + ch1 + " ch2:" + ch2);
                     if (isPlusMin(ch2)) {  //+- or -+  definitely only who plus min
                         if (ch1 != ch2) {
                             str.remove(i);
@@ -153,15 +153,15 @@ public class Draft {
                         }
                         //meetPlusMin = true;
                     } else if (isNumeric(String.valueOf(ch2))) { //-+-1 or +-+1
-                        System.out.println("isNumeric");
+                        //System.out.println("isNumeric");
                         str.add(i+2,")");
                         str.add(i,"0");
                         str.add(i,"(");
-                        System.out.println(str);
+                        //System.out.println(str);
                         //str = "(0" + ch1 + ch2 + ")" + str.substring(i + 2);
                         i += 5;
                         if(i<str.size()){
-                            System.out.println("after jump 5 step ,ch :" + str.get(i));
+                            //System.out.println("after jump 5 step ,ch :" + str.get(i));
                         }
                         meetPlusMin = false;
                         meetMulDiv = false;
@@ -174,7 +174,7 @@ public class Draft {
             } else if(isMulDiv(ch1)){
                 ch2 = str.get(i+1);
                 if(isPlusMin(ch2)){
-                    System.out.println("isMuldiv + isPlusMin");
+                    //System.out.println("isMuldiv + isPlusMin");
                     str.add(i+1,"0");
                     str.add(i+1,"(");
                     addBrac = true;
@@ -199,7 +199,7 @@ public class Draft {
                 if(isPlusMin(ch2)){
                     str.add(i+1,"0");
                 }
-                System.out.println(str);
+                //System.out.println(str);
                 i++;
                 meetPlusMin = false;
                 meetMulDiv = false;
@@ -224,12 +224,12 @@ public class Draft {
                     str.add(i,")");
                 }
             }
-            System.out.println(Lbrac+ " " + Rbrac);
+            //System.out.println(Lbrac+ " " + Rbrac);
         }
-        System.out.println(str.toString());
+        //System.out.println(str.toString());
         String exp = String.join(",", str);
         exp = exp.replaceAll(",","");
-        System.out.println(exp);
+        //System.out.println(exp);
 
         /*
         String[] a = {"var","v","a","=","1t"};
@@ -239,7 +239,7 @@ public class Draft {
         for(int i=0,j=4;j<a.length;i++,j++) {
             b[i] = a[j];
         }
-        System.out.println(Arrays.toString(b));
+        //System.out.println(Arrays.toString(b));
 
 
          */
@@ -250,7 +250,7 @@ public class Draft {
         Scanner in = new Scanner(System.in);
         int value = 123;
 String str = String.valueOf(value);
-        System.out.println(str);
+        //System.out.println(str);
         //System.out.println(Integer.parseInt("123") +1 );
         content obj = new content();
         obj.value.add(1);

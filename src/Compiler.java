@@ -16,7 +16,7 @@ public class Compiler {
         Parser parser = new Parser();
         parser.start();
         //SaveContent.print();
-        System.out.println("End");
+        //System.out.println("End");
         PcodeGenerator pcodeGenerator = new PcodeGenerator();
         pcodeGenerator.generate();
         //Writer.showList();

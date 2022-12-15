@@ -7,7 +7,7 @@ import Save.TreeNode;
 public class VarDef extends SymbAnalyse{
     public VarDef(TreeNode parent){
         super("<VarDef>",parent);
-        System.out.println("start <VarDef>");
+        //System.out.println("start <VarDef>");
         //1 - Ident
         if(sym.typeCode.equals("IDENFR")){
             parserList.add(sym);
@@ -45,11 +45,11 @@ public class VarDef extends SymbAnalyse{
             //printout <VarDef>
             //save.addParserWord(listIndex,this.node.node);
             //listIndex++;
-            System.out.println("Printout <VarDef>");
+            //System.out.println("Printout <VarDef>");
             parserList.add(this.node.node);
         }
         else{
-            System.out.println("VarDef Error: Not ident");
+            //System.out.println("VarDef Error: Not ident");
         }
     }
 }
