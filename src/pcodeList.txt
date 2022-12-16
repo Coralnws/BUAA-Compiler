@@ -1,397 +1,262 @@
-const v N = 10007
-const a const_diag_matrix [ 3 ] [ 3 ] = { { 1 , 0 , 0 } , { 0 , 1 , 0 } , { 0 , 0 , 1 } }
-const v const_d_matrix = 3
-const a const_base [ 3 ] = { 1 , 0 , 0 }
-const v const_a = 1
-const v const_b = 2
-const v const_c = 3
-const v const_d = 4
-var a diag_matrix [ 3 ] [ 3 ] = { { 1 , 0 , 0 } , { 0 , 1 , 0 } , { 0 , 0 , 1 } }
-var v d_matrix = 3
-var a base [ 3 ] = { 1 , 0 , 0 }
-var a matrix_A [ 10 ] [ 10 ]
-var a matrix_B [ 10 ] [ 10 ]
-func void print_id
-para v id
-start print_id
-ins-1
-ln-1
-anw-1 = id
-PRINTF
+const v Mod = 10007
+const a dx [ 2 ] = { 1 , 0 }
+const a dy [ 2 ] = { 0 , 1 }
+const a Map [ 5 ] [ 5 ] = { { 0 , 1 , 0 , 1 , 0 } , { 0 , 1 , 1 , 1 , 1 } , { 1 , 1 , 1 , 1 , 1 } , { 1 , 0 , 1 , 0 , 1 } , { 1 , 1 , 1 , 0 , 1 } }
+var a strP [ 2 ]
+var v ans
+var v base
+var a val [ 5 ] [ 5 ]
+func int CalcMod
+para v x
+start CalcMod
+1t = x - x / Mod * Mod
+ret 1t
+end CalcMod
+func int Check
+para v y
+start Check
 #if1
-#cond1 0 &&
-#cond2 4 > 5
+#cond1 y >= 0 &&
+#cond2 y < 5
 cond #cond1 && #cond2
 CheckCond
 start #if1
-ret
+ret 1
 end #if1
-end print_id
-func void print_matrix
-para a matrix [ ] [ 10 ]
-start print_matrix
-var v i = 0
-var v j
-#while
-#cond1 i < 10
-cond #cond1
-CheckCond
-start #while
-upd j = 0
-#while
-#cond1 j < 10
-cond #cond1
-CheckCond
-start #while
-#if2
-1t = 10 - 1
-#cond1 j == 1t
-cond #cond1
-CheckCond
-start #if2
-ins-1
-2t = matrix [ i ] [ j ]
-anw-1 = 2t
-PRINTF
-end #if2
-start #else2
-ins-1
-str-1 = 
-3t = matrix [ i ] [ j ]
-anw-1 = 3t
-PRINTF
-end #else2
-4t = j + 1
-upd j = 4t
-end #while
-ln-1
-PRINTF
-5t = i + 1
-upd i = 5t
-end #while
-end print_matrix
-func void create_double_matrix
-para a matrix_A [ ] [ 10 ]
-para a matrix_B [ ] [ 10 ]
+ret 0
+end Check
+func int check
 para v x
 para v y
-start create_double_matrix
-var v i = 0
-var v j
-#while
-#cond1 i < 10
-cond #cond1
+start check
+#if2
+#cond1 0 > x ||
+#cond2 5 <= x ||
+push y
+call Check
+2t = RET
+3t = ! 2t
+#cond3 3t
+cond #cond1 || #cond2 || #cond3
 CheckCond
-start #while
-upd j = 0
-#while
-#cond1 j < 10
-cond #cond1
-CheckCond
-start #while
-6t = i + 1 + x
-upd matrix_A [ i ] [ j ] = 6t
-7t = j + 1 + y
-upd matrix_B [ i ] [ j ] = 7t
-8t = j + 1
-upd j = 8t
-end #while
-9t = i + 1
-upd i = 9t
-end #while
-end create_double_matrix
-func int sum_matrix
-para a matrix [ ] [ 10 ]
-start sum_matrix
-var v i = 0
-var v j
-var v k
-var v res = 0
-#while
-#cond1 i < 10
-cond #cond1
-CheckCond
-start #while
-upd j = 0
-#while
-#cond1 j < 10
-cond #cond1
-CheckCond
-start #while
-10t = matrix [ i ] [ j ]
-11t = res + 10t
-upd res = 11t
-12t = j + 1
-upd j = 12t
-end #while
-13t = i + 1
-upd i = 13t
-end #while
-ret res
-end sum_matrix
-func int multi_double_matrix
-para a matrix_A [ ] [ 10 ]
-para a matrix_B [ ] [ 10 ]
-start multi_double_matrix
-var a matrix_C [ 10 ] [ 10 ]
-var v i = 0
-var v j
-var v k
-#while
-#cond1 i < 10
-cond #cond1
-CheckCond
-start #while
-upd j = 0
-#while
-#cond1 j < 10
-cond #cond1
-CheckCond
-start #while
-upd k = 0
-upd matrix_C [ i ] [ j ] = 0
-#while
-#cond1 k < 10
-cond #cond1
-CheckCond
-start #while
-14t = matrix_C [ i ] [ j ]
-15t = matrix_A [ i ] [ k ]
-16t = matrix_B [ k ] [ j ]
-17t = 14t + 15t * 16t
-upd matrix_C [ i ] [ j ] = 17t
-18t = k + 1
-upd k = 18t
-end #while
-19t = j + 1
-upd j = 19t
-end #while
-20t = i + 1
-upd i = 20t
-end #while
-push matrix_C
-call sum_matrix
-21t = RET
-ret 21t
-end multi_double_matrix
-func int vdot
-para a x [ ]
-para a y [ ]
-start vdot
-var v d = 0
-var v sum = 0
-#while
-#cond1 1 ||
-#cond2 0
-cond #cond1 || #cond2
-CheckCond
-start #while
-22t = x [ d ]
-23t = y [ d ]
-24t = sum + 22t * 23t / 1
-upd sum = 24t
-25t = d + 1
-upd d = 25t
+start #if2
+ret 0
+end #if2
 #if3
-#cond1 d == const_d_matrix ||
-#cond2 0 &&
-26t = - sum < 7
-27t = ! 26t
-28t = 27t 7 + 1
-#cond3 28t ||
-29t = + sum
-30t = 8 - 1
-#cond4 29t > 30t
-cond #cond1 || #cond2 && #cond3 || #cond4
+4t = Map [ x ] [ y ]
+#cond1 4t
+cond #cond1
 CheckCond
 start #if3
-BREAK
+ret 1
 end #if3
 start #else3
+ret 0
+end #else3
+ret 0
+end check
+func void dfs
+para v x
+para v y
+para v base
+para a height [ ] [ 5 ]
+start dfs
 #if4
-#cond1 1
+5t = val [ x ] [ y ]
+#cond1 5t != 0
 cond #cond1
 CheckCond
 start #if4
-CONTINUE
+ret
 end #if4
-start #else4
-end #else4
-end #else3
-end #while
-ret sum
-end vdot
-func void print_vec
-para a v [ ]
-start print_vec
-ins-1
-str-1 = 
-ins-2
-str-2 = 
-ins-3
-ln-1
-31t = v [ 0 ]
-anw-1 = 31t
-32t = v [ 1 ]
-anw-2 = 32t
-33t = v [ 2 ]
-anw-3 = 33t
-PRINTF
-end print_vec
-func void print_solve_math_problem
-start print_solve_math_problem
-start #block
-str-1 =Let us solve math problem
-ln-1
-PRINTF
-end #block
-end print_solve_math_problem
-func void empty_block
-start empty_block
-end empty_block
-func void solve_math_problem
-para v x
-para v y
-start solve_math_problem
-var v tmp
-call print_solve_math_problem
-34t = RET
-call empty_block
-35t = RET
+6t = height [ x ] [ y ]
+7t = base * 6t % Mod + Mod
+push 7t
+call CalcMod
+8t = RET
+upd val [ x ] [ y ] = 8t
 #if5
-#cond1 x == y
+9t = val [ x ] [ y ]
+#cond1 9t == 0
 cond #cond1
 CheckCond
 start #if5
-str-1 =x not equal to y
-ln-1
-PRINTF
-ret
+upd val [ x ] [ y ] = 1
 end #if5
-start #else5
+var v t1 = 0
+var v t2 = 0
 #if6
-#cond1 x != y
+10t = dx [ 0 ]
+11t = x + 10t
+push 11t
+12t = dy [ 0 ]
+13t = y + 12t
+push 13t
+call check
+14t = RET
+#cond1 14t
 cond #cond1
 CheckCond
 start #if6
-str-1 =x is not equal to y and 
-PRINTF
+15t = dx [ 0 ]
+16t = x + 15t
+push 16t
+17t = dy [ 0 ]
+18t = y + 17t
+push 18t
+19t = val [ x ] [ y ]
+push 19t
+push height
+call dfs
+20t = RET
+upd t1 = 1
+end #if6
 #if7
-#cond1 x >= y
+21t = dx [ 1 ]
+22t = x + 21t
+push 22t
+23t = dy [ 1 ]
+24t = y + 23t
+push 24t
+call check
+25t = RET
+#cond1 25t
 cond #cond1
 CheckCond
 start #if7
-36t = x - y
-upd tmp = 36t
-str-1 =x is 
-ins-1
-str-2 = more than y
-ln-1
-anw-1 = tmp
-PRINTF
+26t = dx [ 1 ]
+27t = x + 26t
+push 27t
+28t = dy [ 1 ]
+29t = y + 28t
+push 29t
+30t = val [ x ] [ y ]
+push 30t
+push height
+call dfs
+31t = RET
+upd t2 = 1
 end #if7
 #if8
-#cond1 x <= y
-cond #cond1
+#cond1 t1 != 0 ||
+#cond2 t2 != 0
+cond #cond1 || #cond2
 CheckCond
 start #if8
-37t = y - x
-upd tmp = 37t
-str-1 =y is 
-ins-1
-str-2 = more than x
-ln-1
-anw-1 = tmp
-PRINTF
-end #if8
-end #if6
-end #else5
 ret
-end solve_math_problem
+end #if8
+32t = - 1
+upd val [ x ] [ y ] = 32t
+end dfs
 func int main
 start main
-const v N = 3
-var a v [ 3 ]
+str-1 =19373459
+ln-1
+PRINTF
 var v i = 0
+var v j
+var a height [ 5 ] [ 5 ]
 #while
-#cond1 i < N
+#cond1 i < 5
 cond #cond1
 CheckCond
 start #while
-upd v [ i ] = getint ( )
-38t = i + 1
-upd i = 38t
+upd j = 0
+#while
+#cond1 j < 5
+cond #cond1
+CheckCond
+start #while
+upd height [ i ] [ j ] = getint ( )
+33t = j + 1
+upd j = 33t
 end #while
+34t = i + 1
+upd i = 34t
 #if9
-39t = ! 0
-#cond1 39t &&
-#cond2 0 ||
-#cond3 1
-cond #cond1 && #cond2 || #cond3
+#cond1 i == 5
+cond #cond1
 CheckCond
 start #if9
-push 20373623
-call print_id
-40t = RET
+BREAK
 end #if9
-push matrix_A
-push matrix_B
-push 0
-push 0
-call create_double_matrix
-41t = RET
-ln-1
-PRINTF
-push matrix_A
-call print_matrix
-42t = RET
-ln-1
-PRINTF
-push matrix_B
-call print_matrix
-43t = RET
-44t = ( ( 1 + 1 / 1 * 1 ) % 2 ) - + 1 - + - 1
-var v res = 44t
-push matrix_A
-push matrix_B
-call multi_double_matrix
-45t = RET
-upd res = 45t
-ins-1
-ln-1
-anw-1 = res
-PRINTF
+start #else9
+CONTINUE
+end #else9
+end #while
 upd i = 0
 #while
-#cond1 i < N
+#cond1 i < 2
 cond #cond1
 CheckCond
 start #while
-var v res = 0
-push v
-46t = diag_matrix [ i ]
-push 46t
-call vdot
-47t = RET
-upd res = 47t
-ins-1
-ln-1
-anw-1 = res
-PRINTF
-48t = i + 1
-upd i = 48t
+upd strP [ i ] = getint ( )
+35t = i + 1
+upd i = 35t
 end #while
-push 100
-push 100
-call solve_math_problem
-49t = RET
-push 200
-push 100
-call solve_math_problem
-50t = RET
-push 100
-push 300
-call solve_math_problem
-51t = RET
+36t = GETINT
+upd base = 36t
+37t = strP [ 0 ]
+push 37t
+38t = strP [ 1 ]
+push 38t
+push base
+push height
+call dfs
+39t = RET
+str-1 =val20: 
+ins-1
+str-2 =, val21:
+ins-2
+str-3 =, val22:
+ins-3
+str-4 =, val23:
+ins-4
+str-5 =, val24:
+ins-5
+ln-1
+40t = val [ 2 ] [ 0 ]
+anw-1 = 40t
+41t = val [ 2 ] [ 1 ]
+anw-2 = 41t
+42t = val [ 2 ] [ 2 ]
+anw-3 = 42t
+43t = val [ 2 ] [ 3 ]
+anw-4 = 43t
+44t = val [ 2 ] [ 4 ]
+anw-5 = 44t
+PRINTF
+str-1 =val30: 
+ins-1
+str-2 =, val32: 
+ins-2
+str-3 =, val34: 
+ins-3
+ln-1
+45t = val [ 3 ] [ 0 ]
+anw-1 = 45t
+46t = val [ 3 ] [ 2 ]
+anw-2 = 46t
+47t = val [ 3 ] [ 4 ]
+anw-3 = 47t
+PRINTF
+str-1 =val40: 
+ins-1
+str-2 =, val42:
+ins-2
+str-3 =, val43:
+ins-3
+str-4 =, val44:
+ins-4
+ln-1
+48t = val [ 4 ] [ 0 ]
+anw-1 = 48t
+49t = val [ 4 ] [ 2 ]
+anw-2 = 49t
+50t = val [ 4 ] [ 3 ]
+anw-3 = 50t
+51t = val [ 4 ] [ 4 ]
+anw-4 = 51t
+PRINTF
 ret 0
 end main

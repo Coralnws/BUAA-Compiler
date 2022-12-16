@@ -1,267 +1,262 @@
-var a conflictMap [ 20 ] [ 20 ]
-var a record [ 20 ]
-var a result [ 20 ]
-var v minGroup = 30
-var v m = 0
-var v global_var = 0
-func int func
-start func
-1t = global_var + 1
-upd global_var = 1t
-ret 1
-end func
-func void init
-start init
-var v i = 0
-#while
-#cond1 i < 20
-cond #cond1
-CheckCond
-start #while
-upd record [ i ] = 0
-upd result [ i ] = 0
-2t = i + 1
-upd i = 2t
-end #while
-ret
-end init
-func void copy
-start copy
-var v i = 0
-#while
-#cond1 i < 20
-cond #cond1
-CheckCond
-start #while
-3t = record [ i ]
-upd result [ i ] = 3t
-4t = i + 1
-upd i = 4t
-end #while
-ret
-end copy
-func void attribute
-para v num
-para v groupNum
-start attribute
+const v Mod = 10007
+const a dx [ 2 ] = { 1 , 0 }
+const a dy [ 2 ] = { 0 , 1 }
+const a Map [ 5 ] [ 5 ] = { { 0 , 1 , 0 , 1 , 0 } , { 0 , 1 , 1 , 1 , 1 } , { 1 , 1 , 1 , 1 , 1 } , { 1 , 0 , 1 , 0 , 1 } , { 1 , 1 , 1 , 0 , 1 } }
+var a strP [ 2 ]
+var v ans
+var v base
+var a val [ 5 ] [ 5 ]
+func int CalcMod
+para v x
+start CalcMod
+1t = x - x / Mod * Mod
+ret 1t
+end CalcMod
+func int Check
+para v y
+start Check
 #if1
-#cond1 num > m
-cond #cond1
-CheckCond
-start #if1
-#if2
-#cond1 groupNum < minGroup
-cond #cond1
-CheckCond
-start #if2
-upd minGroup = groupNum
-call copy
-5t = RET
-end #if2
-ret
-end #if1
-var v i = 1
-#while
-#cond1 i <= groupNum
-cond #cond1
-CheckCond
-start #while
-var v flag = 0
-var v j = 1
-#while
-#cond1 j <= m
-cond #cond1
-CheckCond
-start #while
-#if3
-6t = conflictMap [ num ] [ j ]
-#cond1 6t == 1 &&
-7t = record [ j ]
-#cond2 7t == i
+#cond1 y >= 0 &&
+#cond2 y < 5
 cond #cond1 && #cond2
 CheckCond
+start #if1
+ret 1
+end #if1
+ret 0
+end Check
+func int check
+para v x
+para v y
+start check
+#if2
+#cond1 0 > x ||
+#cond2 5 <= x ||
+push y
+call Check
+2t = RET
+3t = ! 2t
+#cond3 3t
+cond #cond1 || #cond2 || #cond3
+CheckCond
+start #if2
+ret 0
+end #if2
+#if3
+4t = Map [ x ] [ y ]
+#cond1 4t
+cond #cond1
+CheckCond
 start #if3
-upd flag = 1
+ret 1
 end #if3
-8t = j + 1
-upd j = 8t
-end #while
+start #else3
+ret 0
+end #else3
+ret 0
+end check
+func void dfs
+para v x
+para v y
+para v base
+para a height [ ] [ 5 ]
+start dfs
 #if4
-#cond1 flag == 0
+5t = val [ x ] [ y ]
+#cond1 5t != 0
 cond #cond1
 CheckCond
 start #if4
-upd record [ num ] = i
-9t = num + 1
-push 9t
-push groupNum
-call attribute
-10t = RET
-upd record [ num ] = 0
-end #if4
-11t = i + 1
-upd i = 11t
-end #while
-12t = groupNum + 1
-upd record [ num ] = 12t
-13t = num + 1
-push 13t
-14t = groupNum + 1
-push 14t
-call attribute
-15t = RET
 ret
-end attribute
-func int main
-start main
-str-1 =20373360
-ln-1
-PRINTF
-call init
-16t = RET
-var v n
-17t = GETINT
-upd n = 17t
-18t = GETINT
-upd m = 18t
-var v i = 0
-#while
-#cond1 i < n
-cond #cond1
-CheckCond
-start #while
-var v j = 0
-var a temp [ 3 ]
-#while
-#cond1 3
-cond #cond1
-CheckCond
-start #while
-var v k
-19t = GETINT
-upd k = 19t
-upd temp [ j ] = k
+end #if4
+6t = height [ x ] [ y ]
+7t = base * 6t % Mod + Mod
+push 7t
+call CalcMod
+8t = RET
+upd val [ x ] [ y ] = 8t
 #if5
-#cond1 j > 1
+9t = val [ x ] [ y ]
+#cond1 9t == 0
 cond #cond1
 CheckCond
 start #if5
-BREAK
+upd val [ x ] [ y ] = 1
 end #if5
-start #else5
-20t = j + 1
-upd j = 20t
-end #else5
-end #while
-21t = temp [ 0 ]
-22t = temp [ 1 ]
-upd conflictMap [ 21t ] [ 22t ] = 1
-23t = temp [ 1 ]
-24t = temp [ 0 ]
-upd conflictMap [ 23t ] [ 24t ] = 1
-25t = temp [ 0 ]
-26t = temp [ 2 ]
-upd conflictMap [ 25t ] [ 26t ] = 1
-27t = temp [ 2 ]
-28t = temp [ 0 ]
-upd conflictMap [ 27t ] [ 28t ] = 1
-29t = temp [ 1 ]
-30t = temp [ 2 ]
-upd conflictMap [ 29t ] [ 30t ] = 1
-31t = temp [ 2 ]
-32t = temp [ 1 ]
-upd conflictMap [ 31t ] [ 32t ] = 1
-33t = i + 1
-upd i = 33t
-end #while
-push 1
-push 1
-call attribute
-34t = RET
-str-1 =input:
-ln-1
-PRINTF
-str-1 =4
-ln-1
-str-2 =7
-ln-2
-str-3 =1 2 3
-ln-3
-str-4 =2 3 4
-ln-4
-str-5 =3 4 5
-ln-5
-str-6 =4 5 6
-ln-6
-PRINTF
-str-1 =Your answer is:
-ln-1
-PRINTF
-upd i = 1
-#while
-#cond1 i <= minGroup
-cond #cond1
-CheckCond
-start #while
-var v j = 1
-#while
-#cond1 j <= m
-cond #cond1
-CheckCond
-start #while
+var v t1 = 0
+var v t2 = 0
 #if6
-35t = result [ j ]
-#cond1 35t == i
+10t = dx [ 0 ]
+11t = x + 10t
+push 11t
+12t = dy [ 0 ]
+13t = y + 12t
+push 13t
+call check
+14t = RET
+#cond1 14t
 cond #cond1
 CheckCond
 start #if6
-ins-1
-anw-1 = j
-PRINTF
+15t = dx [ 0 ]
+16t = x + 15t
+push 16t
+17t = dy [ 0 ]
+18t = y + 17t
+push 18t
+19t = val [ x ] [ y ]
+push 19t
+push height
+call dfs
+20t = RET
+upd t1 = 1
 end #if6
-36t = j + 1
-upd j = 36t
-end #while
-ln-1
-PRINTF
-37t = i + 1
-upd i = 37t
-end #while
-str-1 =expect:
-ln-1
-PRINTF
-str-1 =1 4 7
-ln-1
-str-2 =2 5
-ln-2
-str-3 =3 6
-ln-3
-PRINTF
 #if7
-#cond1 0 &&
-call func
-38t = RET
-#cond2 38t
-cond #cond1 && #cond2
+21t = dx [ 1 ]
+22t = x + 21t
+push 22t
+23t = dy [ 1 ]
+24t = y + 23t
+push 24t
+call check
+25t = RET
+#cond1 25t
+cond #cond1
 CheckCond
 start #if7
+26t = dx [ 1 ]
+27t = x + 26t
+push 27t
+28t = dy [ 1 ]
+29t = y + 28t
+push 29t
+30t = val [ x ] [ y ]
+push 30t
+push height
+call dfs
+31t = RET
+upd t2 = 1
 end #if7
-ins-1
-ln-1
-anw-1 = global_var
-PRINTF
 #if8
-#cond1 1 ||
-call func
-39t = RET
-#cond2 39t
+#cond1 t1 != 0 ||
+#cond2 t2 != 0
 cond #cond1 || #cond2
 CheckCond
 start #if8
+ret
 end #if8
-ins-1
+32t = - 1
+upd val [ x ] [ y ] = 32t
+end dfs
+func int main
+start main
+str-1 =19373459
 ln-1
-anw-1 = global_var
+PRINTF
+var v i = 0
+var v j
+var a height [ 5 ] [ 5 ]
+#while
+#cond1 i < 5
+cond #cond1
+CheckCond
+start #while
+upd j = 0
+#while
+#cond1 j < 5
+cond #cond1
+CheckCond
+start #while
+upd height [ i ] [ j ] = getint ( )
+33t = j + 1
+upd j = 33t
+end #while
+34t = i + 1
+upd i = 34t
+#if9
+#cond1 i == 5
+cond #cond1
+CheckCond
+start #if9
+BREAK
+end #if9
+start #else9
+CONTINUE
+end #else9
+end #while
+upd i = 0
+#while
+#cond1 i < 2
+cond #cond1
+CheckCond
+start #while
+upd strP [ i ] = getint ( )
+35t = i + 1
+upd i = 35t
+end #while
+36t = GETINT
+upd base = 36t
+37t = strP [ 0 ]
+push 37t
+38t = strP [ 1 ]
+push 38t
+push base
+push height
+call dfs
+39t = RET
+str-1 =val20: 
+ins-1
+str-2 =, val21:
+ins-2
+str-3 =, val22:
+ins-3
+str-4 =, val23:
+ins-4
+str-5 =, val24:
+ins-5
+ln-1
+40t = val [ 2 ] [ 0 ]
+anw-1 = 40t
+41t = val [ 2 ] [ 1 ]
+anw-2 = 41t
+42t = val [ 2 ] [ 2 ]
+anw-3 = 42t
+43t = val [ 2 ] [ 3 ]
+anw-4 = 43t
+44t = val [ 2 ] [ 4 ]
+anw-5 = 44t
+PRINTF
+str-1 =val30: 
+ins-1
+str-2 =, val32: 
+ins-2
+str-3 =, val34: 
+ins-3
+ln-1
+45t = val [ 3 ] [ 0 ]
+anw-1 = 45t
+46t = val [ 3 ] [ 2 ]
+anw-2 = 46t
+47t = val [ 3 ] [ 4 ]
+anw-3 = 47t
+PRINTF
+str-1 =val40: 
+ins-1
+str-2 =, val42:
+ins-2
+str-3 =, val43:
+ins-3
+str-4 =, val44:
+ins-4
+ln-1
+48t = val [ 4 ] [ 0 ]
+anw-1 = 48t
+49t = val [ 4 ] [ 2 ]
+anw-2 = 49t
+50t = val [ 4 ] [ 3 ]
+anw-3 = 50t
+51t = val [ 4 ] [ 4 ]
+anw-4 = 51t
 PRINTF
 ret 0
 end main

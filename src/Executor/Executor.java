@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 import static Executor.Executor.activeRunner;
 import static Executor.Executor.floor;
 
+
 public class Executor {
     static HashMap<Integer, HashMap<String, Symbol>> symbTable = new HashMap<Integer, HashMap<String, Symbol>>();
     static int pointer = 1;
@@ -26,6 +27,7 @@ public class Executor {
     static HashMap<Integer, Func> funcList = new HashMap<Integer, Func>(); //floor list
     static HashMap<String,Integer> floorList = new HashMap<String,Integer>();
     static ArrayList<String> pcodeList = new ArrayList<String>();
+    static int blocknum=1;
 
     //static Stack<Integer> loopList = new Stack<Integer>(); //1 = if,2=while
     static String pcode; //读着的pcode
@@ -75,7 +77,9 @@ public class Executor {
             }
             while(skipping){ //跳到下一个碰到的end
                 if(sym[0].equals("end")){
+                    System.out.println("currentIF:" + activeRunner.ifList.peek());
                     if(activeRunner.currentIfEnd(sym[1])){
+                        System.out.println("check is end if:"+pcode);
                         activeRunner.ifList.pop();
                         skipping = false;
                         readPcode();
@@ -334,6 +338,10 @@ public class Executor {
             }
             else if(sym[0].equals("end")){//record this pointer as current floor's func's end addr
                 if(isIf(sym[1])){
+                    if(activeRunner == null && floor != 0){
+                        continue;
+                    }
+                    activeRunner.ifList.pop();
                 }else if(sym[1].equals("#while")){
                     if(activeRunner == null && floor != 0){
                         continue;
@@ -501,10 +509,8 @@ public class Executor {
                     continue;
                 }
                 activeRunner.whileStartList.put(activeRunner.getWhileNum(), pointer);
-                if(activeRunner.func.name.equals("attribute")){
-                    System.out.println("Attribute's while");
-                }
 
+                System.out.println("检查activeRunner是哪个:"+activeRunner.name);
                 System.out.println("Check whileNum when start #while :" +activeRunner.getCurrentWhile());
                 System.out.println("Check while start pointer:" + Writer.readPcode(pointer));
                 //whilePointer=pointer+1;
@@ -516,6 +522,7 @@ public class Executor {
                 }
                 if(activeRunner != null){
                     activeRunner.ifList.push(sym[0]);
+                    System.out.println("push ifList: " + sym[0]);
                     activeRunner.isIf = true;
                 }
 
@@ -542,8 +549,12 @@ public class Executor {
                 }else{
                     int value = senseValue(sym[1]);
                     if(value==0){
+                        System.out.println("result = false");
                         resultList.add(false);
-                    }else resultList.add(true);
+                    }else{ resultList.add(true);
+                        System.out.println("result = true");}
+
+
                 }
 
                 if(resultList.contains(false)){
@@ -665,13 +676,14 @@ public class Executor {
                             System.out.println("Check now should be end #while , "+pcode);
                             //readPcode();
                         }
-
+                        System.out.println("remove whileStart : "+activeRunner.getCurrentWhile());
                         activeRunner.whileStartList.remove(activeRunner.getCurrentWhile());
+                        System.out.println("remove whileEnd : "+activeRunner.getCurrentWhile());
                         activeRunner.whileEndList.remove(activeRunner.getCurrentWhile());
                         activeRunner.endWhile();
-                        System.out.println("Cond is false, skip while and remove whileStart : " + activeRunner.getCurrentWhile());
+                        //System.out.println("Cond is false, skip while and remove whileStart : " + activeRunner.getCurrentWhile());
                         System.out.println("Check skipStartList size " + activeRunner.whileStartList.size());
-                        System.out.println("Debug: pcode = "+pcode);
+                        //System.out.println("Debug: pcode = "+pcode);
                         //skipping = true;
                     }
                 }else{
@@ -683,23 +695,24 @@ public class Executor {
                 if(activeRunner == null && floor != 0){
                     continue;
                 }
-                if(activeRunner.whileStartList.size()>0){
+                if(activeRunner.whileStartList.containsKey(activeRunner.getCurrentWhile())){
                     pointer = activeRunner.whileStartList.get(activeRunner.getCurrentWhile());
                     System.out.println("Continue and Return to while,check pcode : " +Writer.readPcode(pointer));
                 }else{
-                    //error
+                    getWhileStart();
                 }
             }
             else if(sym[0].equals("BREAK")){
                 if(activeRunner == null && floor != 0){
                     continue;
                 }
-                if(activeRunner.whileStartList.size()>0){
-                    System.out.println("Remove whileStart: " + activeRunner.getCurrentWhile());
+                if(activeRunner.whileStartList.containsKey(activeRunner.getCurrentWhile())){
+                    //System.out.println("Remove whileStart: " + activeRunner.getCurrentWhile());
                     if(activeRunner.whileEndList.containsKey(activeRunner.getCurrentWhile())){
                         pointer= activeRunner.whileEndList.get(activeRunner.getCurrentWhile());
                     }else{
                         String currentWhile = activeRunner.getCurrentWhile();
+                        System.out.println("没记录whileEnd,寻找 "+currentWhile);
                         while(true){
                             readPcode();
                             System.out.println("skipping while, pcode : "+ pcode);
@@ -726,17 +739,76 @@ public class Executor {
                     activeRunner.whileStartList.remove(activeRunner.getCurrentWhile());
                     activeRunner.whileEndList.remove(activeRunner.getCurrentWhile());
                     activeRunner.endWhile();
-                    if(activeRunner.getCurrentWhile().equals("while2") && !activeRunner.whileStartList.containsKey("while1")) {
-                        System.out.println("Error whileStart = 0");
-                    }
-
                     //skipping = true;
                     //continue;
-                }else{
+                }else if((activeRunner instanceof Block)){
+                    int pt = getWhileEnd();
                     System.out.println("error whilestartlist = 0");
                 }
             }
         }
+    }
+
+    public int getWhileStart() {
+        Runner readRunner;
+        int index = 2;
+        int startPointer = 0;
+        while (startPointer == 0) { //如果当前runner没有这个变量
+            if(activeRunner instanceof Block){
+                endBlock();
+            }
+            if(activeRunner.whileStartList.containsKey(activeRunner.getCurrentWhile())){
+                pointer = activeRunner.whileStartList.get(activeRunner.getCurrentWhile());
+                startPointer = pointer;
+            }
+            System.out.println("当前是block且while的开始是在block外面");
+        }
+        return startPointer;
+    }
+
+    public int getWhileEnd() {//如果block里面没有whileStart
+        Runner readRunner;
+        int index = 2;
+        int pt = 0;
+        while (pt == 0) { //如果当前runner没有这个变量
+            if(activeRunner instanceof Block){
+                endBlock();
+            }
+            pointer = activeRunner.addrPointer;
+            if(activeRunner.whileStartList.containsKey(activeRunner.getCurrentWhile())){
+                if(activeRunner.whileEndList.containsKey(activeRunner.getCurrentWhile())){
+                    pointer = activeRunner.whileEndList.get(activeRunner.getCurrentWhile());
+                    pt = pointer;
+
+                }else{
+                    String currentWhile = activeRunner.getCurrentWhile();
+                    System.out.println("没记录whileEnd,寻找 "+currentWhile);
+                    while(true){
+                        readPcode();
+                        //System.out.println("检查当前的pcode "+ pcode);
+                        if(pcode.equals("start #while")){
+                            activeRunner.getWhileNum();
+                            //activeRunner.whileStartList.put(activeRunner.getWhileNum(), pointer);
+                        }
+                        if(pcode.equals("end #while")){
+                            if(!activeRunner.getCurrentWhile().equals(currentWhile)){
+                                //activeRunner.whileStartList.remove(activeRunner.getCurrentWhile());
+                                activeRunner.endWhile();
+                            }else{
+                                break;
+                                //activeRunner.whileStartList.remove(activeRunner.getCurrentWhile());
+                            }
+                        }
+                    }
+                    System.out.println("找到了,检查当前应该找的endWhile: "+pcode);
+                }
+                activeRunner.whileStartList.remove(activeRunner.getCurrentWhile());
+                activeRunner.whileEndList.remove(activeRunner.getCurrentWhile());
+                activeRunner.endWhile();
+                pt = pointer;
+            }
+        }
+        return pt;
     }
 
     public void readPcode() {
@@ -819,6 +891,7 @@ public class Executor {
     public Runner newRunner() {
         Runner newRunner = new Runner(pointer, currentFunc, floor,level);
         if(level==0){
+            newRunner.name = "main";
             runnerStack.push(newRunner);
             activeRunner = newRunner;
             level++;
@@ -837,16 +910,7 @@ public class Executor {
     }
     public Func newFloor(String name,int type){
         Func func = new Func(name,type);
-        /*
-        HashMap<String,Symbol> symbList = new HashMap<String,Symbol>();
-        floor = floorList.size();  //排号
-        System.out.println("In newFloor,floor : " + floor);
-        symbTable.put(floor,symbList);  //创建新符号表
-        funcList.put(floor, func);  //记录func对象
-        floorList.put(name,floor);  //可以通过funcname找到floor
-        func.floor = floor;   //往func对象记录floor
 
-         */
         currentFunc = func;  //设成现在正在读取的floor
         symbTable.get(0).put(name,func); //放进全局层
 
@@ -863,25 +927,36 @@ public class Executor {
         newBlock.funcFloor = currentFunc.floor;
         System.out.println("newBlock ,currentFunc:"+ currentFunc.name);
         newBlock.func = currentFunc;
+        newBlock.name = "block"+blocknum++;
         newBlock.level = level;
+        /*
+        newBlock.whileStartList = activeRunner.whileStartList;
+        newBlock.whileEndList = activeRunner.whileEndList;
+        newBlock.whileNum= activeRunner.whileNum;
+
+         */
         level++;
 
         runnerStack.push(newBlock);
         activeRunner = newBlock;
+        checkStackRunner();
         //checkStackRunner();
         //return newBlock;
     }
 
     public void endBlock(){
-        runnerStack.pop();
-        System.out.println("Pop Runner");
+
+        System.out.println("Pop Runner : "+runnerStack.pop().name);
         activeRunner = runnerStack.peek();
         level--;
+        blocknum--;
         System.out.println("endBlock,level="+level);
+        checkStackRunner();
     }
 
     public void recordStart(){
         currentFunc.addrS = pointer;  //避开start
+        checkStackRunner();
     }
     public void recordEnd(){
         currentFunc.addrE = pointer-1;  //不用避开end
@@ -939,6 +1014,7 @@ public class Executor {
         newRunner.funcFloor = func.floor;
         newRunner.func = func;
         newRunner.level = level;
+        newRunner.name = func.name;
         level++;
 
         System.out.println("In call func,activeRunner: " + activeRunner + " funcfloor:" + activeRunner.funcFloor);
@@ -1345,7 +1421,7 @@ public class Executor {
             index = level*dimension + dimension2;
         }else{
             System.out.println("arr dimension value,dim1 = "+symb.dimension.get(0) + " dim2 = "+symb.dimension.get(1));
-            System.out.println("dimension1 = "+dimension1 + " dimension2=" + dimension2);
+            System.out.println("dimension1= "+dimension1 + " dimension2=" + dimension2);
             index = symb.dimension.get(1) * dimension1 + dimension2;
         }
         System.out.println("Arr value size:" + symb.valueList.size());
@@ -1404,14 +1480,11 @@ public class Executor {
     }
 
     public void checkStackRunner(){
-        System.out.println("Check runnerStack");
+        System.out.println("检查RunnerStack");
         for(int i=0;i<runnerStack.size();i++){
-            if(runnerStack.get(i) instanceof Block){
-                System.out.println(runnerStack.get(i).func.name+ " #block");
-            }else {
-                System.out.println(runnerStack.get(i).func.name);
-            }
+            System.out.print(runnerStack.get(i).name+" ");
         }
+        System.out.println();
     }
 
     public void updateArr(String name, int dimension1, int dimension2,int newValue) {
@@ -1508,6 +1581,7 @@ public class Executor {
 }
 
 class Runner{
+    String name;
     Stack<Object> exeStack = new Stack<Object>();
     HashMap<String,Symbol> symbList = new HashMap<String,Symbol>();
     LinkedHashMap<String,String> printQueue = new LinkedHashMap<String,String>();
@@ -1523,7 +1597,7 @@ class Runner{
     static HashMap<String,Integer> ifElseList = new HashMap<String,Integer>();
     static Stack<String> condOpList = new Stack<String>();
     static Stack<Boolean> condList = new Stack<Boolean>();
-    static Stack<String> ifList = new Stack<String>();
+    Stack<String> ifList = new Stack<String>();
     boolean isWhile = false;
     boolean isIf = false;
     boolean isElse = false;
@@ -1539,14 +1613,6 @@ class Runner{
 
     public void endWhile(){
         whileNum--;
-
-        /*
-        if(whileNum == 0){
-            whileStartList.clear();
-            whileEndList.clear();
-        }
-
-         */
     }
 
     public Runner(int addrPointer,Func func,int funcFloor,int level){
@@ -1585,21 +1651,30 @@ class Runner{
         }
     }
 
-    public boolean currentIfEnd(String str){
-        if(Executor.isIf(str)){
-            if(str.equals(ifList.peek())){
+    public boolean currentIfEnd(String str) {
+        if (Executor.isIf(str)) {
+            if (str.equals(ifList.peek())) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        }else if(Executor.isElse(str)){
-            if(str.charAt(str.length()-1) == ifList.peek().charAt(ifList.peek().length()-1)){
+        } else if (Executor.isElse(str)) {
+            if (str.charAt(str.length() - 1) == ifList.peek().charAt(ifList.peek().length() - 1)) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
-        return true;
+        return false;
+    }
+
+    public void checkExeStack(){
+        System.out.println("检查ExeStack.");
+        for(int i=0;i<activeRunner.exeStack.size();i++){
+            System.out.print(activeRunner.exeStack.get(i)+" ");
+        }
+        System.out.println();
+
     }
 }
 
