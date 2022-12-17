@@ -6,7 +6,7 @@ import Save.*;
 public class ConstExp extends SymbAnalyse{  //for number
     public ConstExp(TreeNode parent){
         super("<ConstExp>",parent);
-        System.out.println("start <ConstExp>");
+        ////System.out.println("start <ConstExp>");
         //1
         if(AddExp.scanAhead() != ParserType.ERROR){
             AddExp addExp = new AddExp(this.node);
@@ -16,7 +16,7 @@ public class ConstExp extends SymbAnalyse{  //for number
         listIndex++;
 
          */
-            System.out.println("Printout <ConstExp>");
+            ////System.out.println("Printout <ConstExp>");
             parserList.add(this.node.node);
         }
     }

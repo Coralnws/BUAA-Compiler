@@ -1,90 +1,78 @@
 
+const int eye[3][3] = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, D = 3;
+const int base[3] = {1, 0, 0};
+int va[3][3], vb[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, vc[3] = {4, 5, 6}, vd[3], badname;
 
-const int c_common = 10, c_array[3] = {1, 2, 3};
-const int  c_matrix[3][3] = {{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
-int v_common, v_array[3], v_matrix[3][3];
-int v_commonInit = 10;
-int v_arrayInit[3] = {1, 2, 3};
-int v_matrixInit[3][3] = {{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
-
-
-
-void print(int output) {
-    printf("\nf2() flag : %d", output);
-    return;
-}
-
-int f0() {
-	return 1;
-}
-
-int f1(int a[], int b[][3], int c[]) {
-    return a[0] + b[0][0] + c[0];
-}
-
-int f2(int a, int b) {
-    int c;
-    int flag;
-    int a1[2] = {1, 2};
-    int a2[3][3] = {{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
-    c = -(a*b) + a/b + (a%b) -1 + f1(a1, a2, a2[0]) - +f0();
-
-    if (a > 10 && b > 10) {
-        print(1);
-        flag = 0;
-    }
-    if (a > 10 && b <= 10) {
-        print(2);
-        flag = 0;
-    }
-    if (a <= 10 && b <= 10) {
-        print(3);
-        flag = 1;
-    }
-    if (a <= 10 && b > 10) {
-        print(4);
-        flag = 1;
-    }
-    return flag;
-}
-
-int main() {
-    printf("19373528 ");
-    ;
-    {
+int vdot(int x[], int y[]) {
+	int d = 0, sum = 0;
+	int useless;
+	while (1 || 0) {
+		sum = sum + x[d] * y[d] / 1;
+		useless = sum % 2 - 3;
+		d = d + 1;
+		if (d == D || 0 && ! - sum < 7 + 1 || + sum > 8 - 1) break;
+		else if (1) continue;
+		else ;
 	}
-    int a,b,flag1,flag2,flag,i;
-    a = getint();
-    b = getint();
-    i=0;
-    if (a != b) {
-        while (i < 3) {
-            int c1;
-            int c2;
-            c1 = a + b;
-            c2 = a - b;
-            
-            flag1=f2(c1,c2);
-            flag2=f2(c2,c1);
-			
-            if (flag1 == 0 || !flag2) {
-                flag = 0;
-            } else {
-                flag = 1;
-            }
-			printf("\nflag = %d : c1 = %d, c2 = %d", flag, c1, c2);
-            i = i + 1;
-            a = a + 5;
-            b = b + 5;
-            if (i >= 10) {
-                continue;
-            }
-            if (i < 0) {
-                break;
-            }
-        }
-    }
-    return 0;
+	return sum;
 }
 
+void print_id(int id) {
+	printf("%d\n", id);
+	if (0 && 4 > 5) return;
+}
+
+
+void print_vec(int x[]) {
+	printf("%d %d %d\n", x[0], x[1], x[2]);
+}
+
+void uselessfunc() {
+	int i  =  0;
+	i = i + 2 - 5 %2;
+	if (i >= 3);
+}
+
+void print_mat(int m[][3]) {
+	int dt = 0;
+	while (!0) {
+		print_vec(m[dt]);
+		dt = dt + 1;
+		if (dt < 3 && 1) {continue;}
+		else if (1)break;
+		else {}
+	}
+}
+int main() {
+	print_id(19373311);
+	int d1 = 0;
+	while (d1 != D || d1 < D) {
+		int d2 = 0;
+		while (d2 <= D - 1) {
+			va[d1][d2] = getint();
+			d2 = d2 + 1;
+		}
+		d1 = d1 + 1;
+	}
+	int cd = 5;
+	while (cd) {
+		cd = cd - 1;
+		printf("123\n");
+	}
+	print_vec(vc);
+	int ans;
+	ans = vdot(va[0], vc);
+	printf("%d\n", ans);
+	ans = vdot(va[1], vb[0]);
+	printf("%d\n", ans);
+	ans = vdot(va[2], vb[0]);
+	printf("%d\n", ans);
+	ans = vdot(va[0], vb[2]);
+	printf("%d\n", ans);
+	ans = vdot(va[0], vb[1]);
+	printf("%d\n", ans);
+	print_mat(vb);
+	uselessfunc();
+	return 0;
+}
 

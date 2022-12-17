@@ -7,7 +7,7 @@ import Save.TreeNode;
 public class InitVal extends SymbAnalyse{
     public InitVal(TreeNode parent){
         super("<InitVal>",parent);
-        System.out.println("Start <InitVal>");
+        ////System.out.println("Start <InitVal>");
 
         //1 - for array's value { }
         if(sym.content.equals("{")){ //数组
@@ -38,7 +38,7 @@ public class InitVal extends SymbAnalyse{
                 //printout <InitVal>
                 //save.addParserWord(listIndex,this.node.node);
                 //listIndex++;
-                System.out.println("Printout <InitVal>");
+                ////System.out.println("Printout <InitVal>");
                 parserList.add(this.node.node);
             }
         }
@@ -47,11 +47,11 @@ public class InitVal extends SymbAnalyse{
             //printout <InitVal>
             //save.addParserWord(listIndex,this.node.node);
             //listIndex++;
-            System.out.println("Printout <InitVal>");
+            ////System.out.println("Printout <InitVal>");
             parserList.add(this.node.node);
         }
         else{
-            System.out.println("InitVal Error : Not Match.");
+            ////System.out.println("InitVal Error : Not Match.");
         }
     }
 

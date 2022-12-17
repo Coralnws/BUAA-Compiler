@@ -7,7 +7,7 @@ import Save.TreeNode;
 public class EqExp extends SymbAnalyse{
     public EqExp(TreeNode parent){
         super("<EqExp>",parent);
-        System.out.println("Start <EqExp>");
+        ////System.out.println("Start <EqExp>");
 
         //1
         RelExp relExp = new RelExp(this.node);
@@ -17,7 +17,7 @@ public class EqExp extends SymbAnalyse{
         listIndex++;
 
          */
-        System.out.println("Printout <EqExp>");
+        ////System.out.println("Printout <EqExp>");
         parserList.add(this.node.node);
         //2
         while(sym.typeCode.equals("EQL") || sym.typeCode.equals("NEQ")){
@@ -29,7 +29,7 @@ public class EqExp extends SymbAnalyse{
             //2.1
             relExp = new RelExp(this.node);
 
-            System.out.println("Printout <EqExp>");
+            ////System.out.println("Printout <EqExp>");
             parserList.add(this.node.node);
         }
     }

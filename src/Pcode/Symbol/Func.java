@@ -18,12 +18,12 @@ public class Func extends Symbol {
         paraList.add(para);
         pt = paraNum;
         paraNum++;
-        //System.out.println("Here to check para in func:" + paraList.get(0));
+        //////System.out.println("Here to check para in func:" + paraList.get(0));
     }
 
     public Para getPara(){
         if(pt>=0){
-            //System.out.println(paraList.get(pt));
+            //////System.out.println(paraList.get(pt));
             return paraList.get(pt--);
         }
         else{

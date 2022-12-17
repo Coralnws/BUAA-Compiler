@@ -6,7 +6,7 @@ import Save.TreeNode;
 public class UnaryExp extends SymbAnalyse{
     public UnaryExp(TreeNode parent){
         super("<UnaryExp>",parent);
-        System.out.println("start <UnaryExp>");
+        ////System.out.println("start <UnaryExp>");
         //1
         ParserType type = AddExp.scanAhead();
         if(type == ParserType.PrimaryExp || type == ParserType.LVal){
@@ -46,7 +46,7 @@ public class UnaryExp extends SymbAnalyse{
         //printout <UnaryExp>
         //save.addParserWord(listIndex,this.node.node);
         //listIndex++;
-        System.out.println("Printout <UnaryExp>");
+        ////System.out.println("Printout <UnaryExp>");
         parserList.add(this.node.node);
     }
 }

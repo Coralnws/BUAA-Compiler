@@ -6,7 +6,7 @@ import Save.TreeNode;
 public class PrimaryExp extends SymbAnalyse{
     public PrimaryExp(TreeNode parent){
         super("<PrimaryExp>",parent);
-        System.out.println("start <PrimaryExp>");
+        ////System.out.println("start <PrimaryExp>");
         //1 (Exp)
         if(sym.content.equals("(")){
             parserList.add(sym);
@@ -31,13 +31,13 @@ public class PrimaryExp extends SymbAnalyse{
             LVal lVal = new LVal(this.node);
         }
         else{
-            System.out.println("PrimaryExp error: Nothing match");
+            ////System.out.println("PrimaryExp error: Nothing match");
         }
 
         //printout <PrimaryExp>
         //save.addParserWord(listIndex,this.node.node);
         //listIndex++;
-        System.out.println("Printout <PrimaryExp>");
+        ////System.out.println("Printout <PrimaryExp>");
         parserList.add(this.node.node);
     }
 }

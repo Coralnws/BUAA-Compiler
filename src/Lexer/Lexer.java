@@ -38,7 +38,7 @@ public class Lexer {  //词法分析
     public void save(String typeCode,String content){
         if(!singleLineComment && !multiLineComment){
             saveWord = new lexerWord(typeCode,content,line);
-            //System.out.println(content);
+            ////System.out.println(content);
             save.addLexerWord(saveWord);
         }
     }
@@ -46,12 +46,12 @@ public class Lexer {  //词法分析
     public void start() throws IOException {   //正式开始分析
         nextSym();
         while(sym != (char)-1){
-            //System.out.println("char:" + sym);
+            ////System.out.println("char:" + sym);
             currentWord.delete( 0, currentWord.length() );  //每次重置字符串
-            //System.out.println("CurrentWord:" + currentWord);
+            ////System.out.println("CurrentWord:" + currentWord);
             while(sym == ' '){        //检查是不是空格
                 nextSym();
-                //System.out.println("space");
+                ////System.out.println("space");
             }
             // 1 - 数字串（数字开头必定是数字串）
             if(isDigit(sym)) {
@@ -59,7 +59,7 @@ public class Lexer {  //词法分析
                     currentWord.append(sym);
                     nextSym();
                 }
-                //System.out.println(currentWord);
+                ////System.out.println(currentWord);
                 save("INTCON",currentWord.toString());
                 //saveWord = new Save.Word("INTCON",currentWord.toString(),line);
                 //wordList.add(saveWord);
@@ -72,18 +72,18 @@ public class Lexer {  //词法分析
                     currentWord.append(sym);
                     nextSym();
                 }
-                //System.out.println(currentWord);
+                ////System.out.println(currentWord);
                 //检查是不是关键字
 
                 if(Vocab.lexicalVocab.containsKey(currentWord.toString())){
                     String keyWord = Vocab.lexicalCode(currentWord.toString());
-                    //System.out.println(keyWord);
+                    ////System.out.println(keyWord);
                     save(keyWord,currentWord.toString());
                 }
                 else{
                     save("IDENFR",currentWord.toString());
                 }
-                //System.out.println(currentWord);
+                ////System.out.println(currentWord);
             }
             // 3- formatString （“” 开头和结尾）
             else if(sym == '"'){
@@ -97,7 +97,7 @@ public class Lexer {  //词法分析
                 }
                 currentWord.append(sym);
                 nextSym();
-                //System.out.println(currentWord);
+                ////System.out.println(currentWord);
                 save("STRCON",currentWord.toString());
             }
             /* 4 - 注释 : / 开头 ， // 或 /* 或 除的/ （三种可能）
@@ -199,10 +199,10 @@ public class Lexer {  //词法分析
                 singleLineComment = false;
             }
             else{
-                //System.out.println("here:" + sym);
+                ////System.out.println("here:" + sym);
                 nextSym();
             }
-            //System.out.println("line: " + line + ",word: " + currentWord);
+            ////System.out.println("line: " + line + ",word: " + currentWord);
         }
         reader.close();
     }

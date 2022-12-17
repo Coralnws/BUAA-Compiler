@@ -9,7 +9,7 @@ import Save.parserWord;
 public class Decl extends SymbAnalyse{
     public Decl(TreeNode parent){
         super("<Decl>",parent);
-        System.out.println("Start <Decl>");
+        ////System.out.println("Start <Decl>");
         //1
         if(sym.content.equals("const")){
             ConstDecl constDecl = new ConstDecl(this.node);

@@ -6,7 +6,7 @@ import Save.TreeNode;
 public class FuncFParam extends SymbAnalyse{
     public FuncFParam(TreeNode parent){
         super("<FuncFParam>",parent);
-        System.out.println("Start <FuncParam>");
+        ////System.out.println("Start <FuncParam>");
         //1
         if(sym.content.equals("int")){
             parserList.add(sym);
@@ -55,7 +55,7 @@ public class FuncFParam extends SymbAnalyse{
                 //printout <FuncFParam>
                 //save.addParserWord(listIndex,this.node.node);
                 //listIndex++;
-                System.out.println("Printout <FuncParam>");
+                ////System.out.println("Printout <FuncParam>");
                 parserList.add(this.node.node);
             }
         }

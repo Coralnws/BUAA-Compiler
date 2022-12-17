@@ -1,268 +1,795 @@
-1t = - 1
-2t = - 1
-var a next [ 4 ] [ 2 ] = { { 1 , 0 } , { 0 , 1t } , { 2t , 0 } , { 0 , 1 } }
-const v len = 3
-3t = - 1
-4t = - 1
-const a next1 [ 4 ] [ 2 ] = { { 1 , 0 } , { 0 , 3t } , { 4t , 0 } , { 0 , 1 } }
-const a xxx [ 2 ] = { 1 , 2 }
-var v ans = 0
-var a arr [ 2 ] = { 3 , 1 }
-func int getDif3N
-para v min
-para v max
-start getDif3N
-var v i = 1
-var v j = 1
-var v k = 1
-var v cnt = 0
-var a arr1 [ 2 ] = { 1 , 2 }
-#while
-#cond1 i <= 3
-cond #cond1
-CheckCond
-start #while
-upd j = 1
-#while
-#cond1 j <= 3
-cond #cond1
-CheckCond
-start #while
-upd k = 1
-#while
-#cond1 k <= 3
-cond #cond1
-CheckCond
-start #while
+const v global_const_A = 1
+const v global_const_B1 = 11
+const v global_const_B2 = 12
+const v A = 10
+1t = ( 1 + 9 ) + 1
+const a array_A [ 1t ] = { 0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , A }
+const a array_D [ 2 ] [ 1 ] = { { 1 } , { 1 } }
+2t = ( 110 / 10 )
+var a B [ 2t ]
+3t = + 11
+var a AB [ 3t ]
+var v global_var1
+var v global_var2
+var v global_var3 = 0
+4t = 7 % 4
+5t = 8 / 2
+var a array_D1 [ 4t ] [ 5t ] = { { 1 , 2 , 3 , 4 } , { 5 , 6 , 7 , 8 } , { 10 , 11 , 12 , 13 } }
+func void func_void
+start func_void
+const v const_1 = 1
+var v var1
+upd global_var1 = 1
+6t = global_var1 + global_var3
+start #block
+7t = GETINT
+upd var1 = 7t
+8t = const_1 + var1
+upd var1 = 8t
+end #block
+ret
+end func_void
+func int func_if_var
+para v var
+start func_if_var
 #if1
-#cond1 i != j &&
-#cond2 i != k &&
-#cond3 j != k
-cond #cond1 && #cond2 && #cond3
+#cond1 var > 0
+cond #cond1
 CheckCond
 start #if1
-5t = cnt + 1
-upd cnt = 5t
+upd var = 1
 end #if1
-6t = k + 1
-upd k = 6t
-end #while
-7t = j + 1
-upd j = 7t
-end #while
-8t = i + 1
-upd i = 8t
-end #while
-ret cnt
-end getDif3N
-func int judgeB
-para v a
-para v b
-start judgeB
 #if2
-#cond1 a <= b
+9t = var + 1
+#cond1 9t <= 1
 cond #cond1
 CheckCond
 start #if2
+upd var = 4
+end #if2
 #if3
-#cond1 a < b
+10t = 1 + 1
+#cond1 var >= 10t
 cond #cond1
 CheckCond
 start #if3
-9t = a - b
-ret 9t
+upd var = 5
 end #if3
-start #else3
 #if4
-#cond1 a == b
+11t = - var + var
+#cond1 11t
 cond #cond1
 CheckCond
 start #if4
-ret 0
+upd var = 6
 end #if4
-end #else3
-end #if2
-start #else2
 #if5
-#cond1 a >= b
+12t = - var + var
+13t = 0 + 1
+#cond1 12t == 13t
 cond #cond1
 CheckCond
 start #if5
+upd var = 7
+end #if5
 #if6
-#cond1 a > b
+#cond1 var > 1 != var < 1
 cond #cond1
 CheckCond
 start #if6
-10t = a - b
-ret 10t
+upd var = 8
 end #if6
-start #else6
 #if7
-#cond1 a == b
+14t = ! var
+#cond1 14t
 cond #cond1
 CheckCond
 start #if7
-ret 0
+upd var = 0
 end #if7
-end #else6
-end #if5
-end #else2
-ret 0
-end judgeB
-func void printArr
-para a a [ ]
-start printArr
-var v i = 0
-#while
-#cond1 i < 2
-cond #cond1
-CheckCond
-start #while
-ins-1
-11t = a [ i ]
-anw-1 = 11t
-PRINTF
-12t = i + 1
-upd i = 12t
-end #while
-ln-1
-PRINTF
-end printArr
-func void printArr2
-para a a [ ] [ 2 ]
-start printArr2
-var v i = 0
-#while
-#cond1 i < 4
-cond #cond1
-CheckCond
-start #while
-13t = a [ i ]
-push 13t
-call printArr
-14t = RET
-15t = i + 1
-upd i = 15t
-end #while
-ret
-end printArr2
-func void printHello
-start printHello
-var v name
-16t = GETINT
-upd name = 16t
-str-1 =Hello 
-ins-1
-ln-1
-anw-1 = name
-PRINTF
-end printHello
-func int add
-para v n
-start add
-var v ans
-17t = n + 3
-upd ans = 17t
-ret ans
-end add
-func void opp
-start opp
-end opp
-func int main
-start main
-str-1 =19373573
-ln-1
-PRINTF
-var v ans
-start #block
-end #block
-start #block
-upd ans = 3
-end #block
-var v i = 0
-var v y = 1
 #if8
-18t = ! y
-#cond1 18t
+#cond1 var < 1
 cond #cond1
 CheckCond
 start #if8
-upd y = 0
+15t = - var
+upd var = 15t
 end #if8
-19t = + 1
-upd y = 19t
-20t = - 1
-upd y = 20t
-var v xx
-21t = next [ 0 ] [ 0 ]
-22t = ( 16 + 2 ) / ( i + 1 ) - 14 + 21t
-upd xx = 22t
-#while
-#cond1 i <= 5
-cond #cond1
-CheckCond
-start #while
+start #else8
+end #else8
+ret var
+end func_if_var
+func void func_null
+start func_null
+end func_null
+func int func_if_D1array
+para a a [ ]
+para v factor
+start func_if_D1array
 #if9
-#cond1 i == 3
+16t = a [ 0 ]
+#cond1 16t == 0
 cond #cond1
 CheckCond
 start #if9
-23t = i + 1
-upd i = 23t
-CONTINUE
+17t = a [ 0 ]
+18t = a [ 1 ]
+19t = 17t + 18t
+upd a [ 0 ] = 19t
 end #if9
 #if10
-#cond1 i == 5
+20t = a [ 1 ]
+#cond1 20t != 1
 cond #cond1
 CheckCond
 start #if10
-BREAK
+21t = a [ 1 ]
+22t = a [ 2 ]
+23t = 21t + 22t
+upd a [ 1 ] = 23t
 end #if10
-start #else10
-var v j = i
-end #else10
-24t = i + 1
-upd i = 24t
-end #while
-25t = GETINT
-upd ans = 25t
-ins-1
-ln-1
-push ans
-call add
-26t = RET
-anw-1 = 26t
-PRINTF
-push 1
-push 999
-call getDif3N
-27t = RET
-upd ans = 27t
-ins-1
-ln-1
-anw-1 = ans
-PRINTF
-push 2
+#if11
+24t = a [ 2 ]
+#cond1 24t >= 2
+cond #cond1
+CheckCond
+start #if11
+25t = a [ 2 ]
+26t = 1 + 25t % A
+upd a [ 2 ] = 26t
+end #if11
+#if12
+27t = a [ 3 ]
+#cond1 27t <= 5
+cond #cond1
+CheckCond
+start #if12
+28t = a [ 3 ]
+29t = a [ 4 ]
+30t = 28t * - + - + - 29t
+upd a [ 3 ] = 30t
+end #if12
+#if13
+31t = a [ 4 ]
+#cond1 31t < 0
+cond #cond1
+CheckCond
+start #if13
+32t = a [ 4 ]
+33t = a [ 1 ]
+34t = ( 32t + 5 / 3 ) % 33t
+upd a [ 4 ] = 34t
+end #if13
+#if14
+35t = a [ 5 ]
+36t = a [ 4 ]
+37t = 5 + 36t
+#cond1 35t > 37t
+cond #cond1
+CheckCond
+start #if14
+38t = a [ 5 ]
+39t = a [ 3 ]
+40t = 38t % ( 39t * 2 )
+upd a [ 5 ] = 40t
+end #if14
+#if15
+41t = a [ 6 ]
+42t = 41t / 2
+43t = a [ 5 ]
+44t = a [ 2 ]
+#cond1 42t > 1 == 43t > 44t
+cond #cond1
+CheckCond
+start #if15
+45t = a [ 6 ]
+46t = + - ( 45t / 9 )
+upd a [ 6 ] = 46t
+end #if15
+#if16
+47t = a [ 7 ]
+#cond1 47t
+cond #cond1
+CheckCond
+start #if16
+48t = a [ 7 ]
+49t = 48t / 2
+upd a [ 7 ] = 49t
+end #if16
+50t = a [ 0 ]
+51t = a [ 1 ]
+52t = a [ 2 ]
+53t = a [ 3 ]
+54t = a [ 4 ]
+55t = a [ 5 ]
+56t = a [ 6 ]
+57t = 50t + 51t + 52t + ( 53t + 54t + 55t + 56t ) / factor
+ret 57t
+end func_if_D1array
+func int func_test
+para a a [ ]
+para v i
+start func_test
+upd a [ i ] = 1
+ret 1
+end func_test
+func void func_test_A
+start func_test_A
+var v var1 = 3
+var v var2 = 4
+var v var3 = 5
+var a var [ 12 ] = { 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
+#if17
+#cond1 var1 < 1 ||
+#cond2 var1 > 3
+cond #cond1 || #cond2
+CheckCond
+start #if17
+upd var [ 0 ] = 1
+end #if17
+#if18
+#cond1 var1 > 1 ||
+#cond2 var1 < 3
+cond #cond1 || #cond2
+CheckCond
+start #if18
+upd var [ 1 ] = 1
+end #if18
+start #else18
+upd var [ 1 ] = 0
+end #else18
+#if19
+#cond1 var1 == 3 &&
+#cond2 var2 == 4
+cond #cond1 && #cond2
+CheckCond
+start #if19
+upd var [ 2 ] = 1
+end #if19
+start #else19
+upd var [ 2 ] = 0
+end #else19
+#if20
+#cond1 var3 == 3 &&
+push var
 push 3
-call judgeB
-28t = RET
-upd ans = 28t
-str-1 =judgeB 2,3 = 
+call func_test
+58t = RET
+#cond2 58t
+cond #cond1 && #cond2
+CheckCond
+start #if20
+end #if20
+#if21
+#cond1 var3 >= 3 &&
+push var
+push 4
+call func_test
+59t = RET
+#cond2 59t
+cond #cond1 && #cond2
+CheckCond
+start #if21
+end #if21
+#if22
+#cond1 var3 == 5 ||
+push var
+push 5
+call func_test
+60t = RET
+#cond2 60t
+cond #cond1 || #cond2
+CheckCond
+start #if22
+end #if22
+#if23
+#cond1 var3 <= 3 ||
+push var
+push 6
+call func_test
+61t = RET
+#cond2 61t
+cond #cond1 || #cond2
+CheckCond
+start #if23
+end #if23
+#if24
+#cond1 var3 != 3 &&
+push var
+push 7
+call func_test
+62t = RET
+#cond2 62t ||
+push var
+push 8
+call func_test
+63t = RET
+#cond3 63t
+cond #cond1 && #cond2 || #cond3
+CheckCond
+start #if24
+end #if24
+#if25
+#cond1 var3 != 5 ||
+push var
+push 9
+call func_test
+64t = RET
+#cond2 64t &&
+push var
+push 10
+call func_test
+65t = RET
+#cond3 65t
+cond #cond1 || #cond2 && #cond3
+CheckCond
+start #if25
+end #if25
+#if26
+66t = ! var1
+#cond1 66t ||
+67t = ! var2
+#cond2 67t ||
+#cond3 var3 &&
+push var
+push 11
+call func_test
+68t = RET
+#cond4 68t
+cond #cond1 || #cond2 || #cond3 && #cond4
+CheckCond
+start #if26
+end #if26
+str-1 =Testing Short-circuit evaluation : 
+ins-1
+str-2 = 
+ins-2
+str-3 = 
+ins-3
+str-4 = 
+ins-4
+str-5 = 
+ins-5
+str-6 = 
+ins-6
+str-7 = 
+ins-7
+str-8 = 
+ins-8
+str-9 = 
+ins-9
+str-10 = 
+ins-10
+str-11 = 
+ins-11
+str-12 = 
+ins-12
+ln-1
+69t = var [ 0 ]
+anw-1 = 69t
+70t = var [ 1 ]
+anw-2 = 70t
+71t = var [ 2 ]
+anw-3 = 71t
+72t = var [ 3 ]
+anw-4 = 72t
+73t = var [ 4 ]
+anw-5 = 73t
+74t = var [ 5 ]
+anw-6 = 74t
+75t = var [ 6 ]
+anw-7 = 75t
+76t = var [ 7 ]
+anw-8 = 76t
+77t = var [ 8 ]
+anw-9 = 77t
+78t = var [ 9 ]
+anw-10 = 78t
+79t = var [ 10 ]
+anw-11 = 79t
+80t = var [ 11 ]
+anw-12 = 80t
+PRINTF
+ret
+end func_test_A
+func void func_if_D2array
+para a a [ ] [ 3 ]
+para v factor
+start func_if_D2array
+#if27
+81t = a [ 0 ] [ 0 ]
+#cond1 81t == 1
+cond #cond1
+CheckCond
+start #if27
+82t = a [ 0 ] [ 0 ]
+83t = a [ 0 ] [ 1 ]
+84t = 82t + 83t
+upd a [ 0 ] [ 0 ] = 84t
+end #if27
+#if28
+85t = a [ 0 ] [ 1 ]
+#cond1 85t != 1
+cond #cond1
+CheckCond
+start #if28
+86t = a [ 0 ] [ 1 ]
+87t = a [ 0 ] [ 2 ]
+88t = 86t + 87t
+upd a [ 0 ] [ 1 ] = 88t
+end #if28
+#if29
+89t = a [ 0 ] [ 2 ]
+#cond1 89t >= 2
+cond #cond1
+CheckCond
+start #if29
+90t = a [ 0 ] [ 2 ]
+91t = 1 + 90t % A
+upd a [ 0 ] [ 2 ] = 91t
+end #if29
+#if30
+92t = a [ 1 ] [ 0 ]
+#cond1 92t <= 5
+cond #cond1
+CheckCond
+start #if30
+93t = a [ 1 ] [ 0 ]
+94t = a [ 1 ] [ 0 ]
+95t = 93t * - + - + - 94t
+upd a [ 1 ] [ 0 ] = 95t
+end #if30
+#if31
+96t = a [ 1 ] [ 0 ]
+#cond1 96t < 0
+cond #cond1
+CheckCond
+start #if31
+97t = a [ 1 ] [ 0 ]
+98t = a [ 1 ] [ 1 ]
+99t = ( 97t + 5 / 3 ) % 98t
+upd a [ 1 ] [ 0 ] = 99t
+end #if31
+#if32
+100t = a [ 1 ] [ 0 ]
+101t = ! 100t
+#cond1 101t
+cond #cond1
+CheckCond
+start #if32
+upd a [ 1 ] [ 0 ] = 1
+end #if32
+#if33
+102t = a [ 1 ] [ 1 ]
+103t = a [ 1 ] [ 2 ]
+104t = 5 + 103t
+#cond1 102t > 104t
+cond #cond1
+CheckCond
+start #if33
+105t = a [ 1 ] [ 2 ]
+106t = a [ 0 ] [ 0 ]
+107t = 105t % ( 106t * 2 )
+upd a [ 1 ] [ 1 ] = 107t
+end #if33
+#if34
+108t = a [ 0 ] [ 1 ]
+109t = 108t / 2
+110t = a [ 1 ] [ 0 ]
+111t = a [ 1 ] [ 2 ]
+#cond1 109t > 1 == 110t > 111t
+cond #cond1
+CheckCond
+start #if34
+112t = a [ 1 ] [ 1 ]
+113t = + - ( 112t / 3 )
+upd a [ 1 ] [ 2 ] = 113t
+end #if34
+#if35
+114t = a [ 0 ] [ 0 ]
+#cond1 114t
+cond #cond1
+CheckCond
+start #if35
+115t = a [ 0 ] [ 0 ]
+116t = 115t / 2
+upd a [ 0 ] [ 0 ] = 116t
+end #if35
+str-1 =Testing func_if_D2array(a[][3], b) ......
+ln-1
+ins-1
+str-2 = 
+ins-2
+str-3 = 
+ins-3
+ln-2
+ins-4
+str-4 = 
+ins-5
+str-5 = 
+ins-6
+ln-3
+117t = a [ 0 ] [ 0 ]
+anw-1 = 117t
+118t = a [ 0 ] [ 1 ]
+anw-2 = 118t
+119t = a [ 0 ] [ 2 ]
+anw-3 = 119t
+120t = a [ 1 ] [ 0 ]
+anw-4 = 120t
+121t = a [ 1 ] [ 1 ]
+anw-5 = 121t
+122t = a [ 1 ] [ 2 ]
+anw-6 = 122t
+PRINTF
+end func_if_D2array
+func int func_while
+para v n
+para v m
+start func_while
+123t = m + n
+var v i = 123t
+var v j = 0
+var v k = 0
+#while
+#cond1 i
+cond #cond1
+CheckCond
+start #while
+124t = k + 1
+upd k = 124t
+125t = i - 1
+upd i = 125t
+#if36
+#cond1 i == n
+cond #cond1
+CheckCond
+start #if36
+BREAK
+end #if36
+#if37
+126t = n + 1
+#cond1 i == 126t
+cond #cond1
+CheckCond
+start #if37
+CONTINUE
+end #if37
+127t = j + 1
+upd j = 127t
+end #while
+ret j
+end func_while
+func void func_pass_array
+para a array [ ] [ 4 ]
+start func_pass_array
+var v i = 0
+str-1 =Testing func_pass_array(int a[][4) ......
+ln-1
+ins-1
+str-2 = 
+ins-2
+str-3 = 
+ins-3
+str-4 = 
+ins-4
+ln-2
+ins-5
+str-5 = 
+ins-6
+str-6 = 
+ins-7
+str-7 = 
+ins-8
+ln-3
+ins-9
+str-8 = 
+ins-10
+str-9 = 
+ins-11
+str-10 = 
+ins-12
+ln-4
+128t = array [ 0 ] [ 0 ]
+anw-1 = 128t
+129t = array [ 0 ] [ 1 ]
+anw-2 = 129t
+130t = array [ 0 ] [ 2 ]
+anw-3 = 130t
+131t = array [ 0 ] [ 3 ]
+anw-4 = 131t
+132t = array [ 1 ] [ 0 ]
+anw-5 = 132t
+133t = array [ 1 ] [ 1 ]
+anw-6 = 133t
+134t = array [ 1 ] [ 2 ]
+anw-7 = 134t
+135t = array [ 1 ] [ 3 ]
+anw-8 = 135t
+136t = array [ 2 ] [ 0 ]
+anw-9 = 136t
+137t = array [ 2 ] [ 1 ]
+anw-10 = 137t
+138t = array [ 2 ] [ 2 ]
+anw-11 = 138t
+139t = array [ 2 ] [ 3 ]
+anw-12 = 139t
+PRINTF
+ret
+end func_pass_array
+func void func_pass_PartArray
+para a a [ ]
+start func_pass_PartArray
+var v i = 0
+str-1 =Testing func_pass_PartArray(int a[]) ...... 
+ins-1
+str-2 = 
+ins-2
+str-3 = 
+ins-3
+str-4 = 
+ins-4
+ln-1
+140t = a [ 0 ]
+anw-1 = 140t
+141t = a [ 1 ]
+anw-2 = 141t
+142t = a [ 2 ]
+anw-3 = 142t
+143t = a [ 3 ]
+anw-4 = 143t
+PRINTF
+ret
+end func_pass_PartArray
+func void func_pass_arrayElement
+para v a
+start func_pass_arrayElement
+str-1 =Testing func_pass_arrayElement(int a) ...... 
 ins-1
 ln-1
-anw-1 = ans
+anw-1 = a
 PRINTF
-call printHello
-29t = RET
-push next
-call printArr2
-30t = RET
-31t = next [ 0 ]
-push 31t
-call printArr
-32t = RET
-push arr
-call printArr
-33t = RET
+end func_pass_arrayElement
+func int main
+start main
+str-1 =19373235
+ln-1
+PRINTF
+var v var1 = 1
+var v mul
+call func_test_A
+144t = RET
+const v const_C1 = global_const_B1
+145t = + 12
+const v const_C2 = 145t
+146t = - global_const_B2
+const v const_C3 = 146t
+147t = ( + - + - + - const_C2 ) * ( const_C2 / global_const_A ) % ( global_const_B2 + 1 ) + global_const_B1
+const v const_D1 = 147t
+148t = global_var3 + const_D1
+var v var4 = 148t
+var v var5
+149t = 1 + 2 * 3
+var v var6 = 149t
+150t = GETINT
+upd mul = 150t
+var v i = 0
+#while
+#cond1 i <= 10
+cond #cond1
+CheckCond
+start #while
+151t = array_A [ i ]
+152t = array_A [ i ]
+153t = 151t * 152t
+upd B [ i ] = 153t
+154t = B [ i ]
+155t = mul * 154t
+upd AB [ i ] = 155t
+156t = i + 1
+upd i = 156t
+end #while
+push array_D1
+call func_pass_array
+157t = RET
+158t = array_D1 [ 1 ]
+push 158t
+call func_pass_PartArray
+159t = RET
+160t = array_D1 [ 0 ] [ 2 ]
+push 160t
+call func_pass_arrayElement
+161t = RET
+str-1 =Testing complex calculate ...... result = 
+ins-1
+str-2 =.
+ln-1
+162t = AB [ 1 ]
+163t = AB [ 2 ]
+164t = AB [ 3 ]
+165t = AB [ 2 ]
+166t = AB [ 1 ]
+167t = - ( ( ( + - + - 162t ) + 163t ) * ( 164t % 165t ) / 166t )
+anw-1 = 167t
+PRINTF
+str-1 =Testing D2array traversal and assignment.
+ln-1
+PRINTF
+var a array_E [ 2 ] [ 3 ]
+var v j = 0
+#while
+#cond1 j < 2
+cond #cond1
+CheckCond
+start #while
+upd i = 0
+#while
+#cond1 i <= 2
+cond #cond1
+CheckCond
+start #while
+168t = i + j
+upd array_E [ j ] [ i ] = 168t
+169t = i + 1
+upd i = 169t
+end #while
+170t = j + 1
+upd j = 170t
+end #while
+str-1 =Array array_E:
+ln-1
+ins-1
+str-2 = 
+ins-2
+str-3 = 
+ins-3
+ln-2
+ins-4
+str-4 = 
+ins-5
+str-5 = 
+ins-6
+ln-3
+171t = array_E [ 0 ] [ 0 ]
+anw-1 = 171t
+172t = array_E [ 0 ] [ 1 ]
+anw-2 = 172t
+173t = array_E [ 0 ] [ 2 ]
+anw-3 = 173t
+174t = array_E [ 1 ] [ 0 ]
+anw-4 = 174t
+175t = array_E [ 1 ] [ 1 ]
+anw-5 = 175t
+176t = array_E [ 1 ] [ 2 ]
+anw-6 = 176t
+PRINTF
+call func_void
+177t = RET
+push const_C1
+call func_if_var
+178t = RET
+upd var5 = 178t
+var v factor
+179t = GETINT
+upd factor = 179t
+push AB
+push factor
+call func_if_D1array
+180t = RET
+var v x = 180t
+push array_E
+push factor
+call func_if_D2array
+181t = RET
+str-1 =Loop 7 times, once continue, once break. Symbol j = 
+ins-1
+str-2 =. func_while(x, y)is done!
+ln-1
+push var5
+push var6
+call func_while
+182t = RET
+anw-1 = 182t
+PRINTF
 ret 0
 end main

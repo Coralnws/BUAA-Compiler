@@ -6,7 +6,7 @@ import Save.TreeNode;
 public class MainFuncDef extends SymbAnalyse {
     public MainFuncDef(TreeNode parent){
         super("<MainFuncDef>",parent);
-        System.out.println("Start <MainFUncDef>");
+        ////System.out.println("Start <MainFUncDef>");
 
         //1
         if(sym.content.equals("int")){
@@ -40,7 +40,7 @@ public class MainFuncDef extends SymbAnalyse {
                    }
                }
             }
-            System.out.println("Printout <MainFUncDef>");
+            ////System.out.println("Printout <MainFUncDef>");
             parserList.add(this.node.node);
         }
     }

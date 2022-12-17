@@ -51,7 +51,7 @@ public class PcodeGenerator {
         nextWord();
         while(currentWord != null){
             //这边读的是CompUnit的部分，之后那些就好像语法分析那样，从内部来调用
-            System.out.println("In PcodeGenerator , Currentword:" + currentWord.typeCode);
+            //System.out.println("In PcodeGenerator , Currentword:" + currentWord.typeCode);
             if(currentWord.typeCode.equals("<FuncDef>")){
                 nextWord();
                 nextWord();
@@ -77,7 +77,7 @@ public class PcodeGenerator {
                 }
             }
             if(currentWord instanceof lexerWord){
-                //System.out.println("CurrentLexerWord: " + currentWord.content);
+                ////System.out.println("CurrentLexerWord: " + currentWord.content);
             }else if(currentWord instanceof parserWord){
                 while(ignoreList.contains(currentWord.typeCode)){
                     currentWord = SaveContent.getWord(index++);
@@ -113,7 +113,7 @@ public class PcodeGenerator {
     public static void scanWord(int scanIndex){
         if(scanIndex < treeList.size()){
             scanWord = treeList.get(scanIndex);
-            //System.out.println("scanWord: " + scanWord.typeCode);
+            ////System.out.println("scanWord: " + scanWord.typeCode);
             if(scanIndex < treeList.size() - 1 ){
                 scanWordAhead = treeList.get(scanIndex+1);
             }else{

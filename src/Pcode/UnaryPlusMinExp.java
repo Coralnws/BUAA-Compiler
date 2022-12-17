@@ -8,7 +8,7 @@ import static Pcode.Exp.scanAhead;
 
 public class UnaryPlusMinExp extends PcodeGenerator{
     public UnaryPlusMinExp() throws IOException {
-        System.out.println("To UnaryPlusMinExp, check now is + / - :" + currentWord.content);
+        //System.out.println("To UnaryPlusMinExp, check now is + / - :" + currentWord.content);
         pcode.append(currentWord.content);
         ignoreParser = true;
         nextWord();

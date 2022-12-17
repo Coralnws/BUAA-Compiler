@@ -553,14 +553,23 @@ public class Executor {
 
                 if(checkCondGotOp(sym)){
                     int value1=-1,value2=-1;
+                    boolean res = false;
                     for(int i=1,j=1;i<sym.length;i++){
                         if(isOp(sym[i])){
                             value2 = senseValue(sym[i+1]);
-
+                            res = calcCond(value1,value2,sym[i]);
                             resultList.add(calcCond(value1,value2,sym[i]));
                             //if(resultList.contains(false)) condResult =false;
                         }else{
-                            value1 = senseValue(sym[i]);
+                            if(!res)
+                                value1 = senseValue(sym[i]);
+                            else{
+                                if(res){
+                                    value1 = 1;
+                                }else{
+                                    value1=0;
+                                }
+                            }
                         }
                     }
                 }else{

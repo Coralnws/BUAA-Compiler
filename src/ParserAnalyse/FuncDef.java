@@ -6,7 +6,7 @@ import Save.TreeNode;
 public class FuncDef extends SymbAnalyse{
     public FuncDef(TreeNode parent){
         super("<FuncDef>",parent);
-        System.out.println("Start <FuncDef>");
+        //System.out.println("Start <FuncDef>");
         //1
         if(sym.content.equals("void") || sym.content.equals("int")){
             FuncType funcType = new FuncType(this.node);
@@ -37,7 +37,7 @@ public class FuncDef extends SymbAnalyse{
                     Block block = new Block(this.node);
                 }
 
-                System.out.println("Printout <FuncDef>");
+                //System.out.println("Printout <FuncDef>");
                 parserList.add(this.node.node);
             }
         }

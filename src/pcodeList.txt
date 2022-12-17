@@ -1,188 +1,243 @@
-const v c_common = 10
-const a c_array [ 3 ] = { 1 , 2 , 3 }
-const a c_matrix [ 3 ] [ 3 ] = { { 1 , 2 , 3 } , { 1 , 2 , 3 } , { 1 , 2 , 3 } }
-var v v_common
-var a v_array [ 3 ]
-var a v_matrix [ 3 ] [ 3 ]
-var v v_commonInit = 10
-var a v_arrayInit [ 3 ] = { 1 , 2 , 3 }
-var a v_matrixInit [ 3 ] [ 3 ] = { { 1 , 2 , 3 } , { 1 , 2 , 3 } , { 1 , 2 , 3 } }
-func void print
-para v output
-start print
-ln-1
-str-1 =f2() flag : 
-ins-1
-anw-1 = output
-PRINTF
-ret
-end print
-func int f0
-start f0
-ret 1
-end f0
-func int f1
-para a a [ ]
-para a b [ ] [ 3 ]
-para a c [ ]
-start f1
-1t = a [ 0 ]
-2t = b [ 0 ] [ 0 ]
-3t = c [ 0 ]
-4t = 1t + 2t + 3t
-ret 4t
-end f1
-func int f2
-para v a
-para v b
-start f2
-var v c
-var v flag
-var a a1 [ 2 ] = { 1 , 2 }
-var a a2 [ 3 ] [ 3 ] = { { 1 , 2 , 3 } , { 1 , 2 , 3 } , { 1 , 2 , 3 } }
-push a1
-push a2
-5t = a2 [ 0 ]
-push 5t
-call f1
-6t = RET
-call f0
-7t = RET
-8t = - ( a * b ) + a / b + ( a % b ) - 1 + 6t - + 7t
-upd c = 8t
+const a eye [ 3 ] [ 3 ] = { { 1 , 0 , 0 } , { 0 , 1 , 0 } , { 0 , 0 , 1 } }
+const v D = 3
+const a base [ 3 ] = { 1 , 0 , 0 }
+var a va [ 3 ] [ 3 ]
+var a vb [ 3 ] [ 3 ] = { { 1 , 2 , 3 } , { 4 , 5 , 6 } , { 7 , 8 , 9 } }
+var a vc [ 3 ] = { 4 , 5 , 6 }
+var a vd [ 3 ]
+var v badname
+func int vdot
+para a x [ ]
+para a y [ ]
+start vdot
+var v d = 0
+var v sum = 0
+var v useless
+#while
+#cond1 1 ||
+#cond2 0
+cond #cond1 || #cond2
+CheckCond
+start #while
+1t = x [ d ]
+2t = y [ d ]
+3t = sum + 1t * 2t / 1
+upd sum = 3t
+4t = sum % 2 - 3
+upd useless = 4t
+5t = d + 1
+upd d = 5t
 #if1
-#cond1 a > 10 &&
-#cond2 b > 10
-cond #cond1 && #cond2
+#cond1 d == D ||
+#cond2 0 &&
+6t = - sum < 7
+7t = ! 6t
+8t = 7t 7 + 1
+#cond3 8t ||
+9t = + sum
+10t = 8 - 1
+#cond4 9t > 10t
+cond #cond1 || #cond2 && #cond3 || #cond4
 CheckCond
 start #if1
-push 1
-call print
-9t = RET
-upd flag = 0
+BREAK
 end #if1
+start #else1
 #if2
-#cond1 a > 10 &&
-#cond2 b <= 10
-cond #cond1 && #cond2
+#cond1 1
+cond #cond1
 CheckCond
 start #if2
-push 2
-call print
-10t = RET
-upd flag = 0
+CONTINUE
 end #if2
+start #else2
+end #else2
+end #else1
+end #while
+ret sum
+end vdot
+func void print_id
+para v id
+start print_id
+ins-1
+ln-1
+anw-1 = id
+PRINTF
 #if3
-#cond1 a <= 10 &&
-#cond2 b <= 10
+#cond1 0 &&
+#cond2 4 > 5
 cond #cond1 && #cond2
 CheckCond
 start #if3
-push 3
-call print
-11t = RET
-upd flag = 1
+ret
 end #if3
-#if4
-#cond1 a <= 10 &&
-#cond2 b > 10
-cond #cond1 && #cond2
-CheckCond
-start #if4
-push 4
-call print
-12t = RET
-upd flag = 1
-end #if4
-ret flag
-end f2
-func int main
-start main
-str-1 =19373528 
+end print_id
+func void print_vec
+para a x [ ]
+start print_vec
+ins-1
+str-1 = 
+ins-2
+str-2 = 
+ins-3
+ln-1
+11t = x [ 0 ]
+anw-1 = 11t
+12t = x [ 1 ]
+anw-2 = 12t
+13t = x [ 2 ]
+anw-3 = 13t
 PRINTF
-start #block
-end #block
-var v a
-var v b
-var v flag1
-var v flag2
-var v flag
-var v i
-13t = GETINT
-upd a = 13t
-14t = GETINT
-upd b = 14t
-upd i = 0
-#if5
-#cond1 a != b
+end print_vec
+func void uselessfunc
+start uselessfunc
+var v i = 0
+14t = i + 2 - 5 % 2
+upd i = 14t
+#if4
+#cond1 i >= 3
 cond #cond1
 CheckCond
-start #if5
+start #if4
+end #if4
+end uselessfunc
+func void print_mat
+para a m [ ] [ 3 ]
+start print_mat
+var v dt = 0
 #while
-#cond1 i < 3
+15t = ! 0
+#cond1 15t
 cond #cond1
 CheckCond
 start #while
-var v c1
-var v c2
-15t = a + b
-upd c1 = 15t
-16t = a - b
-upd c2 = 16t
-push c1
-push c2
-call f2
+16t = m [ dt ]
+push 16t
+call print_vec
 17t = RET
-upd flag1 = 17t
-push c2
-push c1
-call f2
-18t = RET
-upd flag2 = 18t
+18t = dt + 1
+upd dt = 18t
+#if5
+#cond1 dt < 3 &&
+#cond2 1
+cond #cond1 && #cond2
+CheckCond
+start #if5
+CONTINUE
+end #if5
+start #else5
 #if6
-#cond1 flag1 == 0 ||
-19t = ! flag2
-#cond2 19t
-cond #cond1 || #cond2
+#cond1 1
+cond #cond1
 CheckCond
 start #if6
-upd flag = 0
+BREAK
 end #if6
 start #else6
-upd flag = 1
 end #else6
-ln-1
-str-1 =flag = 
-ins-1
-str-2 = : c1 = 
-ins-2
-str-3 =, c2 = 
-ins-3
-anw-1 = flag
-anw-2 = c1
-anw-3 = c2
-PRINTF
-20t = i + 1
-upd i = 20t
-21t = a + 5
-upd a = 21t
-22t = b + 5
-upd b = 22t
-#if7
-#cond1 i >= 10
-cond #cond1
-CheckCond
-start #if7
-CONTINUE
-end #if7
-#if8
-#cond1 i < 0
-cond #cond1
-CheckCond
-start #if8
-BREAK
-end #if8
+end #else5
 end #while
-end #if5
+end print_mat
+func int main
+start main
+push 19373311
+call print_id
+19t = RET
+var v d1 = 0
+#while
+#cond1 d1 != D ||
+#cond2 d1 < D
+cond #cond1 || #cond2
+CheckCond
+start #while
+var v d2 = 0
+#while
+20t = D - 1
+#cond1 d2 <= 20t
+cond #cond1
+CheckCond
+start #while
+upd va [ d1 ] [ d2 ] = getint ( )
+21t = d2 + 1
+upd d2 = 21t
+end #while
+22t = d1 + 1
+upd d1 = 22t
+end #while
+var v cd = 5
+#while
+#cond1 cd
+cond #cond1
+CheckCond
+start #while
+23t = cd - 1
+upd cd = 23t
+str-1 =123
+ln-1
+PRINTF
+end #while
+push vc
+call print_vec
+24t = RET
+var v ans
+25t = va [ 0 ]
+push 25t
+push vc
+call vdot
+26t = RET
+upd ans = 26t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+27t = va [ 1 ]
+push 27t
+28t = vb [ 0 ]
+push 28t
+call vdot
+29t = RET
+upd ans = 29t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+30t = va [ 2 ]
+push 30t
+31t = vb [ 0 ]
+push 31t
+call vdot
+32t = RET
+upd ans = 32t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+33t = va [ 0 ]
+push 33t
+34t = vb [ 2 ]
+push 34t
+call vdot
+35t = RET
+upd ans = 35t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+36t = va [ 0 ]
+push 36t
+37t = vb [ 1 ]
+push 37t
+call vdot
+38t = RET
+upd ans = 38t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+push vb
+call print_mat
+39t = RET
+call uselessfunc
+40t = RET
 ret 0
 end main

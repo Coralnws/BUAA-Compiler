@@ -8,7 +8,7 @@ import Save.*;
 public class ConstDecl extends SymbAnalyse {
     public ConstDecl(TreeNode parent){
         super("<ConstDecl>",parent);
-        System.out.println("start <ConstDecl>");
+        ////System.out.println("start <ConstDecl>");
 
         //1
         if(sym.content.equals("const")){
@@ -45,20 +45,20 @@ public class ConstDecl extends SymbAnalyse {
                     listIndex++;
 
                      */
-                    System.out.println("Printout <ConstDecl>");
+                    ////System.out.println("Printout <ConstDecl>");
                     parserList.add(this.node.node);
                 }
                 else{
-                    System.out.println("ConstDecl Error:Not ;");
+                    ////System.out.println("ConstDecl Error:Not ;");
                 }
             }
             else{
-                System.out.println("ConstDecl Error:Not int");
+                ////System.out.println("ConstDecl Error:Not int");
             }
 
         }
         else{
-            System.out.println("ConstDecl Error:Not const");
+            ////System.out.println("ConstDecl Error:Not const");
         }
     }
 }

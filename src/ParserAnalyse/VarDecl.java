@@ -7,7 +7,7 @@ import Save.parserWord;
 public class VarDecl extends SymbAnalyse{
     public VarDecl(TreeNode parent){
         super("<VarDecl>",parent);
-        System.out.println("start <VarDecl>");
+        ////System.out.println("start <VarDecl>");
         //1
         if(sym.content.equals("int")){
             parserList.add(sym);
@@ -36,7 +36,7 @@ public class VarDecl extends SymbAnalyse{
                 semicnNode.addNode(this.node);
                 nextSym();
 
-                System.out.println("Printout <VarDecl>");
+                ////System.out.println("Printout <VarDecl>");
                 parserList.add(this.node.node);
             }
         }

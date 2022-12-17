@@ -6,7 +6,7 @@ import Save.TreeNode;
 public class UnaryOp extends SymbAnalyse{
     public UnaryOp(TreeNode parent){
         super("<UnaryOp>",parent);
-        System.out.println("start <UnaryOp>");
+        ////System.out.println("start <UnaryOp>");
         //1
         if(sym.content.equals("+") || sym.content.equals("-") || sym.content.equals("!")){
             parserList.add(sym);
@@ -15,13 +15,13 @@ public class UnaryOp extends SymbAnalyse{
             nextSym();
         }
         else{
-            System.out.println("UnaryOp Error: Not Match.");
+            ////System.out.println("UnaryOp Error: Not Match.");
         }
 
         //printout <UnaryOp>
         //save.addParserWord(listIndex,this.node.node);
        // listIndex++;
-        System.out.println("Printout <UnaryOp>");
+        ////System.out.println("Printout <UnaryOp>");
         parserList.add(this.node.node);
     }
 }

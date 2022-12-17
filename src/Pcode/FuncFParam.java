@@ -13,7 +13,7 @@ public class FuncFParam extends PcodeGenerator{
         //v=var , a=array
         pcode.append("para");
         if(currentWord.typeCode.equals("<FuncFParam>")){
-            System.out.println("currentWord.typeCode.equals(\"<FuncFParam>\")");
+            //System.out.println("currentWord.typeCode.equals(\"<FuncFParam>\")");
             nextWord(); //int
             nextWord(); //<name>
             if(!wordAhead.content.equals("[")){
@@ -38,7 +38,7 @@ public class FuncFParam extends PcodeGenerator{
                 }
 
                 if(currentWord.typeCode.equals("LBRACK")){ //如果是二维
-                    System.out.println("是二维");
+                    //System.out.println("是二维");
                     pcode.append(" " + currentWord.content); // [
                     nextWord();  //<ConstExp>
 
@@ -49,10 +49,10 @@ public class FuncFParam extends PcodeGenerator{
 
                     if(FParamtestExp()){
                         //如果形参array里面有Exp
-                        System.out.println("形参array里面有Exp");
+                        //System.out.println("形参array里面有Exp");
                         ConstExp constExp = new ConstExp();
                         pcode.append(" " + varT);
-                        System.out.println("append varT:" + varT);
+                        //System.out.println("append varT:" + varT);
                     }else{
                         pcode.append(" " + currentWord.content); //var or num
                         nextWord(); // ]
@@ -60,7 +60,7 @@ public class FuncFParam extends PcodeGenerator{
 
                 }
                 //ignoreParser = false;
-                System.out.println("FuncFParam while loop : " + wordAhead.typeCode);
+                //System.out.println("FuncFParam while loop : " + wordAhead.typeCode);
             }
         }
         writer.write(String.valueOf(pcode));

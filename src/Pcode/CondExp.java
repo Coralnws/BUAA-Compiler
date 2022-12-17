@@ -9,7 +9,7 @@ import static Pcode.Exp.scanAhead;
 public class CondExp extends PcodeGenerator{
     static int condNum = 1;
     public CondExp() throws IOException {
-        System.out.println("Check now is start of CondExp : " + currentWord.typeCode);
+        //System.out.println("Check now is start of CondExp : " + currentWord.typeCode);
         pcode.append(getCondNum());
         ignoreParser = true;
         while(!currentWord.typeCode.equals("CondEnd") && !currentWord.typeCode.equals("AND") && !currentWord.typeCode.equals("OR")) {
@@ -30,7 +30,7 @@ public class CondExp extends PcodeGenerator{
             pcode.append(" "+currentWord.content);
         }
 
-        System.out.println("CondExp end ,check now is && || ): " + currentWord.typeCode);
+        //System.out.println("CondExp end ,check now is && || ): " + currentWord.typeCode);
         writer.write(String.valueOf(pcode));
         ignoreParser = false;
     }

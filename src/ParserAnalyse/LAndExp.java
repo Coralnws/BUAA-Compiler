@@ -7,14 +7,14 @@ import Save.TreeNode;
 public class LAndExp extends SymbAnalyse{
     public LAndExp(TreeNode parent){
         super("<LAndExp>",parent);
-        System.out.println("Start <LAndExp>");
+        ////System.out.println("Start <LAndExp>");
         //1
         EqExp eqExp = new EqExp(this.node);
 
         //printout <LAndExp>
         //save.addParserWord(listIndex,this.node.node);
         //listIndex++;
-        System.out.println("Printout <LAndExp>");
+        ////System.out.println("Printout <LAndExp>");
         parserList.add(this.node.node);
 
         //2
@@ -29,7 +29,7 @@ public class LAndExp extends SymbAnalyse{
             //printout <LAndExp>
             //save.addParserWord(listIndex,this.node.node);
             //listIndex++;
-            System.out.println("Printout <LAndExp>");
+            ////System.out.println("Printout <LAndExp>");
             parserList.add(this.node.node);
         }
     }

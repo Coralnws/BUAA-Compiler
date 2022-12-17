@@ -6,21 +6,21 @@ import Save.TreeNode;
 public class ConstInitVal extends SymbAnalyse{
     public ConstInitVal(TreeNode parent){
         super("<ConstInitVal>",parent);
-        System.out.println("start <ConstInitVal>");
-        //System.out.println("start ConstInitVal");
-        //System.out.println("here:" + sym.content);
+        ////System.out.println("start <ConstInitVal>");
+        //////System.out.println("start ConstInitVal");
+        //////System.out.println("here:" + sym.content);
         //1 - for array's value { }
         if(sym.content.equals("{")){ //数组
-            //System.out.println("here:" + sym.content);
+            //////System.out.println("here:" + sym.content);
             parserList.add(sym);
             TreeNode LBraceNode = new TreeNode(sym);
             LBraceNode.addNode(this.node);
             nextSym();
 
-            //System.out.println("here:" + sym.content);
+            //////System.out.println("here:" + sym.content);
             //2 - for sth kind of {{},{}}
             if(!sym.content.equals("}")){
-                System.out.println("not }");
+                ////System.out.println("not }");
                 ConstInitVal constInitVal = new ConstInitVal(this.node);
                 //2.2 - for comma in {} and btween {}
                 while(sym.content.equals(",")){
@@ -41,7 +41,7 @@ public class ConstInitVal extends SymbAnalyse{
                 RBraceNode.addNode(this.node);
                 nextSym();
 
-                System.out.println("Printout <ConstInitVal>");
+                ////System.out.println("Printout <ConstInitVal>");
                 parserList.add(this.node.node);
             }else{
                 //error
@@ -54,7 +54,7 @@ public class ConstInitVal extends SymbAnalyse{
             save.addParserWord(listIndex,this.node.node);
             listIndex++;
              */
-            System.out.println("Printout <ConstInitVal>");
+            ////System.out.println("Printout <ConstInitVal>");
             parserList.add(this.node.node);
         }
     }

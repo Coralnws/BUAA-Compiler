@@ -5,22 +5,22 @@ import java.io.IOException;
 public class Call extends PcodeGenerator{
     String func;
     public Call() throws IOException {
-        System.out.println("To Call.");
+        //System.out.println("To Call.");
         //currentWord是IDENFR
         ignoreParser = false;
         func = currentWord.content; //记录funcName
-        System.out.println("funcName: " + func);
+        //System.out.println("funcName: " + func);
         nextWord(); // (
         nextWord(); //<FuncRParams>
         if(currentWord.typeCode.equals("<FuncRParams>")){
-            System.out.println("有传参");
+            //System.out.println("有传参");
             nextWord();
             while(currentWord.typeCode.equals("<Exp>")){
-                System.out.println("一个新参数");
+                //System.out.println("一个新参数");
                 ignoreParser = true;
                 nextWord();
                 if(CalltestExp()){
-                    System.out.println("参数是Exp");
+                    //System.out.println("参数是Exp");
                     Exp exp = new Exp();
                     pcode.append(" " + varT);
                 }else{

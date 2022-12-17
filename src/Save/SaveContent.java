@@ -56,7 +56,7 @@ public class SaveContent { //记录wordlist
             }
             writer.write(content);
             writer.flush();
-            //System.out.println(word.typeCode + " " + word.content);
+            //////System.out.println(word.typeCode + " " + word.content);
         }
     }
 
@@ -82,7 +82,7 @@ public class SaveContent { //记录wordlist
             //PcodeGenerator.treeList.add(word);
             writer.write(content);
             writer.flush();
-            //System.out.println(word.typeCode + " " + word.content);
+            //////System.out.println(word.typeCode + " " + word.content);
         }
     }
 

@@ -15,7 +15,7 @@ Stmt → LVal '=' Exp ';' (Done)
 public class Stmt extends PcodeGenerator{
     int elseNum;
     public Stmt() throws IOException {
-        System.out.println("Pcode Stmt,check now is <Stmt>: " + currentWord.typeCode);
+        //System.out.println("Pcode Stmt,check now is <Stmt>: " + currentWord.typeCode);
         nextWord();
 
         if(currentWord.typeCode.equals("<LVal>")){  //updVar or getint
@@ -33,7 +33,7 @@ public class Stmt extends PcodeGenerator{
                 //prevWord();
                 //prevWord();
                 nextWord();
-                System.out.println("Debug : " + currentWord.typeCode);
+                //System.out.println("Debug : " + currentWord.typeCode);
                 UpdVar updVar = new UpdVar();
             }else if(wordAhead.content.equals("getint")){
                 index -= 2;
@@ -65,7 +65,7 @@ public class Stmt extends PcodeGenerator{
             nextWord();
         }
         else if(currentWord.typeCode.equals("SEMICN")){
-            System.out.println("Stmt is ; ,skip");
+            //System.out.println("Stmt is ; ,skip");
             nextWord();
         }
         else if(currentWord.typeCode.equals("IFTK")){
@@ -142,6 +142,6 @@ public class Stmt extends PcodeGenerator{
             Block block = new Block("#block");
         }
 
-        System.out.println("End of stmt ,now is: "+ currentWord.typeCode);
+        //System.out.println("End of stmt ,now is: "+ currentWord.typeCode);
     }
 }
