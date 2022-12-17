@@ -1,262 +1,268 @@
-const v Mod = 10007
-const a dx [ 2 ] = { 1 , 0 }
-const a dy [ 2 ] = { 0 , 1 }
-const a Map [ 5 ] [ 5 ] = { { 0 , 1 , 0 , 1 , 0 } , { 0 , 1 , 1 , 1 , 1 } , { 1 , 1 , 1 , 1 , 1 } , { 1 , 0 , 1 , 0 , 1 } , { 1 , 1 , 1 , 0 , 1 } }
-var a strP [ 2 ]
-var v ans
-var v base
-var a val [ 5 ] [ 5 ]
-func int CalcMod
-para v x
-start CalcMod
-1t = x - x / Mod * Mod
-ret 1t
-end CalcMod
-func int Check
-para v y
-start Check
+1t = - 1
+2t = - 1
+var a next [ 4 ] [ 2 ] = { { 1 , 0 } , { 0 , 1t } , { 2t , 0 } , { 0 , 1 } }
+const v len = 3
+3t = - 1
+4t = - 1
+const a next1 [ 4 ] [ 2 ] = { { 1 , 0 } , { 0 , 3t } , { 4t , 0 } , { 0 , 1 } }
+const a xxx [ 2 ] = { 1 , 2 }
+var v ans = 0
+var a arr [ 2 ] = { 3 , 1 }
+func int getDif3N
+para v min
+para v max
+start getDif3N
+var v i = 1
+var v j = 1
+var v k = 1
+var v cnt = 0
+var a arr1 [ 2 ] = { 1 , 2 }
+#while
+#cond1 i <= 3
+cond #cond1
+CheckCond
+start #while
+upd j = 1
+#while
+#cond1 j <= 3
+cond #cond1
+CheckCond
+start #while
+upd k = 1
+#while
+#cond1 k <= 3
+cond #cond1
+CheckCond
+start #while
 #if1
-#cond1 y >= 0 &&
-#cond2 y < 5
-cond #cond1 && #cond2
+#cond1 i != j &&
+#cond2 i != k &&
+#cond3 j != k
+cond #cond1 && #cond2 && #cond3
 CheckCond
 start #if1
-ret 1
+5t = cnt + 1
+upd cnt = 5t
 end #if1
-ret 0
-end Check
-func int check
-para v x
-para v y
-start check
+6t = k + 1
+upd k = 6t
+end #while
+7t = j + 1
+upd j = 7t
+end #while
+8t = i + 1
+upd i = 8t
+end #while
+ret cnt
+end getDif3N
+func int judgeB
+para v a
+para v b
+start judgeB
 #if2
-#cond1 0 > x ||
-#cond2 5 <= x ||
-push y
-call Check
-2t = RET
-3t = ! 2t
-#cond3 3t
-cond #cond1 || #cond2 || #cond3
+#cond1 a <= b
+cond #cond1
 CheckCond
 start #if2
-ret 0
-end #if2
 #if3
-4t = Map [ x ] [ y ]
-#cond1 4t
+#cond1 a < b
 cond #cond1
 CheckCond
 start #if3
-ret 1
+9t = a - b
+ret 9t
 end #if3
 start #else3
-ret 0
-end #else3
-ret 0
-end check
-func void dfs
-para v x
-para v y
-para v base
-para a height [ ] [ 5 ]
-start dfs
 #if4
-5t = val [ x ] [ y ]
-#cond1 5t != 0
+#cond1 a == b
 cond #cond1
 CheckCond
 start #if4
-ret
+ret 0
 end #if4
-6t = height [ x ] [ y ]
-7t = base * 6t % Mod + Mod
-push 7t
-call CalcMod
-8t = RET
-upd val [ x ] [ y ] = 8t
+end #else3
+end #if2
+start #else2
 #if5
-9t = val [ x ] [ y ]
-#cond1 9t == 0
+#cond1 a >= b
 cond #cond1
 CheckCond
 start #if5
-upd val [ x ] [ y ] = 1
-end #if5
-var v t1 = 0
-var v t2 = 0
 #if6
-10t = dx [ 0 ]
-11t = x + 10t
-push 11t
-12t = dy [ 0 ]
-13t = y + 12t
-push 13t
-call check
-14t = RET
-#cond1 14t
+#cond1 a > b
 cond #cond1
 CheckCond
 start #if6
-15t = dx [ 0 ]
-16t = x + 15t
-push 16t
-17t = dy [ 0 ]
-18t = y + 17t
-push 18t
-19t = val [ x ] [ y ]
-push 19t
-push height
-call dfs
-20t = RET
-upd t1 = 1
+10t = a - b
+ret 10t
 end #if6
+start #else6
 #if7
-21t = dx [ 1 ]
-22t = x + 21t
-push 22t
-23t = dy [ 1 ]
-24t = y + 23t
-push 24t
-call check
-25t = RET
-#cond1 25t
+#cond1 a == b
 cond #cond1
 CheckCond
 start #if7
-26t = dx [ 1 ]
-27t = x + 26t
-push 27t
-28t = dy [ 1 ]
-29t = y + 28t
-push 29t
-30t = val [ x ] [ y ]
-push 30t
-push height
-call dfs
-31t = RET
-upd t2 = 1
+ret 0
 end #if7
-#if8
-#cond1 t1 != 0 ||
-#cond2 t2 != 0
-cond #cond1 || #cond2
-CheckCond
-start #if8
-ret
-end #if8
-32t = - 1
-upd val [ x ] [ y ] = 32t
-end dfs
-func int main
-start main
-str-1 =19373459
-ln-1
-PRINTF
+end #else6
+end #if5
+end #else2
+ret 0
+end judgeB
+func void printArr
+para a a [ ]
+start printArr
 var v i = 0
-var v j
-var a height [ 5 ] [ 5 ]
-#while
-#cond1 i < 5
-cond #cond1
-CheckCond
-start #while
-upd j = 0
-#while
-#cond1 j < 5
-cond #cond1
-CheckCond
-start #while
-upd height [ i ] [ j ] = getint ( )
-33t = j + 1
-upd j = 33t
-end #while
-34t = i + 1
-upd i = 34t
-#if9
-#cond1 i == 5
-cond #cond1
-CheckCond
-start #if9
-BREAK
-end #if9
-start #else9
-CONTINUE
-end #else9
-end #while
-upd i = 0
 #while
 #cond1 i < 2
 cond #cond1
 CheckCond
 start #while
-upd strP [ i ] = getint ( )
-35t = i + 1
-upd i = 35t
+ins-1
+11t = a [ i ]
+anw-1 = 11t
+PRINTF
+12t = i + 1
+upd i = 12t
 end #while
-36t = GETINT
-upd base = 36t
-37t = strP [ 0 ]
-push 37t
-38t = strP [ 1 ]
-push 38t
-push base
-push height
-call dfs
-39t = RET
-str-1 =val20: 
-ins-1
-str-2 =, val21:
-ins-2
-str-3 =, val22:
-ins-3
-str-4 =, val23:
-ins-4
-str-5 =, val24:
-ins-5
 ln-1
-40t = val [ 2 ] [ 0 ]
-anw-1 = 40t
-41t = val [ 2 ] [ 1 ]
-anw-2 = 41t
-42t = val [ 2 ] [ 2 ]
-anw-3 = 42t
-43t = val [ 2 ] [ 3 ]
-anw-4 = 43t
-44t = val [ 2 ] [ 4 ]
-anw-5 = 44t
 PRINTF
-str-1 =val30: 
+end printArr
+func void printArr2
+para a a [ ] [ 2 ]
+start printArr2
+var v i = 0
+#while
+#cond1 i < 4
+cond #cond1
+CheckCond
+start #while
+13t = a [ i ]
+push 13t
+call printArr
+14t = RET
+15t = i + 1
+upd i = 15t
+end #while
+ret
+end printArr2
+func void printHello
+start printHello
+var v name
+16t = GETINT
+upd name = 16t
+str-1 =Hello 
 ins-1
-str-2 =, val32: 
-ins-2
-str-3 =, val34: 
-ins-3
 ln-1
-45t = val [ 3 ] [ 0 ]
-anw-1 = 45t
-46t = val [ 3 ] [ 2 ]
-anw-2 = 46t
-47t = val [ 3 ] [ 4 ]
-anw-3 = 47t
+anw-1 = name
 PRINTF
-str-1 =val40: 
+end printHello
+func int add
+para v n
+start add
+var v ans
+17t = n + 3
+upd ans = 17t
+ret ans
+end add
+func void opp
+start opp
+end opp
+func int main
+start main
+str-1 =19373573
+ln-1
+PRINTF
+var v ans
+start #block
+end #block
+start #block
+upd ans = 3
+end #block
+var v i = 0
+var v y = 1
+#if8
+18t = ! y
+#cond1 18t
+cond #cond1
+CheckCond
+start #if8
+upd y = 0
+end #if8
+19t = + 1
+upd y = 19t
+20t = - 1
+upd y = 20t
+var v xx
+21t = next [ 0 ] [ 0 ]
+22t = ( 16 + 2 ) / ( i + 1 ) - 14 + 21t
+upd xx = 22t
+#while
+#cond1 i <= 5
+cond #cond1
+CheckCond
+start #while
+#if9
+#cond1 i == 3
+cond #cond1
+CheckCond
+start #if9
+23t = i + 1
+upd i = 23t
+CONTINUE
+end #if9
+#if10
+#cond1 i == 5
+cond #cond1
+CheckCond
+start #if10
+BREAK
+end #if10
+start #else10
+var v j = i
+end #else10
+24t = i + 1
+upd i = 24t
+end #while
+25t = GETINT
+upd ans = 25t
 ins-1
-str-2 =, val42:
-ins-2
-str-3 =, val43:
-ins-3
-str-4 =, val44:
-ins-4
 ln-1
-48t = val [ 4 ] [ 0 ]
-anw-1 = 48t
-49t = val [ 4 ] [ 2 ]
-anw-2 = 49t
-50t = val [ 4 ] [ 3 ]
-anw-3 = 50t
-51t = val [ 4 ] [ 4 ]
-anw-4 = 51t
+push ans
+call add
+26t = RET
+anw-1 = 26t
 PRINTF
+push 1
+push 999
+call getDif3N
+27t = RET
+upd ans = 27t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+push 2
+push 3
+call judgeB
+28t = RET
+upd ans = 28t
+str-1 =judgeB 2,3 = 
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+call printHello
+29t = RET
+push next
+call printArr2
+30t = RET
+31t = next [ 0 ]
+push 31t
+call printArr
+32t = RET
+push arr
+call printArr
+33t = RET
 ret 0
 end main

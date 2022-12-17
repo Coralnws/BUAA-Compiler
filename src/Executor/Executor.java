@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.nio.file.FileSystemNotFoundException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -107,6 +108,7 @@ public class Executor {
                     Arr arr = newArr(sym[2],1);
                     System.out.println("New Arr");
                     if((sym.length> 6) && sym[6].equals("[")){  //如果是二维
+                        arr.dimensionNum=2;
                         arr.addDimension(senseValue(sym[4]));
                         System.out.println("Two Dimension :" + sym[7]);
                         arr.addDimension(senseValue(sym[7]));
@@ -114,6 +116,7 @@ public class Executor {
                         index = 10;
                     }
                     else{  //一维
+                        arr.dimensionNum=1;
                         arr.addDimension(0);
                         arr.addDimension(senseValue(sym[4]));
                         arrDim = 1;
@@ -182,12 +185,14 @@ public class Executor {
                     Arr arr = newArr(sym[2],0);
 
                     if((sym.length> 6) && sym[6].equals("[")){  //如果是二维
+                        arr.dimensionNum = 2;
                         arr.addDimension(senseValue(sym[4]));
                         System.out.println("Two Dimension :" + sym[7]);
                         arr.addDimension(senseValue(sym[7]));
                         index = 9;
                     }
                     else{  //一维
+                        arr.dimensionNum = 1;
                         arr.addDimension(0);
                         arr.addDimension(senseValue(sym[4]));
                         index = 6;
@@ -341,7 +346,14 @@ public class Executor {
                     if(activeRunner == null && floor != 0){
                         continue;
                     }
-                    activeRunner.ifList.pop();
+                    String str = Writer.readPcode(pointer);
+                    String[] str1 = str.split(" ");
+                    if(str1[0].equals("start") && activeRunner.currentIfEnd(sym[1])){
+
+                    }else{
+                        activeRunner.ifList.pop();
+                    }
+
                 }else if(sym[1].equals("#while")){
                     if(activeRunner == null && floor != 0){
                         continue;
@@ -418,16 +430,21 @@ public class Executor {
                     }
 
                     Symbol arr = getArr(sym[2]);
-                    /*
+/*
                     if(arr instanceof paraArr){
                         arr = ((paraArr) arr).content;
                     }
-                     */
-                    if(arr.dimension.get(0) != 0 && dimension == 1){
-                        System.out.println("第一维度传参");
+
+
+ */
+                    if(arr.dimensionNum != dimension){
+                        System.out.println("维度不一样");
                         System.out.println("检查下一句是传参,跳过这句: " + Writer.readPcode(pointer));
                         pointer++;
                         //这里设定是传第几个维度过去
+                        if(arr instanceof paraArr){
+                            arr = ((paraArr) arr).content;
+                        }
                         paraArr arrAsPara = new paraArr(arr.name);  //这边先放一样名字
                         arrAsPara.skipLevel=true;
                         arrAsPara.level=senseValue(sym[4]);
@@ -660,16 +677,29 @@ public class Executor {
                                 readPcode();
                                 System.out.println("skipping while, pcode : "+ pcode);
                                 sym = pcode.split(" ");
-                                if(pcode.equals("start #while")){
-                                    activeRunner.getWhileNum();
+                                if(sym[0].equals("start")){//pcode.equals("start #while")
+                                    if(sym[1].equals("#while")){
+                                        activeRunner.getWhileNum();
+
+                                    }
+                                    /*else if(isIf(sym[1])){
+                                        activeRunner.ifList.push(sym[1]);
+                                    }
+                                     */
                                     //activeRunner.whileStartList.put(activeRunner.getWhileNum(), pointer);
                                 }
-                                if(pcode.equals("end #while")){
-                                    if(!activeRunner.getCurrentWhile().equals(currentWhile)){
-                                        //activeRunner.whileStartList.remove(activeRunner.getCurrentWhile());
-                                        activeRunner.endWhile();
-                                    }else{
-                                        break;
+                                if(sym[0].equals("end")){//pcode.equals("end #while")
+                                    if(sym[1].equals("#while")){
+                                        System.out.println("读到while");
+                                        if(!activeRunner.getCurrentWhile().equals(currentWhile)){
+                                            //activeRunner.whileStartList.remove(activeRunner.getCurrentWhile());
+                                            activeRunner.endWhile();
+                                        }else{
+                                            break;
+                                        }
+                                    }
+                                    else if(activeRunner.ifList.size()>0 && sym[1].equals(activeRunner.ifList.peek())){
+                                        activeRunner.ifList.pop();
                                     }
                                 }
                             }
@@ -717,17 +747,29 @@ public class Executor {
                             readPcode();
                             System.out.println("skipping while, pcode : "+ pcode);
                             sym = pcode.split(" ");
-                            if(pcode.equals("start #while")){
-                                activeRunner.getWhileNum();
+                            if(sym[0].equals("start")){//pcode.equals("start #while")
+                                if(sym[1].equals("#while")){
+                                    activeRunner.getWhileNum();
+                                }
+                                /*else if(isIf(sym[1])){
+                                    activeRunner.ifList.push(sym[1]);
+                                }
+                                 */
                                 //activeRunner.whileStartList.put(activeRunner.getWhileNum(), pointer);
                             }
-                            if(pcode.equals("end #while")){
-                                if(!activeRunner.getCurrentWhile().equals(currentWhile)){
-                                    //activeRunner.whileStartList.remove(activeRunner.getCurrentWhile());
-                                    activeRunner.endWhile();
-                                }else{
-                                    break;
-                                    //activeRunner.whileStartList.remove(activeRunner.getCurrentWhile());
+                            if(sym[0].equals("end")){//pcode.equals("end #while")
+                                if(activeRunner.ifList.size()>0)
+                                    System.out.println("检查当前if:"+activeRunner.ifList.peek());
+                                if(sym[1].equals("#while")) {
+                                    if (!activeRunner.getCurrentWhile().equals(currentWhile)) {
+                                        //activeRunner.whileStartList.remove(activeRunner.getCurrentWhile());
+                                        activeRunner.endWhile();
+                                    } else {
+                                        break;
+                                    }
+                                }
+                                else if(activeRunner.ifList.size()>0 && sym[1].equals(activeRunner.ifList.peek())){
+                                    activeRunner.ifList.pop();
                                 }
                             }
                         }
@@ -1214,10 +1256,12 @@ public class Executor {
             para = new paraArr(name);
             if(!arr[4].equals("]")){//有一维数字
                 if(arr.length > 6){
+                    para.dimensionNum = 2;
                     ((paraArr) para).addDimension(senseValue(arr[4]));
                     ((paraArr) para).addDimension(senseValue(arr[7]));
                 }
                 else{
+                    para.dimensionNum = 1;
                     ((paraArr) para).addDimension(0);
                     ((paraArr) para).addDimension(senseValue(arr[4]));
                 }
@@ -1226,10 +1270,12 @@ public class Executor {
                 //((paraArr) para).addDimension(0);
                 System.out.println("ARR LENGTH: " + arr.length);
                 if(arr.length > 5){
+                    para.dimensionNum = 2;
                     ((paraArr) para).addDimension(0);
                     ((paraArr) para).addDimension(senseValue(arr[6]));
                 }
                 else{
+                    para.dimensionNum = 1;
                     ((paraArr) para).addDimension(0);
                     ((paraArr) para).addDimension(0);
                 }
@@ -1653,7 +1699,9 @@ class Runner{
 
     public boolean currentIfEnd(String str) {
         if (Executor.isIf(str)) {
+            System.out.println("currentIfEnd,检查读到的if:"+str);
             if (str.equals(ifList.peek())) {
+                System.out.println("是当前的if,peek:"+ifList.peek());
                 return true;
             } else {
                 return false;

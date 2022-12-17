@@ -1,262 +1,188 @@
-const v Mod = 10007
-const a dx [ 2 ] = { 1 , 0 }
-const a dy [ 2 ] = { 0 , 1 }
-const a Map [ 5 ] [ 5 ] = { { 0 , 1 , 0 , 1 , 0 } , { 0 , 1 , 1 , 1 , 1 } , { 1 , 1 , 1 , 1 , 1 } , { 1 , 0 , 1 , 0 , 1 } , { 1 , 1 , 1 , 0 , 1 } }
-var a strP [ 2 ]
-var v ans
-var v base
-var a val [ 5 ] [ 5 ]
-func int CalcMod
-para v x
-start CalcMod
-1t = x - x / Mod * Mod
-ret 1t
-end CalcMod
-func int Check
-para v y
-start Check
+const v c_common = 10
+const a c_array [ 3 ] = { 1 , 2 , 3 }
+const a c_matrix [ 3 ] [ 3 ] = { { 1 , 2 , 3 } , { 1 , 2 , 3 } , { 1 , 2 , 3 } }
+var v v_common
+var a v_array [ 3 ]
+var a v_matrix [ 3 ] [ 3 ]
+var v v_commonInit = 10
+var a v_arrayInit [ 3 ] = { 1 , 2 , 3 }
+var a v_matrixInit [ 3 ] [ 3 ] = { { 1 , 2 , 3 } , { 1 , 2 , 3 } , { 1 , 2 , 3 } }
+func void print
+para v output
+start print
+ln-1
+str-1 =f2() flag : 
+ins-1
+anw-1 = output
+PRINTF
+ret
+end print
+func int f0
+start f0
+ret 1
+end f0
+func int f1
+para a a [ ]
+para a b [ ] [ 3 ]
+para a c [ ]
+start f1
+1t = a [ 0 ]
+2t = b [ 0 ] [ 0 ]
+3t = c [ 0 ]
+4t = 1t + 2t + 3t
+ret 4t
+end f1
+func int f2
+para v a
+para v b
+start f2
+var v c
+var v flag
+var a a1 [ 2 ] = { 1 , 2 }
+var a a2 [ 3 ] [ 3 ] = { { 1 , 2 , 3 } , { 1 , 2 , 3 } , { 1 , 2 , 3 } }
+push a1
+push a2
+5t = a2 [ 0 ]
+push 5t
+call f1
+6t = RET
+call f0
+7t = RET
+8t = - ( a * b ) + a / b + ( a % b ) - 1 + 6t - + 7t
+upd c = 8t
 #if1
-#cond1 y >= 0 &&
-#cond2 y < 5
+#cond1 a > 10 &&
+#cond2 b > 10
 cond #cond1 && #cond2
 CheckCond
 start #if1
-ret 1
+push 1
+call print
+9t = RET
+upd flag = 0
 end #if1
-ret 0
-end Check
-func int check
-para v x
-para v y
-start check
 #if2
-#cond1 0 > x ||
-#cond2 5 <= x ||
-push y
-call Check
-2t = RET
-3t = ! 2t
-#cond3 3t
-cond #cond1 || #cond2 || #cond3
+#cond1 a > 10 &&
+#cond2 b <= 10
+cond #cond1 && #cond2
 CheckCond
 start #if2
-ret 0
+push 2
+call print
+10t = RET
+upd flag = 0
 end #if2
 #if3
-4t = Map [ x ] [ y ]
-#cond1 4t
-cond #cond1
+#cond1 a <= 10 &&
+#cond2 b <= 10
+cond #cond1 && #cond2
 CheckCond
 start #if3
-ret 1
+push 3
+call print
+11t = RET
+upd flag = 1
 end #if3
-start #else3
-ret 0
-end #else3
-ret 0
-end check
-func void dfs
-para v x
-para v y
-para v base
-para a height [ ] [ 5 ]
-start dfs
 #if4
-5t = val [ x ] [ y ]
-#cond1 5t != 0
-cond #cond1
+#cond1 a <= 10 &&
+#cond2 b > 10
+cond #cond1 && #cond2
 CheckCond
 start #if4
-ret
+push 4
+call print
+12t = RET
+upd flag = 1
 end #if4
-6t = height [ x ] [ y ]
-7t = base * 6t % Mod + Mod
-push 7t
-call CalcMod
-8t = RET
-upd val [ x ] [ y ] = 8t
+ret flag
+end f2
+func int main
+start main
+str-1 =19373528 
+PRINTF
+start #block
+end #block
+var v a
+var v b
+var v flag1
+var v flag2
+var v flag
+var v i
+13t = GETINT
+upd a = 13t
+14t = GETINT
+upd b = 14t
+upd i = 0
 #if5
-9t = val [ x ] [ y ]
-#cond1 9t == 0
+#cond1 a != b
 cond #cond1
 CheckCond
 start #if5
-upd val [ x ] [ y ] = 1
-end #if5
-var v t1 = 0
-var v t2 = 0
-#if6
-10t = dx [ 0 ]
-11t = x + 10t
-push 11t
-12t = dy [ 0 ]
-13t = y + 12t
-push 13t
-call check
-14t = RET
-#cond1 14t
+#while
+#cond1 i < 3
 cond #cond1
 CheckCond
+start #while
+var v c1
+var v c2
+15t = a + b
+upd c1 = 15t
+16t = a - b
+upd c2 = 16t
+push c1
+push c2
+call f2
+17t = RET
+upd flag1 = 17t
+push c2
+push c1
+call f2
+18t = RET
+upd flag2 = 18t
+#if6
+#cond1 flag1 == 0 ||
+19t = ! flag2
+#cond2 19t
+cond #cond1 || #cond2
+CheckCond
 start #if6
-15t = dx [ 0 ]
-16t = x + 15t
-push 16t
-17t = dy [ 0 ]
-18t = y + 17t
-push 18t
-19t = val [ x ] [ y ]
-push 19t
-push height
-call dfs
-20t = RET
-upd t1 = 1
+upd flag = 0
 end #if6
+start #else6
+upd flag = 1
+end #else6
+ln-1
+str-1 =flag = 
+ins-1
+str-2 = : c1 = 
+ins-2
+str-3 =, c2 = 
+ins-3
+anw-1 = flag
+anw-2 = c1
+anw-3 = c2
+PRINTF
+20t = i + 1
+upd i = 20t
+21t = a + 5
+upd a = 21t
+22t = b + 5
+upd b = 22t
 #if7
-21t = dx [ 1 ]
-22t = x + 21t
-push 22t
-23t = dy [ 1 ]
-24t = y + 23t
-push 24t
-call check
-25t = RET
-#cond1 25t
+#cond1 i >= 10
 cond #cond1
 CheckCond
 start #if7
-26t = dx [ 1 ]
-27t = x + 26t
-push 27t
-28t = dy [ 1 ]
-29t = y + 28t
-push 29t
-30t = val [ x ] [ y ]
-push 30t
-push height
-call dfs
-31t = RET
-upd t2 = 1
+CONTINUE
 end #if7
 #if8
-#cond1 t1 != 0 ||
-#cond2 t2 != 0
-cond #cond1 || #cond2
+#cond1 i < 0
+cond #cond1
 CheckCond
 start #if8
-ret
-end #if8
-32t = - 1
-upd val [ x ] [ y ] = 32t
-end dfs
-func int main
-start main
-str-1 =19373459
-ln-1
-PRINTF
-var v i = 0
-var v j
-var a height [ 5 ] [ 5 ]
-#while
-#cond1 i < 5
-cond #cond1
-CheckCond
-start #while
-upd j = 0
-#while
-#cond1 j < 5
-cond #cond1
-CheckCond
-start #while
-upd height [ i ] [ j ] = getint ( )
-33t = j + 1
-upd j = 33t
-end #while
-34t = i + 1
-upd i = 34t
-#if9
-#cond1 i == 5
-cond #cond1
-CheckCond
-start #if9
 BREAK
-end #if9
-start #else9
-CONTINUE
-end #else9
+end #if8
 end #while
-upd i = 0
-#while
-#cond1 i < 2
-cond #cond1
-CheckCond
-start #while
-upd strP [ i ] = getint ( )
-35t = i + 1
-upd i = 35t
-end #while
-36t = GETINT
-upd base = 36t
-37t = strP [ 0 ]
-push 37t
-38t = strP [ 1 ]
-push 38t
-push base
-push height
-call dfs
-39t = RET
-str-1 =val20: 
-ins-1
-str-2 =, val21:
-ins-2
-str-3 =, val22:
-ins-3
-str-4 =, val23:
-ins-4
-str-5 =, val24:
-ins-5
-ln-1
-40t = val [ 2 ] [ 0 ]
-anw-1 = 40t
-41t = val [ 2 ] [ 1 ]
-anw-2 = 41t
-42t = val [ 2 ] [ 2 ]
-anw-3 = 42t
-43t = val [ 2 ] [ 3 ]
-anw-4 = 43t
-44t = val [ 2 ] [ 4 ]
-anw-5 = 44t
-PRINTF
-str-1 =val30: 
-ins-1
-str-2 =, val32: 
-ins-2
-str-3 =, val34: 
-ins-3
-ln-1
-45t = val [ 3 ] [ 0 ]
-anw-1 = 45t
-46t = val [ 3 ] [ 2 ]
-anw-2 = 46t
-47t = val [ 3 ] [ 4 ]
-anw-3 = 47t
-PRINTF
-str-1 =val40: 
-ins-1
-str-2 =, val42:
-ins-2
-str-3 =, val43:
-ins-3
-str-4 =, val44:
-ins-4
-ln-1
-48t = val [ 4 ] [ 0 ]
-anw-1 = 48t
-49t = val [ 4 ] [ 2 ]
-anw-2 = 49t
-50t = val [ 4 ] [ 3 ]
-anw-3 = 50t
-51t = val [ 4 ] [ 4 ]
-anw-4 = 51t
-PRINTF
+end #if5
 ret 0
 end main
