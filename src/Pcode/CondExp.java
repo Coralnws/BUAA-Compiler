@@ -35,12 +35,7 @@ public class CondExp extends PcodeGenerator{
         }
         if(currentWord.typeCode.equals("AND") || currentWord.typeCode.equals("OR")){
             pcode.append(" "+currentWord.content);
-            System.out.println("lastOp 赋值");
-            lastOp = currentWord;
-        }else{
-            lastOp = null;
         }
-
         //System.out.println("CondExp end ,check now is && || ): " + currentWord.typeCode);
         writer.write(String.valueOf(pcode));
         ignoreParser = false;

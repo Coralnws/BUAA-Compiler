@@ -579,9 +579,8 @@ public class Executor {
                         System.out.println("result = false");
                         resultList.add(false);
                     }else{ resultList.add(true);
-                        System.out.println("result = true");}
-
-
+                        System.out.println("result = true");
+                    }
                 }
 //------------------------------以上是计算一个cond---------------------------
                 if(resultList.contains(false)){
@@ -596,6 +595,7 @@ public class Executor {
                             System.out.println("skip到CheckCond");
                             activeRunner.condList.push(false);
                             currentRes =false;
+                            pointer--;
                         }else{
                             System.out.println("skip到||");
                         }

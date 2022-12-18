@@ -1,48 +1,296 @@
-func int print0
-start print0
-str-1 =print0
+const a eye [ 3 ] [ 3 ] = { { 1 , 0 , 0 } , { 0 , 1 , 0 } , { 0 , 0 , 1 } }
+const v D = 3
+const a base [ 3 ] = { 1 , 0 , 0 }
+var a va [ 3 ] [ 3 ]
+var a vb [ 3 ] [ 3 ] = { { 1 , 2 , 3 } , { 4 , 5 , 6 } , { 7 , 8 , 9 } }
+var a vc [ 3 ] = { 4 , 5 , 6 }
+var a vd [ 3 ]
+var v badname
+func int vdot
+para a x [ ]
+para a y [ ]
+start vdot
+var v d = 0
+var v sum = 0
+var v useless
+#while
+#cond1 1 ||
+#cond2 0
+cond #cond1 || #cond2
+CheckCond
+start #while
+1t = x [ d ]
+2t = y [ d ]
+3t = sum + 1t * 2t / 1
+upd sum = 3t
+str-1 =sum=
+ins-1
 ln-1
+anw-1 = sum
 PRINTF
-ret 0
-end print0
-func int print1
-start print1
-str-1 =print1
-ln-1
-PRINTF
-ret 1
-end print1
-func int main
-start main
+4t = sum % 2 - 3
+upd useless = 4t
+5t = d + 1
+upd d = 5t
 #if1
-#cond1 1 &&
-#cond2 0 ||
-#cond3 1 &&
-call print0
-1t = RET
-#cond4 1t
-cond #cond1 && #cond2 || #cond3 && #cond4
+#cond1 d == D ||
+#cond2 0 &&
+6t = - sum < 7
+7t = ! 6t
+8t = 7t 7 + 1
+#cond3 8t ||
+9t = + sum
+10t = 8 - 1
+#cond4 9t > 10t
+cond #cond1 || #cond2 && #cond3 || #cond4
 CheckCond
 start #if1
-str-1 =break
-ln-1
-PRINTF
+BREAK
 end #if1
+start #else1
 #if2
-#cond1 0 &&
-#cond2 0 &&
-2t = - 36
-3t = ! 2t
-4t = 7 + 1
-#cond3 3t < 4t ||
-5t = + 36
-6t = 8 - 1
-#cond4 5t > 6t
-cond #cond1 && #cond2 && #cond3 || #cond4
+#cond1 1
+cond #cond1
 CheckCond
 start #if2
-str-1 =break
+CONTINUE
+end #if2
+start #else2
+end #else2
+end #else1
+end #while
+ret sum
+end vdot
+func void print_id
+para v id
+start print_id
+ins-1
+ln-1
+anw-1 = id
+PRINTF
+#if3
+#cond1 0 &&
+#cond2 4 > 5
+cond #cond1 && #cond2
+CheckCond
+start #if3
+ret
+end #if3
+end print_id
+func void print_vec
+para a x [ ]
+start print_vec
+ins-1
+str-1 = 
+ins-2
+str-2 = 
+ins-3
+ln-1
+11t = x [ 0 ]
+anw-1 = 11t
+12t = x [ 1 ]
+anw-2 = 12t
+13t = x [ 2 ]
+anw-3 = 13t
+PRINTF
+end print_vec
+func void uselessfunc
+start uselessfunc
+var v i = 0
+14t = i + 2 - 5 % 2
+upd i = 14t
+#if4
+#cond1 i >= 3
+cond #cond1
+CheckCond
+start #if4
+end #if4
+end uselessfunc
+func void print_mat
+para a m [ ] [ 3 ]
+start print_mat
+var v dt = 0
+#while
+15t = ! 0
+#cond1 15t
+cond #cond1
+CheckCond
+start #while
+16t = m [ dt ]
+push 16t
+call print_vec
+17t = RET
+18t = dt + 1
+upd dt = 18t
+#if5
+#cond1 dt < 3 &&
+#cond2 1
+cond #cond1 && #cond2
+CheckCond
+start #if5
+CONTINUE
+end #if5
+start #else5
+#if6
+#cond1 1
+cond #cond1
+CheckCond
+start #if6
+BREAK
+end #if6
+start #else6
+end #else6
+end #else5
+end #while
+end print_mat
+func int main
+start main
+push 19373311
+call print_id
+19t = RET
+var v d1 = 0
+#while
+#cond1 d1 != D ||
+#cond2 d1 < D
+cond #cond1 || #cond2
+CheckCond
+start #while
+var v d2 = 0
+#while
+20t = D - 1
+#cond1 d2 <= 20t
+cond #cond1
+CheckCond
+start #while
+upd va [ d1 ] [ d2 ] = getint ( )
+21t = d2 + 1
+upd d2 = 21t
+end #while
+22t = d1 + 1
+upd d1 = 22t
+end #while
+var v cd = 5
+#while
+#cond1 cd
+cond #cond1
+CheckCond
+start #while
+23t = cd - 1
+upd cd = 23t
+str-1 =123
 ln-1
 PRINTF
-end #if2
+end #while
+push vc
+call print_vec
+24t = RET
+var v ans
+str-1 =-------------------------
+ln-1
+PRINTF
+ins-1
+str-1 = 
+25t = va [ 0 ] [ 0 ]
+anw-1 = 25t
+PRINTF
+ins-1
+str-1 = 
+26t = va [ 0 ] [ 1 ]
+anw-1 = 26t
+PRINTF
+ins-1
+ln-1
+27t = va [ 0 ] [ 2 ]
+anw-1 = 27t
+PRINTF
+ins-1
+str-1 = 
+28t = va [ 1 ] [ 0 ]
+anw-1 = 28t
+PRINTF
+ins-1
+str-1 = 
+29t = va [ 1 ] [ 1 ]
+anw-1 = 29t
+PRINTF
+ins-1
+ln-1
+30t = va [ 1 ] [ 2 ]
+anw-1 = 30t
+PRINTF
+ins-1
+str-1 = 
+31t = va [ 2 ] [ 0 ]
+anw-1 = 31t
+PRINTF
+ins-1
+str-1 = 
+32t = va [ 2 ] [ 1 ]
+anw-1 = 32t
+PRINTF
+ins-1
+ln-1
+33t = va [ 2 ] [ 2 ]
+anw-1 = 33t
+PRINTF
+34t = va [ 0 ]
+push 34t
+push vc
+call vdot
+35t = RET
+upd ans = 35t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+36t = va [ 1 ]
+push 36t
+37t = vb [ 0 ]
+push 37t
+call vdot
+38t = RET
+upd ans = 38t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+39t = va [ 2 ]
+push 39t
+40t = vb [ 0 ]
+push 40t
+call vdot
+41t = RET
+upd ans = 41t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+42t = va [ 0 ]
+push 42t
+43t = vb [ 2 ]
+push 43t
+call vdot
+44t = RET
+upd ans = 44t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+45t = va [ 0 ]
+push 45t
+46t = vb [ 1 ]
+push 46t
+call vdot
+47t = RET
+upd ans = 47t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+push vb
+call print_mat
+48t = RET
+call uselessfunc
+49t = RET
+ret 0
 end main
