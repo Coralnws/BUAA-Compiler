@@ -29,10 +29,6 @@ public class Executor {
     static HashMap<String,Integer> floorList = new HashMap<String,Integer>();
     static ArrayList<String> pcodeList = new ArrayList<String>();
     static int blocknum=1;
-    static int returnCondPt=0;
-    static boolean canStartCalcCond=false;
-    static boolean condIsMix = false;
-
 
     //static Stack<Integer> loopList = new Stack<Integer>(); //1 = if,2=while
     static String pcode; //读着的pcode
@@ -531,8 +527,6 @@ public class Executor {
                 System.out.println("Check while start pointer:" + Writer.readPcode(pointer));
                 //whilePointer=pointer+1;
                 activeRunner.isWhile = true;
-                System.out.println("记录cond1的位置:" + Writer.readPcode(pointer));
-                activeRunner.recordCondLocation.put("#cond1",pointer);
             }
             else if(isIf(sym[0])){
                 if(activeRunner == null && floor != 0){
@@ -542,83 +536,15 @@ public class Executor {
                     activeRunner.ifList.push(sym[0]);
                     System.out.println("push ifList: " + sym[0]);
                     activeRunner.isIf = true;
-                    System.out.println("记录cond1的位置:" + Writer.readPcode(pointer));
-                    activeRunner.recordCondLocation.put("#cond1",pointer);
                 }
+
             }
             else if(isCond(sym[0])){ // == < > <= >=
-                returnCondPt = pointer
-                System.out.println("记录cond的开始位置" + Writer.readPcode(pointer));
-
-                if(!canStartCalcCond){
-                    System.out.println("还不可以算cond");
-                    continue;
-                }
-                boolean currentRes=false;
-                if(!condIsMix){
-                    if(checkCondGotOp(sym)){
-                        int value1=-1,value2=-1;
-                        boolean res = false;
-                        for(int i=1,j=1;i<sym.length;i++){
-                            if(isOp(sym[i])){
-                                value2 = senseValue(sym[i+1]);
-                                res = calcCond(value1,value2,sym[i]);
-                                resultList.add(calcCond(value1,value2,sym[i]));
-                                //if(resultList.contains(false)) condResult =false;
-                            }else{
-                                if(!res)
-                                    value1 = senseValue(sym[i]);
-                                else{
-                                    if(res){
-                                        value1 = 1;
-                                    }else{
-                                        value1=0;
-                                    }
-                                }
-                            }
-                        }
-                    }else{
-                        int value = senseValue(sym[1]);
-                        if(value==0){
-                            System.out.println("result = false");
-                            resultList.add(false);
-                        }else{ resultList.add(true);
-                            System.out.println("result = true");}
-                    }
-                    //这个是算了当前cond的对错放进condList
-                    if(resultList.contains(false)){
-                        activeRunner.condList.push(false);
-                        currentRes =false;
-                    }else{
-                        activeRunner.condList.push(true);
-                        currentRes=true;
-                    }
-                    if(sym[sym.length-1].equals("||")){
-                        if(currentRes){
-                            shortCircuit=true;
-                            continue;
-                        }
-                    }
-                    if(sym[sym.length-1].equals("&&")){
-                        if(!currentRes){
-                            shortCircuit=true;
-                            continue;
-                        }
-                    }
-                }
-
-                /*
                 if(activeRunner == null && floor != 0){
                     continue;
                 }
-
                 ArrayList<Boolean> resultList = new ArrayList<Boolean>();
-
-
-
-//------------------------------------ 以下是计算某个cond ----------------------------------------
                 boolean currentRes=false;
-
                 if(checkCondGotOp(sym)){
                     int value1=-1,value2=-1;
                     boolean res = false;
@@ -648,29 +574,38 @@ public class Executor {
                     }else{ resultList.add(true);
                         System.out.println("result = true");}
                 }
-
                 if(resultList.contains(false)){
-                    activeRunner.condList.push(false);
-                    currentRes =false;
-                }else{
-                    activeRunner.condList.push(true);
-                    currentRes=true;
-                }
-//------------------------------------以上------------------------------------------
-                if(sym[sym.length-1].equals("||")){
-                    if(currentRes){
-                        shortCircuit=true;
-                        continue;
+                    System.out.println("当前cond:" + pcode + ",result = false");
+                    if(sym[sym.length-1].equals("&&")) {  //如果是false + && 有 && 短路
+                        while(!sym[0].equals("CheckCond") && !sym[sym.length-1].equals("||")){
+                            readPcode();
+                            sym = pcode.split(" ");
+                        }
+                        System.out.println("&&短路");
+                        if(sym[0].equals("CheckCond")){
+                            System.out.println("skip到CheckCond");
+                            activeRunner.condList.push(false);
+                            currentRes =false;
+                        }else{
+                            System.out.println("skip到||");
+                        }
+                    }else if(!sym[sym.length-1].equals("&&") && !sym[sym.length-1].equals("||")){
+                        activeRunner.condList.push(false);
+                        currentRes =false;
                     }
-                }
-                if(sym[sym.length-1].equals("&&")){
-                    if(!currentRes){
-                        shortCircuit=true;
-                        continue;
+                }else{
+                    System.out.println("当前cond:" + pcode + ",result = true");
+                    if(sym[sym.length-1].equals("||")){
+                        System.out.println("整个cond短路");
+                        activeRunner.condList.push(true);
+                        currentRes=true;
+                        shortCircuit = true;
+                    }else if(!sym[sym.length-1].equals("&&") && !sym[sym.length-1].equals("||")){
+                        activeRunner.condList.push(true);
+                        currentRes =false;
                     }
                 }
 
-                 */
             }
             else if(sym[0].equals("CheckCond")){
                 if(activeRunner == null && floor != 0){
@@ -1694,7 +1629,6 @@ class Runner{
     static HashMap<String,Integer> ifElseList = new HashMap<String,Integer>();
     static Stack<String> condOpList = new Stack<String>();
     static Stack<Boolean> condList = new Stack<Boolean>();
-    HashMap<String,Integer> recordCondLocation = new Stack<String,Integer>()
     Stack<String> ifList = new Stack<String>();
     boolean isWhile = false;
     boolean isIf = false;

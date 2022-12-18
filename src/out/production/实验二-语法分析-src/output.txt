@@ -490,6 +490,20 @@ INTCON 1
 <Exp>
 SEMICN ;
 <Stmt>
+PRINTFTK printf
+LPARENT (
+STRCON "sum=%d\n"
+COMMA ,
+IDENFR sum
+<LVal>
+<PrimaryExp>
+<UnaryExp>
+<MulExp>
+<AddExp>
+<Exp>
+PRINTEND )
+SEMICN ;
+<Stmt>
 IDENFR useless
 <LVal>
 ASSIGN =

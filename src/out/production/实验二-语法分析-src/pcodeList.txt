@@ -23,6 +23,11 @@ start #while
 2t = y [ d ]
 3t = sum + 1t * 2t / 1
 upd sum = 3t
+str-1 =sum=
+ins-1
+ln-1
+anw-1 = sum
+PRINTF
 4t = sum % 2 - 3
 upd useless = 4t
 5t = d + 1
