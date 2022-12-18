@@ -583,28 +583,53 @@ public class Executor {
 
 
                 }
-
+//------------------------------以上是计算一个cond---------------------------
                 if(resultList.contains(false)){
-                    activeRunner.condList.push(false);
-                    currentRes =false;
+                    System.out.println("当前cond:" + pcode + ",result = false");
+                    if(sym[sym.length-1].equals("&&")) {  //如果是false + && 有 && 短路
+                        while(!sym[0].equals("CheckCond") && !sym[sym.length-1].equals("||")){
+                            readPcode();
+                            sym = pcode.split(" ");
+                        }
+                        System.out.println("&&短路");
+                        if(sym[0].equals("CheckCond")){
+                            System.out.println("skip到CheckCond");
+                            activeRunner.condList.push(false);
+                            currentRes =false;
+                        }else{
+                            System.out.println("skip到||");
+                        }
+                    }else if(!sym[sym.length-1].equals("&&") && !sym[sym.length-1].equals("||")){
+                        activeRunner.condList.push(false);
+                        currentRes =false;
+                    }
                 }else{
-                    activeRunner.condList.push(true);
-                    currentRes=true;
+                    System.out.println("当前cond:" + pcode + ",result = true");
+                    if(sym[sym.length-1].equals("||")){
+                        System.out.println("整个cond短路");
+                        activeRunner.condList.push(true);
+                        currentRes=true;
+                        shortCircuit = true;
+                    }else if(!sym[sym.length-1].equals("&&") && !sym[sym.length-1].equals("||")){
+                        activeRunner.condList.push(true);
+                        currentRes =false;
+                    }
                 }
-
+//-----------------------------记录当前cond的结果-------------------------------
+                /*
+                if(sym[sym.length-1].equals("&&")){
+                    if(!activeRunner.condList.peek()){  //如果是false
+                        shortCircuit=true;
+                        continue;
+                    }
+                }
                 if(sym[sym.length-1].equals("||")){
                     if(currentRes){
                         shortCircuit=true;
                         continue;
                     }
                 }
-                if(sym[sym.length-1].equals("&&")){
-                    if(!currentRes){
-                        shortCircuit=true;
-                        continue;
-                    }
-                }
-/*
+
                 if(activeRunner.condList.size() > 1){
                     System.out.println("检查short circuit , pcode = "+pcode);
                     String currentOp = sym[sym.length-1];

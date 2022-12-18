@@ -13,9 +13,13 @@ int vdot(int x[], int y[]) {
 	int useless;
 	while (1 || 0) {
 		sum = sum + x[d] * y[d] / 1;
+		printf("sum=%d\n",sum);
 		useless = sum % 2 - 3;
 		d = d + 1;
-		if (d == D || 0 && ! - sum < 7 + 1 || + sum > 8 - 1) break;
+		if (d == D || 0 && ! - sum < 7 + 1 || + sum > 8 - 1){
+			printf("break\n"); 
+			break;	
+		} 
 		else if (1) continue;
 		else ;
 	}
@@ -76,6 +80,8 @@ int main() {
 	printf("%d ",va[2][0]);
 	printf("%d ",va[2][1]);
 	printf("%d\n",va[2][2]);
+
+
 	ans = vdot(va[0], vc);
 	printf("%d\n", ans);
 	ans = vdot(va[1], vb[0]);

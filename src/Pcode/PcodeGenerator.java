@@ -12,6 +12,7 @@ public class PcodeGenerator {
     public static ArrayList<Word> treeList = SaveContent.getTreeList();
     public static Word currentWord;
     static Word wordAhead;
+    static Word lastOp = null;
     static Word scanWord;
     static Word scanWordAhead;
     static int index = 2;
@@ -68,10 +69,10 @@ public class PcodeGenerator {
 
     public static void nextWord(){
         if(index < treeList.size()) {
+
             currentWord = SaveContent.getWord(index++);
 
             if(ignoreParser){
-
                 while(currentWord instanceof parserWord){
                     currentWord = treeList.get(index++);
                 }
