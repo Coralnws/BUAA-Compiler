@@ -23,6 +23,11 @@ start #while
 2t = y [ d ]
 3t = sum + 1t * 2t / 1
 upd sum = 3t
+str-1 =sum=
+ins-1
+ln-1
+anw-1 = sum
+PRINTF
 4t = sum % 2 - 3
 upd useless = 4t
 5t = d + 1
@@ -180,42 +185,57 @@ push vc
 call print_vec
 24t = RET
 var v ans
-25t = va [ 0 ]
-push 25t
-push vc
-call vdot
-26t = RET
-upd ans = 26t
+str-1 =-------------------------
+ln-1
+PRINTF
+ins-1
+str-1 = 
+25t = va [ 0 ] [ 0 ]
+anw-1 = 25t
+PRINTF
+ins-1
+str-1 = 
+26t = va [ 0 ] [ 1 ]
+anw-1 = 26t
+PRINTF
 ins-1
 ln-1
-anw-1 = ans
+27t = va [ 0 ] [ 2 ]
+anw-1 = 27t
 PRINTF
-27t = va [ 1 ]
-push 27t
-28t = vb [ 0 ]
-push 28t
-call vdot
-29t = RET
-upd ans = 29t
+ins-1
+str-1 = 
+28t = va [ 1 ] [ 0 ]
+anw-1 = 28t
+PRINTF
+ins-1
+str-1 = 
+29t = va [ 1 ] [ 1 ]
+anw-1 = 29t
+PRINTF
 ins-1
 ln-1
-anw-1 = ans
+30t = va [ 1 ] [ 2 ]
+anw-1 = 30t
 PRINTF
-30t = va [ 2 ]
-push 30t
-31t = vb [ 0 ]
-push 31t
-call vdot
-32t = RET
-upd ans = 32t
+ins-1
+str-1 = 
+31t = va [ 2 ] [ 0 ]
+anw-1 = 31t
+PRINTF
+ins-1
+str-1 = 
+32t = va [ 2 ] [ 1 ]
+anw-1 = 32t
+PRINTF
 ins-1
 ln-1
-anw-1 = ans
+33t = va [ 2 ] [ 2 ]
+anw-1 = 33t
 PRINTF
-33t = va [ 0 ]
-push 33t
-34t = vb [ 2 ]
+34t = va [ 0 ]
 push 34t
+push vc
 call vdot
 35t = RET
 upd ans = 35t
@@ -223,9 +243,9 @@ ins-1
 ln-1
 anw-1 = ans
 PRINTF
-36t = va [ 0 ]
+36t = va [ 1 ]
 push 36t
-37t = vb [ 1 ]
+37t = vb [ 0 ]
 push 37t
 call vdot
 38t = RET
@@ -234,10 +254,43 @@ ins-1
 ln-1
 anw-1 = ans
 PRINTF
+39t = va [ 2 ]
+push 39t
+40t = vb [ 0 ]
+push 40t
+call vdot
+41t = RET
+upd ans = 41t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+42t = va [ 0 ]
+push 42t
+43t = vb [ 2 ]
+push 43t
+call vdot
+44t = RET
+upd ans = 44t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+45t = va [ 0 ]
+push 45t
+46t = vb [ 1 ]
+push 46t
+call vdot
+47t = RET
+upd ans = 47t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
 push vb
 call print_mat
-39t = RET
+48t = RET
 call uselessfunc
-40t = RET
+49t = RET
 ret 0
 end main

@@ -1,795 +1,291 @@
-const v global_const_A = 1
-const v global_const_B1 = 11
-const v global_const_B2 = 12
-const v A = 10
-1t = ( 1 + 9 ) + 1
-const a array_A [ 1t ] = { 0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , A }
-const a array_D [ 2 ] [ 1 ] = { { 1 } , { 1 } }
-2t = ( 110 / 10 )
-var a B [ 2t ]
-3t = + 11
-var a AB [ 3t ]
-var v global_var1
-var v global_var2
-var v global_var3 = 0
-4t = 7 % 4
-5t = 8 / 2
-var a array_D1 [ 4t ] [ 5t ] = { { 1 , 2 , 3 , 4 } , { 5 , 6 , 7 , 8 } , { 10 , 11 , 12 , 13 } }
-func void func_void
-start func_void
-const v const_1 = 1
-var v var1
-upd global_var1 = 1
-6t = global_var1 + global_var3
-start #block
-7t = GETINT
-upd var1 = 7t
-8t = const_1 + var1
-upd var1 = 8t
-end #block
-ret
-end func_void
-func int func_if_var
-para v var
-start func_if_var
+const a eye [ 3 ] [ 3 ] = { { 1 , 0 , 0 } , { 0 , 1 , 0 } , { 0 , 0 , 1 } }
+const v D = 3
+const a base [ 3 ] = { 1 , 0 , 0 }
+var a va [ 3 ] [ 3 ]
+var a vb [ 3 ] [ 3 ] = { { 1 , 2 , 3 } , { 4 , 5 , 6 } , { 7 , 8 , 9 } }
+var a vc [ 3 ] = { 4 , 5 , 6 }
+var a vd [ 3 ]
+var v badname
+func int vdot
+para a x [ ]
+para a y [ ]
+start vdot
+var v d = 0
+var v sum = 0
+var v useless
+#while
+#cond1 1 ||
+#cond2 0
+cond #cond1 || #cond2
+CheckCond
+start #while
+1t = x [ d ]
+2t = y [ d ]
+3t = sum + 1t * 2t / 1
+upd sum = 3t
+4t = sum % 2 - 3
+upd useless = 4t
+5t = d + 1
+upd d = 5t
 #if1
-#cond1 var > 0
-cond #cond1
+#cond1 d == D ||
+#cond2 0 &&
+6t = - sum < 7
+7t = ! 6t
+8t = 7t 7 + 1
+#cond3 8t ||
+9t = + sum
+10t = 8 - 1
+#cond4 9t > 10t
+cond #cond1 || #cond2 && #cond3 || #cond4
 CheckCond
 start #if1
-upd var = 1
+BREAK
 end #if1
+start #else1
 #if2
-9t = var + 1
-#cond1 9t <= 1
+#cond1 1
 cond #cond1
 CheckCond
 start #if2
-upd var = 4
+CONTINUE
 end #if2
+start #else2
+end #else2
+end #else1
+end #while
+ret sum
+end vdot
+func void print_id
+para v id
+start print_id
+ins-1
+ln-1
+anw-1 = id
+PRINTF
 #if3
-10t = 1 + 1
-#cond1 var >= 10t
-cond #cond1
+#cond1 0 &&
+#cond2 4 > 5
+cond #cond1 && #cond2
 CheckCond
 start #if3
-upd var = 5
+ret
 end #if3
+end print_id
+func void print_vec
+para a x [ ]
+start print_vec
+ins-1
+str-1 = 
+ins-2
+str-2 = 
+ins-3
+ln-1
+11t = x [ 0 ]
+anw-1 = 11t
+12t = x [ 1 ]
+anw-2 = 12t
+13t = x [ 2 ]
+anw-3 = 13t
+PRINTF
+end print_vec
+func void uselessfunc
+start uselessfunc
+var v i = 0
+14t = i + 2 - 5 % 2
+upd i = 14t
 #if4
-11t = - var + var
-#cond1 11t
+#cond1 i >= 3
 cond #cond1
 CheckCond
 start #if4
-upd var = 6
 end #if4
-#if5
-12t = - var + var
-13t = 0 + 1
-#cond1 12t == 13t
+end uselessfunc
+func void print_mat
+para a m [ ] [ 3 ]
+start print_mat
+var v dt = 0
+#while
+15t = ! 0
+#cond1 15t
 cond #cond1
 CheckCond
+start #while
+16t = m [ dt ]
+push 16t
+call print_vec
+17t = RET
+18t = dt + 1
+upd dt = 18t
+#if5
+#cond1 dt < 3 &&
+#cond2 1
+cond #cond1 && #cond2
+CheckCond
 start #if5
-upd var = 7
+CONTINUE
 end #if5
+start #else5
 #if6
-#cond1 var > 1 != var < 1
+#cond1 1
 cond #cond1
 CheckCond
 start #if6
-upd var = 8
-end #if6
-#if7
-14t = ! var
-#cond1 14t
-cond #cond1
-CheckCond
-start #if7
-upd var = 0
-end #if7
-#if8
-#cond1 var < 1
-cond #cond1
-CheckCond
-start #if8
-15t = - var
-upd var = 15t
-end #if8
-start #else8
-end #else8
-ret var
-end func_if_var
-func void func_null
-start func_null
-end func_null
-func int func_if_D1array
-para a a [ ]
-para v factor
-start func_if_D1array
-#if9
-16t = a [ 0 ]
-#cond1 16t == 0
-cond #cond1
-CheckCond
-start #if9
-17t = a [ 0 ]
-18t = a [ 1 ]
-19t = 17t + 18t
-upd a [ 0 ] = 19t
-end #if9
-#if10
-20t = a [ 1 ]
-#cond1 20t != 1
-cond #cond1
-CheckCond
-start #if10
-21t = a [ 1 ]
-22t = a [ 2 ]
-23t = 21t + 22t
-upd a [ 1 ] = 23t
-end #if10
-#if11
-24t = a [ 2 ]
-#cond1 24t >= 2
-cond #cond1
-CheckCond
-start #if11
-25t = a [ 2 ]
-26t = 1 + 25t % A
-upd a [ 2 ] = 26t
-end #if11
-#if12
-27t = a [ 3 ]
-#cond1 27t <= 5
-cond #cond1
-CheckCond
-start #if12
-28t = a [ 3 ]
-29t = a [ 4 ]
-30t = 28t * - + - + - 29t
-upd a [ 3 ] = 30t
-end #if12
-#if13
-31t = a [ 4 ]
-#cond1 31t < 0
-cond #cond1
-CheckCond
-start #if13
-32t = a [ 4 ]
-33t = a [ 1 ]
-34t = ( 32t + 5 / 3 ) % 33t
-upd a [ 4 ] = 34t
-end #if13
-#if14
-35t = a [ 5 ]
-36t = a [ 4 ]
-37t = 5 + 36t
-#cond1 35t > 37t
-cond #cond1
-CheckCond
-start #if14
-38t = a [ 5 ]
-39t = a [ 3 ]
-40t = 38t % ( 39t * 2 )
-upd a [ 5 ] = 40t
-end #if14
-#if15
-41t = a [ 6 ]
-42t = 41t / 2
-43t = a [ 5 ]
-44t = a [ 2 ]
-#cond1 42t > 1 == 43t > 44t
-cond #cond1
-CheckCond
-start #if15
-45t = a [ 6 ]
-46t = + - ( 45t / 9 )
-upd a [ 6 ] = 46t
-end #if15
-#if16
-47t = a [ 7 ]
-#cond1 47t
-cond #cond1
-CheckCond
-start #if16
-48t = a [ 7 ]
-49t = 48t / 2
-upd a [ 7 ] = 49t
-end #if16
-50t = a [ 0 ]
-51t = a [ 1 ]
-52t = a [ 2 ]
-53t = a [ 3 ]
-54t = a [ 4 ]
-55t = a [ 5 ]
-56t = a [ 6 ]
-57t = 50t + 51t + 52t + ( 53t + 54t + 55t + 56t ) / factor
-ret 57t
-end func_if_D1array
-func int func_test
-para a a [ ]
-para v i
-start func_test
-upd a [ i ] = 1
-ret 1
-end func_test
-func void func_test_A
-start func_test_A
-var v var1 = 3
-var v var2 = 4
-var v var3 = 5
-var a var [ 12 ] = { 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
-#if17
-#cond1 var1 < 1 ||
-#cond2 var1 > 3
-cond #cond1 || #cond2
-CheckCond
-start #if17
-upd var [ 0 ] = 1
-end #if17
-#if18
-#cond1 var1 > 1 ||
-#cond2 var1 < 3
-cond #cond1 || #cond2
-CheckCond
-start #if18
-upd var [ 1 ] = 1
-end #if18
-start #else18
-upd var [ 1 ] = 0
-end #else18
-#if19
-#cond1 var1 == 3 &&
-#cond2 var2 == 4
-cond #cond1 && #cond2
-CheckCond
-start #if19
-upd var [ 2 ] = 1
-end #if19
-start #else19
-upd var [ 2 ] = 0
-end #else19
-#if20
-#cond1 var3 == 3 &&
-push var
-push 3
-call func_test
-58t = RET
-#cond2 58t
-cond #cond1 && #cond2
-CheckCond
-start #if20
-end #if20
-#if21
-#cond1 var3 >= 3 &&
-push var
-push 4
-call func_test
-59t = RET
-#cond2 59t
-cond #cond1 && #cond2
-CheckCond
-start #if21
-end #if21
-#if22
-#cond1 var3 == 5 ||
-push var
-push 5
-call func_test
-60t = RET
-#cond2 60t
-cond #cond1 || #cond2
-CheckCond
-start #if22
-end #if22
-#if23
-#cond1 var3 <= 3 ||
-push var
-push 6
-call func_test
-61t = RET
-#cond2 61t
-cond #cond1 || #cond2
-CheckCond
-start #if23
-end #if23
-#if24
-#cond1 var3 != 3 &&
-push var
-push 7
-call func_test
-62t = RET
-#cond2 62t ||
-push var
-push 8
-call func_test
-63t = RET
-#cond3 63t
-cond #cond1 && #cond2 || #cond3
-CheckCond
-start #if24
-end #if24
-#if25
-#cond1 var3 != 5 ||
-push var
-push 9
-call func_test
-64t = RET
-#cond2 64t &&
-push var
-push 10
-call func_test
-65t = RET
-#cond3 65t
-cond #cond1 || #cond2 && #cond3
-CheckCond
-start #if25
-end #if25
-#if26
-66t = ! var1
-#cond1 66t ||
-67t = ! var2
-#cond2 67t ||
-#cond3 var3 &&
-push var
-push 11
-call func_test
-68t = RET
-#cond4 68t
-cond #cond1 || #cond2 || #cond3 && #cond4
-CheckCond
-start #if26
-end #if26
-str-1 =Testing Short-circuit evaluation : 
-ins-1
-str-2 = 
-ins-2
-str-3 = 
-ins-3
-str-4 = 
-ins-4
-str-5 = 
-ins-5
-str-6 = 
-ins-6
-str-7 = 
-ins-7
-str-8 = 
-ins-8
-str-9 = 
-ins-9
-str-10 = 
-ins-10
-str-11 = 
-ins-11
-str-12 = 
-ins-12
-ln-1
-69t = var [ 0 ]
-anw-1 = 69t
-70t = var [ 1 ]
-anw-2 = 70t
-71t = var [ 2 ]
-anw-3 = 71t
-72t = var [ 3 ]
-anw-4 = 72t
-73t = var [ 4 ]
-anw-5 = 73t
-74t = var [ 5 ]
-anw-6 = 74t
-75t = var [ 6 ]
-anw-7 = 75t
-76t = var [ 7 ]
-anw-8 = 76t
-77t = var [ 8 ]
-anw-9 = 77t
-78t = var [ 9 ]
-anw-10 = 78t
-79t = var [ 10 ]
-anw-11 = 79t
-80t = var [ 11 ]
-anw-12 = 80t
-PRINTF
-ret
-end func_test_A
-func void func_if_D2array
-para a a [ ] [ 3 ]
-para v factor
-start func_if_D2array
-#if27
-81t = a [ 0 ] [ 0 ]
-#cond1 81t == 1
-cond #cond1
-CheckCond
-start #if27
-82t = a [ 0 ] [ 0 ]
-83t = a [ 0 ] [ 1 ]
-84t = 82t + 83t
-upd a [ 0 ] [ 0 ] = 84t
-end #if27
-#if28
-85t = a [ 0 ] [ 1 ]
-#cond1 85t != 1
-cond #cond1
-CheckCond
-start #if28
-86t = a [ 0 ] [ 1 ]
-87t = a [ 0 ] [ 2 ]
-88t = 86t + 87t
-upd a [ 0 ] [ 1 ] = 88t
-end #if28
-#if29
-89t = a [ 0 ] [ 2 ]
-#cond1 89t >= 2
-cond #cond1
-CheckCond
-start #if29
-90t = a [ 0 ] [ 2 ]
-91t = 1 + 90t % A
-upd a [ 0 ] [ 2 ] = 91t
-end #if29
-#if30
-92t = a [ 1 ] [ 0 ]
-#cond1 92t <= 5
-cond #cond1
-CheckCond
-start #if30
-93t = a [ 1 ] [ 0 ]
-94t = a [ 1 ] [ 0 ]
-95t = 93t * - + - + - 94t
-upd a [ 1 ] [ 0 ] = 95t
-end #if30
-#if31
-96t = a [ 1 ] [ 0 ]
-#cond1 96t < 0
-cond #cond1
-CheckCond
-start #if31
-97t = a [ 1 ] [ 0 ]
-98t = a [ 1 ] [ 1 ]
-99t = ( 97t + 5 / 3 ) % 98t
-upd a [ 1 ] [ 0 ] = 99t
-end #if31
-#if32
-100t = a [ 1 ] [ 0 ]
-101t = ! 100t
-#cond1 101t
-cond #cond1
-CheckCond
-start #if32
-upd a [ 1 ] [ 0 ] = 1
-end #if32
-#if33
-102t = a [ 1 ] [ 1 ]
-103t = a [ 1 ] [ 2 ]
-104t = 5 + 103t
-#cond1 102t > 104t
-cond #cond1
-CheckCond
-start #if33
-105t = a [ 1 ] [ 2 ]
-106t = a [ 0 ] [ 0 ]
-107t = 105t % ( 106t * 2 )
-upd a [ 1 ] [ 1 ] = 107t
-end #if33
-#if34
-108t = a [ 0 ] [ 1 ]
-109t = 108t / 2
-110t = a [ 1 ] [ 0 ]
-111t = a [ 1 ] [ 2 ]
-#cond1 109t > 1 == 110t > 111t
-cond #cond1
-CheckCond
-start #if34
-112t = a [ 1 ] [ 1 ]
-113t = + - ( 112t / 3 )
-upd a [ 1 ] [ 2 ] = 113t
-end #if34
-#if35
-114t = a [ 0 ] [ 0 ]
-#cond1 114t
-cond #cond1
-CheckCond
-start #if35
-115t = a [ 0 ] [ 0 ]
-116t = 115t / 2
-upd a [ 0 ] [ 0 ] = 116t
-end #if35
-str-1 =Testing func_if_D2array(a[][3], b) ......
-ln-1
-ins-1
-str-2 = 
-ins-2
-str-3 = 
-ins-3
-ln-2
-ins-4
-str-4 = 
-ins-5
-str-5 = 
-ins-6
-ln-3
-117t = a [ 0 ] [ 0 ]
-anw-1 = 117t
-118t = a [ 0 ] [ 1 ]
-anw-2 = 118t
-119t = a [ 0 ] [ 2 ]
-anw-3 = 119t
-120t = a [ 1 ] [ 0 ]
-anw-4 = 120t
-121t = a [ 1 ] [ 1 ]
-anw-5 = 121t
-122t = a [ 1 ] [ 2 ]
-anw-6 = 122t
-PRINTF
-end func_if_D2array
-func int func_while
-para v n
-para v m
-start func_while
-123t = m + n
-var v i = 123t
-var v j = 0
-var v k = 0
-#while
-#cond1 i
-cond #cond1
-CheckCond
-start #while
-124t = k + 1
-upd k = 124t
-125t = i - 1
-upd i = 125t
-#if36
-#cond1 i == n
-cond #cond1
-CheckCond
-start #if36
 BREAK
-end #if36
-#if37
-126t = n + 1
-#cond1 i == 126t
-cond #cond1
-CheckCond
-start #if37
-CONTINUE
-end #if37
-127t = j + 1
-upd j = 127t
+end #if6
+start #else6
+end #else6
+end #else5
 end #while
-ret j
-end func_while
-func void func_pass_array
-para a array [ ] [ 4 ]
-start func_pass_array
-var v i = 0
-str-1 =Testing func_pass_array(int a[][4) ......
-ln-1
-ins-1
-str-2 = 
-ins-2
-str-3 = 
-ins-3
-str-4 = 
-ins-4
-ln-2
-ins-5
-str-5 = 
-ins-6
-str-6 = 
-ins-7
-str-7 = 
-ins-8
-ln-3
-ins-9
-str-8 = 
-ins-10
-str-9 = 
-ins-11
-str-10 = 
-ins-12
-ln-4
-128t = array [ 0 ] [ 0 ]
-anw-1 = 128t
-129t = array [ 0 ] [ 1 ]
-anw-2 = 129t
-130t = array [ 0 ] [ 2 ]
-anw-3 = 130t
-131t = array [ 0 ] [ 3 ]
-anw-4 = 131t
-132t = array [ 1 ] [ 0 ]
-anw-5 = 132t
-133t = array [ 1 ] [ 1 ]
-anw-6 = 133t
-134t = array [ 1 ] [ 2 ]
-anw-7 = 134t
-135t = array [ 1 ] [ 3 ]
-anw-8 = 135t
-136t = array [ 2 ] [ 0 ]
-anw-9 = 136t
-137t = array [ 2 ] [ 1 ]
-anw-10 = 137t
-138t = array [ 2 ] [ 2 ]
-anw-11 = 138t
-139t = array [ 2 ] [ 3 ]
-anw-12 = 139t
-PRINTF
-ret
-end func_pass_array
-func void func_pass_PartArray
-para a a [ ]
-start func_pass_PartArray
-var v i = 0
-str-1 =Testing func_pass_PartArray(int a[]) ...... 
-ins-1
-str-2 = 
-ins-2
-str-3 = 
-ins-3
-str-4 = 
-ins-4
-ln-1
-140t = a [ 0 ]
-anw-1 = 140t
-141t = a [ 1 ]
-anw-2 = 141t
-142t = a [ 2 ]
-anw-3 = 142t
-143t = a [ 3 ]
-anw-4 = 143t
-PRINTF
-ret
-end func_pass_PartArray
-func void func_pass_arrayElement
-para v a
-start func_pass_arrayElement
-str-1 =Testing func_pass_arrayElement(int a) ...... 
-ins-1
-ln-1
-anw-1 = a
-PRINTF
-end func_pass_arrayElement
+end print_mat
 func int main
 start main
-str-1 =19373235
-ln-1
-PRINTF
-var v var1 = 1
-var v mul
-call func_test_A
-144t = RET
-const v const_C1 = global_const_B1
-145t = + 12
-const v const_C2 = 145t
-146t = - global_const_B2
-const v const_C3 = 146t
-147t = ( + - + - + - const_C2 ) * ( const_C2 / global_const_A ) % ( global_const_B2 + 1 ) + global_const_B1
-const v const_D1 = 147t
-148t = global_var3 + const_D1
-var v var4 = 148t
-var v var5
-149t = 1 + 2 * 3
-var v var6 = 149t
-150t = GETINT
-upd mul = 150t
-var v i = 0
+push 19373311
+call print_id
+19t = RET
+var v d1 = 0
 #while
-#cond1 i <= 10
+#cond1 d1 != D ||
+#cond2 d1 < D
+cond #cond1 || #cond2
+CheckCond
+start #while
+var v d2 = 0
+#while
+20t = D - 1
+#cond1 d2 <= 20t
 cond #cond1
 CheckCond
 start #while
-151t = array_A [ i ]
-152t = array_A [ i ]
-153t = 151t * 152t
-upd B [ i ] = 153t
-154t = B [ i ]
-155t = mul * 154t
-upd AB [ i ] = 155t
-156t = i + 1
-upd i = 156t
+upd va [ d1 ] [ d2 ] = getint ( )
+21t = d2 + 1
+upd d2 = 21t
 end #while
-push array_D1
-call func_pass_array
-157t = RET
-158t = array_D1 [ 1 ]
-push 158t
-call func_pass_PartArray
-159t = RET
-160t = array_D1 [ 0 ] [ 2 ]
-push 160t
-call func_pass_arrayElement
-161t = RET
-str-1 =Testing complex calculate ...... result = 
-ins-1
-str-2 =.
-ln-1
-162t = AB [ 1 ]
-163t = AB [ 2 ]
-164t = AB [ 3 ]
-165t = AB [ 2 ]
-166t = AB [ 1 ]
-167t = - ( ( ( + - + - 162t ) + 163t ) * ( 164t % 165t ) / 166t )
-anw-1 = 167t
-PRINTF
-str-1 =Testing D2array traversal and assignment.
-ln-1
-PRINTF
-var a array_E [ 2 ] [ 3 ]
-var v j = 0
+22t = d1 + 1
+upd d1 = 22t
+end #while
+var v cd = 5
 #while
-#cond1 j < 2
+#cond1 cd
 cond #cond1
 CheckCond
 start #while
-upd i = 0
-#while
-#cond1 i <= 2
-cond #cond1
-CheckCond
-start #while
-168t = i + j
-upd array_E [ j ] [ i ] = 168t
-169t = i + 1
-upd i = 169t
-end #while
-170t = j + 1
-upd j = 170t
-end #while
-str-1 =Array array_E:
+23t = cd - 1
+upd cd = 23t
+str-1 =123
 ln-1
-ins-1
-str-2 = 
-ins-2
-str-3 = 
-ins-3
-ln-2
-ins-4
-str-4 = 
-ins-5
-str-5 = 
-ins-6
-ln-3
-171t = array_E [ 0 ] [ 0 ]
-anw-1 = 171t
-172t = array_E [ 0 ] [ 1 ]
-anw-2 = 172t
-173t = array_E [ 0 ] [ 2 ]
-anw-3 = 173t
-174t = array_E [ 1 ] [ 0 ]
-anw-4 = 174t
-175t = array_E [ 1 ] [ 1 ]
-anw-5 = 175t
-176t = array_E [ 1 ] [ 2 ]
-anw-6 = 176t
 PRINTF
-call func_void
-177t = RET
-push const_C1
-call func_if_var
-178t = RET
-upd var5 = 178t
-var v factor
-179t = GETINT
-upd factor = 179t
-push AB
-push factor
-call func_if_D1array
-180t = RET
-var v x = 180t
-push array_E
-push factor
-call func_if_D2array
-181t = RET
-str-1 =Loop 7 times, once continue, once break. Symbol j = 
-ins-1
-str-2 =. func_while(x, y)is done!
+end #while
+push vc
+call print_vec
+24t = RET
+var v ans
+str-1 =-------------------------
 ln-1
-push var5
-push var6
-call func_while
-182t = RET
-anw-1 = 182t
 PRINTF
+ins-1
+str-1 = 
+25t = va [ 0 ] [ 0 ]
+anw-1 = 25t
+PRINTF
+ins-1
+str-1 = 
+26t = va [ 0 ] [ 1 ]
+anw-1 = 26t
+PRINTF
+ins-1
+ln-1
+27t = va [ 0 ] [ 2 ]
+anw-1 = 27t
+PRINTF
+ins-1
+str-1 = 
+28t = va [ 1 ] [ 0 ]
+anw-1 = 28t
+PRINTF
+ins-1
+str-1 = 
+29t = va [ 1 ] [ 1 ]
+anw-1 = 29t
+PRINTF
+ins-1
+ln-1
+30t = va [ 1 ] [ 2 ]
+anw-1 = 30t
+PRINTF
+ins-1
+str-1 = 
+31t = va [ 2 ] [ 0 ]
+anw-1 = 31t
+PRINTF
+ins-1
+str-1 = 
+32t = va [ 2 ] [ 1 ]
+anw-1 = 32t
+PRINTF
+ins-1
+ln-1
+33t = va [ 2 ] [ 2 ]
+anw-1 = 33t
+PRINTF
+34t = va [ 0 ]
+push 34t
+push vc
+call vdot
+35t = RET
+upd ans = 35t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+36t = va [ 1 ]
+push 36t
+37t = vb [ 0 ]
+push 37t
+call vdot
+38t = RET
+upd ans = 38t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+39t = va [ 2 ]
+push 39t
+40t = vb [ 0 ]
+push 40t
+call vdot
+41t = RET
+upd ans = 41t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+42t = va [ 0 ]
+push 42t
+43t = vb [ 2 ]
+push 43t
+call vdot
+44t = RET
+upd ans = 44t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+45t = va [ 0 ]
+push 45t
+46t = vb [ 1 ]
+push 46t
+call vdot
+47t = RET
+upd ans = 47t
+ins-1
+ln-1
+anw-1 = ans
+PRINTF
+push vb
+call print_mat
+48t = RET
+call uselessfunc
+49t = RET
 ret 0
 end main

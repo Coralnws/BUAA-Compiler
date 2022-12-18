@@ -447,6 +447,7 @@ public class Executor {
                         }
                         paraArr arrAsPara = new paraArr(arr.name);  //这边先放一样名字
                         arrAsPara.skipLevel=true;
+                        System.out.println("检查level是:"+arrAsPara.level);
                         arrAsPara.level=senseValue(sym[4]);
                         arrAsPara.content=arr;
                         activeRunner.exeStack.push(arrAsPara);
