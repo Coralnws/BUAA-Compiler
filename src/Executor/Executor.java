@@ -29,6 +29,10 @@ public class Executor {
     static HashMap<String,Integer> floorList = new HashMap<String,Integer>();
     static ArrayList<String> pcodeList = new ArrayList<String>();
     static int blocknum=1;
+    static int returnCondPt=0;
+    static boolean canStartCalcCond=false;
+    static boolean condIsMix = false;
+
 
     //static Stack<Integer> loopList = new Stack<Integer>(); //1 = if,2=while
     static String pcode; //读着的pcode
@@ -430,13 +434,7 @@ public class Executor {
                     }
 
                     Symbol arr = getArr(sym[2]);
-/*
-                    if(arr instanceof paraArr){
-                        arr = ((paraArr) arr).content;
-                    }
 
-
- */
                     if(arr.dimensionNum != dimension){
                         System.out.println("维度不一样");
                         System.out.println("检查下一句是传参,跳过这句: " + Writer.readPcode(pointer));
@@ -533,6 +531,8 @@ public class Executor {
                 System.out.println("Check while start pointer:" + Writer.readPcode(pointer));
                 //whilePointer=pointer+1;
                 activeRunner.isWhile = true;
+                System.out.println("记录cond1的位置:" + Writer.readPcode(pointer));
+                activeRunner.recordCondLocation.put("#cond1",pointer);
             }
             else if(isIf(sym[0])){
                 if(activeRunner == null && floor != 0){
@@ -542,14 +542,81 @@ public class Executor {
                     activeRunner.ifList.push(sym[0]);
                     System.out.println("push ifList: " + sym[0]);
                     activeRunner.isIf = true;
+                    System.out.println("记录cond1的位置:" + Writer.readPcode(pointer));
+                    activeRunner.recordCondLocation.put("#cond1",pointer);
                 }
-
             }
             else if(isCond(sym[0])){ // == < > <= >=
+                returnCondPt = pointer
+                System.out.println("记录cond的开始位置" + Writer.readPcode(pointer));
+
+                if(!canStartCalcCond){
+                    System.out.println("还不可以算cond");
+                    continue;
+                }
+                boolean currentRes=false;
+                if(!condIsMix){
+                    if(checkCondGotOp(sym)){
+                        int value1=-1,value2=-1;
+                        boolean res = false;
+                        for(int i=1,j=1;i<sym.length;i++){
+                            if(isOp(sym[i])){
+                                value2 = senseValue(sym[i+1]);
+                                res = calcCond(value1,value2,sym[i]);
+                                resultList.add(calcCond(value1,value2,sym[i]));
+                                //if(resultList.contains(false)) condResult =false;
+                            }else{
+                                if(!res)
+                                    value1 = senseValue(sym[i]);
+                                else{
+                                    if(res){
+                                        value1 = 1;
+                                    }else{
+                                        value1=0;
+                                    }
+                                }
+                            }
+                        }
+                    }else{
+                        int value = senseValue(sym[1]);
+                        if(value==0){
+                            System.out.println("result = false");
+                            resultList.add(false);
+                        }else{ resultList.add(true);
+                            System.out.println("result = true");}
+                    }
+                    //这个是算了当前cond的对错放进condList
+                    if(resultList.contains(false)){
+                        activeRunner.condList.push(false);
+                        currentRes =false;
+                    }else{
+                        activeRunner.condList.push(true);
+                        currentRes=true;
+                    }
+                    if(sym[sym.length-1].equals("||")){
+                        if(currentRes){
+                            shortCircuit=true;
+                            continue;
+                        }
+                    }
+                    if(sym[sym.length-1].equals("&&")){
+                        if(!currentRes){
+                            shortCircuit=true;
+                            continue;
+                        }
+                    }
+                }
+
+                /*
                 if(activeRunner == null && floor != 0){
                     continue;
                 }
+
                 ArrayList<Boolean> resultList = new ArrayList<Boolean>();
+
+
+
+//------------------------------------ 以下是计算某个cond ----------------------------------------
                 boolean currentRes=false;
 
                 if(checkCondGotOp(sym)){
@@ -580,8 +647,6 @@ public class Executor {
                         resultList.add(false);
                     }else{ resultList.add(true);
                         System.out.println("result = true");}
-
-
                 }
 
                 if(resultList.contains(false)){
@@ -591,7 +656,7 @@ public class Executor {
                     activeRunner.condList.push(true);
                     currentRes=true;
                 }
-
+//------------------------------------以上------------------------------------------
                 if(sym[sym.length-1].equals("||")){
                     if(currentRes){
                         shortCircuit=true;
@@ -604,59 +669,35 @@ public class Executor {
                         continue;
                     }
                 }
-/*
-                if(activeRunner.condList.size() > 1){
-                    System.out.println("检查short circuit , pcode = "+pcode);
-                    String currentOp = sym[sym.length-1];
-                    boolean cond2 = activeRunner.condList.pop();
-                    boolean cond1 = activeRunner.condList.pop();
-                    String op = activeRunner.condOpList.pop();
-                    System.out.print("currentOp = "+ currentOp);
-                    System.out.print(" cond1 = "+ cond1);
-                    System.out.print(" cond2 = "+ cond2);
-                    System.out.println(" op = "+ op);
 
-                    boolean result = compareCond(cond1,cond2,op);
-
-                    if(op.equals("||") && result){
-                        System.out.println("OR short circuit");
-                        activeRunner.condList.push(true);
-                        shortCircuit = true;
-                    }else if(op.equals("&&") && !result){
-                        if(currentOp.equals("||") || currentOp.equals("&&")) {
-                            if (currentOp.equals("&&")) {
-                                System.out.println("AND short circuit");
-                                activeRunner.condList.push(false);
-                                shortCircuit = true;
-                            }
-                        }
-                        activeRunner.condList.push(false);
-                    }else{
-                        activeRunner.condList.push(result);
-                    }
-                }
-                String op = sym[sym.length-1];
-                if(op.equals("||") || op.equals("&&")){
-                    if(op.equals("||") && activeRunner.condList.contains(true)){
-                        shortCircuit = true;
-                    }
-                    if(op.equals("&&") && activeRunner.condList.contains(false)){
-                        shortCircuit = true;
-                    }
-                    else{
-                        activeRunner.condOpList.push(sym[sym.length-1]);
-                    }
-                }
-
-                checkCondList();
-
- */
-
+                 */
             }
             else if(sym[0].equals("CheckCond")){
                 if(activeRunner == null && floor != 0){
                     continue;
                 }
+                /**
+                 * 1.先run一轮,记录所有 && || / 看是不是混合
+                 * 2.不是混合照原本的做,混合的话另外做
+                 * 3.混合:先run第一轮把所有&&都做完,第二轮正常做,做&&的时候也是要看shortcircuit
+                 * 4.合起来,先判断是不是混合,是混合先解决&& ,然后放到后面正常做,正常做的时候看shortcircuit
+                 * 5.最后的时候记得clear recordCondLocation
+                 */
+                String[] newCond;
+                String cond1,cond2;
+                //1 如果是混合的
+                if(pcode.contains("&&") && pcode.contains("||")){
+                    System.out.println("混合的");
+                    cond1 = sym[1];
+                    for(int i=1;i<sym.length;i++){
+                        if(sym[i].equals("&&")){
+
+
+                        }
+                    }
+
+                }
+
                 if(activeRunner.whileStartList.size() == 0 && activeRunner.whileNum > 1) {
                     System.out.println("Error whileStart = 0");
                 }
@@ -1653,6 +1694,7 @@ class Runner{
     static HashMap<String,Integer> ifElseList = new HashMap<String,Integer>();
     static Stack<String> condOpList = new Stack<String>();
     static Stack<Boolean> condList = new Stack<Boolean>();
+    HashMap<String,Integer> recordCondLocation = new Stack<String,Integer>()
     Stack<String> ifList = new Stack<String>();
     boolean isWhile = false;
     boolean isIf = false;

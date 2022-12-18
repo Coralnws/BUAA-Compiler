@@ -65,3 +65,9 @@
 
 
 新做法：
+
+遇到if 或者 while之后，开始记录cond1 的 pointer位置，遇到cond1就开始记录cond2，以此类推
+
+在遇到checkcond之后才正式地用condList里面的坐标去找cond
+
+在正式做之前先run一轮checkcond，然后记录起来是不是混合，如果是混合的话就要先做&&，否则照常做，然后看shortcircuit
