@@ -1,230 +1,53 @@
-func int main
-start main
-str-1 =19182636
-ln-1
-PRINTF
-var v a = 5
-var v b = 6
-var a s1 [ 6 ] = { 0 , 1 , 2 , 3 , 6 , 12 }
-var a s2 [ 2 ] [ 3 ] = { { 10 , 11 , 12 } , { 13 , 14 , 15 } }
+func void hanoi
+para v from
+para v via
+para v to
+para v t
+start hanoi
 #if1
-1t = s1 [ 0 ]
-2t = ! 1t
-#cond1 2t == 1 &&
-3t = s1 [ 0 ]
-4t = ( 3t * 2 )
-5t = ! 4t
-#cond2 5t &&
-6t = ! 0
-#cond3 6t
-cond #cond1 && #cond2 && #cond3
+#cond1 t == 0
+cond #cond1
 CheckCond
 start #if1
-str-1 =! is ok
-ln-1
-PRINTF
+ret
 end #if1
-start #else1
-str-1 =! has problem
-ln-1
-PRINTF
-end #else1
-#if2
-7t = a + b
-8t = s1 [ 5 ]
-#cond1 7t < 8t &&
-9t = s1 [ 3 ]
-10t = s1 [ 0 ]
-11t = 9t - 10t
-12t = s2 [ 1 ] [ 2 ]
-13t = 12t / a
-#cond2 11t < 13t == 0 &&
-14t = a + b
-15t = s1 [ 0 ]
-#cond3 b < 14t < 15t == 0 &&
-16t = a + b
-17t = s1 [ 2 ]
-18t = s1 [ 1 ]
-#cond4 0 == b < 16t < 17t > 18t
-cond #cond1 && #cond2 && #cond3 && #cond4
-CheckCond
-start #if2
-str-1 =< is ok
-ln-1
-PRINTF
-end #if2
-start #else2
-str-1 =< has problem
-ln-1
-PRINTF
-end #else2
-#if3
-19t = a * b
-20t = s1 [ 2 ]
-21t = s2 [ 1 ] [ 2 ]
-22t = 20t * 21t
-#cond1 19t > 22t == 0 &&
-23t = s2 [ 0 ] [ 1 ]
-24t = s1 [ 2 ]
-25t = ( 23t - 24t ) % a
-26t = s2 [ 1 ] [ 2 ]
-27t = 26t / a
-#cond2 25t > 27t &&
-28t = s1 [ 5 ]
-29t = a + b + 2
-#cond3 28t > 29t > 0 == 0 &&
-30t = s1 [ 5 ]
-31t = a + b
-32t = s1 [ 1 ]
-#cond4 30t > 31t < 32t == 0
-cond #cond1 && #cond2 && #cond3 && #cond4
-CheckCond
-start #if3
-str-1 => is ok
-ln-1
-PRINTF
-end #if3
-start #else3
-str-1 => has problem
-ln-1
-PRINTF
-end #else3
-#if4
-#cond1 a <= b &&
-33t = s1 [ 1 ]
-34t = b + 33t
-#cond2 a <= 34t &&
-35t = s1 [ 0 ]
-#cond3 a <= b <= 35t == 0 &&
-36t = s1 [ 2 ]
-#cond4 a <= b >= 36t < 1
-cond #cond1 && #cond2 && #cond3 && #cond4
-CheckCond
-start #if4
-str-1 =<= is ok
-ln-1
-PRINTF
-end #if4
-start #else4
-str-1 =<= has problem
-ln-1
-PRINTF
-end #else4
-#if5
-37t = a + 1
-#cond1 b >= 37t &&
-38t = s1 [ 4 ]
-39t = s1 [ 1 ]
-40t = 38t + 39t
-#cond2 b >= 40t != 1 &&
-41t = s1 [ 1 ]
-42t = 41t + 1
-#cond3 a <= b >= 42t == 0 &&
-43t = s1 [ 0 ]
-44t = s1 [ 0 ]
-#cond4 a >= b >= 43t <= 44t != 1
-cond #cond1 && #cond2 && #cond3 && #cond4
-CheckCond
-start #if5
-str-1 =>= is ok
-ln-1
-PRINTF
-end #if5
-start #else5
-str-1 =>= has problem
-ln-1
-PRINTF
-end #else5
-#if6
-#cond1 a != b &&
-#cond2 a == b == 0 &&
-#cond3 a > b == a < b != 1 &&
-45t = s1 [ 2 ]
-46t = s1 [ 0 ]
-47t = s1 [ 4 ]
-#cond4 a >= b == 45t != 46t != 47t
-cond #cond1 && #cond2 && #cond3 && #cond4
-CheckCond
-start #if6
-str-1 === != is ok
-ln-1
-PRINTF
-end #if6
-start #else6
-str-1 === != has problem
-ln-1
-PRINTF
-end #else6
-#if7
-48t = s1 [ 3 ]
-49t = s2 [ 0 ] [ 1 ]
-#cond1 48t == 49t ||
-#cond2 a >= b ||
-50t = a + 7 % 4
-51t = b * 3
-#cond3 50t < 51t
-cond #cond1 || #cond2 || #cond3
-CheckCond
-start #if7
-str-1 =or is ok
-ln-1
-PRINTF
-end #if7
-start #else7
-str-1 =or has problem
-ln-1
-PRINTF
-end #else7
-#if8
-52t = a / 2
-53t = b - 3
-#cond1 52t < 53t ||
-54t = s1 [ 0 ]
-55t = 54t + 1
-56t = s1 [ 5 ]
-#cond2 55t > 56t &&
-57t = s1 [ 5 ]
-#cond3 b > 57t
-cond #cond1 || #cond2 && #cond3
-CheckCond
-start #if8
-str-1 =the priority of and/or is ok
-ln-1
-PRINTF
-end #if8
-start #else8
-str-1 =the priority of and/or has problem
-ln-1
-PRINTF
-end #else8
-#if9
-#cond1 a < b ||
-58t = + a
-#cond2 58t
-cond #cond1 || #cond2
-CheckCond
-start #if9
-59t = a + 1
-upd a = 59t
-#if10
-60t = s1 [ 0 ]
-61t = s1 [ 1 ]
-#cond1 60t < 61t &&
-62t = + b
-#cond2 62t
-cond #cond1 && #cond2
-CheckCond
-start #if10
-63t = b + 1
-upd b = 63t
+push from
+push to
+push via
+1t = t - 1
+push 1t
+call hanoi
+2t = RET
+str-1 =Move from 
 ins-1
-str-1 = 
+str-2 = to 
 ins-2
 ln-1
-anw-1 = a
-anw-2 = b
+anw-1 = from
+anw-2 = to
 PRINTF
-end #if10
-end #if9
+push via
+push from
+push to
+3t = t - 1
+push 3t
+call hanoi
+4t = RET
+ret
+end hanoi
+func int main
+start main
+var v t
+5t = GETINT
+upd t = 5t
+str-1 =20373493
+ln-1
+PRINTF
+push 1
+push 2
+push 3
+push t
+call hanoi
+6t = RET
 ret 0
 end main

@@ -1,9 +1,10 @@
 19182636
-! has problem
-< has problem
+! is ok
+< is ok
 > is ok
-<= has problem
+<= is ok
 >= is ok
 == != is ok
 or is ok
-the priority of and/or has problem
+the priority of and/or is ok
+6 7
