@@ -1,296 +1,230 @@
-const a eye [ 3 ] [ 3 ] = { { 1 , 0 , 0 } , { 0 , 1 , 0 } , { 0 , 0 , 1 } }
-const v D = 3
-const a base [ 3 ] = { 1 , 0 , 0 }
-var a va [ 3 ] [ 3 ]
-var a vb [ 3 ] [ 3 ] = { { 1 , 2 , 3 } , { 4 , 5 , 6 } , { 7 , 8 , 9 } }
-var a vc [ 3 ] = { 4 , 5 , 6 }
-var a vd [ 3 ]
-var v badname
-func int vdot
-para a x [ ]
-para a y [ ]
-start vdot
-var v d = 0
-var v sum = 0
-var v useless
-#while
-#cond1 1 ||
-#cond2 0
-cond #cond1 || #cond2
-CheckCond
-start #while
-1t = x [ d ]
-2t = y [ d ]
-3t = sum + 1t * 2t / 1
-upd sum = 3t
-str-1 =sum=
-ins-1
+func int main
+start main
+str-1 =19182636
 ln-1
-anw-1 = sum
 PRINTF
-4t = sum % 2 - 3
-upd useless = 4t
-5t = d + 1
-upd d = 5t
+var v a = 5
+var v b = 6
+var a s1 [ 6 ] = { 0 , 1 , 2 , 3 , 6 , 12 }
+var a s2 [ 2 ] [ 3 ] = { { 10 , 11 , 12 } , { 13 , 14 , 15 } }
 #if1
-#cond1 d == D ||
-#cond2 0 &&
-6t = - sum < 7
-7t = ! 6t
-8t = 7t 7 + 1
-#cond3 8t ||
-9t = + sum
-10t = 8 - 1
-#cond4 9t > 10t
-cond #cond1 || #cond2 && #cond3 || #cond4
+1t = s1 [ 0 ]
+2t = ! 1t
+#cond1 2t == 1 &&
+3t = s1 [ 0 ]
+4t = ( 3t * 2 )
+5t = ! 4t
+#cond2 5t &&
+6t = ! 0
+#cond3 6t
+cond #cond1 && #cond2 && #cond3
 CheckCond
 start #if1
-BREAK
+str-1 =! is ok
+ln-1
+PRINTF
 end #if1
 start #else1
+str-1 =! has problem
+ln-1
+PRINTF
+end #else1
 #if2
-#cond1 1
-cond #cond1
+7t = a + b
+8t = s1 [ 5 ]
+#cond1 7t < 8t &&
+9t = s1 [ 3 ]
+10t = s1 [ 0 ]
+11t = 9t - 10t
+12t = s2 [ 1 ] [ 2 ]
+13t = 12t / a
+#cond2 11t < 13t == 0 &&
+14t = a + b
+15t = s1 [ 0 ]
+#cond3 b < 14t < 15t == 0 &&
+16t = a + b
+17t = s1 [ 2 ]
+18t = s1 [ 1 ]
+#cond4 0 == b < 16t < 17t > 18t
+cond #cond1 && #cond2 && #cond3 && #cond4
 CheckCond
 start #if2
-CONTINUE
+str-1 =< is ok
+ln-1
+PRINTF
 end #if2
 start #else2
-end #else2
-end #else1
-end #while
-ret sum
-end vdot
-func void print_id
-para v id
-start print_id
-ins-1
+str-1 =< has problem
 ln-1
-anw-1 = id
 PRINTF
+end #else2
 #if3
-#cond1 0 &&
-#cond2 4 > 5
-cond #cond1 && #cond2
+19t = a * b
+20t = s1 [ 2 ]
+21t = s2 [ 1 ] [ 2 ]
+22t = 20t * 21t
+#cond1 19t > 22t == 0 &&
+23t = s2 [ 0 ] [ 1 ]
+24t = s1 [ 2 ]
+25t = ( 23t - 24t ) % a
+26t = s2 [ 1 ] [ 2 ]
+27t = 26t / a
+#cond2 25t > 27t &&
+28t = s1 [ 5 ]
+29t = a + b + 2
+#cond3 28t > 29t > 0 == 0 &&
+30t = s1 [ 5 ]
+31t = a + b
+32t = s1 [ 1 ]
+#cond4 30t > 31t < 32t == 0
+cond #cond1 && #cond2 && #cond3 && #cond4
 CheckCond
 start #if3
-ret
+str-1 => is ok
+ln-1
+PRINTF
 end #if3
-end print_id
-func void print_vec
-para a x [ ]
-start print_vec
+start #else3
+str-1 => has problem
+ln-1
+PRINTF
+end #else3
+#if4
+#cond1 a <= b &&
+33t = s1 [ 1 ]
+34t = b + 33t
+#cond2 a <= 34t &&
+35t = s1 [ 0 ]
+#cond3 a <= b <= 35t == 0 &&
+36t = s1 [ 2 ]
+#cond4 a <= b >= 36t < 1
+cond #cond1 && #cond2 && #cond3 && #cond4
+CheckCond
+start #if4
+str-1 =<= is ok
+ln-1
+PRINTF
+end #if4
+start #else4
+str-1 =<= has problem
+ln-1
+PRINTF
+end #else4
+#if5
+37t = a + 1
+#cond1 b >= 37t &&
+38t = s1 [ 4 ]
+39t = s1 [ 1 ]
+40t = 38t + 39t
+#cond2 b >= 40t != 1 &&
+41t = s1 [ 1 ]
+42t = 41t + 1
+#cond3 a <= b >= 42t == 0 &&
+43t = s1 [ 0 ]
+44t = s1 [ 0 ]
+#cond4 a >= b >= 43t <= 44t != 1
+cond #cond1 && #cond2 && #cond3 && #cond4
+CheckCond
+start #if5
+str-1 =>= is ok
+ln-1
+PRINTF
+end #if5
+start #else5
+str-1 =>= has problem
+ln-1
+PRINTF
+end #else5
+#if6
+#cond1 a != b &&
+#cond2 a == b == 0 &&
+#cond3 a > b == a < b != 1 &&
+45t = s1 [ 2 ]
+46t = s1 [ 0 ]
+47t = s1 [ 4 ]
+#cond4 a >= b == 45t != 46t != 47t
+cond #cond1 && #cond2 && #cond3 && #cond4
+CheckCond
+start #if6
+str-1 === != is ok
+ln-1
+PRINTF
+end #if6
+start #else6
+str-1 === != has problem
+ln-1
+PRINTF
+end #else6
+#if7
+48t = s1 [ 3 ]
+49t = s2 [ 0 ] [ 1 ]
+#cond1 48t == 49t ||
+#cond2 a >= b ||
+50t = a + 7 % 4
+51t = b * 3
+#cond3 50t < 51t
+cond #cond1 || #cond2 || #cond3
+CheckCond
+start #if7
+str-1 =or is ok
+ln-1
+PRINTF
+end #if7
+start #else7
+str-1 =or has problem
+ln-1
+PRINTF
+end #else7
+#if8
+52t = a / 2
+53t = b - 3
+#cond1 52t < 53t ||
+54t = s1 [ 0 ]
+55t = 54t + 1
+56t = s1 [ 5 ]
+#cond2 55t > 56t &&
+57t = s1 [ 5 ]
+#cond3 b > 57t
+cond #cond1 || #cond2 && #cond3
+CheckCond
+start #if8
+str-1 =the priority of and/or is ok
+ln-1
+PRINTF
+end #if8
+start #else8
+str-1 =the priority of and/or has problem
+ln-1
+PRINTF
+end #else8
+#if9
+#cond1 a < b ||
+58t = + a
+#cond2 58t
+cond #cond1 || #cond2
+CheckCond
+start #if9
+59t = a + 1
+upd a = 59t
+#if10
+60t = s1 [ 0 ]
+61t = s1 [ 1 ]
+#cond1 60t < 61t &&
+62t = + b
+#cond2 62t
+cond #cond1 && #cond2
+CheckCond
+start #if10
+63t = b + 1
+upd b = 63t
 ins-1
 str-1 = 
 ins-2
-str-2 = 
-ins-3
 ln-1
-11t = x [ 0 ]
-anw-1 = 11t
-12t = x [ 1 ]
-anw-2 = 12t
-13t = x [ 2 ]
-anw-3 = 13t
+anw-1 = a
+anw-2 = b
 PRINTF
-end print_vec
-func void uselessfunc
-start uselessfunc
-var v i = 0
-14t = i + 2 - 5 % 2
-upd i = 14t
-#if4
-#cond1 i >= 3
-cond #cond1
-CheckCond
-start #if4
-end #if4
-end uselessfunc
-func void print_mat
-para a m [ ] [ 3 ]
-start print_mat
-var v dt = 0
-#while
-15t = ! 0
-#cond1 15t
-cond #cond1
-CheckCond
-start #while
-16t = m [ dt ]
-push 16t
-call print_vec
-17t = RET
-18t = dt + 1
-upd dt = 18t
-#if5
-#cond1 dt < 3 &&
-#cond2 1
-cond #cond1 && #cond2
-CheckCond
-start #if5
-CONTINUE
-end #if5
-start #else5
-#if6
-#cond1 1
-cond #cond1
-CheckCond
-start #if6
-BREAK
-end #if6
-start #else6
-end #else6
-end #else5
-end #while
-end print_mat
-func int main
-start main
-push 19373311
-call print_id
-19t = RET
-var v d1 = 0
-#while
-#cond1 d1 != D ||
-#cond2 d1 < D
-cond #cond1 || #cond2
-CheckCond
-start #while
-var v d2 = 0
-#while
-20t = D - 1
-#cond1 d2 <= 20t
-cond #cond1
-CheckCond
-start #while
-upd va [ d1 ] [ d2 ] = getint ( )
-21t = d2 + 1
-upd d2 = 21t
-end #while
-22t = d1 + 1
-upd d1 = 22t
-end #while
-var v cd = 5
-#while
-#cond1 cd
-cond #cond1
-CheckCond
-start #while
-23t = cd - 1
-upd cd = 23t
-str-1 =123
-ln-1
-PRINTF
-end #while
-push vc
-call print_vec
-24t = RET
-var v ans
-str-1 =-------------------------
-ln-1
-PRINTF
-ins-1
-str-1 = 
-25t = va [ 0 ] [ 0 ]
-anw-1 = 25t
-PRINTF
-ins-1
-str-1 = 
-26t = va [ 0 ] [ 1 ]
-anw-1 = 26t
-PRINTF
-ins-1
-ln-1
-27t = va [ 0 ] [ 2 ]
-anw-1 = 27t
-PRINTF
-ins-1
-str-1 = 
-28t = va [ 1 ] [ 0 ]
-anw-1 = 28t
-PRINTF
-ins-1
-str-1 = 
-29t = va [ 1 ] [ 1 ]
-anw-1 = 29t
-PRINTF
-ins-1
-ln-1
-30t = va [ 1 ] [ 2 ]
-anw-1 = 30t
-PRINTF
-ins-1
-str-1 = 
-31t = va [ 2 ] [ 0 ]
-anw-1 = 31t
-PRINTF
-ins-1
-str-1 = 
-32t = va [ 2 ] [ 1 ]
-anw-1 = 32t
-PRINTF
-ins-1
-ln-1
-33t = va [ 2 ] [ 2 ]
-anw-1 = 33t
-PRINTF
-34t = va [ 0 ]
-push 34t
-push vc
-call vdot
-35t = RET
-upd ans = 35t
-ins-1
-ln-1
-anw-1 = ans
-PRINTF
-36t = va [ 1 ]
-push 36t
-37t = vb [ 0 ]
-push 37t
-call vdot
-38t = RET
-upd ans = 38t
-ins-1
-ln-1
-anw-1 = ans
-PRINTF
-39t = va [ 2 ]
-push 39t
-40t = vb [ 0 ]
-push 40t
-call vdot
-41t = RET
-upd ans = 41t
-ins-1
-ln-1
-anw-1 = ans
-PRINTF
-42t = va [ 0 ]
-push 42t
-43t = vb [ 2 ]
-push 43t
-call vdot
-44t = RET
-upd ans = 44t
-ins-1
-ln-1
-anw-1 = ans
-PRINTF
-45t = va [ 0 ]
-push 45t
-46t = vb [ 1 ]
-push 46t
-call vdot
-47t = RET
-upd ans = 47t
-ins-1
-ln-1
-anw-1 = ans
-PRINTF
-push vb
-call print_mat
-48t = RET
-call uselessfunc
-49t = RET
+end #if10
+end #if9
 ret 0
 end main

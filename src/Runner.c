@@ -1,100 +1,185 @@
 
-const int eye[3][3] = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, D = 3;
-const int base[3] = {1, 0, 0};
-int va[3][3], vb[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, vc[3] = {4, 5, 6}, vd[3], badname;
+const int global_const_A = 1;
+const int global_const_B1 = 11, global_const_B2 = 12;
+const int A = 10;
+const int array_A[(1 + 9) + 1] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+const int array_D[2][1] = {{1},
+                           {1}};
+
+int B[(110 / 10)], AB[+11];
+int global_var1;
+int global_var2, global_var3 = 0;
+int array_D1[7 % 4][8 / 2] = {{1,  2,  3,  4},
+                              {5,  6,  7,  8},
+                              {10, 11, 12, 13}};
+
+
+void func_void() {
+    const int const_1 = 1;
+    int var1;
+    global_var1 = 1;
+    global_var1 + global_var3;
+    {
+        var1 = getint();
+        var1 = const_1 + var1;
+    };
+    return;
+}
+
+int func_if_var(int var) {
+    if (var > 0) var = 1;
+    if (var + 1 <= 1)
+        var = 4;
+    if (var >= 1 + 1)
+        var = 5;
+    if (-var + var) var = 6;
+    if (-var + var == 0 + 1) var = 7;
+    if (var > 1 != var < 1) var = 8;
+    if (!var) var = 0;
+    if (var < 1) {
+        var = -var;
+    } else;
+    return var;
+}
+
+void func_null() {
+}
+
+int func_if_D1array(int a[], int factor) {
+    if (a[0] == 0) a[0] = a[0] + a[1];
+    if (a[1] != 1) a[1] = a[1] + a[2];
+    if (a[2] >= 2) a[2] = 1 + a[2] % A;
+    if (a[3] <= 5) a[3] = a[3] * - + - + -a[4];
+    if (a[4] < 0) a[4] = (a[4] + 5 / 3) % a[1];
+    if (a[5] > 5 + a[4]) a[5] = a[5] % (a[3] * 2);
+    if (a[6] / 2 > 1 == a[5] > a[2]) a[6] = + -(a[6] / 9);
+    if (a[7]) a[7] = a[7] / 2;
+    //printf("Testing func_if(a[], b) ...... %d %d %d %d %d %d %d %d %d\n", a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], factor + 1);
+    return a[0] + a[1] + a[2] + (a[3] + a[4] + a[5] + a[6]) / factor;
+}
+
+int func_test(int a[], int i) {
+    a[i] = 1;
+    return 1;
+}
+
+void func_test_A() {
+    int var1 = 3, var2 = 4, var3 = 5;
+    int var[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    if (var1 < 1 || var1 > 3) var[0] = 1;
+    if (var1 > 1 || var1 < 3) var[1] = 1;
+    else var[1] = 0;
+    if (var1 == 3 && var2 == 4) var[2] = 1;
+    else var[2] = 0;
+    if (var3 == 3 && func_test(var, 3));
+    if (var3 >= 3 && func_test(var, 4));
+    if (var3 == 5 || func_test(var, 5));
+    if (var3 <= 3 || func_test(var, 6));
+    if (var3 != 3 && func_test(var, 7) || func_test(var, 8));
+    if (var3 != 5 || func_test(var, 9) && func_test(var, 10));
+    if (!var1 || !var2 || var3 && func_test(var, 11));
+    printf("Testing Short-circuit evaluation : %d %d %d %d %d %d %d %d %d %d %d %d\n",
+           var[0], var[1], var[2], var[3], var[4], var[5], var[6], var[7], var[8], var[9], var[10], var[11]);
+    return;
+}
 
 int getint(){
 	int s;
 	scanf("%d",&s);
 	return s;
 } 
-int vdot(int x[], int y[]) {
-	int d = 0, sum = 0;
-	int useless;
-	while (1 || 0) {
-		sum = sum + x[d] * y[d] / 1;
-		printf("sum=%d\n",sum);
-		useless = sum % 2 - 3;
-		d = d + 1;
-		if (d == D || 0 && ! - sum < 7 + 1 || + sum > 8 - 1){
-			printf("break\n"); 
-			break;	
-		} 
-		else if (1) continue;
-		else ;
-	}
-	return sum;
+void func_if_D2array(int a[][3], int factor) {
+    if (a[0][0] == 1) a[0][0] = a[0][0] + a[0][1];
+    if (a[0][1] != 1) a[0][1] = a[0][1] + a[0][2];
+    if (a[0][2] >= 2) a[0][2] = 1 + a[0][2] % A;
+    if (a[1][0] <= 5) a[1][0] = a[1][0] * - + - + -a[1][0];
+    if (a[1][0] < 0) a[1][0] = (a[1][0] + 5 / 3) % a[1][1];
+    if (!a[1][0]) a[1][0] = 1;
+    if (a[1][1] > 5 + a[1][2]) a[1][1] = a[1][2] % (a[0][0] * 2);
+    if (a[0][1] / 2 > 1 == a[1][0] > a[1][2]) a[1][2] = + -(a[1][1] / 3);
+    if (a[0][0]) a[0][0] = a[0][0] / 2;
+    printf("Testing func_if_D2array(a[][3], b) ......\n%d %d %d\n%d %d %d\n", a[0][0], a[0][1], a[0][2], a[1][0],
+           a[1][1], a[1][2]);
 }
 
-void print_id(int id) {
-	printf("%d\n", id);
-	if (0 && 4 > 5) return;
+int func_while(int n, int m) {
+    int i = m + n, j = 0, k = 0;
+    while (i) {
+        k = k + 1;
+        i = i - 1;
+        if (i == n)
+            break;
+        if (i == n + 1)
+            continue;
+        j = j + 1;
+    }
+    return j;
 }
 
-
-void print_vec(int x[]) {
-	printf("%d %d %d\n", x[0], x[1], x[2]);
+void func_pass_array(int array[][4]) {
+    int i = 0;
+    printf("Testing func_pass_array(int a[][4) ......\n%d %d %d %d\n%d %d %d %d\n%d %d %d %d\n",
+           array[0][0], array[0][1], array[0][2], array[0][3], array[1][0], array[1][1], array[1][2], array[1][3],
+           array[2][0], array[2][1], array[2][2], array[2][3]);
+    return;
 }
 
-void uselessfunc() {
-	int i  =  0;
-	i = i + 2 - 5 %2;
-	if (i >= 3);
+void func_pass_PartArray(int a[]) {
+    int i = 0;
+    printf("Testing func_pass_PartArray(int a[]) ...... %d %d %d %d\n",
+           a[0], a[1], a[2], a[3]);
+    return;
 }
 
-void print_mat(int m[][3]) {
-	int dt = 0;
-	while (!0) {
-		print_vec(m[dt]);
-		dt = dt + 1;
-		if (dt < 3 && 1) {continue;}
-		else if (1)break;
-		else {}
-	}
+void func_pass_arrayElement(int a) {
+    printf("Testing func_pass_arrayElement(int a) ...... %d\n", a);
+    // return ;
 }
+
 int main() {
-	print_id(19373311);
-	int d1 = 0;
-	while (d1 != D || d1 < D) {
-		int d2 = 0;
-		while (d2 <= D - 1) {
-			va[d1][d2] = getint();
-			d2 = d2 + 1;
-		}
-		d1 = d1 + 1;
-	}
-	int cd = 5;
-	while (cd) {
-		cd = cd - 1;
-		printf("123\n");
-	}
-	print_vec(vc);
-	int ans;
-	printf("-------------------------\n");
-	printf("%d ",va[0][0]);
-	printf("%d ",va[0][1]);
-	printf("%d\n",va[0][2]);
-	printf("%d ",va[1][0]);
-	printf("%d ",va[1][1]);
-	printf("%d\n",va[1][2]);
-	printf("%d ",va[2][0]);
-	printf("%d ",va[2][1]);
-	printf("%d\n",va[2][2]);
-
-
-	ans = vdot(va[0], vc);
-	printf("%d\n", ans);
-	ans = vdot(va[1], vb[0]);
-	printf("%d\n", ans);
-	ans = vdot(va[2], vb[0]);
-	printf("%d\n", ans);
-	ans = vdot(va[0], vb[2]);
-	printf("%d\n", ans);
-	ans = vdot(va[0], vb[1]);
-	printf("%d\n", ans);
-	print_mat(vb);
-	uselessfunc();
-	return 0;
+    //my number
+    printf("19373235\n");
+    int var1 = 1;
+    /*
+     * printf("I'm a comment");
+     */
+    int mul;
+    func_test_A();
+    const int const_C1 = global_const_B1, const_C2 = +12, const_C3 = -global_const_B2;
+    const int const_D1 = (+ - + - + -const_C2) * (const_C2 / global_const_A) % (global_const_B2 + 1) + global_const_B1;
+    int var4 = global_var3 + const_D1, var5, var6 = 1 + 2 * 3;
+    mul = getint();
+    int i = 0;
+    while (i <= 10) {
+        B[i] = array_A[i] * array_A[i];
+        AB[i] = mul * B[i];
+        i = i + 1;
+    }
+    func_pass_array(array_D1);
+    func_pass_PartArray(array_D1[1]);
+    func_pass_arrayElement(array_D1[0][2]);
+    printf("Testing complex calculate ...... result = %d.\n", -(((+ - + -AB[1]) + AB[2]) * (AB[3] % AB[2]) / AB[1]));;
+    printf("Testing D2array traversal and assignment.\n");
+    int array_E[2][3];
+    int j = 0;
+    while (j < 2) {
+        i = 0;
+        while (i <= 2) {
+            array_E[j][i] = i + j;
+            i = i + 1;
+        }
+        j = j + 1;
+    }
+    printf("Array array_E:\n%d %d %d\n%d %d %d\n",
+           array_E[0][0], array_E[0][1], array_E[0][2], array_E[1][0], array_E[1][1], array_E[1][2]);
+    func_void();
+    var5 = func_if_var(const_C1);
+    int factor;
+    factor = getint();
+    int x = func_if_D1array(AB, factor);
+    func_if_D2array(array_E, factor);
+    printf("Loop 7 times, once continue, once break. Symbol j = %d. func_while(x, y)is done!\n",
+           func_while(var5, var6));
+    return 0;
 }
-
 
