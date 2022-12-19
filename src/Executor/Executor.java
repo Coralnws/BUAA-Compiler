@@ -14,8 +14,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static Executor.Executor.activeRunner;
-import static Executor.Executor.floor;
+import static Executor.Executor.*;
 
 
 public class Executor {
@@ -24,7 +23,7 @@ public class Executor {
     static int floor = 0;
     static Runner activeRunner;
     static Stack<Runner> runnerStack = new Stack<Runner>();
-    static HashMap<String, Integer> tempList = new HashMap<String, Integer>(); //temp var
+    static HashMap<String, Integer> publicTempList = new HashMap<String, Integer>(); //temp var
     static HashMap<Integer, Func> funcList = new HashMap<Integer, Func>(); //floor list
     static HashMap<String,Integer> floorList = new HashMap<String,Integer>();
     static ArrayList<String> pcodeList = new ArrayList<String>();
@@ -303,10 +302,10 @@ public class Executor {
                     if(activeRunner == null && floor != 0){
                         continue;
                     }
-                    System.out.println("start #else, check else :" + activeRunner.isElse);
-                    if(activeRunner.isElse){   //碰到start #else的时候，如果isElse是true就代表上一个if cond是 false,这个else要执行
+                    System.out.println("start #else, check else :" + activeRunner.isElseList.get(sym[1]));
+                    if(activeRunner.isElseList.get(sym[1])){   //碰到start #else的时候，如果isElse是true就代表上一个if cond是 false,这个else要执行
                         //如果是else if,那么这边先把else设成false也没有影响,等if再判断再看是不是isElse
-                        activeRunner.isElse = false;
+                        activeRunner.isElseList.put(sym[1],false);
                     }else{ //如果这时候isElse false代表上一个if是true,这边就要跳到下一个end
                         skipping = true;
                     }
@@ -399,7 +398,7 @@ public class Executor {
                     }else{
                         result = 0;
                     }
-                    addTempList(sym[0],result);
+                    addtempList(sym[0],result);
                     continue;
                 } else if(isExpression()){
                     String[] newSym = new String[sym.length-2];  //删掉前面两个符号
@@ -468,12 +467,13 @@ public class Executor {
                     //System.out.println("hasRet is :" + hasRet);
                     if(hasRet){
                         value = (int) activeRunner.exeStack.pop();
+                        System.out.println("RET = "+value);
                         hasRet = false;
                     }
                 }
 
                 //System.out.println("Value of "+ sym[0] + " : " + value);
-                addTempList(sym[0],value);
+                addtempList(sym[0],value);
             }
             else if(isStr(sym[0])){
                 if(activeRunner == null && floor != 0){
@@ -725,7 +725,7 @@ public class Executor {
                 //System.out.println("Check condList size is 1 : "+activeRunner.condList.size());
                 condResult = activeRunner.condList.pop();
                 activeRunner.condList.clear();
-                activeRunner.isElse = false;
+                //activeRunner.isElseList.get() = false;
                 if(!condResult){
                     //System.out.println("Cond is false");
                     readPcode();
@@ -733,7 +733,7 @@ public class Executor {
                     if(isIf(sym[1])){
                         //System.out.println("Cond false,skip to else");
                         skipping = true;
-                        activeRunner.isElse = true;
+                        activeRunner.isElseList.put(ifToElse(sym[1]),true);
                     }else if(sym[1].equals("#while")){
                         //System.out.println("Check cond false,skip while");
                         //System.out.println("Remove whileStart: " + activeRunner.getCurrentWhile());
@@ -789,6 +789,9 @@ public class Executor {
                         //skipping = true;
                     }
                 }else{
+                    readPcode();
+                    sym = pcode.split(" ");
+                    activeRunner.isElseList.put(ifToElse(sym[1]),false);
                     //System.out.println("Cond true, end at if");
                     //System.out.println("Check else is false:" + activeRunner.isElse);
                 }
@@ -1319,6 +1322,11 @@ public class Executor {
         return arr;
     }
 
+    public String ifToElse(String ifStr){
+        char ch = ifStr.charAt(ifStr.length()-1);
+        return "#else"+ch;
+    }
+
     public Para newPara(String[] arr){
         //para a  a [ ] [ 2 ]
         //para v b
@@ -1389,8 +1397,12 @@ public class Executor {
         //
     }
 
-    public void addTempList(String str, Integer value) {
-        tempList.put(str, value);
+    public void addtempList(String str, Integer value) {
+        if(activeRunner!= null){
+            activeRunner.tempList.put(str, value);
+        }else{
+            publicTempList.put(str,value);
+        }
     }
 
     public boolean isAnw(String str) {
@@ -1418,7 +1430,7 @@ public class Executor {
     }
 
     public boolean isTemp(String str) {
-        Pattern pattern = Pattern.compile("[0-9]*t");
+        Pattern pattern = Pattern.compile("[0-9][0-9]*t");
         Matcher matcher = pattern.matcher(str);
         return matcher.matches();
     }
@@ -1461,8 +1473,16 @@ public class Executor {
     }
 
     public int getTempValue(String name) {
-        System.out.println("GetTempValue , " + name +" = "+ tempList.get(name));
-        return tempList.get(name);
+        if(activeRunner!=null){
+            System.out.println("GetTempValue , " + name +" = "+ activeRunner.tempList.get(name));
+            return activeRunner.tempList.get(name);
+
+        }else{
+            System.out.println("GetTempValue , " + name +" = "+ publicTempList.get(name));
+            return publicTempList.get(name);
+        }
+
+
     }
 
     public int getVarValue(String name) {
@@ -1719,9 +1739,10 @@ class Runner{
     int endAddr;
     Func func;
     int funcFloor;
-
+    HashMap<String, Integer> tempList = new HashMap<String, Integer>(); //temp var
     HashMap<String,Integer> whileStartList = new HashMap<String,Integer>();
     HashMap<String,Integer> whileEndList = new HashMap<String,Integer>();
+    HashMap<String,Boolean> isElseList = new HashMap<String,Boolean>();
 
     static HashMap<String,Integer> ifElseList = new HashMap<String,Integer>();
     static Stack<String> condOpList = new Stack<String>();
@@ -1749,6 +1770,7 @@ class Runner{
         this.func = func;
         this.funcFloor = funcFloor;
         this.level = level;
+        tempList.putAll(publicTempList);
     }
 
     public Symbol getSymb(String name){ //get symbol from active runner symbtable

@@ -1,97 +1,46 @@
 
-const int eye[3][3] = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, D = 3;
-const int base[3] = {1, 0, 0};
-int va[3][3], vb[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, vc[3] = {4, 5, 6}, vd[3], badname;
+const int _ = 20373117 + -+-1 * 1 / 1 - +1 % 2;
+const int value1 = 1;
 
-int getint(){
-	int s;
-	scanf("%d",&s);
-	return s;
-} 
-int vdot(int x[], int y[]) {
-	int d = 0, sum = 0;
-	int useless;
-	while (1 || 0) {
-		sum = sum + x[d] * y[d] / 1;
-		printf("sum=%d\n",sum);
-		useless = sum % 2 - 3;
-		d = d + 1;
-		if (d == D || 0 && ! - sum < 7 + 1 || + sum > 8 - 1) break;
-		else if (1) continue;
-		else ;
-	}
-	return sum;
-}
-
-void print_id(int id) {
-	printf("%d\n", id);
-	if (0 && 4 > 5) return;
-}
+int value10 = 10;
+int value11 = 11, value12 = 12, value13;
 
 
-void print_vec(int x[]) {
-	printf("%d %d %d\n", x[0], x[1], x[2]);
-}
-
-void uselessfunc() {
-	int i  =  0;
-	i = i + 2 - 5 %2;
-	if (i >= 3);
-}
-
-void print_mat(int m[][3]) {
-	int dt = 0;
-	while (!0) {
-		print_vec(m[dt]);
-		dt = dt + 1;
-		if (dt < 3 && 1) {continue;}
-		else if (1)break;
-		else {}
-	}
-}
 int main() {
-	print_id(19373311);
-	int d1 = 0;
-	while (d1 != D || d1 < D) {
-		int d2 = 0;
-		while (d2 <= D - 1) {
-			va[d1][d2] = getint();
-			d2 = d2 + 1;
+	value13 = 13;
+	int value14 = 14, value15 = 15, value16;
+	int value17;
+
+	printf("%d\n", _);
+
+	int n = 3;
+	while(n > 0) {
+		n = -1 + n;
+		if (n == 2) {
+			if (value14 - value11 == 3) {
+				continue;
+				printf("continue is wrong\n");
+			} else {
+				printf("if is wrong\n");
+				break;
+			}
+		} else if (n == 1) {
+			if (value15 - value12 != 3) {
+				printf("if is wrong\n");
+				break;
+			} else {
+				continue;
+				printf("continue is wrong\n");
+			}
 		}
-		d1 = d1 + 1;
-	}
-	int cd = 5;
-	while (cd) {
-		cd = cd - 1;
-		printf("123\n");
-	}
-	print_vec(vc);
-	int ans;
-	printf("-------------------------\n");
-	printf("%d ",va[0][0]);
-	printf("%d ",va[0][1]);
-	printf("%d\n",va[0][2]);
-	printf("%d ",va[1][0]);
-	printf("%d ",va[1][1]);
-	printf("%d\n",va[1][2]);
-	printf("%d ",va[2][0]);
-	printf("%d ",va[2][1]);
-	printf("%d\n",va[2][2]);
 
+		if (n == 0) {
+			 printf("%d\n", 20373117 + -+-1 * 1 / 1 - +1 % 2);
+			 printf("%d\n", 20373117);
+		}
+	}
 
-	ans = vdot(va[0], vc);
-	printf("%d\n", ans);
-	ans = vdot(va[1], vb[0]);
-	printf("%d\n", ans);
-	ans = vdot(va[2], vb[0]);
-	printf("%d\n", ans);
-	ans = vdot(va[0], vb[2]);
-	printf("%d\n", ans);
-	ans = vdot(va[0], vb[1]);
-	printf("%d\n", ans);
-	print_mat(vb);
-	uselessfunc();
+	printf("\n\n\n\n\n\n");
+
 	return 0;
 }
-
-

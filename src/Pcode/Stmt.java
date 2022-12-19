@@ -14,6 +14,7 @@ Stmt → LVal '=' Exp ';' (Done)
  */
 public class Stmt extends PcodeGenerator{
     int elseNum;
+    int ifNum;
     public Stmt() throws IOException {
         //System.out.println("Pcode Stmt,check now is <Stmt>: " + currentWord.typeCode);
         nextWord();
@@ -77,6 +78,7 @@ public class Stmt extends PcodeGenerator{
              */
             nextIf();
             elseNum = ifNum();
+            ifNum = PcodeGenerator.ifNum;
             writer.write(getIfNum());
             nextWord();
             nextWord();
@@ -86,9 +88,9 @@ public class Stmt extends PcodeGenerator{
                     nextWord(); // <Block>
                     Block block = new Block(getIfNum());
                 }else{
-                    writer.write("start "+getIfNum());
+                    writer.write("start "+ "#if"+ifNum);
                     Stmt stmt = new Stmt();
-                    writer.write("end "+getIfNum());
+                    writer.write("end "+ "#if"+ifNum);
                 }
                 if(currentWord.typeCode.equals("ELSETK")){
                     nextWord(); //<Stmt>
