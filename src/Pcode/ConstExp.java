@@ -98,7 +98,7 @@ public class ConstExp extends PcodeGenerator{
 
     boolean isMulti(){
         String str = pcode.toString();
-        if(str.contains("+") || str.contains("-") || str.contains("*") || str.contains("/") || str.contains("%")){
+        if(str.contains("+") || str.contains("-") || str.contains("*") || str.contains("/") || str.contains("%") || str.contains("(") && str.contains(")")){
             return true;
         }
         else{

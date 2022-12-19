@@ -19,7 +19,7 @@ public class Return extends PcodeGenerator{
         //System.out.println("Check now is Exp or ; : " + currentWord.typeCode);
 
         while(!currentWord.typeCode.equals("SEMICN")){
-            if(!BlockItemTestExp()){
+            if(!currentWord.typeCode.equals("LPARENT") && !BlockItemTestExp()){
                 //System.out.println("return值没有Exp");
                 while(!currentWord.typeCode.equals("SEMICN")){
                     //System.out.println("append into pcode: " + currentWord.typeCode);
