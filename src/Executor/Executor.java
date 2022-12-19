@@ -614,8 +614,7 @@ public class Executor {
                     System.out.println("检查opList size:"+opList.size());
                     System.out.println("检查operandList size:"+operandList.size());
                     System.out.println("检查最后答案:" + operandList.peek());
-                    System.out.println(
-                            operandList.toString().replaceAll("\\[", "").replaceAll("]", ""));
+                    System.out.println(operandList.toString().replaceAll("\\[", "").replaceAll("]", ""));
 
                     String res = operandList.pop();
                     if(res.equals("0")){
@@ -814,7 +813,7 @@ public class Executor {
                                 /*
                                 if(activeRunner.ifList.size()>0)
                                     System.out.println("检查当前if:"+activeRunner.ifList.peek());
-                                    
+
                                  */
                                 if(sym[1].equals("#while")) {
                                     if (!activeRunner.getCurrentWhile().equals(currentWhile)) {
