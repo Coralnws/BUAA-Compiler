@@ -1,148 +1,223 @@
-func void read
-para a a [ ] [ 3 ]
-para v n
-start read
-var v i = 0
-var v j = 0
-#while
-#cond1 i < n
-cond #cond1
-CheckCond
-start #while
-upd j = 0
-#while
-#cond1 j < 3
-cond #cond1
-CheckCond
-start #while
-upd a [ i ] [ j ] = getint ( )
-1t = j + 1
-upd j = 1t
-end #while
-2t = i + 1
-upd i = 2t
-end #while
+1t = 6 / 4
+const v simple_const_a = 1t
+const a arr_1d_a [ 5 ] = { 2 , 3 , 4 , 5 , 6 }
+const a arr_2d_a [ 2 ] [ 2 ] = { { 7 , 8 } , { 9 , 10 } }
+const a arr_2d_b [ 3 ] [ 2 ] = { { 44 , 55 } , { 66 , 77 } , { 88 , 99 } }
+const v simple_cosnt_b = 11
+const a arr_1d_b [ 9 ] = { 11 , 22 , 33 , 44 , 55 , 66 , 77 , 88 , 99 }
+var v simple_var_c = 327
+var v simple_var_d
+var a arr_1d_c [ 2 ] = { 896 , 1 }
+var a arr_1d_d [ 10 ]
+var a arr_2d_c [ 3 ] [ 3 ]
+var a arr_2d_d [ 2 ] [ 2 ] = { { 3 , 56 } , { 45 , 16 } }
+var a arr_2d_e [ 10 ] [ 10 ]
+func void empty_func
+start empty_func
+end empty_func
+func void para_only
+para v a
+para a b [ ]
+para a c [ ] [ 2 ]
+start para_only
+str-1 =Successfully call a function with 3 types of paras.
+ln-1
+PRINTF
 ret
-end read
+end para_only
+func void put_stu_id
+start put_stu_id
+str-1 =20373453
+ln-1
+ln-2
+PRINTF
+ret
+end put_stu_id
+func int sum_arr_1d
+para a arr [ ]
+para v length
+start sum_arr_1d
+var v i = 0
+var v sum = 0
+#while
+2t = length - 1
+#cond1 i <= 2t
+cond #cond1
+CheckCond
+start #while
+start #block
+3t = arr [ i ]
+4t = sum + 3t
+upd sum = 4t
+5t = i + 1
+upd i = 5t
+end #block
+end #while
+ret sum
+end sum_arr_1d
+func int get_then_print
+start get_then_print
+const a const_tmp [ 2 ] = { 66 , 88 }
+var v tmp
+var v ans
+var a ret [ 2 ] [ 3 ]
+6t = GETINT
+upd tmp = 6t
+#if1
+#cond1 tmp > 100
+cond #cond1
+CheckCond
+start #if1
+start #block
+ln-1
+str-1 =Just get a number [
+ins-1
+str-2 =] (greater than 100).
+ln-2
+anw-1 = tmp
+PRINTF
+end #block
+end #if1
+start #else1
+start #block
+ln-1
+str-1 =Just get a number [
+ins-1
+str-2 =] (smaller than or equal to 100).
+ln-2
+anw-1 = tmp
+PRINTF
+end #block
+end #else1
+upd ret [ 0 ] [ 0 ] = tmp
+7t = const_tmp [ 0 ]
+8t = tmp + ( 7t / 2 )
+upd ret [ 0 ] [ 1 ] = 8t
+9t = const_tmp [ 0 ]
+10t = const_tmp [ 1 ]
+11t = 9t * 10t
+upd ret [ 0 ] [ 2 ] = 11t
+12t = ret [ 0 ]
+push 12t
+push 3
+call sum_arr_1d
+13t = RET
+upd ans = 13t
+ret ans
+end get_then_print
+func void put_global_simple_var_c
+start put_global_simple_var_c
+str-1 =GLOBAL simple_var_c: 
+ins-1
+ln-1
+anw-1 = simple_var_c
+PRINTF
+ret
+end put_global_simple_var_c
 func int main
 start main
-var a a [ 5 ] = { 1 , 2 , 3 , 4 , 5 }
-3t = 1000 - 997 + 123 / 145
-4t = 6 - 3 * 5 % 7 - 3 / 2
-var a c [ 2 ] [ 3t ] = { { 1 , 2 , 3 } , { 4t , 4 , 5 } }
-5t = 100 - 99
-6t = c [ 1 ] [ 2 ]
-7t = 6t + 3
-upd c [ 1 ] [ 5t ] = 7t
-str-1 =20373318
-ln-1
-PRINTF
-var v i = 0
-#while
-#cond1 i < 5
-cond #cond1
-CheckCond
-start #while
-str-1 =a[
-ins-1
-str-2 =] = 
-ins-2
-str-3 =, 
-anw-1 = i
-8t = a [ i ]
-anw-2 = 8t
-PRINTF
-9t = i + 1
-upd i = 9t
-end #while
-ln-1
-PRINTF
-upd i = 0
-10t = i + 100
-var v j = 10t
-var v flag = 0
-upd i = 0
-upd j = 123456789
-#while
-#cond1 i < 2
-cond #cond1
-CheckCond
-start #while
-upd j = 0
-#while
-#cond1 j < 3
-cond #cond1
-CheckCond
-start #while
-str-1 =c[
-ins-1
-str-2 =][
-ins-2
-str-3 =] = 
-ins-3
-str-4 =, 
-anw-1 = i
-anw-2 = j
-11t = c [ i ] [ j ]
-anw-3 = 11t
-PRINTF
-12t = j + 1
-upd j = 12t
-end #while
-ln-1
-PRINTF
-13t = i + 1
-upd i = 13t
-end #while
-var a a1 [ 3 ] [ 3 ]
-push a1
-push 3
-call read
+var v n
+var a ans [ 10 ]
+var v t = 10
+call put_stu_id
 14t = RET
-upd i = 0
-var v sum1 = 0
-var v sum2 = 0
+call empty_func
+15t = RET
+16t = arr_1d_b [ 0 ]
+17t = arr_1d_a [ 2 ]
+18t = 16t / 17t
+upd simple_var_d = 18t
+push simple_var_d
+push arr_1d_c
+push arr_2d_d
+call para_only
+19t = RET
 #while
-#cond1 i < 3
+#cond1 t
 cond #cond1
 CheckCond
 start #while
-upd j = 0
-#while
-#cond1 j < 3
+start #block
+20t = t - 1
+upd t = 20t
+call get_then_print
+21t = RET
+22t = 21t % 10 + 10
+upd n = 22t
+#if2
+#cond1 n >= 10
 cond #cond1
 CheckCond
-start #while
-var v sum2 = 0
-15t = j + i - j
-16t = a1 [ 15t ] [ j ]
-17t = sum1 + 16t
-upd sum1 = 17t
-upd sum2 = sum1
-18t = j + 1
-upd j = 18t
-end #while
-19t = i + 1
-upd i = 19t
-end #while
-str-1 =sum1 = 
+start #if2
+23t = n - 10
+upd n = 23t
+end #if2
+str-1 =lucky number: 
 ins-1
-str-2 =, sum2 = 
+ln-1
+anw-1 = n
+PRINTF
+var v simple_var_c = 0
+var v index = 0
+#while
+#cond1 simple_var_c < 8
+cond #cond1
+CheckCond
+start #while
+start #block
+#if3
+#cond1 simple_var_c == 2
+cond #cond1
+CheckCond
+start #if3
+start #block
+24t = simple_var_c + 1
+upd simple_var_c = 24t
+CONTINUE
+end #block
+end #if3
+start #else3
+start #block
+#if4
+25t = n + 1
+#cond1 25t <= simple_var_c
+cond #cond1
+CheckCond
+start #if4
+BREAK
+end #if4
+end #block
+end #else3
+str-1 =(
+ins-1
+str-2 =)
 ins-2
 ln-1
-anw-1 = sum1
-anw-2 = sum2
+anw-1 = simple_var_c
+26t = arr_1d_b [ simple_var_c ]
+anw-2 = 26t
 PRINTF
-var a asd [ 6 ]
-20t = a1 [ 2 ] [ 1 ]
-21t = c [ 0 ] [ 0 ]
-22t = 20t + 21t
-upd asd [ 4 ] = 22t
-str-1 =asd[4] = 
-ins-1
+27t = arr_1d_b [ simple_var_c ]
+upd ans [ index ] = 27t
+28t = index + 1
+upd index = 28t
+29t = simple_var_c + 1
+upd simple_var_c = 29t
+end #block
+end #while
+#if5
+30t = n + 1
+#cond1 30t != simple_var_c
+cond #cond1
+CheckCond
+start #if5
+str-1 =The ones digit of the lucky number is greater than 7.
 ln-1
-23t = asd [ 4 ]
-anw-1 = 23t
 PRINTF
+end #if5
+end #block
+end #while
+call put_global_simple_var_c
+31t = RET
 ret 0
 end main

@@ -216,7 +216,8 @@ public class Executor {
                 }
                 if(sym[1].equals("v")){//0-const , 1-type(0-const ,1-normal) 2-name ,3-'=' , 4: var/num
                     Variable var = newVar(sym[2],0);
-                    System.out.println("sym[4] :" +sym[4]); if(sym[4].equals("(")){
+                    System.out.println("sym[4] :" +sym[4]);
+                    if(sym[4].equals("(")){
                         String[] newSym = new String[sym.length-4];  //删掉前面四个符号
                         for(int i=0,j=4;j<sym.length;i++,j++){
                             newSym[i] = sym[j];
@@ -331,15 +332,8 @@ public class Executor {
             else if(sym[0].equals("start")) { //record this pointer as current floor's func's start addr
                 System.out.println("Read start");
                 if (isIf(sym[1])) {
-                    if(activeRunner == null && floor != 0){
-                        continue;
-                    }
-                    //newBlock();
+
                 } else if (sym[1].equals("#while")) {
-                    if(activeRunner == null && floor != 0){
-                        continue;
-                    }
-                    //newBlock();
 
                 } else if (sym[1].equals("#block")) {
                     if(activeRunner == null && floor != 0){
@@ -401,7 +395,6 @@ public class Executor {
                     }else{
                         activeRunner.ifList.pop();
                     }
-                    endBlock();
 
                 }else if(sym[1].equals("#while")){
                     if(activeRunner == null && floor != 0){
@@ -411,10 +404,8 @@ public class Executor {
                     //System.out.println("Record while end pcode : currentWhile is "+activeRunner.getCurrentWhile()+" endList : " + Writer.readPcode(pointer));
                     //System.out.println("Check return to which while : "+activeRunner.getCurrentWhile());
                     //System.out.println("Check size of whileStartList : "+activeRunner.whileStartList.size());
-                    checkStackRunner();
                     pointer = activeRunner.whileStartList.get(activeRunner.getCurrentWhile());
                     //System.out.println("Return to while,check pcode : " +Writer.readPcode(pointer));
-                    endBlock();
                 }else if(sym[1].equals("#block")){
                     if(activeRunner == null && floor != 0){
                         continue;
@@ -481,16 +472,10 @@ public class Executor {
                     }
 
                     Symbol arr = getArr(sym[2]);
-/*
-                    if(arr instanceof paraArr){
-                        arr = ((paraArr) arr).content;
-                    }
 
-
- */
                     if(arr.dimensionNum != dimension){
-                        //System.out.println("维度不一样");
-                        //System.out.println("检查下一句是传参,跳过这句: " + Writer.readPcode(pointer));
+                        System.out.println("维度不一样");
+                        System.out.println("检查下一句是传参,跳过这句: " + Writer.readPcode(pointer));
                         pointer++;
                         //这里设定是传第几个维度过去
                         if(arr instanceof paraArr){
@@ -498,7 +483,7 @@ public class Executor {
                         }
                         paraArr arrAsPara = new paraArr(arr.name);  //这边先放一样名字
                         arrAsPara.skipLevel=true;
-                        //System.out.println("检查level是:"+arrAsPara.level);
+                        System.out.println("检查level是:"+arrAsPara.level);
                         arrAsPara.level=senseValue(sym[4]);
                         arrAsPara.content=arr;
                         activeRunner.exeStack.push(arrAsPara);
@@ -578,8 +563,7 @@ public class Executor {
                 if(activeRunner == null && floor != 0){
                     continue;
                 }
-                newBlock();
-                activeRunner.whileStartList.put(activeRunner.getWhileNum(), pointer-1);
+                activeRunner.whileStartList.put(activeRunner.getWhileNum(), pointer);
 
                 //System.out.println("检查activeRunner是哪个:"+activeRunner.name);
                 //System.out.println("Check whileNum when start #while :" +activeRunner.getCurrentWhile());
@@ -592,12 +576,12 @@ public class Executor {
                     continue;
                 }
                 if(activeRunner != null){
-                    newBlock();
                     activeRunner.ifList.push(sym[0]);
                     //activeRunner.isElseList.put(ifToElse(sym[0]),false);
                     System.out.println("push ifList: " + sym[0]);
                     activeRunner.isIf = true;
                 }
+
             }
             else if(isCond(sym[0])){ // == < > <= >=
                 if(activeRunner == null && floor != 0){
@@ -706,6 +690,7 @@ public class Executor {
                         currentRes =false;
                     }
                 }
+
             }
             else if(sym[0].equals("CheckCond")){
                 if(activeRunner == null && floor != 0){
@@ -747,6 +732,11 @@ public class Executor {
                                         activeRunner.getWhileNum();
 
                                     }
+                                    /*else if(isIf(sym[1])){
+                                        activeRunner.ifList.push(sym[1]);
+                                    }
+                                     */
+                                    //activeRunner.whileStartList.put(activeRunner.getWhileNum(), pointer);
                                 }
                                 if(sym[0].equals("end")){//pcode.equals("end #while")
                                     if(sym[1].equals("#while")){
@@ -776,14 +766,12 @@ public class Executor {
                         //System.out.println("Debug: pcode = "+pcode);
                         //skipping = true;
                     }
-                    endBlock();
                 }else{
                     readPcode();
                     sym = pcode.split(" ");
                     activeRunner.isElseList.put(ifToElse(sym[1]),false);
                     //System.out.println("Cond true, end at if");
                     //System.out.println("Check else is false:" + activeRunner.isElse);
-                    //newBlock();
                 }
             }
             else if(sym[0].equals("CONTINUE")){
@@ -1754,6 +1742,7 @@ class Runner{
     static Stack<String> condOpList = new Stack<String>();
     static Stack<Boolean> condList = new Stack<Boolean>();
     Stack<String> ifList = new Stack<String>();
+
     boolean isWhile = false;
     boolean isIf = false;
     boolean isElse = false;

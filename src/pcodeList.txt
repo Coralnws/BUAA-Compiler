@@ -1,148 +1,237 @@
-func void read
-para a a [ ] [ 3 ]
-para v n
-start read
+const v MOD = 13331
+const a TEST0 [ 5 ] = { 0 , 1 , 2 , 3 , 4 }
+const a TEST1 [ 2 ] [ 2 ] = { { 1 , 2 } , { 3 , 4 } }
+var a num [ 100 ]
+func void mul
+para a a [ ] [ 2 ]
+para a b [ ] [ 2 ]
+para a c [ ] [ 2 ]
+start mul
+var a temp [ 2 ] [ 2 ] = { { 0 , 0 } , { 0 , 0 } }
 var v i = 0
-var v j = 0
-#while
-#cond1 i < n
-cond #cond1
-CheckCond
-start #while
-upd j = 0
-#while
-#cond1 j < 3
-cond #cond1
-CheckCond
-start #while
-upd a [ i ] [ j ] = getint ( )
-1t = j + 1
-upd j = 1t
-end #while
-2t = i + 1
-upd i = 2t
-end #while
-ret
-end read
-func int main
-start main
-var a a [ 5 ] = { 1 , 2 , 3 , 4 , 5 }
-3t = 1000 - 997 + 123 / 145
-4t = 6 - 3 * 5 % 7 - 3 / 2
-var a c [ 2 ] [ 3t ] = { { 1 , 2 , 3 } , { 4t , 4 , 5 } }
-5t = 100 - 99
-6t = c [ 1 ] [ 2 ]
-7t = 6t + 3
-upd c [ 1 ] [ 5t ] = 7t
-str-1 =20373318
-ln-1
-PRINTF
-var v i = 0
-#while
-#cond1 i < 5
-cond #cond1
-CheckCond
-start #while
-str-1 =a[
-ins-1
-str-2 =] = 
-ins-2
-str-3 =, 
-anw-1 = i
-8t = a [ i ]
-anw-2 = 8t
-PRINTF
-9t = i + 1
-upd i = 9t
-end #while
-ln-1
-PRINTF
-upd i = 0
-10t = i + 100
-var v j = 10t
-var v flag = 0
-upd i = 0
-upd j = 123456789
+var v j
+var v k
 #while
 #cond1 i < 2
 cond #cond1
 CheckCond
 start #while
+start #block
 upd j = 0
 #while
-#cond1 j < 3
+#cond1 j < 2
 cond #cond1
 CheckCond
 start #while
-str-1 =c[
-ins-1
-str-2 =][
-ins-2
-str-3 =] = 
-ins-3
-str-4 =, 
-anw-1 = i
-anw-2 = j
-11t = c [ i ] [ j ]
-anw-3 = 11t
-PRINTF
-12t = j + 1
-upd j = 12t
+start #block
+upd k = 0
+#while
+#cond1 k < 2
+cond #cond1
+CheckCond
+start #while
+start #block
+1t = temp [ i ] [ j ]
+2t = a [ i ] [ k ]
+3t = b [ k ] [ j ]
+4t = 1t + 2t * 3t
+var v x = 4t
+5t = x % MOD
+upd temp [ i ] [ j ] = 5t
+6t = k + 1
+upd k = 6t
+end #block
 end #while
-ln-1
-PRINTF
-13t = i + 1
-upd i = 13t
+7t = j + 1
+upd j = 7t
+end #block
 end #while
-var a a1 [ 3 ] [ 3 ]
-push a1
-push 3
-call read
-14t = RET
+8t = i + 1
+upd i = 8t
+end #block
+end #while
 upd i = 0
-var v sum1 = 0
-var v sum2 = 0
 #while
-#cond1 i < 3
+#cond1 i < 2
 cond #cond1
 CheckCond
 start #while
+start #block
 upd j = 0
 #while
-#cond1 j < 3
+#cond1 j < 2
 cond #cond1
 CheckCond
 start #while
-var v sum2 = 0
-15t = j + i - j
-16t = a1 [ 15t ] [ j ]
-17t = sum1 + 16t
-upd sum1 = 17t
-upd sum2 = sum1
-18t = j + 1
-upd j = 18t
+start #block
+9t = temp [ i ] [ j ]
+upd c [ i ] [ j ] = 9t
+10t = j + 1
+upd j = 10t
+end #block
 end #while
-19t = i + 1
-upd i = 19t
+11t = i + 1
+upd i = 11t
+end #block
 end #while
-str-1 =sum1 = 
+end mul
+func int f_final
+para v n
+start f_final
+var a x [ 2 ] = { 1 , 1 }
+var a res [ 2 ] [ 2 ] = { { 1 , 0 } , { 0 , 1 } }
+var a t [ 2 ] [ 2 ] = { { 1 , 1 } , { 1 , 0 } }
+12t = n - 1
+var v k = 12t
+#while
+#cond1 k
+cond #cond1
+CheckCond
+start #while
+start #block
+#if1
+13t = k % 2
+#cond1 13t
+cond #cond1
+CheckCond
+start #if1
+start #block
+push res
+push t
+push res
+call mul
+14t = RET
+end #block
+end #if1
+push t
+push t
+push t
+call mul
+15t = RET
+16t = k / 2
+upd k = 16t
+end #block
+end #while
+var a c [ 2 ] = { 0 , 0 }
+var v i = 0
+#while
+#cond1 i < 2
+cond #cond1
+CheckCond
+start #while
+start #block
+var v j = 0
+#while
+#cond1 j < 2
+cond #cond1
+CheckCond
+start #while
+start #block
+17t = c [ i ]
+18t = x [ j ]
+19t = res [ j ] [ i ]
+20t = 17t + 18t * 19t
+var v r = 20t
+21t = r % MOD
+upd c [ i ] = 21t
+22t = j + 1
+upd j = 22t
+end #block
+end #while
+23t = i + 1
+upd i = 23t
+end #block
+end #while
+24t = c [ 0 ]
+ret 24t
+end f_final
+func void printAns
+para v n
+para a x [ ]
+start printAns
+var v i = 1
+#while
+#cond1 i <= n
+cond #cond1
+CheckCond
+start #while
+start #block
 ins-1
-str-2 =, sum2 = 
+str-1 = 
+25t = x [ i ]
+push 25t
+call f_final
+26t = RET
+anw-1 = 26t
+PRINTF
+27t = i + 1
+upd i = 27t
+end #block
+end #while
+end printAns
+func int main
+start main
+str-1 =20373569 the mafia~
+ln-1
+PRINTF
+str-1 =testConst: 
+ins-1
+str-2 = 
 ins-2
+str-3 = 
+ins-3
 ln-1
-anw-1 = sum1
-anw-2 = sum2
+28t = TEST0 [ 1 ]
+29t = TEST0 [ 4 ]
+30t = 28t * 29t
+anw-1 = 30t
+31t = TEST1 [ 0 ] [ 0 ]
+32t = TEST1 [ 1 ] [ 1 ]
+33t = 31t * 32t
+anw-2 = 33t
+34t = TEST1 [ 1 ] [ 0 ]
+35t = TEST0 [ 2 ]
+36t = 34t + 35t
+anw-3 = 36t
 PRINTF
-var a asd [ 6 ]
-20t = a1 [ 2 ] [ 1 ]
-21t = c [ 0 ] [ 0 ]
-22t = 20t + 21t
-upd asd [ 4 ] = 22t
-str-1 =asd[4] = 
+var v n
+37t = GETINT
+upd n = 37t
+var v i = 1
+#while
+#cond1 i <= n
+cond #cond1
+CheckCond
+start #while
+start #block
+var v a
+38t = GETINT
+upd a = 38t
+upd num [ i ] = a
+start #block
+39t = i + 1
+upd i = 39t
+end #block
+end #block
+end #while
+push n
+push num
+call printAns
+40t = RET
+41t = num [ n ]
+var v maxx = 41t
+42t = num [ n ]
+43t = num [ 1 ]
+44t = num [ n ]
+45t = maxx + 5 - + - + ( ( 42t * 2 / 99 + 43t * 44t % MOD ) - 1 )
+upd maxx = 45t
+ln-1
+str-1 =testExp: 
 ins-1
-ln-1
-23t = asd [ 4 ]
-anw-1 = 23t
+ln-2
+anw-1 = maxx
 PRINTF
+start #block
+end #block
 ret 0
 end main
