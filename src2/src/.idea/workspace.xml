@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0f214fe-f9ac-4293-99e1-9a7e3b4b5fdb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../src/Executor/Executor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/Executor/Executor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/out/production/实验二-语法分析-src/Executor/Executor.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/out/production/实验二-语法分析-src/Executor/Executor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/out/production/实验二-语法分析-src/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/out/production/实验二-语法分析-src/output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/out/production/实验二-语法分析-src/pcodeList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/out/production/实验二-语法分析-src/pcodeList.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/out/production/实验二-语法分析-src/pcoderesult.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/out/production/实验二-语法分析-src/pcoderesult.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/out/production/实验二-语法分析-src/testfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/out/production/实验二-语法分析-src/testfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/out/production/实验二-语法分析-src/tree.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/out/production/实验二-语法分析-src/tree.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/pcodeList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pcodeList.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/pcoderesult.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/pcoderesult.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/testfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/testfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/tree.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/tree.txt" afterDir="false" />
-    </list>
+    <list default="true" id="b0f214fe-f9ac-4293-99e1-9a7e3b4b5fdb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -180,7 +167,7 @@
       <workItem from="1671325554739" duration="8937000" />
       <workItem from="1671369227631" duration="10195000" />
       <workItem from="1671413806573" duration="8184000" />
-      <workItem from="1671439808180" duration="720000" />
+      <workItem from="1671439808180" duration="721000" />
     </task>
     <servers />
   </component>

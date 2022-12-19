@@ -167,9 +167,19 @@ public class Executor {
                     if(sym.length > 3){ //define value
                         System.out.println("Has define value");
                         System.out.println("sym[4] :" +sym[4]);
-
-                        value = senseValue(sym[4]);
-
+                        if(sym[4].equals("(")){
+                            String[] newSym = new String[sym.length-4];  //删掉前面四个符号
+                            for(int i=0,j=4;j<sym.length;i++,j++){
+                                newSym[i] = sym[j];
+                            }
+                            String exp = getExpression(newSym);
+                            //System.out.println("In var,expresson is "+exp);
+                            Calculator cal = new Calculator(exp);
+                            //Expression cal = new Expression(exp);
+                            value = cal.calc();
+                        }else{
+                            value = senseValue(sym[4]);
+                        }
                         var.addValue(value);
                     }
                 }
@@ -206,8 +216,20 @@ public class Executor {
                 }
                 if(sym[1].equals("v")){//0-const , 1-type(0-const ,1-normal) 2-name ,3-'=' , 4: var/num
                     Variable var = newVar(sym[2],0);
-                    System.out.println("sym[4] :" +sym[4]);
-                    value =senseValue(sym[4]);
+                    System.out.println("sym[4] :" +sym[4]); if(sym[4].equals("(")){
+                        String[] newSym = new String[sym.length-4];  //删掉前面四个符号
+                        for(int i=0,j=4;j<sym.length;i++,j++){
+                            newSym[i] = sym[j];
+                        }
+                        String exp = getExpression(newSym);
+                        //System.out.println("In var,expresson is "+exp);
+                        Calculator cal = new Calculator(exp);
+                        //Expression cal = new Expression(exp);
+                        value = cal.calc();
+                    }else{
+                        value = senseValue(sym[4]);
+                    }
+                    //value =senseValue(sym[4]);
                     var.addValue(value);
                 }
 
@@ -238,7 +260,17 @@ public class Executor {
 
                     if(sym[index].equals("getint")){//upd a = getint ( )
                         value = getint();
-                    }else{
+                    }else if(sym[index].equals("(")){
+                        String[] newSym = new String[sym.length-index];  //删掉前面四个符号
+                        for(int i=0,j=index;j<sym.length;i++,j++){
+                            newSym[i] = sym[j];
+                        }
+                        String exp = getExpression(newSym);
+                        //System.out.println("In var,expresson is "+exp);
+                        Calculator cal = new Calculator(exp);
+                        //Expression cal = new Expression(exp);
+                        value = cal.calc();
+                    } else{
                         value = senseValue(sym[index]);
                     }
 
@@ -249,7 +281,17 @@ public class Executor {
 
                     if(sym[3].equals("getint")){//upd a = getint ( )
                         value = getint();
-                    }else{
+                    } else if(sym[3].equals("(")){
+                        String[] newSym = new String[sym.length-3];  //删掉前面四个符号
+                        for(int i=0,j=3;j<sym.length;i++,j++){
+                            newSym[i] = sym[j];
+                        }
+                        String exp = getExpression(newSym);
+                        //System.out.println("In var,expresson is "+exp);
+                        Calculator cal = new Calculator(exp);
+                        //Expression cal = new Expression(exp);
+                        value = cal.calc();
+                    } else{
                         value = senseValue(sym[3]);
                     }
                     System.out.println("Upd : " + value);
@@ -289,8 +331,15 @@ public class Executor {
             else if(sym[0].equals("start")) { //record this pointer as current floor's func's start addr
                 System.out.println("Read start");
                 if (isIf(sym[1])) {
-
+                    if(activeRunner == null && floor != 0){
+                        continue;
+                    }
+                    //newBlock();
                 } else if (sym[1].equals("#while")) {
+                    if(activeRunner == null && floor != 0){
+                        continue;
+                    }
+                    //newBlock();
 
                 } else if (sym[1].equals("#block")) {
                     if(activeRunner == null && floor != 0){
@@ -352,6 +401,7 @@ public class Executor {
                     }else{
                         activeRunner.ifList.pop();
                     }
+                    endBlock();
 
                 }else if(sym[1].equals("#while")){
                     if(activeRunner == null && floor != 0){
@@ -361,8 +411,10 @@ public class Executor {
                     //System.out.println("Record while end pcode : currentWhile is "+activeRunner.getCurrentWhile()+" endList : " + Writer.readPcode(pointer));
                     //System.out.println("Check return to which while : "+activeRunner.getCurrentWhile());
                     //System.out.println("Check size of whileStartList : "+activeRunner.whileStartList.size());
+                    checkStackRunner();
                     pointer = activeRunner.whileStartList.get(activeRunner.getCurrentWhile());
                     //System.out.println("Return to while,check pcode : " +Writer.readPcode(pointer));
+                    endBlock();
                 }else if(sym[1].equals("#block")){
                     if(activeRunner == null && floor != 0){
                         continue;
@@ -526,7 +578,8 @@ public class Executor {
                 if(activeRunner == null && floor != 0){
                     continue;
                 }
-                activeRunner.whileStartList.put(activeRunner.getWhileNum(), pointer);
+                newBlock();
+                activeRunner.whileStartList.put(activeRunner.getWhileNum(), pointer-1);
 
                 //System.out.println("检查activeRunner是哪个:"+activeRunner.name);
                 //System.out.println("Check whileNum when start #while :" +activeRunner.getCurrentWhile());
@@ -539,12 +592,12 @@ public class Executor {
                     continue;
                 }
                 if(activeRunner != null){
+                    newBlock();
                     activeRunner.ifList.push(sym[0]);
                     //activeRunner.isElseList.put(ifToElse(sym[0]),false);
                     System.out.println("push ifList: " + sym[0]);
                     activeRunner.isIf = true;
                 }
-
             }
             else if(isCond(sym[0])){ // == < > <= >=
                 if(activeRunner == null && floor != 0){
@@ -653,68 +706,6 @@ public class Executor {
                         currentRes =false;
                     }
                 }
-//-----------------------------记录当前cond的结果-------------------------------
-                /*
-                if(sym[sym.length-1].equals("&&")){
-                    if(!activeRunner.condList.peek()){  //如果是false
-                        shortCircuit=true;
-                        continue;
-                    }
-                }
-                if(sym[sym.length-1].equals("||")){
-                    if(currentRes){
-                        shortCircuit=true;
-                        continue;
-                    }
-                }
-
-                if(activeRunner.condList.size() > 1){
-                    System.out.println("检查short circuit , pcode = "+pcode);
-                    String currentOp = sym[sym.length-1];
-                    boolean cond2 = activeRunner.condList.pop();
-                    boolean cond1 = activeRunner.condList.pop();
-                    String op = activeRunner.condOpList.pop();
-                    System.out.print("currentOp = "+ currentOp);
-                    System.out.print(" cond1 = "+ cond1);
-                    System.out.print(" cond2 = "+ cond2);
-                    System.out.println(" op = "+ op);
-
-                    boolean result = compareCond(cond1,cond2,op);
-
-                    if(op.equals("||") && result){
-                        System.out.println("OR short circuit");
-                        activeRunner.condList.push(true);
-                        shortCircuit = true;
-                    }else if(op.equals("&&") && !result){
-                        if(currentOp.equals("||") || currentOp.equals("&&")) {
-                            if (currentOp.equals("&&")) {
-                                System.out.println("AND short circuit");
-                                activeRunner.condList.push(false);
-                                shortCircuit = true;
-                            }
-                        }
-                        activeRunner.condList.push(false);
-                    }else{
-                        activeRunner.condList.push(result);
-                    }
-                }
-                String op = sym[sym.length-1];
-                if(op.equals("||") || op.equals("&&")){
-                    if(op.equals("||") && activeRunner.condList.contains(true)){
-                        shortCircuit = true;
-                    }
-                    if(op.equals("&&") && activeRunner.condList.contains(false)){
-                        shortCircuit = true;
-                    }
-                    else{
-                        activeRunner.condOpList.push(sym[sym.length-1]);
-                    }
-                }
-
-                checkCondList();
-
- */
-
             }
             else if(sym[0].equals("CheckCond")){
                 if(activeRunner == null && floor != 0){
@@ -756,11 +747,6 @@ public class Executor {
                                         activeRunner.getWhileNum();
 
                                     }
-                                    /*else if(isIf(sym[1])){
-                                        activeRunner.ifList.push(sym[1]);
-                                    }
-                                     */
-                                    //activeRunner.whileStartList.put(activeRunner.getWhileNum(), pointer);
                                 }
                                 if(sym[0].equals("end")){//pcode.equals("end #while")
                                     if(sym[1].equals("#while")){
@@ -790,12 +776,14 @@ public class Executor {
                         //System.out.println("Debug: pcode = "+pcode);
                         //skipping = true;
                     }
+                    endBlock();
                 }else{
                     readPcode();
                     sym = pcode.split(" ");
                     activeRunner.isElseList.put(ifToElse(sym[1]),false);
                     //System.out.println("Cond true, end at if");
                     //System.out.println("Check else is false:" + activeRunner.isElse);
+                    //newBlock();
                 }
             }
             else if(sym[0].equals("CONTINUE")){
@@ -1607,7 +1595,7 @@ public class Executor {
                 readRunner = runnerStack.get(level-index);  //如果这层还是没有
                 System.out.println("activeRunner is block,level :" + readRunner.level);
                 index++; //如果这层还是没有
-                symb =(Arr) readRunner.getSymb(name);
+                symb = readRunner.getSymb(name);
             }
             else{
                 if(index == 2){

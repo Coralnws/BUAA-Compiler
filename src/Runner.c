@@ -1,16 +1,16 @@
-const int n = 15;   // constDel
-const int a1 = 1, a2 = 2;
-const int d1 = 10, d2 = 100, d3 = 1000;
-int m;              /* VarDecl */
-int b1 = 123, b2;
-int c1, c2, c3;
+// B
 
-int getval() {
-    return 1;
-}
-
-int foo(int n) {
-    return n;
+void read(int a[][3], int n) {
+    int i = 0, j = 0;
+    while (i < n) {
+        j = 0;
+        while (j < 3) {
+            a[i][j] = getint();
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+    return ;
 }
 
 int getint(){
@@ -18,64 +18,75 @@ int getint(){
 	scanf("%d",&s);
 	return s;
 } 
-int add(int a, int b) {
-    return a + b;
-}
-
-int sum(int a, int b, int c) {
-    return a + b + c;
-}
-
-void put() {
-    printf("hello");
-    return;
-}
-
 int main() {
-    printf("20376115\n");
-    put();
-    printf("a1: %d, a2: %d\n", a1, a2);
-    printf("m: %d b2: %d\n", m, b2);
-    // Lval = Exp, cover all Exp
-    b1 = n % 2 * -3 * 8 % b1 * getval() / add(1, 1) * foo(b1);
-    //getval=1,add=2,foo=123
+    int a[5] = {1, 2, 3, 4, 5};
+    int c[2][1000-997 + 123 / 145] = {{1, 2, 3}, {6 - 3 * 5 % 7 - 3 / 2, 4, 5}};
+    c[1][100-99] = c[1][2] + 3;
 
-    printf("b: %d\n", b1);
+    printf("20373318\n");
 
-    int a1;
-    a1 = getint();
-    printf("a1: %d\n", a1);
-
-    ;;;;;;;;;;;;;;;;;;;;;;;
-
-    printf("sum: %d\n", sum(1, 2, 3));
-
-    {
-        int a1 = 3;
-        printf("a1: %d\n", a1);
-        {
-
-        }
+    int i = 0;
+    while (i < 5) {
+        printf("a[%d] = %d, ", i, a[i]);
+        i = i + 1;
     }
-    int i = 0, j = 0;
-    while (!i) {
-        printf("i: %d\n", i);
-        j = j + 1;
-        if (j < 3)
-            if (j > 1)
-                printf("j: %d > 1\n", j);
-            else
-                continue;
+    printf("\n");
 
-        if (i != i == i <= -1) {
-            printf("123456\n");
+    i = 0;
+    int j = i + 100, flag = 0;
+    /*
+    while (i < 7) {
+        j = 0;
+        while (j < 8) {
+            if (b[i][j] == 1) {
+                flag = 1;
+                break;
+            }
+            j = j + 1;
         }
+        if (flag == 1) break;
+        i = i + 1;
+    }
+    printf("i = %d, j = %d, flag = %d\n", i, j, flag);
+    */
 
-        if (j >= 4) { break; }
+    ;
+
+    i = 0;
+    j = 123456789;
+    while (i < 2) {
+        j = 0;
+        while (j < 3) {
+            printf("c[%d][%d] = %d, ", i, j, c[i][j]);
+            j = j + 1;
+        }
+        printf("\n");
+        i = i + 1;
     }
 
+    int a1[3][3];
+    read(a1, 3);
+    i = 0;
+    int sum1 = 0, sum2 = 0;;
+    while (i < 3) {
+        j = 0;
+        while (j < 3) {
+            int sum2 = 0;
+            sum1 = sum1 + a1[j+i-j][j];
+            sum2 = sum1;
+            printf("sum1 = %d, sum2 = %d\n", sum1, sum2);
+            j = j + 1;
+        }
+        i = i + 1;
+    }
+    printf("sum1 = %d, sum2 = %d\n", sum1, sum2);
+
+    int asd[6];
+    asd[4] = a1[2][1] + c[0][0];
+    printf("asd[4] = %d\n", asd[4]);
 
     return 0;
 }
+
 
 
