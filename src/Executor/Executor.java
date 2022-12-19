@@ -540,6 +540,7 @@ public class Executor {
                 }
                 if(activeRunner != null){
                     activeRunner.ifList.push(sym[0]);
+                    //activeRunner.isElseList.put(ifToElse(sym[0]),false);
                     System.out.println("push ifList: " + sym[0]);
                     activeRunner.isIf = true;
                 }
@@ -727,12 +728,13 @@ public class Executor {
                 activeRunner.condList.clear();
                 //activeRunner.isElseList.get() = false;
                 if(!condResult){
-                    //System.out.println("Cond is false");
+                    System.out.println("Cond is false");
                     readPcode();
                     sym = pcode.split(" ");
                     if(isIf(sym[1])){
-                        //System.out.println("Cond false,skip to else");
+                        System.out.println("Cond false,skip to else,put into isElseList:"+sym[1]);
                         skipping = true;
+                        System.out.println("put isElseList : "+ifToElse(sym[1]));
                         activeRunner.isElseList.put(ifToElse(sym[1]),true);
                     }else if(sym[1].equals("#while")){
                         //System.out.println("Check cond false,skip while");
@@ -1323,8 +1325,24 @@ public class Executor {
     }
 
     public String ifToElse(String ifStr){
-        char ch = ifStr.charAt(ifStr.length()-1);
-        return "#else"+ch;
+        if(isIf(ifStr)){
+            System.out.println("ifStr is : "+ifStr);
+            int i=0;
+            String ch ="";
+            ch += ifStr.charAt(i);
+            while(!isNumeric(ch)){
+                i++;
+                ch = "";
+                ch += ifStr.charAt(i);
+            }
+            String num="";
+            while(i<ifStr.length()){
+                num += ifStr.charAt(i);
+                i++;
+            }
+            return "#else"+num;
+        }
+        return null;
     }
 
     public Para newPara(String[] arr){

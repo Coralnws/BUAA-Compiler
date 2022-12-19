@@ -1,15 +1,398 @@
-func int add
-start add
-1t = 1 + ( 1 )
-ret 1t
-end add
+const v a = 1
+1t = 1 + 1
+const v b = 1t
+2t = 1 + 1 * 1
+const v c = 2t
+3t = 1 + 1 * ( 1 + 1 )
+const v d = 3t
+4t = 1 - 1
+const v e = 4t
+5t = 1 - 1 / 1
+const v f = 5t
+6t = 1 - 1 % a
+const v g = 6t
+7t = 1 + 1 - c + ( f - g )
+const v h = 7t
+8t = 489 % 562 % 13 % 910 * 895 * 284 + 769 / 458 * 721 % 442 * 666 % 630 - 531 / 898 - 666 % 625 * 471 % 646 * 260 % 7 - 998 % 68 * 92 / 369 % 747 / 62 / 707 * 258 + 34 * 236 * 708 + 257 - 706 % 240 / 1000 / 73 * 163 % 328 + 532 + 309 * 272 + 673 % 970 * 874 / 994
+const v l = 8t
+9t = 444 % 255 % 242 % 317 % 795 / 623 / 559 * 35
+const v o = 9t
+10t = - + - ( 1 + 1 * ( 1 + 1 ) )
+const v p = 10t
+11t = - + - ( 1 + 1 * ( 1 + 1 ) ) * 655 + e * p
+const v q = 11t
+12t = - + - ( 1 + 1 * ( 1 + 1 ) ) * 655 + e % p
+const v qq = 12t
+13t = - + - ( 1 + 1 * ( 1 + 1 ) ) * 655 + e / p
+const v qqq = 13t
+14t = 1 + 1 * ( 1 + 1 )
+15t = 444 % 255 % 242 % 317 % 795 / 623 / 559 * 35
+16t = - 45
+17t = 1 - 1 / 1
+const a arr [ 14t ] = { 15t , 16t , 17t }
+18t = 1 + 1 * ( 1 + 1 )
+const a brr [ 18t ] [ 1 ] = { { 1 } , { 1 } , { 1 } }
+var v awa
+var v awd = 141
+19t = 949 + 229 % 375 % 393 + 355 + 948 * 181 - 867 % 366 * 71 * 660 % 20 / 737 / 293 - 5 / 479 + 311 / 176 % 158 * 43 / 66 + 682 - 788 % 887 * 715
+20t = 1 + 1 * ( 1 + 1 ) + 225
+21t = - 22
+22t = 11 - 1
+var a crr [ 2 ] [ 3 ] = { { 19t , 20t , 21t } , { 16 , 4 , 22t } }
+23t = 141 - 25
+var a drr [ 1 ] [ 2 ] = { { 141 , 23t } }
+var a err [ 2 ] = { 225 , 747 }
+func void foo1
+start foo1
+ret
+ret
+ret
+end foo1
+func void foo2
+para v a
+start foo2
+end foo2
+func void mqsort
+para v l
+para v r
+para a q [ ]
+start mqsort
+#if1
+#cond1 l >= r
+cond #cond1
+CheckCond
+start #if1
+ret
+end #if1
+24t = ( l + r ) / 2
+25t = q [ 24t ]
+var v x = 25t
+26t = l - 1
+var v i = 26t
+27t = r + 1
+var v j = 27t
+#while
+#cond1 i < j
+cond #cond1
+CheckCond
+start #while
+28t = i + 1
+upd i = 28t
+#while
+29t = q [ i ]
+#cond1 29t < x
+cond #cond1
+CheckCond
+start #while
+30t = i + 1
+upd i = 30t
+end #while
+31t = j - 1
+upd j = 31t
+#while
+32t = q [ j ]
+#cond1 32t > x
+cond #cond1
+CheckCond
+start #while
+33t = j - 1
+upd j = 33t
+end #while
+#if2
+#cond1 i < j
+cond #cond1
+CheckCond
+start #if2
+34t = q [ i ]
+var v t = 34t
+35t = q [ j ]
+upd q [ i ] = 35t
+upd q [ j ] = t
+end #if2
+end #while
+push l
+push j
+push q
+call mqsort
+36t = RET
+37t = j + 1
+push 37t
+push r
+push q
+call mqsort
+38t = RET
+end mqsort
+func int foo3
+para v c
+para v d
+start foo3
+39t = c + d
+ret 39t
+end foo3
+func void mqsort2
+para v l
+para v r
+para a q [ ] [ 20 ]
+start mqsort2
+#if3
+#cond1 l >= r
+cond #cond1
+CheckCond
+start #if3
+ret
+end #if3
+40t = ( l + r ) / 2
+41t = q [ 1 ] [ 40t ]
+var v x = 41t
+42t = l - 1
+var v i = 42t
+43t = r + 1
+var v j = 43t
+#while
+#cond1 i < j
+cond #cond1
+CheckCond
+start #while
+44t = i + 1
+upd i = 44t
+#while
+45t = q [ 1 ] [ i ]
+#cond1 45t < x
+cond #cond1
+CheckCond
+start #while
+46t = i + 1
+upd i = 46t
+end #while
+47t = j - 1
+upd j = 47t
+#while
+48t = q [ 1 ] [ j ]
+#cond1 48t > x
+cond #cond1
+CheckCond
+start #while
+49t = j - 1
+upd j = 49t
+end #while
+#if4
+#cond1 i < j
+cond #cond1
+CheckCond
+start #if4
+50t = q [ 1 ] [ i ]
+var v t = 50t
+51t = q [ 1 ] [ j ]
+upd q [ 1 ] [ i ] = 51t
+upd q [ 1 ] [ j ] = t
+end #if4
+end #while
+push l
+push j
+push q
+call mqsort2
+52t = RET
+53t = j + 1
+push 53t
+push r
+push q
+call mqsort2
+54t = RET
+end mqsort2
 func int main
 start main
+upd awa = 10
+var v awadwad
+upd awadwad = 545
+str-1 =20231204
+ln-1
+PRINTF
+55t = 243 / 440 % 570 - 559 / 373 % 960 / 460 % 101 % 205 % 16 / 487 - 107 / 234 / 435 + a
+start #block
+str-1 =awadwad is 
+ins-1
+str-2 = now
+ln-1
+anw-1 = awadwad
+PRINTF
+var v awadwad = 11
+str-1 =awadwad has changed in block
+ln-1
+PRINTF
+str-1 =awadwad is 
+ins-1
+str-2 = now
+ln-1
+anw-1 = awadwad
+PRINTF
+end #block
+var v fowao = 14
+#if5
+56t = 208 * 695 % 426 / 896
+#cond1 56t < fowao
+cond #cond1
+CheckCond
+start #if5
+end #if5
+#if6
+57t = 208 * 695 % 426 / 896
+#cond1 57t > fowao
+cond #cond1
+CheckCond
+start #if6
+end #if6
+#if7
+58t = 208 * 695 % 426 / 896
+#cond1 58t == fowao
+cond #cond1
+CheckCond
+start #if7
+end #if7
+#if8
+#cond1 fowao != g
+cond #cond1
+CheckCond
+start #if8
+#if9
+59t = ! g
+#cond1 59t
+cond #cond1
+CheckCond
+start #if9
+60t = crr [ 0 ] [ 1 ]
+var v k = 60t
+end #if9
+end #if8
+#if10
+61t = 247 * 821 - 45 % 268 % 445 * 262 - 938 % 66 - 140 * 975 * 882 / 758 * 199 / 282 - 175 * 80 / 646 + 181 / 962 % 857 % 193 * 658 * 287 / 796 % 674 * 285 % 314
+#cond1 61t >= fowao
+cond #cond1
+CheckCond
+start #if10
+#if11
+#cond1 fowao == fowao
+cond #cond1
+CheckCond
+start #if11
+#if12
+#cond1 fowao
+cond #cond1
+CheckCond
+start #if12
+str-1 =double if
+ln-1
+PRINTF
+end #if12
+end #if11
+end #if10
+var v waidj = 11
+#while
+#cond1 waidj <= 10000
+cond #cond1
+CheckCond
+start #while
+62t = waidj + 1
+upd waidj = 62t
+#if13
+#cond1 waidj > 100
+cond #cond1
+CheckCond
+start #if13
+str-1 =cur val in loop is 
 ins-1
 ln-1
-call add
-2t = RET
-anw-1 = 2t
+anw-1 = waidj
 PRINTF
+end #if13
+start #else13
+CONTINUE
+end #else13
+#if14
+#cond1 waidj == 101
+cond #cond1
+CheckCond
+start #if14
+BREAK
+end #if14
+end #while
+str-1 =input n and the array which length is n, then will sort this array, n is required less than 20
+ln-1
+PRINTF
+var v n
+63t = GETINT
+upd n = 63t
+var a q [ 20 ] = { 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 }
+var v i = 0
+var a qq [ 2 ] [ 20 ] = { { 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 } , { 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 } }
+#while
+#cond1 i < n
+cond #cond1
+CheckCond
+start #while
+64t = q [ i ]
+upd qq [ 1 ] [ i ] = 64t
+65t = i + 1
+upd i = 65t
+end #while
+upd i = 0
+#while
+#cond1 i < n
+cond #cond1
+CheckCond
+start #while
+upd q [ i ] = getint ( )
+66t = i + 1
+upd i = 66t
+end #while
+push 0
+67t = n - 1
+push 67t
+push q
+call mqsort
+68t = RET
+upd i = 0
+str-1 =after sort, the array is: 
+PRINTF
+#while
+#cond1 i < n
+cond #cond1
+CheckCond
+start #while
+ins-1
+str-1 = 
+69t = q [ i ]
+anw-1 = 69t
+PRINTF
+70t = i + 1
+upd i = 70t
+end #while
+str-1 =414
+PRINTF
+str-1 =414
+PRINTF
+push 0
+71t = n - 1
+push 71t
+push qq
+call mqsort2
+72t = RET
+push 0
+73t = n - 1
+push 73t
+74t = qq [ 1 ]
+push 74t
+call mqsort
+75t = RET
+push n
+76t = err [ 0 ]
+push 76t
+call foo3
+77t = RET
+var v waf = 77t
+upd crr [ 0 ] [ 1 ] = waf
+78t = crr [ 0 ] [ 1 ]
+upd err [ 1 ] = 78t
+79t = err [ 1 ]
+upd crr [ 0 ] [ 1 ] = 79t
 ret 0
 end main
