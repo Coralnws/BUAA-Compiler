@@ -1,99 +1,82 @@
-1t = 20373117 + - + - 1 * 1 / 1 - + 1 % 2
-const v _ = 1t
-const v value1 = 1
-var v value10 = 10
-var v value11 = 11
-var v value12 = 12
-var v value13
-func int main
-start main
-upd value13 = 13
-var v value14 = 14
-var v value15 = 15
-var v value16
-var v value17
-ins-1
-ln-1
-anw-1 = _
-PRINTF
-var v n = 3
-#while
-#cond1 n > 0
-cond #cond1
-CheckCond
-start #while
-2t = - 1 + n
-upd n = 2t
+const v n = 1
+const v a = 1
+const v b = 2
+const v c = 3
+const v d = 4
+const v e = 5
+func int fib
+para v n
+start fib
+var v ret = 1
 #if1
-#cond1 n == 2
-cond #cond1
-CheckCond
-start #if1
-#if2
-3t = value14 - value11
-#cond1 3t == 3
-cond #cond1
-CheckCond
-start #if2
-CONTINUE
-str-1 =continue is wrong
-ln-1
-PRINTF
-end #if2
-start #else2
-str-1 =if is wrong
-ln-1
-PRINTF
-BREAK
-end #else2
-end #if1
-start #else1
-#if3
 #cond1 n == 1
 cond #cond1
 CheckCond
-start #if3
-#if4
-4t = value15 - value12
-#cond1 4t != 3
+start #if1
+upd ret = 1
+end #if1
+start #else1
+#if2
+#cond1 n == 2
 cond #cond1
 CheckCond
-start #if4
-str-1 =if is wrong
-ln-1
-PRINTF
-BREAK
-end #if4
-start #else4
-CONTINUE
-str-1 =continue is wrong
-ln-1
-PRINTF
-end #else4
-end #if3
+start #if2
+upd ret = 1
+end #if2
+start #else2
+1t = n - 1
+push 1t
+call fib
+2t = RET
+3t = n - 2
+push 3t
+call fib
+4t = RET
+5t = 2t + 4t
+upd ret = 5t
+end #else2
 end #else1
-#if5
-#cond1 n == 0
-cond #cond1
-CheckCond
-start #if5
-ins-1
+ret ret
+end fib
+func int main
+start main
+var v n
+6t = GETINT
+upd n = 6t
+str-1 =19374223
 ln-1
-5t = 20373117 + - + - 1 * 1 / 1 - + 1 % 2
-anw-1 = 5t
 PRINTF
+str-1 =fibo[
 ins-1
+str-2 =] = 
+ins-2
 ln-1
-anw-1 = 20373117
+anw-1 = n
+push n
+call fib
+7t = RET
+anw-2 = 7t
 PRINTF
-end #if5
-end #while
+str-1 =fibo[
+ins-1
+str-2 =] / 2 = 
+ins-2
 ln-1
-ln-2
-ln-3
-ln-4
-ln-5
-ln-6
+anw-1 = n
+push n
+call fib
+8t = RET
+9t = 8t / 2
+anw-2 = 9t
+PRINTF
+PRINTF
+PRINTF
+PRINTF
+PRINTF
+PRINTF
+PRINTF
+str-1 =/***************** END *****************/
+ln-1
 PRINTF
 ret 0
 end main

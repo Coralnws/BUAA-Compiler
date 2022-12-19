@@ -1,38 +1,46 @@
-int cnt = 10;
+
+const int _ = 20373117 + -+-1 * 1 / 1 - +1 % 2;
+const int value1 = 1;
+
+int value10 = 10;
+int value11 = 11, value12 = 12, value13;
+
 
 int main() {
-    int i = -+-+-+-+-(2 + (4 + 5) * 7);
-    printf("i=%d\n",i);
-    int begin, end;
-    begin = 1;
-    end = 70;
-    i = begin;
-    printf("20373935");
-    printf("\n");
-    while(i < end) {
-        if (i <= begin + (end - begin) / 3) {
-            if (i % 4 == 0) {
-                printf("Ha\n");
-                cnt = cnt - 1;
-            }
-        } else if (i < begin + (end - begin) / 2) {
+	value13 = 13;
+	int value14 = 14, value15 = 15, value16;
+	int value17;
 
-            if (i % 6 == 0) {
-                printf("Fa\n");
-                cnt = cnt - 1;
-            }
-        } else if (i >= begin + (end - begin) * 3 / 4) {
+	printf("%d\n", _);
 
-            if (i % 8 == 0) {
-                printf("Pa\n");
-                cnt = cnt - 1;
-            }
-        } else if (i > begin + (end - begin) * 5 / 6) {
-            if (i % 10 == 0) {
-                printf("Ja\n");
-            }
-        }
-        i = i + 1;
-    }
-    return 0;
+	int n = 3;
+	while(n > 0) {
+		n = -1 + n;
+		if (n == 2) {
+			if (value14 - value11 == 3) {
+				continue;
+				printf("continue is wrong\n");
+			} else {
+				printf("if is wrong\n");
+				break;
+			}
+		} else if (n == 1) {
+			if (value15 - value12 != 3) {
+				printf("if is wrong\n");
+				break;
+			} else {
+				continue;
+				printf("continue is wrong\n");
+			}
+		}
+
+		if (n == 0) {
+			 printf("%d\n", 20373117 + -+-1 * 1 / 1 - +1 % 2);
+			 printf("%d\n", 20373117);
+		}
+	}
+
+	printf("\n\n\n\n\n\n");
+
+	return 0;
 }
