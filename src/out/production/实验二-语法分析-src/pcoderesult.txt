@@ -1,4 +1,3 @@
-19374223
-fibo[6] = 8
-fibo[6] / 2 = 4
-/***************** END *****************/
+20373649
+The hash of the sorted array is 4978779.
+The hash of the sorted array is 1892916.

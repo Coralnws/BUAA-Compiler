@@ -34,7 +34,7 @@ void divide_and_conquer_sort(int n, int a[], int s) {
                     break;
                 }
             }
-            
+
             if(f_pos == first_n-1) {
                 temp[tpos] = a[last_s+l_pos];
                 tpos = tpos + 1;
@@ -121,8 +121,8 @@ int main() {
     qpow_ans[2] = quick_pow(13, 3444, qpow_MOD);
     qpow_ans[3] = quick_pow(11, 987, qpow_MOD);
 
-    printf("The answer of quick_pow is: %d %d %d %d.\n", 
-        qpow_ans[0], qpow_ans[1], 
+    printf("The answer of quick_pow is: %d %d %d %d.\n",
+        qpow_ans[0], qpow_ans[1],
         qpow_ans[2], qpow_ans[3]); // print7
 
     int a;

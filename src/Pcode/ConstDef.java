@@ -133,6 +133,9 @@ public class ConstDef extends PcodeGenerator{
             if(scanWord.typeCode.equals("IDENFR") && scanWordAhead.typeCode.equals("LBRACK")){
                 return true;
             }
+            if(scanWord.typeCode.equals("LPARENT")){
+                return true;
+            }
             scanIndex ++;
             scanWord(scanIndex);
         }
