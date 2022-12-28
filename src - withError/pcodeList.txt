@@ -1,0 +1,578 @@
+func void move
+para v n
+para v a
+para v b
+para v c
+start move
+#if1
+#cond1 n == 2
+cond #cond1
+CheckCond
+start #if1
+start #block
+start #block
+end #block
+str-1 =Move from 
+ins-1
+str-2 = to 
+ins-2
+ln-1
+anw-1 = a
+anw-2 = c
+PRINTF
+str-1 =Move from 
+ins-1
+str-2 = to 
+ins-2
+ln-1
+anw-1 = a
+anw-2 = c
+PRINTF
+ret
+start #block
+end #block
+end #block
+end #if1
+1t = n - 2
+push 1t
+push a
+push c
+push b
+call move
+2t = RET
+str-1 =Move from 
+ins-1
+str-2 = to 
+ins-2
+ln-1
+anw-1 = a
+anw-2 = c
+PRINTF
+str-1 =Move from 
+ins-1
+str-2 = to 
+ins-2
+ln-1
+anw-1 = a
+anw-2 = c
+PRINTF
+3t = n - 2
+push 3t
+push b
+push a
+push c
+call move
+4t = RET
+end move
+func void solve
+para v n
+para v a
+para v b
+para v c
+start solve
+#if2
+#cond1 n == 2
+cond #cond1
+CheckCond
+start #if2
+start #block
+start #block
+end #block
+str-1 =Move from 
+ins-1
+str-2 = to 
+ins-2
+ln-1
+anw-1 = a
+anw-2 = b
+PRINTF
+str-1 =Move from 
+ins-1
+str-2 = to 
+ins-2
+ln-1
+anw-1 = a
+anw-2 = c
+PRINTF
+ret
+start #block
+end #block
+end #block
+end #if2
+5t = n - 2
+push 5t
+push a
+push b
+push c
+call move
+6t = RET
+str-1 =Move from 
+ins-1
+str-2 = to 
+ins-2
+ln-1
+anw-1 = a
+anw-2 = b
+PRINTF
+str-1 =Move from 
+ins-1
+str-2 = to 
+ins-2
+ln-1
+anw-1 = a
+anw-2 = b
+PRINTF
+7t = n - 2
+push 7t
+push c
+push b
+push a
+call move
+8t = RET
+str-1 =Move from 
+ins-1
+str-2 = to 
+ins-2
+ln-1
+anw-1 = b
+anw-2 = c
+PRINTF
+9t = n - 2
+push 9t
+push a
+push b
+push c
+call solve
+10t = RET
+end solve
+func void dfs
+para a src [ ]
+para a vis [ ]
+para a reflect [ ]
+para v cur
+para v tot
+start dfs
+#if3
+#cond1 cur == tot
+cond #cond1
+CheckCond
+start #if3
+start #block
+start #block
+var v i = 0
+#while
+#cond1 i < tot
+cond #cond1
+CheckCond
+start #while
+start #block
+start #block
+ins-1
+str-1 = 
+11t = src [ i ]
+12t = i + 1
+13t = reflect [ 12t ]
+14t = 11t + 13t
+anw-1 = 14t
+PRINTF
+15t = i + 1
+upd i = 15t
+end #block
+end #block
+end #while
+ln-1
+PRINTF
+ret
+end #block
+end #block
+end #if3
+var v i = 0
+#while
+#cond1 i < tot
+cond #cond1
+CheckCond
+start #while
+start #block
+start #block
+#if4
+16t = vis [ i ]
+17t = ! 16t
+#cond1 17t
+cond #cond1
+CheckCond
+start #if4
+start #block
+start #block
+upd vis [ i ] = 1
+upd src [ cur ] = i
+push src
+push vis
+push reflect
+18t = cur + 1
+push 18t
+push tot
+call dfs
+19t = RET
+upd vis [ i ] = 0
+end #block
+end #block
+end #if4
+20t = i + 1
+upd i = 20t
+end #block
+end #block
+end #while
+ret
+end dfs
+func void matrixPrint
+para a src [ ] [ 5 ]
+para v total
+start matrixPrint
+var v i = 0
+#while
+#cond1 i < total
+cond #cond1
+CheckCond
+start #while
+start #block
+start #block
+var v j = 0
+#while
+#cond1 j < total
+cond #cond1
+CheckCond
+start #while
+start #block
+start #block
+ins-1
+str-1 = 
+21t = src [ i ] [ j ]
+anw-1 = 21t
+PRINTF
+22t = j + 1
+upd j = 22t
+end #block
+end #block
+end #while
+23t = i + 1
+upd i = 23t
+end #block
+end #block
+end #while
+ln-1
+PRINTF
+ret
+end matrixPrint
+func void matrixMul
+para a ans [ ] [ 5 ]
+para a srcA [ ] [ 5 ]
+para a srcB [ ] [ 5 ]
+para v total
+start matrixMul
+var v i = 0
+push srcA
+push total
+call matrixPrint
+24t = RET
+push srcB
+push total
+call matrixPrint
+25t = RET
+#while
+#cond1 i < total
+cond #cond1
+CheckCond
+start #while
+start #block
+start #block
+var v j = 0
+#while
+#cond1 j < total
+cond #cond1
+CheckCond
+start #while
+start #block
+start #block
+var v k = 0
+upd ans [ i ] [ j ] = 0
+#while
+#cond1 k < total
+cond #cond1
+CheckCond
+start #while
+start #block
+start #block
+26t = ans [ i ] [ j ]
+27t = srcA [ i ] [ k ]
+28t = srcB [ k ] [ j ]
+29t = 26t + 27t * 28t
+upd ans [ i ] [ j ] = 29t
+30t = k + 1
+upd k = 30t
+end #block
+end #block
+end #while
+31t = j + 1
+upd j = 31t
+end #block
+end #block
+end #while
+32t = i + 1
+upd i = 32t
+end #block
+end #block
+end #while
+push srcA
+push total
+call matrixPrint
+33t = RET
+push srcB
+push total
+call matrixPrint
+34t = RET
+push ans
+push total
+call matrixPrint
+35t = RET
+ret
+end matrixMul
+func int main
+start main
+var v n
+36t = GETINT
+upd n = 36t
+str-1 =19373354
+ln-1
+PRINTF
+push n
+push 1
+push 2
+push 3
+call solve
+37t = RET
+38t = GETINT
+upd n = 38t
+var a src [ 10 ]
+var a a [ 10 ] = { 9 , 8 , 7 , 6 , 5 , 4 , 3 , 2 , 1 , 0 }
+var a vis [ 10 ]
+var a b [ 10 ] = { 8 , 7 , 6 , 5 , 4 , 3 , 2 , 1 , 0 , 9 }
+var a c [ 3 ] [ 10 ] = { { 7 , 6 , 5 , 4 , 3 , 2 , 1 , 0 , 9 , 8 } , { 6 , 5 , 4 , 3 , 2 , 1 , 0 , 9 , 8 , 7 } , { 5 , 4 , 3 , 2 , 1 , 0 , 9 , 8 , 7 , 6 } }
+var v i = 0
+#while
+#cond1 i < n
+cond #cond1
+CheckCond
+start #while
+start #block
+start #block
+end #block
+39t = a [ i ]
+40t = c [ 2 ] [ i ]
+41t = 39t + 40t + 1
+upd a [ i ] = 41t
+42t = b [ i ]
+43t = c [ 2 ] [ i ]
+44t = 42t + 43t + 2
+upd b [ i ] = 44t
+45t = c [ 0 ] [ i ]
+46t = c [ 2 ] [ i ]
+47t = 45t + 46t + 3
+upd c [ 0 ] [ i ] = 47t
+48t = c [ 1 ] [ i ]
+49t = c [ 2 ] [ i ]
+50t = 48t + 49t + 4
+upd c [ 1 ] [ i ] = 50t
+51t = i + 1
+upd i = 51t
+start #block
+end #block
+end #block
+end #while
+upd i = 0
+#while
+#cond1 114514
+cond #cond1
+CheckCond
+start #while
+start #block
+start #block
+end #block
+upd vis [ i ] = 0
+52t = i + 1
+upd i = 52t
+#if5
+#cond1 i >= n
+cond #cond1
+CheckCond
+start #if5
+BREAK
+end #if5
+start #block
+end #block
+end #block
+end #while
+push src
+push vis
+push a
+push 0
+push n
+call dfs
+53t = RET
+upd i = 0
+#while
+#cond1 114514
+cond #cond1
+CheckCond
+start #while
+start #block
+start #block
+end #block
+upd vis [ i ] = 0
+54t = i + 1
+upd i = 54t
+#if6
+#cond1 i >= n
+cond #cond1
+CheckCond
+start #if6
+BREAK
+end #if6
+start #else6
+start #block
+end #block
+end #else6
+start #block
+end #block
+end #block
+end #while
+push src
+push vis
+push b
+push 0
+push n
+call dfs
+55t = RET
+upd i = 0
+#while
+#cond1 114514
+cond #cond1
+CheckCond
+start #while
+start #block
+start #block
+end #block
+upd vis [ i ] = 0
+56t = i + 1
+upd i = 56t
+#if7
+#cond1 i < n
+cond #cond1
+CheckCond
+start #if7
+CONTINUE
+end #if7
+BREAK
+start #block
+end #block
+end #block
+end #while
+push src
+push vis
+57t = c [ 0 ]
+push 57t
+push 0
+push n
+call dfs
+58t = RET
+upd i = 0
+#while
+#cond1 114514
+cond #cond1
+CheckCond
+start #while
+start #block
+start #block
+end #block
+upd vis [ i ] = 0
+59t = i + 1
+upd i = 59t
+#if8
+#cond1 i < n
+cond #cond1
+CheckCond
+start #if8
+CONTINUE
+end #if8
+start #else8
+BREAK
+end #else8
+start #block
+end #block
+end #block
+end #while
+push src
+push vis
+60t = c [ 1 ]
+push 60t
+push 0
+push n
+call dfs
+61t = RET
+62t = - 1625382311
+63t = - 492323543
+64t = - 252604752
+65t = - 51943305
+66t = - 1854253096
+67t = - 1024571774
+68t = - 1803769826
+69t = - 1485716863
+70t = - 1192520056
+71t = - 1503793409
+72t = - 1911831470
+73t = - 1387735054
+74t = - 274170342
+var a d [ 5 ] [ 5 ] = { { 307728049 , 62t , 1271106322 , 309930583 , 2007032850 } , { 1074055550 , 2036831205 , 63t , 64t , 1295820596 } , { 728458994 , 1673642498 , 65t , 66t , 67t } , { 1430035460 , 1705232663 , 68t , 69t , 70t } , { 71t , 2027983592 , 72t , 73t , 74t } }
+75t = - 39878981
+76t = - 1839064934
+77t = - 68127266
+78t = - 425501077
+79t = - 1281736928
+80t = - 1304579021
+81t = - 1777897472
+82t = - 1921297034
+83t = - 226241316
+84t = - 1840038765
+85t = - 1238621050
+86t = - 1338682930
+var a e [ 5 ] [ 5 ] = { { 75t , 1475936537 , 1944942266 , 1579815806 , 1734290467 } , { 1606724733 , 76t , 1749681186 , 1409364573 , 77t } , { 1869282840 , 1574753938 , 1959861217 , 78t , 79t } , { 80t , 81t , 82t , 1623258471 , 83t } , { 824482268 , 84t , 85t , 1453319654 , 86t } }
+var a f [ 5 ] [ 5 ]
+push f
+push d
+push e
+push 4
+call matrixMul
+87t = RET
+push f
+push e
+push d
+push 5
+call matrixMul
+88t = RET
+#while
+#cond1 114514
+cond #cond1
+CheckCond
+start #while
+start #block
+start #block
+end #block
+ret 0
+str-1 =19373354
+ln-1
+PRINTF
+start #block
+end #block
+end #block
+end #while
+ret 0
+end main
