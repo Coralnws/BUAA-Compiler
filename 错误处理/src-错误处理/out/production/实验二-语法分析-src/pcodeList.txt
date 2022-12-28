@@ -1,0 +1,18 @@
+var v a = 2
+func void func2
+para v b
+start func2
+end func2
+func void add
+start add
+end add
+func int main
+start main
+var a arr1 [ 2 ] [ 3 ]
+call add
+1t = RET
+push 1t
+call func2
+2t = RET
+ret 0
+end main

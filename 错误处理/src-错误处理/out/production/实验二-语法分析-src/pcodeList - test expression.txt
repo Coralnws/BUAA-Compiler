@@ -1,0 +1,193 @@
+1t = ( 3 + 4 ) * ( ( a + c ) - t * y ) / 6 + 7
+var v a = 1t
+func void add
+para a  a [ ] [ 2 ]
+para v b
+start add
+2t = a[1][2]
+push a
+push 3
+call add
+3t = RET
+push n
+4t = b[3][2]
+push 4t
+call add
+5t = RET
+push 5t
+push y
+push 8
+call add
+6t = RET
+push 6t
+call add
+7t = RET
+8t = b[1][2]
+9t = a[2][1]
+push 9t
+push 3
+call add
+10t = RET
+11t = ( 2t + ( 3t + 7t ) * 4 + 8t + 10t )
+upd a = 11t
+12t = a[1][2]
+push a
+push 3
+call add
+13t = RET
+push n
+14t = b[3][2]
+push 14t
+call add
+15t = RET
+push 15t
+push y
+push 8
+call add
+16t = RET
+push 16t
+call add
+17t = RET
+18t = b[1][2]
+19t = a[2][1]
+push 19t
+push 3
+call add
+20t = RET
+21t = ( 12t + ( 13t + 17t ) * 4 + 18t + 20t )
+ret 21t
+end add
+func int main
+start main
+var a a [ 1 ] [ 3 ] 
+var a b [ 2 ] [ 3 ]
+var v a = 3
+var v b = 4
+22t = a[1][2]
+push a
+push 3
+call add
+23t = RET
+push n
+24t = b[3][2]
+push 24t
+call add
+25t = RET
+push 25t
+push y
+push 8
+call add
+26t = RET
+push 26t
+call add
+27t = RET
+28t = b[1][2]
+29t = a[2][1]
+push 29t
+push 3
+call add
+30t = RET
+31t = ( 22t + ( 23t + 27t ) * 4 + 28t + 30t )
+const v a = 31t
+32t = a[1][2]
+push a
+push 3
+call add
+33t = RET
+push n
+34t = b[3][2]
+push 34t
+call add
+35t = RET
+push 35t
+push y
+push 8
+call add
+36t = RET
+push 36t
+call add
+37t = RET
+38t = b[1][2]
+39t = a[2][1]
+push 39t
+push 3
+call add
+40t = RET
+41t = ( 32t + ( 33t + 37t ) * 4 + 38t + 40t )
+upd b[2][3] = 41t
+42t = b[1][2]
+push 2
+push 3
+call add
+43t = RET
+44t = ( 42t + ( 3 + 43t ) * ( ( a + c ) - t * y ) / 6 + 7 )
+const v a = 44t
+const a b [ 2 ] [ 3 ] = { { 1 , 2 } , { 3 , 4 } }
+const a Map [ 5 ] [ 5 ] = { { 0 , 1 , 0 , 1 , 0 } , { 0 , 1 , 1 , 1 , 1 } , { 1 , 1 , 1 , 1 , 1 } , { 1 , 0 , 1 , 0 , 1 } , { 1 , 1 , 1 , 0 , 1 } }
+45t = a[2][3]
+push 45t
+push 4
+push 5
+call add
+46t = RET
+push 46t
+call add
+47t = RET
+push 47t
+48t = a[2][3]
+push 48t
+call add
+49t = RET
+upd a = 49t
+str-1 =val20: 
+ins-1
+str-2 =, val21:
+ins-2
+str-3 =, val22:
+ins-3
+str-4 =, val23:
+ins-4
+str-5 =, val24:
+ins-5
+ln
+50t = val[2][0]
+anw-1 = 50t
+51t = val[2][1]
+anw-2 = 51t
+52t = val[2][2]
+anw-3 = 52t
+53t = val[2][3]
+anw-4 = 53t
+54t = val[2][4]
+anw-5 = 54t
+PRINTF
+str-1 =val20: 
+ins-1
+str-2 =, val21:
+ins-2
+str-3 =, val22:
+ins-3
+str-4 =, val23:
+ins-4
+str-5 =, val24:
+ins-5
+ln
+55t = val[2][0]
+anw-1 = 55t
+push 1
+push 2
+call add
+56t = RET
+anw-2 = 56t
+anw-3 =a
+57t = ( 3 + 2 / 4 ) * 3
+anw-4 = 57t
+58t = val[2][4]
+anw-5 = 58t
+PRINTF
+const a a [ 1 ] = { 4 } ,
+const a b [ 4 ] = { 1 , 2 , 3 , 4 }
+var a a [ 1 ] = { 4 } 
+var a b [ 4 ]
+ret 0
+end main
