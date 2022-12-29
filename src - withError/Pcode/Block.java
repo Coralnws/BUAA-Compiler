@@ -1,6 +1,9 @@
 package Pcode;
 
+import Pcode.Symbol.Symbol;
+
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,6 +17,16 @@ public class Block extends PcodeGenerator {
         nextWord();
         if (currentWord.typeCode.equals("LBRACE") && isIf(funcName) || isElse(funcName) || funcName.equals("#while")) {
             writer.write("start #block");
+        }
+
+        if(funcName.equals("#block") || funcName.equals("#while") || isIf(funcName)||isElse(funcName)){
+            System.out.println("Check block now:"+funcName);
+            HashMap<String, Symbol> symbList = new HashMap<String, Symbol>();
+            symbTable.push(symbList);
+            currentSymbTable = symbList;
+            blockNum++;
+        }else{
+            symbTable.push(currentSymbTable);
         }
         //currentWord : {
         nextWord();
@@ -32,6 +45,14 @@ public class Block extends PcodeGenerator {
             writer.write("end " + funcName);
 
             nextWord();
+        }
+
+        System.out.println("Check symbtable push,size:" + symbTable.size());
+        symbTable.pop();
+        if(symbTable.size() > 0)
+            currentSymbTable = symbTable.peek();
+        if((funcName.equals("#block") || funcName.equals("#while") || isIf(funcName)||isElse(funcName))){
+            blockNum++;
         }
     }
 

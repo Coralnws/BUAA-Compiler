@@ -1,4 +1,23 @@
-20373569 the mafia~
-testConst: 4 4 5
-2 5 13 34 89 233 610 1597 4181 10946 
-testExp: 64
+main_i = 6
+glo_i = 0
+return 1
+sum = 96
+return 1
+sum = 256
+return 1
+sum = 416
+return 1
+sum = 576
+return 1
+sum = 96
+return 1
+sum = 256
+return 1
+sum = 416
+return 1
+sum = 576
+return 1
+sum = 96
+return 1
+sum = 256
+396

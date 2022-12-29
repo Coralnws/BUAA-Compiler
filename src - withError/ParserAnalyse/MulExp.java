@@ -7,14 +7,14 @@ import Save.*;
 public class MulExp extends SymbAnalyse{
     public MulExp(TreeNode parent){
         super("<MulExp>",parent);
-        ////System.out.println("start <MulExp>");
+        System.out.println("start <MulExp>");
         //1
         UnaryExp unaryExp = new UnaryExp(this.node);
 
         //printout<MulExp>
         //save.addParserWord(listIndex,this.node.node);
         //listIndex++;
-        ////System.out.println("Printout <MulExp>");
+        System.out.println("Printout <MulExp>");
         parserList.add(this.node.node);
 
         //2 loop for { (* | / | %)  UnaryExp}
@@ -29,7 +29,7 @@ public class MulExp extends SymbAnalyse{
             //printout<MulExp>
             //save.addParserWord(listIndex,this.node.node);
             //listIndex++;
-            ////System.out.println("Printout <MulExp>");
+            System.out.println("Printout <MulExp>");
             parserList.add(this.node.node);
         }
     }

@@ -1,9 +1,12 @@
 package Pcode;
 
+import Pcode.Symbol.Arr;
+import Pcode.Symbol.Symbol;
+import Pcode.Symbol.Variable;
 import Save.lexerWord;
 
 import java.io.IOException;
-
+import Error.Error;
 import static Pcode.Array.ArrayTestExp;
 import static Pcode.Return.BlockItemTestExp;
 
@@ -20,6 +23,7 @@ public class ConstDef extends PcodeGenerator{
         ignoreParser = true;
         nextWord();
         pcode.append("const");
+        Symbol symb= null;
         if(currentWord.typeCode.equals("IDENFR")){
             if(!wordAhead.content.equals("[")){
                 pcode.append(" v");
@@ -29,12 +33,24 @@ public class ConstDef extends PcodeGenerator{
                 type = 'a';
             }
             if(currentWord.typeCode.equals("IDENFR")){
+                if(checkCurrentSymbExist(currentWord.content)){
+                    Error error = new Error(currentWord.line,'b');
+                    errorRecord.addError(error);
+                }
+                if(type == 'v'){
+                    symb = new Variable(currentWord.content,0);  //type == 1 就是非常量
+                    currentSymbTable.put(currentWord.content,symb);
+                }else if(type == 'a'){
+                    symb = new Arr(currentWord.content,0);
+                    currentSymbTable.put(currentWord.content,symb);
+                }
                 pcode.append(" " + currentWord.content);
                 nextWord(); // array - [  , var - =
             }
 
             if(type == 'a'){ //array - currentWord = [
                 while(currentWord.content.equals("[")){
+                    symb.dimensionNum++;
                     pcode.append(" " + currentWord.content);  // append [
                     nextWord();
                     //inside DIM

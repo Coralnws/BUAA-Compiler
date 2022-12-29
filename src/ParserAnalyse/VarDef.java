@@ -38,8 +38,28 @@ public class VarDef extends SymbAnalyse{
                 TreeNode assignNode = new TreeNode(sym);
                 assignNode.addNode(this.node);
                 nextSym();
-                //4
-                InitVal initVal = new InitVal(this.node);
+                if(sym.typeCode.equals("GETINTTK")){
+                    parserList.add(sym);
+                    TreeNode getintNode = new TreeNode(sym);
+                    getintNode.addNode(this.node);
+                    nextSym();
+                    if(sym.content.equals("(")){
+                        parserList.add(sym);
+                        TreeNode lparentNode = new TreeNode(sym);
+                        lparentNode.addNode(this.node);
+                        nextSym();
+                        if(sym.content.equals(")")){
+                            parserList.add(sym);
+                            TreeNode rparentNode = new TreeNode(sym);
+                            rparentNode.addNode(this.node);
+                            nextSym();
+                        }
+                    }
+
+                }else{
+                    //4
+                    InitVal initVal = new InitVal(this.node);
+                }
             }
 
             //printout <VarDef>

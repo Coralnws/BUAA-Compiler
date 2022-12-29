@@ -19,14 +19,7 @@ public class Draft {
     }
 
     public static void main(String[] args) throws IOException {
-        Stack<Integer> stack = new Stack<Integer>();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-
-        ////System.out.println(stack.get(0));
-        ////System.out.println(stack.get(1));
-        //System.out.println(stack.get(2));
+        //System.out.println(5&9);
 
         /*
         List<String> str = new ArrayList<>();
@@ -247,7 +240,7 @@ public class Draft {
 
 
         /*
-        Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(//System.in);
         int value = 123;
 String str = String.valueOf(value);
         //System.out.println(str);

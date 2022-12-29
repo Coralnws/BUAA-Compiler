@@ -1,6 +1,13 @@
 package ParserAnalyse;
 
+import Pcode.PcodeGenerator;
 import Save.TreeNode;
+import Error.Error;
+import Error.ErrorRecord;
+import Save.Word;
+import Save.lexerWord;
+
+import static Parser.Parser.testError;
 
 
 /*
@@ -15,12 +22,14 @@ Stmt → LVal '=' Exp ';'
 | 'printf''('FormatString{','Exp}')'';'
  */
 public class Stmt extends SymbAnalyse{
+    Word word;
+    Error error;
     public Stmt(TreeNode parent){
         super("<Stmt>",parent);
-        ////System.out.println("start <stmt>");
+        System.out.println("start <stmt>");
         boolean run = false;
 
-        ////System.out.println("In Stmt : sym is " + sym.content);
+        System.out.println("In Stmt : sym is " + sym.content);
         //1 - if
         if(sym.content.equals("if")){
             run = true;
@@ -61,11 +70,43 @@ public class Stmt extends SymbAnalyse{
                        Stmt stmt2 = new Stmt(this.node);
 
                        //insertList();
-                       ////System.out.println("Printout <stmt>");
+                       System.out.println("Printout <stmt>");
                        parserList.add(this.node.node);
                    }
                    else{
-                       ////System.out.println("Printout <stmt>");
+                       System.out.println("Printout <stmt>");
+                       parserList.add(this.node.node);
+                   }
+               }else if(testError){
+                   word = save.getSym(listIndex-2);
+                   System.out.println("Check word is what ,should sth before ):" + word.content);
+                   error = new Error(word.line,'j');
+                   PcodeGenerator.errorRecord.addError(error);
+                   word = new lexerWord("CondEnd",")", word.line);
+                   TreeNode RParentNode = new TreeNode(word);
+                   RParentNode.addNode(this.node);
+                   parserList.add(word);
+
+                   System.out.println("Check sym is what:" + sym.content);
+                   //1.4
+                   Stmt stmt = new Stmt(this.node);
+
+                   //1.5
+                   if(sym.content.equals("else")){
+                       parserList.add(sym);
+                       TreeNode elseNode = new TreeNode(sym);
+                       elseNode.addNode(this.node);
+                       nextSym();
+
+                       //1.6
+                       Stmt stmt2 = new Stmt(this.node);
+
+                       //insertList();
+                       System.out.println("Printout <stmt>");
+                       parserList.add(this.node.node);
+                   }
+                   else{
+                       System.out.println("Printout <stmt>");
                        parserList.add(this.node.node);
                    }
                }
@@ -96,7 +137,21 @@ public class Stmt extends SymbAnalyse{
                     nextSym();
                     //2.4
                     Stmt stmt = new Stmt(this.node);
-                    ////System.out.println("Printout <stmt>");
+                    System.out.println("Printout <stmt>");
+                    parserList.add(this.node.node);
+                }else if(testError){
+                    word = save.getSym(listIndex-2);
+                    System.out.println("Check word is what ,should sth before ):" + word.content);
+                    error = new Error(word.line,'j');
+                    PcodeGenerator.errorRecord.addError(error);
+                    word = new lexerWord("CondEnd",")", word.line);
+                    TreeNode RParentNode = new TreeNode(word);
+                    RParentNode.addNode(this.node);
+                    parserList.add(word);
+
+                    System.out.println("Check sym is what:" + sym.content);
+                    Stmt stmt = new Stmt(this.node);
+                    System.out.println("Printout <stmt>");
                     parserList.add(this.node.node);
                 }
             }
@@ -118,7 +173,19 @@ public class Stmt extends SymbAnalyse{
                 nextSym();
 
                 //insertList();
-                ////System.out.println("Printout <stmt>");
+                System.out.println("Printout <stmt>");
+                parserList.add(this.node.node);
+            }else if(testError){
+                Word word = save.getSym(listIndex-2);
+                System.out.println("Check word is what:" + word.content);
+                Error error = new Error(word.line,'i');
+                PcodeGenerator.errorRecord.addError(error);
+                word = new lexerWord("SEMICN",",", word.line);
+                TreeNode semicnNode = new TreeNode(word);
+                semicnNode.addNode(this.node);
+
+                System.out.println("Check sym is what:" + sym.content);
+                System.out.println("Printout <stmt>");
                 parserList.add(this.node.node);
             }
         }
@@ -138,9 +205,21 @@ public class Stmt extends SymbAnalyse{
                 nextSym();
 
                 //insertList();
-                ////System.out.println("Printout <stmt>");
+                System.out.println("Printout <stmt>");
                 parserList.add(this.node.node);
 
+            }else if(testError){
+                Word word = save.getSym(listIndex-2);
+                System.out.println("Check word is what:" + word.content);
+                Error error = new Error(word.line,'i');
+                PcodeGenerator.errorRecord.addError(error);
+                word = new lexerWord("SEMICN",",", word.line);
+                TreeNode semicnNode = new TreeNode(word);
+                semicnNode.addNode(this.node);
+
+                System.out.println("Check sym is what:" + sym.content);
+                System.out.println("Printout <stmt>");
+                parserList.add(this.node.node);
             }
         }
 
@@ -163,7 +242,19 @@ public class Stmt extends SymbAnalyse{
                 nextSym();
 
                 //insertList();
-                ////System.out.println("Printout <stmt>");
+                System.out.println("Printout <stmt>");
+                parserList.add(this.node.node);
+            }else if(testError){
+                Word word = save.getSym(listIndex-2);
+                System.out.println("Check word is what:" + word.content);
+                Error error = new Error(word.line,'i');
+                PcodeGenerator.errorRecord.addError(error);
+                word = new lexerWord("SEMICN",",", word.line);
+                TreeNode semicnNode = new TreeNode(word);
+                semicnNode.addNode(this.node);
+
+                System.out.println("Check sym is what:" + sym.content);
+                System.out.println("Printout <stmt>");
                 parserList.add(this.node.node);
             }
         }
@@ -212,26 +303,72 @@ public class Stmt extends SymbAnalyse{
                             nextSym();
 
                             //insertList();
-                            ////System.out.println("Printout <stmt>");
+                            System.out.println("Printout <stmt>");
                             parserList.add(this.node.node);
 
+                        }else if(testError){
+                            Word word = save.getSym(listIndex-2);
+                            System.out.println("Check word is what:" + word.content);
+                            Error error = new Error(word.line,'i');
+                            PcodeGenerator.errorRecord.addError(error);
+                            word = new lexerWord("SEMICN",",", word.line);
+                            TreeNode semicnNode = new TreeNode(word);
+                            semicnNode.addNode(this.node);
+
+                            System.out.println("Check sym is what:" + sym.content);
+                            System.out.println("Printout <stmt>");
+                            parserList.add(this.node.node);
                         }
 
+                    }else if (testError){
+                        word = save.getSym(listIndex-2);
+                        System.out.println("Check word is what ,should sth before ):" + word.content);
+                        error = new Error(word.line,'j');
+                        PcodeGenerator.errorRecord.addError(error);
+                        word = new lexerWord("PRINTEND",")", word.line);
+                        TreeNode RParentNode = new TreeNode(word);
+                        RParentNode.addNode(this.node);
+                        parserList.add(word);
+
+                        System.out.println("Check sym is what:" + sym.content);
+                        if(sym.content.equals(";")){
+                            parserList.add(sym);
+                            TreeNode semicnNode = new TreeNode(sym);
+                            semicnNode.addNode(this.node);
+                            nextSym();
+
+                            //insertList();
+                            System.out.println("Printout <stmt>");
+                            parserList.add(this.node.node);
+
+                        }else if(testError){
+                            word = save.getSym(listIndex-2);
+                            System.out.println("Check word is what:" + word.content);
+                            error = new Error(word.line,'i');
+                            PcodeGenerator.errorRecord.addError(error);
+                            word = new lexerWord("SEMICN",",", word.line);
+                            TreeNode semicnNode = new TreeNode(word);
+                            semicnNode.addNode(this.node);
+
+                            System.out.println("Check sym is what:" + sym.content);
+                            System.out.println("Printout <stmt>");
+                            parserList.add(this.node.node);
+                        }
                     }
                 }
 
             }
-            ////System.out.println("quit printf" + " sym:" + sym.content);
+            System.out.println("quit printf" + " sym:" + sym.content);
         }
 
         // 7 - Block : need scan - start with {
         else if(sym.content.equals("{")){
-            ////System.out.println("BLOCK IN STMT");
+            System.out.println("BLOCK IN STMT");
             run = true;
             Block block = new Block(this.node);
 
             //this.insertList();
-            ////System.out.println("Printout <stmt>");
+            System.out.println("Printout <stmt>");
             parserList.add(this.node.node);
         }
 
@@ -239,7 +376,7 @@ public class Stmt extends SymbAnalyse{
         else if(AddExp.scanAhead() == ParserType.LVal){
             boolean isAssign = this.scanAssign();
             run = true;
-            //System.out.println("Exp in stmt");
+            System.out.println("Exp in stmt");
 
             if(isAssign){
                 LVal lVal = new LVal(this.node);
@@ -274,7 +411,19 @@ public class Stmt extends SymbAnalyse{
                                     nextSym();
 
                                     // this.insertList();
-                                    //System.out.println("Printout <stmt>");
+                                    System.out.println("Printout <stmt>");
+                                    parserList.add(this.node.node);
+                                }else if(testError){
+                                    Word word = save.getSym(listIndex-2);
+                                    System.out.println("Check word is what:" + word.content);
+                                    Error error = new Error(word.line,'i');
+                                    PcodeGenerator.errorRecord.addError(error);
+                                    word = new lexerWord("SEMICN",",", word.line);
+                                    TreeNode semicnNode = new TreeNode(word);
+                                    semicnNode.addNode(this.node);
+
+                                    System.out.println("Check sym is what:" + sym.content);
+                                    System.out.println("Printout <stmt>");
                                     parserList.add(this.node.node);
                                 }
                             }
@@ -289,7 +438,19 @@ public class Stmt extends SymbAnalyse{
                             semicnNode.addNode(this.node);
                             nextSym();
 
-                            //System.out.println("Printout <stmt>");
+                            System.out.println("Printout <stmt>");
+                            parserList.add(this.node.node);
+                        }else if(testError){
+                            Word word = save.getSym(listIndex-2);
+                            System.out.println("Check word is what:" + word.content);
+                            Error error = new Error(word.line,'i');
+                            PcodeGenerator.errorRecord.addError(error);
+                            word = new lexerWord("SEMICN",",", word.line);
+                            TreeNode semicnNode = new TreeNode(word);
+                            semicnNode.addNode(this.node);
+
+                            System.out.println("Check sym is what:" + sym.content);
+                            System.out.println("Printout <stmt>");
                             parserList.add(this.node.node);
                         }
                     }
@@ -304,7 +465,19 @@ public class Stmt extends SymbAnalyse{
                     semicnNode.addNode(this.node);
                     nextSym();
 
-                    //System.out.println("Printout <stmt>");
+                    System.out.println("Printout <stmt>");
+                    parserList.add(this.node.node);
+                }else if(testError){
+                    Word word = save.getSym(listIndex-2);
+                    System.out.println("Check word is what:" + word.content);
+                    Error error = new Error(word.line,'i');
+                    PcodeGenerator.errorRecord.addError(error);
+                    word = new lexerWord("SEMICN",",", word.line);
+                    TreeNode semicnNode = new TreeNode(word);
+                    semicnNode.addNode(this.node);
+
+                    System.out.println("Check sym is what:" + sym.content);
+                    System.out.println("Printout <stmt>");
                     parserList.add(this.node.node);
                 }
             }
@@ -312,7 +485,7 @@ public class Stmt extends SymbAnalyse{
         //9 [Exp] ;
 
         else if(AddExp.scanAhead() != ParserType.ERROR){
-            //System.out.println("exp in stmt");
+            System.out.println("exp in stmt");
             run = true;
             Exp exp = new Exp(this.node);
 
@@ -322,7 +495,19 @@ public class Stmt extends SymbAnalyse{
                 semicnNode.addNode(this.node);
                 nextSym();
 
-                //System.out.println("Printout <stmt>");
+                System.out.println("Printout <stmt>");
+                parserList.add(this.node.node);
+            }else if(testError){
+                Word word = save.getSym(listIndex-2);
+                System.out.println("Check word is what:" + word.content);
+                Error error = new Error(word.line,'i');
+                PcodeGenerator.errorRecord.addError(error);
+                word = new lexerWord("SEMICN",",", word.line);
+                TreeNode semicnNode = new TreeNode(word);
+                semicnNode.addNode(this.node);
+
+                System.out.println("Check sym is what:" + sym.content);
+                System.out.println("Printout <stmt>");
                 parserList.add(this.node.node);
             }
         }
@@ -333,13 +518,13 @@ public class Stmt extends SymbAnalyse{
             semicnNode.addNode(this.node);
             nextSym();
 
-            //System.out.println("Printout <stmt>");
+            System.out.println("Printout <stmt>");
             parserList.add(this.node.node);
         }
 
         if(!run){
-            //System.out.println("Not Match" + " sym: " +sym.content );
-            //System.out.println("Not Match line: " + (listIndex));
+            System.out.println("Not Match" + " sym: " +sym.content );
+            System.out.println("Not Match line: " + (listIndex));
         }
 
     }

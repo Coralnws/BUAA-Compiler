@@ -5,6 +5,9 @@ import java.io.IOException;
 import static Pcode.Array.ArrayTestExp;
 import static Pcode.ConstDef.ConstDeclTestExp;
 import static Pcode.Return.BlockItemTestExp;
+import Error.Error;
+import Error.ErrorRecord;
+import Pcode.Symbol.Symbol;
 
 public class UpdVar extends PcodeGenerator{
     char type;
@@ -22,8 +25,17 @@ public class UpdVar extends PcodeGenerator{
             type = 'a';
         }
         if(currentWord.typeCode.equals("IDENFR")){
+            //error
+            Symbol symb = checkVarExist(currentWord.content);
+            //System.out.println("Check symb name :" + symb.name + " and symb's type:" + symb.type);
+            if(symb != null && symb.type == 0){
+                System.out.println("found symb:"+symb.getClass());
+                Error error = new Error(currentWord.line,'h');
+                errorRecord.addError(error);
+            }
+
             pcode.append(" " + currentWord.content); //append name
-            //System.out.println("Debug1 : " + pcode);
+            System.out.println("Debug1 : " + pcode);
             nextWord(); // array - [  , var - =
         }
 

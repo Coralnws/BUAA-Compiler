@@ -18,7 +18,7 @@ public class MulExp extends SymbAnalyse{
         parserList.add(this.node.node);
 
         //2 loop for { (* | / | %)  UnaryExp}
-        while(sym.content.equals("*") || sym.content.equals("/") || sym.content.equals("%")){
+        while(sym.content.equals("*") || sym.content.equals("/") || sym.content.equals("%") || sym.content.equals("bitand")){
             parserList.add(sym);
             TreeNode mulNode = new TreeNode(sym);
             mulNode.addNode(this.node);

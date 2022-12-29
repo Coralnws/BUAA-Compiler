@@ -3,7 +3,7 @@ package Pcode.Symbol;
 public class Variable extends Symbol {
     int floor;
     //public int value;
-    int type; //0-const ,1-normal
+    //int type; //0-const ,1-normal
 
     public Variable(String name,int type) {
         super(name);

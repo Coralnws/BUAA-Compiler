@@ -2,7 +2,8 @@ package Pcode;
 
 import Save.lexerWord;
 import Save.parserWord;
-
+import Error.Error;
+import Error.ErrorRecord;
 import java.io.IOException;
 
 import static Pcode.Exp.scanAhead;
@@ -16,6 +17,11 @@ public class ConstExp extends PcodeGenerator{
         while(!currentWord.typeCode.equals("RBRACK")){
             ignoreParser = true;
             if(scanAhead() == returnType.VAR){
+                if(checkVarExist(currentWord.content) == null){
+                    System.out.println("LVal , gotError c");
+                    Error error = new Error(currentWord.line,'c');
+                    errorRecord.addError(error);
+                }
                 pcode.append(" " + currentWord.content);
                 nextWord();
             }else if(scanAhead() == returnType.NUM){
@@ -67,6 +73,11 @@ public class ConstExp extends PcodeGenerator{
                         writer.write(varT + " = ! " + ans);
                         pcode.append(" "+ varT);
                     }else{
+                        if(checkVarExist(currentWord.content) == null){
+                            System.out.println("LVal , gotError c");
+                            Error error = new Error(currentWord.line,'c');
+                            errorRecord.addError(error);
+                        }
                         nextTVar();
                         writer.write(varT + " = ! " + currentWord.content);
                         pcode.append(" " + varT);

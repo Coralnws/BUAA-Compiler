@@ -1,12 +1,19 @@
 package ParserAnalyse;
 
+import Pcode.PcodeGenerator;
 import Save.TreeNode;
+import Save.Word;
+import Save.lexerWord;
+import Error.Error;
+import Error.ErrorRecord;
+
+import static Parser.Parser.testError;
 
 //ConstDef → Ident { '[' ConstExp ']' } '=' ConstInitVal
 public class ConstDef extends SymbAnalyse{
     public ConstDef(TreeNode parent){
         super("<ConstDef>",parent);
-        ////System.out.println("start <ConstDef>");
+        System.out.println("start <ConstDef>");
 
         //1
         if(sym.typeCode.equals("IDENFR")){
@@ -28,6 +35,15 @@ public class ConstDef extends SymbAnalyse{
                     TreeNode RBrackNode = new TreeNode(sym);
                     RBrackNode.addNode(this.node);
                     nextSym();
+                }else if(testError){
+                    Word word = save.getSym(listIndex-2);
+                    System.out.println("Check word is what:" + word.content);
+                    Error error = new Error(word.line,'k');
+                    PcodeGenerator.errorRecord.addError(error);
+                    word = new lexerWord("RBRACK",",", word.line);
+                    TreeNode RBrackNode= new TreeNode(word);
+                    RBrackNode.addNode(this.node);
+
                 }
             }
             //3
@@ -41,7 +57,7 @@ public class ConstDef extends SymbAnalyse{
                 ConstInitVal constInitVal = new ConstInitVal(this.node);
             }
             else{
-                ////System.out.println("ConstDef Error:Not = ");
+                System.out.println("ConstDef Error:Not = ");
             }
 
 
@@ -51,7 +67,7 @@ public class ConstDef extends SymbAnalyse{
             listIndex++;
 
              */
-            ////System.out.println("Printout <ConstDef>");
+            System.out.println("Printout <ConstDef>");
             parserList.add(this.node.node);
         }
     }

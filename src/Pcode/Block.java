@@ -11,10 +11,10 @@ public class Block extends PcodeGenerator {
         this.funcName = funcName;
         //currentWord应该是<Block>
         writer.write("start " + funcName);
-        if (isIf(funcName) || isElse(funcName) || funcName.equals("#while")) {
+        nextWord();
+        if (currentWord.typeCode.equals("LBRACE") && isIf(funcName) || isElse(funcName) || funcName.equals("#while")) {
             writer.write("start #block");
         }
-        nextWord();
         //currentWord : {
         nextWord();
 

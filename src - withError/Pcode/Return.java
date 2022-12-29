@@ -1,7 +1,8 @@
 package Pcode;
 
 import java.io.IOException;
-
+import Error.Error;
+import Error.ErrorRecord;
 /**
  * <BlockItem>
  * <Stmt>
@@ -10,13 +11,26 @@ import java.io.IOException;
  */
 
 public class Return extends PcodeGenerator{
+    boolean retErr = false;
     public Return() throws IOException {
         //System.out.println("Pcode Return:" + currentWord.typeCode);
         pcode.append("ret");  //currentWord = return
-
+        hasRet = true;
         ignoreParser = true;
         nextWord();   //跳过<Exp>
         //System.out.println("Check now is Exp or ; : " + currentWord.typeCode);
+        if(currentFunc.type == 0){  //不应该有返回值但有
+            if(!currentWord.typeCode.equals("SEMICN")) {
+                Error error = new Error(currentWord.line,'f');
+                errorRecord.addError(error);
+            }
+        }else if(currentFunc.type == 1){  //应该有返回值但没有
+            if(currentWord.typeCode.equals("SEMICN")) {
+                Error error = new Error(currentWord.line,'g');
+                errorRecord.addError(error);
+                //retErr = true;
+            }
+        }
 
         while(!currentWord.typeCode.equals("SEMICN")){
             if(!currentWord.typeCode.equals("LPARENT") && !BlockItemTestExp()){
@@ -33,7 +47,10 @@ public class Return extends PcodeGenerator{
                 pcode.append(" " + varT);
             }
         }
-
+        if(retErr){
+            Error error = new Error(currentWord.line,'g');
+            errorRecord.addError(error);
+        }
         ignoreParser = false;
         writer.write(String.valueOf(pcode));
         nextWord();

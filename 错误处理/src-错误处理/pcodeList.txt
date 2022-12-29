@@ -1,18 +1,56 @@
-var v a = 2
-func void func2
+const v a = 1
+1t = - 2
+const v b = 1t
+const v c = 0
+const v d = 1234567
+const v e = 123456
+2t = ( 1 + 2 + 3 )
+const v f = 2t
+3t = 40 + 15
+const v g = 3t
+4t = ( 12 + 12 ) * 6 + 0
+const v h = 4t
+5t = ( 1 + ( - 2 ) ) * 0 * ( 0 + 1 )
+const v x = 5t
+6t = - 123
+const v __ab1cdefg__123 = 6t
+7t = ( 30 + 50 ) / 4
+const v abc_0_defg = 7t
+8t = - 40 / - 2
+const v y = 8t
+9t = ( + 11 ) % 3
+const v z = 9t
+const a array1 [ 5 ] = { 1 , 2 , 3 , 4 , 5 }
+10t = - 14
+11t = - 15
+12t = - 16
+const a array2 [ 10 ] = { 10 , 11 , 12 , 13 , 10t , 11t , 12t , 17 , 0 , 0 }
+const a array [ 2 ] [ 2 ] = { { 1 , 2 } , { 3 , 4 } }
+13t = 6 / 2
+14t = - 0
+15t = 10 / 5
+16t = 6 % 4 + 5
+var a array3 [ 2 ] [ 13t ] = { { 1 , 14t , 0 } , { 15t , 16t , 0 } }
+var a array4 [ 4 ]
+17t = - 1
+var a array5 [ 4 ] = { 1 , 17t , 0 , 4 }
+var v aaa
+var v bbb
+var v ccc
+var v xx
+var v aaaa = 123
+18t = - 123
+var v bbbb = 18t
+19t = + 0
+var v cccc = 19t
+func int compare
+para v a
 para v b
-start func2
-end func2
-func void add
-start add
-end add
-func int main
-start main
-var a arr1 [ 2 ] [ 3 ]
-call add
-1t = RET
-push 1t
-call func2
-2t = RET
-ret 0
-end main
+start compare
+#if1
+#cond1 a > b
+cond #cond1
+CheckCond
+start #if1
+ret a
+end #if1

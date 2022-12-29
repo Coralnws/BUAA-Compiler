@@ -12,6 +12,7 @@ public class Parser {
     private Word sym;
     public static SaveContent save = SaveContent.getInstance();
     private static int listIndex = 0;   //add(listIndex, content)
+    public static boolean testError = false;
 
 
     public void nextSym() throws IOException {
@@ -20,8 +21,9 @@ public class Parser {
     }
 
     public void start() throws IOException {
+        System.out.println("Start Parser");
         CompUnit compUnit = new CompUnit();
-        printParser();
+        //printParser();
         SymbAnalyse.printTree();
         SymbAnalyse.save.printTree();
     }

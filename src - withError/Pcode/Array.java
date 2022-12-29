@@ -1,6 +1,7 @@
 package Pcode;
 import java.io.IOException;
-
+import Error.Error;
+import Error.ErrorRecord;
 
 //只有作为ConstExp或者Exp的Array才会来到这里，最外层不用找值而是指数组本身的array会在Param和VarDef的时候就append进Pcode
 public class Array extends PcodeGenerator{
@@ -10,6 +11,11 @@ public class Array extends PcodeGenerator{
         //currentWord应该是arrName IDENFR
         ignoreParser = true;
         if(currentWord.typeCode.equals("IDENFR")){
+            if(testError && checkVarExist(currentWord.content) == null){
+                System.out.println("LVal , gotError c");
+                Error error = new Error(currentWord.line,'c');
+                errorRecord.addError(error);
+            }
             pcode.append(currentWord.content);
             nextWord(); // [
             while(currentWord.content.equals("[")){

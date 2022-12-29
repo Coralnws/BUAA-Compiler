@@ -3,7 +3,7 @@ package Pcode;
 import Save.lexerWord;
 
 import java.io.IOException;
-
+import Error.Error;
 import static Pcode.Exp.scanAhead;
 
 public class CondExp extends PcodeGenerator{

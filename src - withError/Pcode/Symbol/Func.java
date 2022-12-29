@@ -34,4 +34,12 @@ public class Func extends Symbol {
     public void recoverPt(){
         pt = paraNum-1;
     }
+    public Para getSpefPara(int index){
+        if(index < paraList.size()){
+            return paraList.get(index);
+        }else{
+            return null;
+        }
+
+    }
 }

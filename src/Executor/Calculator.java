@@ -21,17 +21,17 @@ public class Calculator {
         nextChar();
         while(ch != '#'){
             if(prevPt != null){
-                //System.out.println("prevPt = "+ prevPt);
+                ////System.out.println("prevPt = "+ prevPt);
             }
             if(ch == '-'){
-                //System.out.println("处理 -");
+                ////System.out.println("处理 -");
                 if(prevPt == null){  //第一个 ,是正负类型
-                    //System.out.println("prevPt = null");
+                    ////System.out.println("prevPt = null");
                     Operator neg = new Operator(ch,opType.signNEG);
                     opStack.push(neg);
                     prevPt = neg;
                 }else if(prevPt instanceof Operand){  //前面是数字, 做算数 ,看操作栈有没有
-                    //System.out.println("prevPt = operator");
+                    ////System.out.println("prevPt = operator");
                     Operator minu = new Operator(ch,opType.opMINU);
                     if(opNotEmpty()){ //前面有其他操作符或者（ ,应该没有正负类型
                         checkOpAndPush(minu);
@@ -40,7 +40,7 @@ public class Calculator {
                         prevPt = minu;
                     }
                 }else if(prevPt instanceof Operator){ //前面是操作符 ，要判断是正负数还是做算术的
-                    //System.out.println("prevPt = operator");
+                    ////System.out.println("prevPt = operator");
                     if(isOp(((Operator) prevPt).type) || ((Operator) prevPt).content == '('){
                         //前面是操作符，那么current就是正负类型
                         Operator neg = new Operator(ch,opType.signNEG);
@@ -57,14 +57,14 @@ public class Calculator {
                 nextChar();
             }
             else if(ch == '+'){
-                //System.out.println("处理 +");
+                ////System.out.println("处理 +");
                 if(prevPt == null){  //第一个 ,是正负类型
-                    //System.out.println("prevPt = null");
+                    ////System.out.println("prevPt = null");
                     Operator pos = new Operator(ch,opType.signPOS);
                     opStack.push(pos);
                     prevPt = pos;
                 }else if(prevPt instanceof Operand){  //前面是数字, 做算数 ,看操作栈有没有
-                    //System.out.println("prevPt = number");
+                    ////System.out.println("prevPt = number");
                     Operator plus = new Operator(ch,opType.opPLUS);
                     if(opNotEmpty()){ //前面有其他操作符或者（ ,应该没有正负类型
                         checkOpAndPush(plus);
@@ -73,7 +73,7 @@ public class Calculator {
                         prevPt = plus;
                     }
                 }else if(prevPt instanceof Operator){ //前面是操作符 ，要判断是正负数还是做算术的
-                    //System.out.println("prevPt = operator");
+                    ////System.out.println("prevPt = operator");
                     if(isOp(((Operator) prevPt).type) || ((Operator) prevPt).content == '('){
                         //前面是操作符，那么current就是正负类型
                         Operator pos = new Operator(ch,opType.signPOS);
@@ -107,11 +107,11 @@ public class Calculator {
                         prevPt = mul;
                     }else{
                         //error
-                        //System.out.println("* error1");
+                        ////System.out.println("* error1");
                     }
                 }else{
                     //error
-                    //System.out.println("* error2");
+                    ////System.out.println("* error2");
                 }
                 nextChar();
             }
@@ -133,16 +133,16 @@ public class Calculator {
                         prevPt = div;
                     }else{
                         //error
-                        //System.out.println("/ error1");
+                        ////System.out.println("/ error1");
                     }
                 }else{
                     //error
-                    //System.out.println("/ error2");
+                    ////System.out.println("/ error2");
                 }
                 nextChar();
             }
             else if(ch == '%'){
-                //System.out.println("处理 %");
+                ////System.out.println("处理 %");
                 if(prevPt == null){  //第一个 ,是正负类型
                     //error
                 }else if(prevPt instanceof Operand){  //前面是数字, 做算数 ,看操作栈有没有
@@ -160,11 +160,38 @@ public class Calculator {
                         prevPt = mod;
                     }else{
                         //error
-                        //System.out.println("% error1");
+                        ////System.out.println("% error1");
                     }
                 }else{
                     //error
-                    //System.out.println("% error2");
+                    ////System.out.println("% error2");
+                }
+                nextChar();
+            }
+            else if(ch == '&'){
+                ////System.out.println("处理 %");
+                if(prevPt == null){  //第一个 ,是正负类型
+                    //error
+                }else if(prevPt instanceof Operand){  //前面是数字, 做算数 ,看操作栈有没有
+                    Operator mod = new Operator(ch,opType.opAND);
+                    if(opNotEmpty()){ //前面有其他操作符或者（ ,应该没有正负类型
+                        checkOpAndPush(mod);
+                    }else{
+                        opStack.push(mod);  //如果是空的，直接入栈
+                        prevPt = mod;
+                    }
+                }else if(prevPt instanceof Operator){  //只有可能是 ）
+                    if(((Operator) prevPt).content == ')'){
+                        Operator mod = new Operator(ch,opType.opAND);
+                        opStack.push(mod);
+                        prevPt = mod;
+                    }else{
+                        //error
+                        ////System.out.println("% error1");
+                    }
+                }else{
+                    //error
+                    ////System.out.println("% error2");
                 }
                 nextChar();
             }
@@ -186,44 +213,44 @@ public class Calculator {
                 prevPt = numStack.peek();
                 nextChar();
             }
-            System.out.println("---------------Check this round-------------------");
+            //System.out.println("---------------Check this round-------------------");
             printOpStack();
             printNumStack();
-            System.out.println("-------------- next round , ch = " + ch +"-------------------");
+            //System.out.println("-------------- next round , ch = " + ch +"-------------------");
         }
 
         if(opNotEmpty()){
-            //System.out.println("opStack is not empty");
+            ////System.out.println("opStack is not empty");
             printOpStack();
             while(opNotEmpty()){
                 getOp();
             }
         }
 
-        //System.out.println("Check size of numStack : "+numStack.size());
+        ////System.out.println("Check size of numStack : "+numStack.size());
         int result = numStack.pop().value;
-        System.out.println("Result : " +  result);
+        //System.out.println("Result : " +  result);
 
         return result;
     }
 
     void printOpStack(){
         for(int i=0;i<opStack.size();i++){
-            System.out.print(opStack.get(i).content + " ");
+            //System.out.print(opStack.get(i).content + " ");
         }
-        System.out.println();
+        //System.out.println();
     }
 
     void printNumStack(){
         for(int i=0;i<numStack.size();i++){
-            System.out.print(numStack.get(i).value + " ");
+            //System.out.print(numStack.get(i).value + " ");
         }
-        System.out.println();
+        //System.out.println();
     }
 
 
     void checkOpAndPush(Operator current){
-        //System.out.println("checkOpAndPush()");
+        ////System.out.println("checkOpAndPush()");
         Operator peek = opStack.peek();
         if(peek.content == '('){
             opStack.push(current);
@@ -232,7 +259,7 @@ public class Calculator {
             if(getPrior(peek.content) >= getPrior(ch)) {  //一般算术符类型
                 getOp();  //最后一定导向 opCalc
             }
-            //System.out.println("push opStack :" + current.content);
+            ////System.out.println("push opStack :" + current.content);
             if(opStack.size() > 0  && opStack.peek().content == '-' && getPrior(opStack.peek().content) == getPrior(current.content)){
                 opCalc();
             }
@@ -270,13 +297,16 @@ public class Calculator {
                 break;
             case '%':
                 res.setValue(num2.value % num1.value);
-                //System.out.println("% , result = " + res.value);
+                ////System.out.println("% , result = " + res.value);
                 break;
             case '-':
                 res.setValue(num2.value - num1.value);
                 break;
             case '+':
                 res.setValue(num2.value + num1.value);
+                break;
+            case '&':
+                res.setValue(num2.value & num1.value);
                 break;
         }
         numStack.push(res);
@@ -301,7 +331,7 @@ public class Calculator {
     }
 
     boolean isOp(opType type){
-        if(type == opType.opPLUS || type == opType.opMINU || type == opType.opMUL || type == opType.opDIV ||type == opType.opMOD){
+        if(type == opType.opAND||type == opType.opPLUS || type == opType.opMINU || type == opType.opMUL || type == opType.opDIV ||type == opType.opMOD){
             return true;
         }else{
             return false;
@@ -317,7 +347,7 @@ public class Calculator {
     }
 
     int getPrior(char oper){
-        if(oper == '*' || oper == '/' || oper == '%'){ //优先级最高的
+        if(oper == '*' || oper == '/' || oper == '%' || oper == '&'){ //优先级最高的
             return 1;
         }else if(oper == '+' || oper == '-'){
             return 0;
@@ -349,18 +379,18 @@ public class Calculator {
     }
 
     void combSign(){
-        //System.out.println("前后都是 + - ,combSign");
+        ////System.out.println("前后都是 + - ,combSign");
         if(opNotEmpty()){
             Operator sign = opStack.peek();
             if(isSign(sign.type)){
                 if(sign.content != ch){
-                    //System.out.println("- 进栈 ,当前opStack size:" + opStack.size());
+                    ////System.out.println("- 进栈 ,当前opStack size:" + opStack.size());
                     opStack.pop();
                     Operator newSign = new Operator('-',opType.signNEG);
                     opStack.push(newSign);
                     prevPt = newSign;
                 }else if(sign.content == ch){
-                    //System.out.println("+ 进栈,当前opStack size:" + opStack.size());
+                    ////System.out.println("+ 进栈,当前opStack size:" + opStack.size());
                     opStack.pop();
                     Operator newSign = new Operator('+',opType.signPOS);
                     opStack.push(newSign);
@@ -379,7 +409,7 @@ public class Calculator {
         }else{
             ch = '#';
         }
-        //System.out.println("ch:" + ch);
+        ////System.out.println("ch:" + ch);
     }
 
     boolean isNumeric(char ch){
@@ -417,16 +447,17 @@ enum opType{
     opMOD,
     opLBRAC,
     opRBRAC,
+    opAND,
     signPOS, //正数
     signNEG, //负数
 }
 
 class Tester{
     public static void main(String[] args) {
-        String exp = "15 * 2 - 15 / 2 + 15 % 2 * -3 * 8 % 123 * 1 / 2 * 123";
+        String exp = "5&9";
         String exp2 = "15*2 - (15/2) + 4* 4";
         Calculator cal = new Calculator(exp);
-        System.out.println("res="+cal.calc());
+        //System.out.println("res="+cal.calc());
     }
 
 }

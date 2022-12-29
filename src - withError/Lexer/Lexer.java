@@ -219,6 +219,7 @@ public class Lexer {  //词法分析
                 currentWord.append(sym);
                 save(Vocab.lexicalCode(currentWord.toString()),currentWord.toString());
                 nextSym();
+                readStrAdy = false;
             }
             else if(sym == '\n'){
                 nextSym();

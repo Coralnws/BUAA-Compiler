@@ -1,5 +1,8 @@
 package Pcode;
 
+import Pcode.Symbol.Arr;
+import Pcode.Symbol.Symbol;
+import Pcode.Symbol.Variable;
 import Save.lexerWord;
 
 import java.io.IOException;
@@ -7,7 +10,7 @@ import java.io.IOException;
 import static Pcode.Array.ArrayTestExp;
 import static Pcode.ConstDef.ConstDeclTestExp;
 import static Pcode.Return.BlockItemTestExp;
-
+import Error.Error;
 /**
  * <Decl>
  * <VarDecl>
@@ -27,7 +30,7 @@ public class VarDef extends PcodeGenerator{
         //currentWord应该是<VarDecl>
         //System.out.println("VarDecl开头 :" + currentWord.typeCode);
         ignoreParser = true;
-
+        Symbol symb = null;
         if(currentWord.typeCode.equals("<VarDef>")){
             pcode.append("var");
             nextWord(); //name
@@ -40,12 +43,32 @@ public class VarDef extends PcodeGenerator{
                 type = 'a';
             }
             if(currentWord.typeCode.equals("IDENFR")){
+                //error
+                System.out.println("DEBUG, check vardef:" + currentWord.content);
+                if(checkCurrentSymbExist(currentWord.content)){
+                    System.out.println("vardef , gotError b");
+                    Error error = new Error(currentWord.line,'b');
+                    errorRecord.addError(error);
+                }
+                if(type == 'v'){
+                    symb = new Variable(currentWord.content,1);  //type == 1 就是非常量
+                    currentSymbTable.put(currentWord.content,symb);
+                    System.out.println("DEBUG, check func:" + currentFunc);
+                }else if(type == 'a'){
+                    System.out.println("DefVar here");
+                    symb = new Arr(currentWord.content,1);
+                    System.out.println("newArr:"+symb +"type = "+symb.type);
+                    currentSymbTable.put(currentWord.content,symb);
+                }
+                System.out.println("Check line number:" + currentWord.line);
                 pcode.append(" " + currentWord.content);
                 nextWord(); // array - [  , var - =
             }
 
+
             if(type == 'a'){ //array - currentWord = [
                 while(currentWord.content.equals("[")){
+                    symb.dimensionNum++;
                     pcode.append(" " + currentWord.content);  // append [
                     nextWord();
                     //inside DIM

@@ -158,6 +158,9 @@ public class Print extends PcodeGenerator{
             if(scanWord.typeCode.equals("IDENFR") && scanWordAhead.typeCode.equals("LBRACK")){
                 return true;
             }
+            if(scanWord.typeCode.equals("BITANDTK")){
+                return true;
+            }
             scanIndex ++;
             scanWord(scanIndex);
         }

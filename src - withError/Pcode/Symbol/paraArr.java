@@ -8,6 +8,7 @@ public class paraArr extends Para{
 
     public paraArr(String name) {
         super(name);
+        this.type =1;
     }
 
     public void addDimension(int value){

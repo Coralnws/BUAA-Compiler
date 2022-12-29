@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Arr extends Symbol{
     //public ArrayList<Integer> dimension = new ArrayList<Integer>();
     //public ArrayList<Integer> valueList = new ArrayList<Integer>();
-    int type; //0-const , 1-normal
+    //int type; //0-const , 1-normal
 
 
     public Arr(String name,int type) {

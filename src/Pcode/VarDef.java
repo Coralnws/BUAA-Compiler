@@ -22,6 +22,7 @@ import static Pcode.Return.BlockItemTestExp;
  */
 public class VarDef extends PcodeGenerator{
     char type;
+    String ident;
     public VarDef() throws IOException {
         //var v <name> =
         //currentWord应该是<VarDecl>
@@ -40,6 +41,7 @@ public class VarDef extends PcodeGenerator{
                 type = 'a';
             }
             if(currentWord.typeCode.equals("IDENFR")){
+                ident = currentWord.content;
                 pcode.append(" " + currentWord.content);
                 nextWord(); // array - [  , var - =
             }
@@ -105,6 +107,18 @@ public class VarDef extends PcodeGenerator{
                 if(currentWord.content.equals("=")){
                     pcode.append(" " + currentWord.content);
                     nextWord();  // var/val/exp
+                    if(currentWord.typeCode.equals("GETINTTK")){
+                        nextTVar();
+                        //writer.write(String.valueOf(pcode));
+                        //wrote = true;
+                        writer.write(varT + " = GETINT");
+                        //writer.write("upd " + ident + " = " + varT);
+                        pcode.append(" " + varT);
+                        while(!currentWord.content.equals(")")){
+                            nextWord();
+                        }
+                        nextWord();
+                    }
                     while(!currentWord.typeCode.equals("SEMICN") && !currentWord.typeCode.equals("COMMA")){
                         if(ConstDeclTestExp()){
                             Exp exp = new Exp();

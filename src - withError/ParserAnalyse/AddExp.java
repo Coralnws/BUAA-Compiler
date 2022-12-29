@@ -8,13 +8,13 @@ public class AddExp extends SymbAnalyse {
 
     public AddExp(TreeNode parent) {
         super("<AddExp>", parent);
-        //System.out.println("start <AddExp>");
+        System.out.println("start <AddExp>");
 
         //1
         MulExp mulExp = new MulExp(this.node); //print 1st
 
         //printout <AddExp>
-        //System.out.println("Printout <AddExp>");
+        System.out.println("Printout <AddExp>");
         parserList.add(this.node.node);
 
         //2 loop for { ('+' | '−') MulExp }
@@ -30,7 +30,7 @@ public class AddExp extends SymbAnalyse {
             //printout <AddExp>
             //save.addParserWord(listIndex, this.node.node);
             //listIndex++;
-            //System.out.println("Printout <AddExp>");
+            System.out.println("Printout <AddExp>");
             parserList.add(this.node.node);
         }
     }
@@ -38,33 +38,33 @@ public class AddExp extends SymbAnalyse {
 
     public static ParserType scanAhead(){
         scanSym(listIndex-1);
-        ////System.out.println("Start AddExp.scanAhead()");
-        ////System.out.println("scanSym 1 : " + scanSym.content);
+        System.out.println("Start AddExp.scanAhead()");
+        System.out.println("scanSym 1 : " + scanSym.content);
 
         if(scanSym.typeCode.equals("IDENFR")){ //UnaryExp or LVal
-            ////System.out.println("ScanAhead : Ident");
+            System.out.println("ScanAhead : Ident");
             scanSym(listIndex);
-            ////System.out.println("scanSym+1 :" + scanSym.content);
+            System.out.println("scanSym+1 :" + scanSym.content);
 
             if(scanSym.content.equals("(")){
-                    ////System.out.println("scanAhead return UnaryExp");
+                    System.out.println("scanAhead return UnaryExp");
                     return ParserType.UnaryExp;
             }
             else{
-                    ////System.out.println("scanAhead return LVal");
+                    System.out.println("scanAhead return LVal");
                     return ParserType.LVal;
             }
         }
         if(scanSym.content.equals("(")){
-            ////System.out.println("scanAhead return PrimaryExp");
+            System.out.println("scanAhead return PrimaryExp");
             return ParserType.PrimaryExp;
         }
         if(scanSym.content.equals("+") || scanSym.content.equals("-") || scanSym.content.equals("!")){
-            ////System.out.println("scanAhead return UnaryOp"); //under UnaryExp
+            System.out.println("scanAhead return UnaryOp"); //under UnaryExp
             return ParserType.UnaryOp;
         }
         if(scanSym.typeCode.equals("INTCON")){
-            ////System.out.println("scanAhead return PrimaryExp");
+            System.out.println("scanAhead return PrimaryExp");
             return ParserType.PrimaryExp;
         }
         return ParserType.ERROR;

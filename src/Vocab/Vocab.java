@@ -43,6 +43,7 @@ public class Vocab {
         put("]","RBRACK");
         put("{","LBRACE");
         put("}","RBRACE");
+        put("bitand","BITANDTK");
     }};
 
     public static String lexicalCode(String key){

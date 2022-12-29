@@ -4,5 +4,6 @@ public class paraVar extends Para {
 
     public paraVar(String name) {
         super(name);
+        this.type =1;
     }
 }

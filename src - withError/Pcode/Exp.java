@@ -9,9 +9,13 @@ package Pcode;
 *  6.混搭 calcExp
 */
 
+
 import ParserAnalyse.UnaryOp;
+import Save.SaveContent;
+import Save.Word;
 import Save.lexerWord;
 import Save.parserWord;
+import Error.Error;
 
 import java.io.IOException;
 
@@ -32,6 +36,11 @@ public class Exp extends PcodeGenerator{
                 && !currentWord.typeCode.equals("CondEnd") && !currentWord.typeCode.equals("AND") && !currentWord.typeCode.equals("OR")){
             ignoreParser = true;
             if(scanAhead() == returnType.VAR){
+                if(checkVarExist(currentWord.content) == null){
+                    System.out.println("LVal , gotError c");
+                    Error error = new Error(currentWord.line,'c');
+                    errorRecord.addError(error);
+                }
                 pcode.append(" " + currentWord.content);
                 nextWord();
             }else if(scanAhead() == returnType.NUM){
@@ -83,6 +92,11 @@ public class Exp extends PcodeGenerator{
                         writer.write(varT + " = ! " + ans);
                         pcode.append(" "+ varT);
                     }else{
+                        if(checkVarExist(currentWord.content) == null){
+                            System.out.println("LVal , gotError c");
+                            Error error = new Error(currentWord.line,'c');
+                            errorRecord.addError(error);
+                        }
                         nextTVar();
                         writer.write(varT + " = ! " + currentWord.content);
                         pcode.append(" " + varT);

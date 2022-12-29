@@ -136,6 +136,10 @@ public class ConstDef extends PcodeGenerator{
             if(scanWord.typeCode.equals("LPARENT")){
                 return true;
             }
+            if(scanWord.typeCode.equals("BITANDTK")){
+                return true;
+            }
+
             scanIndex ++;
             scanWord(scanIndex);
         }

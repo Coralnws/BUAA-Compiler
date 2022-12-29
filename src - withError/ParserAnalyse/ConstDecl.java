@@ -1,14 +1,19 @@
 package ParserAnalyse;
 
 
+import Pcode.PcodeGenerator;
 import Save.*;
+import Error.Error;
+import Error.ErrorRecord;
+
+import static Parser.Parser.testError;
 
 
 //ConstDecl → 'const' 'int' ConstDef { ',' ConstDef } ';'
 public class ConstDecl extends SymbAnalyse {
     public ConstDecl(TreeNode parent){
         super("<ConstDecl>",parent);
-        ////System.out.println("start <ConstDecl>");
+        System.out.println("start <ConstDecl>");
 
         //1
         if(sym.content.equals("const")){
@@ -45,20 +50,30 @@ public class ConstDecl extends SymbAnalyse {
                     listIndex++;
 
                      */
-                    ////System.out.println("Printout <ConstDecl>");
+                    System.out.println("Printout <ConstDecl>");
                     parserList.add(this.node.node);
                 }
-                else{
-                    ////System.out.println("ConstDecl Error:Not ;");
+                else if(testError){
+                    Word word = save.getSym(listIndex-2);
+                    System.out.println("Check word is what:" + word.content);
+                    Error error = new Error(word.line,'i');
+                    PcodeGenerator.errorRecord.addError(error);
+                    word = new lexerWord("SEMICN",",", word.line);
+                    TreeNode semicnNode = new TreeNode(word);
+                    semicnNode.addNode(this.node);
+
+                    System.out.println("Check sym is what:" + sym.content);
+                    System.out.println("Printout <stmt>");
+                    parserList.add(this.node.node);
                 }
             }
             else{
-                ////System.out.println("ConstDecl Error:Not int");
+                System.out.println("ConstDecl Error:Not int");
             }
 
         }
         else{
-            ////System.out.println("ConstDecl Error:Not const");
+            System.out.println("ConstDecl Error:Not const");
         }
     }
 }

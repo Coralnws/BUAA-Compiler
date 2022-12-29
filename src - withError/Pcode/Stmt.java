@@ -1,6 +1,8 @@
 package Pcode;
 
 import java.io.IOException;
+import Error.Error;
+import Error.ErrorRecord;
 /*
 Stmt → LVal '=' Exp ';' (Done)
 | [Exp] ';' (Done)
@@ -122,20 +124,32 @@ public class Stmt extends PcodeGenerator{
             if(currentWord.typeCode.equals("<Stmt>")) {
                 if (wordAhead.typeCode.equals("<Block>")) {
                     nextWord(); //<Block>
+                    whileNum++;
                     Block block = new Block("#while");
+                    whileNum--;
                 }else{
                     writer.write("start #while");
+                    whileNum++;
                     Stmt stmt = new Stmt();
+                    whileNum--;
                     writer.write("end #while");
                 }
             }
         }
         else if(currentWord.typeCode.equals("CONTINUETK")){
+            if(whileNum<=0){
+                Error error = new Error(currentWord.line,'m');
+                errorRecord.addError(error);
+            }
             writer.write("CONTINUE");
             nextWord(); // ;
             nextWord();
         }
         else if(currentWord.typeCode.equals("BREAKTK")){
+            if(whileNum<=0){
+                Error error = new Error(currentWord.line,'m');
+                errorRecord.addError(error);
+            }
             writer.write("BREAK");
             nextWord(); // ;
             nextWord();

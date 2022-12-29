@@ -5,6 +5,8 @@ import Save.lexerWord;
 
 import java.io.IOException;
 import static Pcode.Exp.scanAhead;
+import Error.Error;
+import Error.ErrorRecord;
 
 public class UnaryExp extends PcodeGenerator{
     int Lbrac = 1,Rbrac = 0;
@@ -17,6 +19,11 @@ public class UnaryExp extends PcodeGenerator{
         while(!currentWord.typeCode.equals("RPARENT") || ((Lbrac-Rbrac) != 0)){
             ignoreParser = true;
             if(scanAhead() == returnType.VAR){
+                if(checkVarExist(currentWord.content) == null){
+                    System.out.println("LVal , gotError c");
+                    Error error = new Error(currentWord.line,'c');
+                    errorRecord.addError(error);
+                }
                 pcode.append(" " + currentWord.content);
                 nextWord();
             }else if(scanAhead() == returnType.NUM){
@@ -67,6 +74,11 @@ public class UnaryExp extends PcodeGenerator{
                         writer.write(varT + " = ! " + ans);
                         pcode.append(" "+ varT);
                     }else{
+                        if(checkVarExist(currentWord.content) == null){
+                            System.out.println("LVal , gotError c");
+                            Error error = new Error(currentWord.line,'c');
+                            errorRecord.addError(error);
+                        }
                         nextTVar();
                         writer.write(varT + " = ! " + currentWord.content);
                         pcode.append(" " + varT);

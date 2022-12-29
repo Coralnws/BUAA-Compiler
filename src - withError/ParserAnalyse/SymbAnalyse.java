@@ -6,6 +6,7 @@ import Save.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 
 
@@ -32,20 +33,20 @@ public class SymbAnalyse {
         sym = save.getSym(listIndex);
         //parserList.add(sym);
         listIndex++;
-        ////System.out.println("listIndex:" + listIndex);
+        //System.out.println("listIndex:" + listIndex);
         if(sym != null){
             if(sym.content.equals("main")){
                 if(!save.getSym(listIndex).content.equals("(")){
                     sym.typeCode = "IDENFR";
                 }
             }
-            ////System.out.println("sym:" + sym.content);
+            System.out.println("sym:" + sym.content);
         }
     }
 
     public static void scanSym(int index){
         scanSym = save.getSym(index);
-        ////System.out.println("scanSym:" + sym.content);
+        //System.out.println("scanSym:" + sym.content);
     }
 
     public void insertList(){
@@ -58,10 +59,10 @@ public class SymbAnalyse {
     }
 
     public static void printTree() throws IOException {
-        //System.out.println("printTree");
+        System.out.println("printTree");
         BufferedWriter writer = new BufferedWriter(new FileWriter("tree.txt"));
         TreeNode scanNode = firstNode;
-        ////System.out.println(firstNode);
+        System.out.println(firstNode);
         scanTree(scanNode,writer);
     }
 

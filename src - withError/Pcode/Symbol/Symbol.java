@@ -12,6 +12,7 @@ public class Symbol {
     public boolean skipLevel = false;
     public int level;
     public Stack<Integer> levelStack = new Stack<Integer>();
+    public int type;
 
     public Symbol(String name){
         this.name = name;

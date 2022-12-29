@@ -1,7 +1,8 @@
 package Pcode;
 
 import java.io.IOException;
-
+import Error.Error;
+import Error.ErrorRecord;
 /**  printf("a=%d\n",r);
  * <BlockItem>
  * <Stmt>
@@ -27,10 +28,10 @@ public class Print extends PcodeGenerator{
 
     public Print() throws IOException {
         //currentWord 应该是 printf
-        //System.out.println("Check current is printf : "+ currentWord.typeCode);
+        System.out.println("Check current is printf : "+ currentWord.typeCode);
         nextWord();  //(
         nextWord();  //strcon
-        //System.out.println("Check current is strcon : "+ currentWord.content);
+        System.out.println("Check current is strcon : "+ currentWord.content);
         String str = currentWord.content;
         char ch;
 
@@ -46,6 +47,10 @@ public class Print extends PcodeGenerator{
                     pcode.append(getInsNum());
                     writer.write(String.valueOf(pcode));
                     pcode.delete( 0,pcode.length() );
+                }else{
+                    System.out.println("error :a");
+                    Error error = new Error(currentWord.line,'a');
+                    errorRecord.addError(error);
                 }
             }
             else if(ch == '\\'){
@@ -58,7 +63,14 @@ public class Print extends PcodeGenerator{
                     pcode.append(getLnNum());
                     writer.write(String.valueOf(pcode));
                     pcode.delete( 0,pcode.length() );
+                }else{
+                    Error error = new Error(currentWord.line,'a');
+                    errorRecord.addError(error);
                 }
+            }else if(!(ch == 32 || ch == 33 || (ch>=40 && ch<=126))){
+                System.out.println("STRCON error");
+                Error error = new Error(currentWord.line,'a');
+                errorRecord.addError(error);
             }
             else{
                 pcode.append(ch);
@@ -78,7 +90,7 @@ public class Print extends PcodeGenerator{
             while(!currentWord.typeCode.equals("PRINTEND")){
                 if(!currentWord.content.equals(",") && !currentWord.typeCode.equals("PRINTEND")){  //分割每一个para
                     if(PrintTestExp()){
-                        //System.out.println("Print 有Exp");
+                        System.out.println("Print 有Exp");
                         Exp exp = new Exp();
                         pcode.append(" " + varT);
                         if(pcode.length() > 0 ){
@@ -87,7 +99,7 @@ public class Print extends PcodeGenerator{
                             pcode.delete( 0, pcode.length() );
                         }
                     }else{
-                        //System.out.println("Print 没有Exp");
+                        System.out.println("Print 没有Exp");
                         pcode.append(currentWord.content);
                         nextWord();
                     }
@@ -103,18 +115,25 @@ public class Print extends PcodeGenerator{
                 }
             }
             if(pcode.length() > 0){
-                //System.out.println("last");
+                System.out.println("last");
                 pcode.insert(0,getAnwNum() + " = ");
                 writer.write(String.valueOf(pcode));
                 pcode.delete( 0, pcode.length() );
             }
         }
+
+        if(insnum != anwnum){
+            Error error = new Error(currentWord.line,'l');
+            errorRecord.addError(error);
+        }
+
         writer.write("PRINTF");
         ignoreParser = false;
-        //System.out.println("Check current is ) : " + currentWord.content);
+        System.out.println("Check current is ) : " + currentWord.content);
         nextWord();
-        //System.out.println("Check current is ; : " + currentWord.content);
+        System.out.println("Check current is ; : " + currentWord.content);
         nextWord();
+
 
 
     }
@@ -156,6 +175,9 @@ public class Print extends PcodeGenerator{
             }
             //hasArray
             if(scanWord.typeCode.equals("IDENFR") && scanWordAhead.typeCode.equals("LBRACK")){
+                return true;
+            }
+            if(scanWord.typeCode.equals("LPARENT")){
                 return true;
             }
             scanIndex ++;

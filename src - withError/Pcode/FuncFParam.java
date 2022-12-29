@@ -1,16 +1,22 @@
 package Pcode;
-
+import Pcode.Symbol.*;
 import Save.parserWord;
 
+
 import java.io.IOException;
+import java.util.Arrays;
 
 import static Pcode.Exp.ExptestExp;
+import Error.Error;
+import Error.ErrorRecord;
 
 //para - normal var or array , array才需要考虑ConstExp
 public class FuncFParam extends PcodeGenerator{
     //形参要不就是
+    char type;
     public FuncFParam() throws IOException {
         //v=var , a=array
+        Symbol symb = null;
         pcode.append("para");
         if(currentWord.typeCode.equals("<FuncFParam>")){
             //System.out.println("currentWord.typeCode.equals(\"<FuncFParam>\")");
@@ -18,11 +24,31 @@ public class FuncFParam extends PcodeGenerator{
             nextWord(); //<name>
             if(!wordAhead.content.equals("[")){
                 pcode.append(" v");
+                type = 'v';
             } else{
                 pcode.append(" a");
+                type = 'a';
             }
             if(currentWord.typeCode.equals("IDENFR")){
+                if(checkCurrentSymbExist(currentWord.content)){
+                    System.out.println("vardef , gotError b");
+                    Error error = new Error(currentWord.line,'b');
+                    errorRecord.addError(error);
+                }
+                if(type == 'v'){
+                    System.out.println("para is v");
+                    symb = new paraVar(currentWord.content);
+                }else if(type == 'a'){
+                    symb = new paraArr(currentWord.content);
+
+                }
+                currentSymbTable.put(currentWord.content,symb);
                 pcode.append(" " + currentWord.content);
+                currentFunc.addPara((Para) symb);
+            }
+            paraArr arr = null;
+            if(type == 'a'){
+                arr = (paraArr) symb;
             }
             nextWord(); //如果是普通变量就是 , 数组是 [
             //如果是普通变量就可以停了，是数组才会有后面的事
@@ -54,6 +80,19 @@ public class FuncFParam extends PcodeGenerator{
                         pcode.append(" " + varT);
                         //System.out.println("append varT:" + varT);
                     }else{
+                        if(currentWord.typeCode.equals("IDENFR")){
+                            if(checkVarExist(currentWord.content) == null){
+                                System.out.println("LVal , gotError c");
+                                Error error = new Error(currentWord.line,'c');
+                                errorRecord.addError(error);
+                            }
+                        }else{
+                            if(currentWord.typeCode.equals("INTCON")){
+                                arr.addDimension(Integer.parseInt(currentWord.content));
+                                System.out.println("Check here paraDim, " + arr.dimension.size());
+                            }
+
+                        }
                         pcode.append(" " + currentWord.content); //var or num
                         nextWord(); // ]
                     }
@@ -65,6 +104,18 @@ public class FuncFParam extends PcodeGenerator{
         }
         writer.write(String.valueOf(pcode));
         nextWord();
+        String[] sym;
+        String code = pcode.toString();
+        sym = code.split(" ");
+        if(type == 'a'){
+            if(sym.length > 5){
+                System.out.println(Arrays.toString(sym));
+                System.out.println("check here dimensionNum " + symb.name);
+                symb.dimensionNum = 2;
+            }else{
+                symb.dimensionNum = 1;
+            }
+        }
     }
 
     public static boolean FParamtestExp(){

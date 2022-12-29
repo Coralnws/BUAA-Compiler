@@ -12,19 +12,21 @@ public class Compiler {
     public static boolean testError=false;
     public static void main(String[] args) throws IOException {
         Lexer lexer = new Lexer();
-        //lexer.testError=true;
+        lexer.testError=true;
         lexer.start();
         //SaveContent.print();
         Parser parser = new Parser();
+        parser.testError = true;
         parser.start();
         //SaveContent.print();
         ////System.out.println("End");
         PcodeGenerator pcodeGenerator = new PcodeGenerator();
         pcodeGenerator.generate();
+        pcodeGenerator.testError=true;
         //Writer.showList();
 
-        Executor executor = new Executor();
-        executor.execute();
+        //Executor executor = new Executor();
+        //executor.execute();
     }
 }
 
