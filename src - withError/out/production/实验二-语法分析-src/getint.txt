@@ -1,6 +1,0 @@
-
-int getint(){
-	int s;
-	scanf("%d",&s);
-	return s;
-} 
